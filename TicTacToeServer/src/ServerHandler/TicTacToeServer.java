@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tic.tac.toe_server;
+package ServerHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -23,7 +23,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-import static tic.tac.toe_server.ClientHandler.clientsVector;
 
 /**
  *
@@ -225,7 +224,7 @@ public class TicTacToeServer extends Application {
         clietnsVector = ClientHandler.getClientsVector();
         
         /* end all internal sockets (threads that stands against) */
-        for(ClientHandler ch: clientsVector)
+        for(ClientHandler ch: clietnsVector)
         {
             try {
                 ch.currentThread().wait();

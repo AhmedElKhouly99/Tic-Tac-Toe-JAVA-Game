@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tic.tac.toe;
+package ServerHandler;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  *
  * @author Abanoub Kamal
  */
-public class TicTacToe extends Application{
+public class Client extends Application{
     
     Label statusLabel;
     Label statusField;
@@ -150,7 +150,7 @@ public class TicTacToe extends Application{
                     try {
                         updatingClientGuiThread.sleep(50);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
