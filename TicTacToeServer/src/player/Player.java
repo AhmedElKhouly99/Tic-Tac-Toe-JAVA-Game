@@ -26,7 +26,7 @@ public class Player {
     String username;
     String password;
     char gender;
-    //char x_o;
+    char x_o;
     int score = 0;
     //boolean turn;
     int stage;
