@@ -5,13 +5,17 @@
  */
 package ServerHandler;
 
+import Database.Database;
+import java.util.Vector;
+import player.Player;
+
 /**
  *
  * @author START
  */
 public class MessageParser {
     
-    
+    static Vector<Player> LoggedinPlayers = new Vector<Player>();
     
     
     public static void checkClientMsg(String msg)
@@ -33,19 +37,23 @@ public class MessageParser {
         switch (arrString[0])
         {
             case "login": /*-------------------login::username::password----------------------*/
-                
-                if("Username from database".equals(arrString[1]))
-                {
-                    if("Password from database".equals(arrString[2]))
-                    {
-                        System.out.println("My test succeded");
-                    }
+                Player p = null;
+                if(isUser(p, arrString[1], arrString[2])){
+                    System.out.println("correct user!!");
+                    LoggedinPlayers.add(p);
+                }else{
+                    ///Incorrect username or password
                 }
                 
                 break;
                 
             case "signup":/*-------------------signup::username::password----------------------*/
-                
+                Player p1 = new Player(arrString[1], arrString[2], arrString[3].charAt(0));
+                if(addUser(p1)){
+                    System.out.println("user added!!");
+                }else{
+                    System.out.println("fail");
+                }    
          /*------------Insert user data from database----------*/
                 
                 break; 
@@ -87,5 +95,20 @@ public class MessageParser {
                
                 
         }
-}
+    }
+    
+    public static boolean isUser(Player p, String uname, String password)
+    {
+        p = Database.isPlayer(uname, password);
+        if(p != null){
+            return true;
+        }
+        return false;
+    }
+    
+    public static boolean addUser(Player p){
+        return Database.addPlayer(p);
+    }
+            
+    
 }    
