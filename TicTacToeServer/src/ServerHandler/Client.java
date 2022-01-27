@@ -62,16 +62,7 @@ public class Client extends Application{
         myScene = new Scene(rootPane, 375, 400);
 
         try{
-<<<<<<< HEAD
-<<<<<<< HEAD
             clientSocket = new Socket("127.0.0.1", 5000);
-=======
-            clientSocket = new Socket("127.0.0.1", 5005);
->>>>>>> fc523f66c898291f71312162dfc95d456745c741
-=======
-            //clientSocket = new Socket("127.0.0.1", 5000);
-            clientSocket = new Socket("127.0.0.1", 5005);
->>>>>>> khouly
             inS = new DataInputStream(clientSocket.getInputStream());
             outS = new PrintStream(clientSocket.getOutputStream());
         }catch(Exception e){
