@@ -78,7 +78,7 @@ public class ClientHandler extends Thread{
         return clientsVector;
     }
     
-    /* handling the user existness */
+    /* handling the user */
     
     
     
