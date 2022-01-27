@@ -44,9 +44,10 @@ public class ClientHandler extends Thread{
             
             ////////////////////////////////////////////////////////////////////
             while(true){
+                
                 clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
                 outS.println("Online"); // for server status // give an exception error if there is no client
-                
+                //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
                     System.out.println(clientStatus);
@@ -56,6 +57,12 @@ public class ClientHandler extends Thread{
                     clientsVector.removeElement(this);
                     this.currentThread().stop();
                 }
+                else
+                {
+                   MessageParser.checkClientMsg(clientStatus); 
+                }
+                
+                
                 
                 this.currentThread().sleep(50);
             }
@@ -72,19 +79,46 @@ public class ClientHandler extends Thread{
         
     }
 
-    
     public static Vector<ClientHandler> getClientsVector()
     {
         return clientsVector;
     }
     
-    /* handling the user existness */
     
     
-    
-    
-    
-                        
-    
+        
+        
+        
+        
+        
+//        if("login".equals(arrString[0]))
+//        {
+//            if("Username from database".equals(arrString[1]))
+//            {
+//                
+//                if("Password from database".equals(arrString[2]))
+//                {
+//                    System.out.println("My test succeded");
+//                }
+//                
+//            }
+//        }
+//        
+//        
+//        /*------------Insert user data from database----------*/
+//        
+//        if("signup".equals(arrString[0]))   
+//        {
+//            
+//        }
+        
+/* handling the user existness */        
+        
 }
+    
+    
+    
+    
+    
+
 

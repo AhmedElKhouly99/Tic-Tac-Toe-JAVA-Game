@@ -29,7 +29,7 @@ public class Game {
     }
 
     public void setPlayer1_id(int player1_id) {
-        this.player1_id = player1_id;
+        this.player1_id  = player1_id;
     }
 
     public int getPlayer2_id() {
