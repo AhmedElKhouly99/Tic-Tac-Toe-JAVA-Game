@@ -148,7 +148,7 @@ public class TicTacToeServer extends Application {
             public void run(){
                 
                 try{
-                    myServerSocket = new ServerSocket(5000);
+                    myServerSocket = new ServerSocket(5005);
                     while(true){
                         Socket internalSocket = myServerSocket.accept();
                         
@@ -221,7 +221,7 @@ public class TicTacToeServer extends Application {
     /******************* action should take at close the server ***************/
     private void actionAtServerAppClose() throws IOException
     {
-        clietnsVector = ClientHandler.getClientsVector();
+    clietnsVector = ClientHandler.getClientsVector();
         
         /* end all internal sockets (threads that stands against) */
         for(ClientHandler ch: clietnsVector)
