@@ -62,7 +62,7 @@ public class Client extends Application{
         myScene = new Scene(rootPane, 375, 400);
 
         try{
-            clientSocket = new Socket("192.168.133.1", 5000);
+            clientSocket = new Socket("127.0.0.1", 5000);
             inS = new DataInputStream(clientSocket.getInputStream());
             outS = new PrintStream(clientSocket.getOutputStream());
         }catch(Exception e){
