@@ -62,7 +62,7 @@ public class Client extends Application{
         myScene = new Scene(rootPane, 375, 400);
 
         try{
-            clientSocket = new Socket("127.0.0.1", 5005);
+            clientSocket = new Socket("127.0.0.1", 5000);
             inS = new DataInputStream(clientSocket.getInputStream());
             outS = new PrintStream(clientSocket.getOutputStream());
         }catch(Exception e){
@@ -126,7 +126,7 @@ public class Client extends Application{
             public void run(){
                 while(true){
                     try{
-                        outS.println("status::Online"); // for client status // give an exception error if there is no server
+                        outS.println("signup::Soly::soly::m"); // for client status // give an exception error if there is no server
                         serverStatus = inS.readLine(); // for server status // give an exception error if there is no server
                         
                         Platform.runLater(new Runnable(){
