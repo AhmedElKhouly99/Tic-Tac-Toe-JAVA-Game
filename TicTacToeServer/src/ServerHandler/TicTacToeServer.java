@@ -5,6 +5,7 @@
  */
 package ServerHandler;
 
+import Database.Database;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -52,6 +53,7 @@ public class TicTacToeServer extends Application {
     @Override
     public void init()
     {
+        new Database();
         /**********************************************************************/
         /*************************** the server GUI ***************************/
         clientNum = new Label("Client Num: ");
