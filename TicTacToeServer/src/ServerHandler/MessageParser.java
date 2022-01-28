@@ -6,8 +6,12 @@
 package ServerHandler;
 
 import Database.Database;
+import static ServerHandler.ClientHandler.clientsVector;
 import java.util.Vector;
 import player.Player;
+
+//invite::player2_id"abanoub", id="soly"
+//accept::player1_id"soly"::abanoub
 
 /**
  *
@@ -18,7 +22,7 @@ public class MessageParser {
     static Vector<Player> LoggedinPlayers = new Vector<Player>();
     
     
-    public static void checkClientMsg(String msg)
+    public static void checkClientMsg(String msg, ClientHandler ch)
     {
         String[] arrString=msg.split("::");
         //System.out.println(msg);
@@ -40,8 +44,11 @@ public class MessageParser {
                 Player p = null;
                 if(isUser(p, arrString[1], arrString[2])){
                     System.out.println("correct user!!");
+                    ch.thisUname = p.getUsername();
                     LoggedinPlayers.add(p);
+                    ch.outS.println("login::done");
                 }else{
+                    ch.outS.println("login::failed");
                     ///Incorrect username or password
                 }
                 
@@ -50,9 +57,9 @@ public class MessageParser {
             case "signup":/*-------------------signup::username::password----------------------*/
                 Player p1 = new Player(arrString[1], arrString[2], arrString[3].charAt(0));
                 if(addUser(p1)){
-                    System.out.println("user added!!");
+                    ch.outS.println("signup::done");
                 }else{
-                    System.out.println("fail");
+                    ch.outS.println("signup::failed");
                 }    
          /*------------Insert user data from database----------*/
                 
@@ -92,12 +99,31 @@ public class MessageParser {
          /*------------Writting a message----------*/
                
                 break;     
-               
+              
+           case "invite"://invite::abanoub_id
+               clientsVector.forEach((e) -> {
+                   if(e.thisUname == arrString[1]){
+                       e.outS.println("invitedyou::"+ch.thisUname);//invitedyou::soly_id
+                       return;
+                   }
+               });
+               break;
+           case "accept"://accept::soly
+               clientsVector.forEach((e) -> {
+                   if(e.thisUname == arrString[1]){
+                       e.player2Vid = ch.getId();
+                       ch.player2Vid = e.getId();
+                       e.outS.println("inviteAccepted");
+                       return;
+                   }
+               });
+                    // if accepted start game
+               break;
                 
         }
     }
     
-    public static boolean isUser(Player p, String uname, String password)
+    private static boolean isUser(Player p, String uname, String password)
     {
         p = Database.isPlayer(uname, password);
         if(p != null){
@@ -106,9 +132,10 @@ public class MessageParser {
         return false;
     }
     
-    public static boolean addUser(Player p){
+    private static boolean addUser(Player p){
         return Database.addPlayer(p);
     }
-            
+       
+    
     
 }    

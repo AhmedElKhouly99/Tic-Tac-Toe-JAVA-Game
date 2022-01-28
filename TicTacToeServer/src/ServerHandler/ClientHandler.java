@@ -16,11 +16,12 @@ import java.util.Vector;
  */
 public class ClientHandler extends Thread{
   
-
+    long player2Vid;
     DataInputStream  inS;
     PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     String clientStatus;
+    String thisUname;
     
     public ClientHandler(Socket s) {
         try{
@@ -59,7 +60,7 @@ public class ClientHandler extends Thread{
                 }
                 else
                 {
-                   MessageParser.checkClientMsg(clientStatus); 
+                   MessageParser.checkClientMsg(clientStatus, this); 
                 }
                 
                 
