@@ -53,6 +53,7 @@ public class TicTacToeServer extends Application {
     @Override
     public void init()
     {
+        
         new Database();
         /**********************************************************************/
         /*************************** the server GUI ***************************/

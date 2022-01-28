@@ -16,13 +16,21 @@ import java.util.Vector;
  */
 public class ClientHandler extends Thread{
   
+<<<<<<< HEAD
     
+=======
+    long player2Vid;
+>>>>>>> cc0b412bd2d89f209a1cad064c7bef2eb50f40fa
     DataInputStream  inS;
     PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     String clientStatus;
+<<<<<<< HEAD
     int id;
     static int counter_id=0;
+=======
+    String thisUname;
+>>>>>>> cc0b412bd2d89f209a1cad064c7bef2eb50f40fa
     
     public ClientHandler(Socket s) {
         try{
@@ -63,9 +71,13 @@ public class ClientHandler extends Thread{
                 }
                 else
                 {
+<<<<<<< HEAD
                     
                     String respond=MessageParser.checkClientMsg(clientStatus,id);
                     outS.println(respond);
+=======
+                   MessageParser.checkClientMsg(clientStatus, this); 
+>>>>>>> cc0b412bd2d89f209a1cad064c7bef2eb50f40fa
                 }
                 
                 
