@@ -22,6 +22,7 @@ public class ClientHandler extends Thread{
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     String clientStatus;
     String thisUname;
+    ClientHandler player2Handler;
     
     public ClientHandler(Socket s) {
         try{
