@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 24, 2022, 5:28:56 PM
+    Author     : Admin
+*/
+.parent{
+    -fx-background-color: transparent;
+    
+}
+.pane{
+    -fx-background-color: black;
+}
+
+.myPane{
+    -fx-background-color: white;
+}
+
+.loginPane{
+    -fx-background-color: #20b0ee;
+}
+.RegisterPane{
+        -fx-background-color: #20b0ee;
+
+}
