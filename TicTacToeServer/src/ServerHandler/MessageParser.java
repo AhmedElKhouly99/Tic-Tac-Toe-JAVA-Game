@@ -7,6 +7,7 @@ package ServerHandler;
 
 import Database.Database;
 import static ServerHandler.ClientHandler.clientsVector;
+import java.io.IOException;
 import java.util.Vector;
 import player.Player;
 
@@ -22,8 +23,12 @@ public class MessageParser {
     static Vector<Player> LoggedinPlayers = new Vector<Player>();
     
     
+<<<<<<< HEAD
 
     public static void checkClientMsg(String msg, ClientHandler ch)
+=======
+    public static void checkClientMsg(String msg, ClientHandler ch) throws IOException
+>>>>>>> d1ed94dc25362846cd31490e059f6c97e20dd186
     {
         String[] arrString=msg.split("::");
         
@@ -76,7 +81,9 @@ public class MessageParser {
                 break; 
                 
                 
-           case "playing": /*-------------------playing::username::turn::indexPlaymove----------------------*/
+           case "playing"://play::x|o::index  this
+               
+               /*-------------------playing::username::turn::indexPlaymove----------------------*/
                 
          /*------------In a game----------*/
                
@@ -140,10 +147,17 @@ public class MessageParser {
            case "accept"://accept::soly
                clientsVector.forEach((e) -> {
                    if(e.thisUname == arrString[1]){
+<<<<<<< HEAD
                        
                        e.player2Vid = ch.getId();
 
                        ch.player2Vid = e.getId();
+=======
+//                       e.player2Vid = ch.getId();
+//                       ch.player2Vid = e.getId();
+                        ch.player2Handler = e;
+                        e.player2Handler = ch;
+>>>>>>> d1ed94dc25362846cd31490e059f6c97e20dd186
                        e.outS.println("inviteAccepted");
                        return;
                    }

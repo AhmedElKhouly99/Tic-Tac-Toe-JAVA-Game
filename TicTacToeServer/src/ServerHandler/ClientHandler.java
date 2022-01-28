@@ -28,7 +28,11 @@ public class ClientHandler extends Thread{
     static int counter_id=0;
 
     String thisUname;
+<<<<<<< HEAD
 
+=======
+    ClientHandler player2Handler;
+>>>>>>> d1ed94dc25362846cd31490e059f6c97e20dd186
     
     public ClientHandler(Socket s) {
         try{
