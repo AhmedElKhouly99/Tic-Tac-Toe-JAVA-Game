@@ -18,12 +18,10 @@ public class MessageParser {
     static Vector<Player> LoggedinPlayers = new Vector<Player>();
     
     
-    public static void checkClientMsg(String msg)
+    public static String checkClientMsg(String msg,int idClient)
     {
         String[] arrString=msg.split("::");
-        //System.out.println(msg);
-      //  System.out.println(arrString[0]);
-        //System.out.println(arrString[1]);
+        
         
         if("status".equals(arrString[0]))
         {
@@ -39,10 +37,18 @@ public class MessageParser {
             case "login": /*-------------------login::username::password----------------------*/
                 Player p = null;
                 if(isUser(p, arrString[1], arrString[2])){
+                    
                     System.out.println("correct user!!");
+                    
+                    p.setHandlerId(idClient);
+                    
                     LoggedinPlayers.add(p);
+                    
+                    return "Login_SuccessfulLoad all players";
+                    
                 }else{
                     ///Incorrect username or password
+                    return "Login Not successful";
                 }
                 
                 break;
@@ -63,6 +69,7 @@ public class MessageParser {
                 
          /*------------In a game----------*/
                
+               
                 break;
                 
            case "finished_playing": /*-------------------playing::username::winnerStatus----------------------*/
@@ -76,6 +83,24 @@ public class MessageParser {
          /*------------In a game----------*/
                
                 break;     
+           
+           case "invite": /*-------------------invite::username2----------------------*/
+                
+         /*------------In a game----------*/
+              for (Player p2 : LoggedinPlayers) 
+              {
+                if(p2.getUsername()=="username")
+                {
+                    return p2.getId();
+                    
+                }
+            } 
+               
+               
+               
+               
+                break;      
+                
                 
                 
            
