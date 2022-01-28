@@ -16,11 +16,13 @@ import java.util.Vector;
  */
 public class ClientHandler extends Thread{
   
-
+    long player2Vid;
     DataInputStream  inS;
     PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     String clientStatus;
+    String thisUname;
+    ClientHandler player2Handler;
     
     public ClientHandler(Socket s) {
         try{
@@ -44,9 +46,10 @@ public class ClientHandler extends Thread{
             
             ////////////////////////////////////////////////////////////////////
             while(true){
+                
                 clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
                 outS.println("Online"); // for server status // give an exception error if there is no client
-                
+                //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
                     System.out.println(clientStatus);
@@ -56,6 +59,12 @@ public class ClientHandler extends Thread{
                     clientsVector.removeElement(this);
                     this.currentThread().stop();
                 }
+                else
+                {
+                   MessageParser.checkClientMsg(clientStatus, this); 
+                }
+                
+                
                 
                 this.currentThread().sleep(50);
             }
@@ -72,19 +81,16 @@ public class ClientHandler extends Thread{
         
     }
 
-    
     public static Vector<ClientHandler> getClientsVector()
     {
         return clientsVector;
     }
-    
-    /* handling the user */
-    
-    
-    
-    
-    
-                        
-    
+          
 }
+    
+    
+    
+    
+    
+
 
