@@ -22,11 +22,8 @@ public class MessageParser {
     static Vector<Player> LoggedinPlayers = new Vector<Player>();
     
     
-<<<<<<< HEAD
-    public static String checkClientMsg(String msg,int idClient)
-=======
+
     public static void checkClientMsg(String msg, ClientHandler ch)
->>>>>>> cc0b412bd2d89f209a1cad064c7bef2eb50f40fa
     {
         String[] arrString=msg.split("::");
         
@@ -47,23 +44,21 @@ public class MessageParser {
                 if(isUser(p, arrString[1], arrString[2])){
                     
                     System.out.println("correct user!!");
-<<<<<<< HEAD
-                    
-                    p.setHandlerId(idClient);
+//<<<<<<< HEAD
+//                    
+//                    p.setHandlerId(idClient);
                     
                     LoggedinPlayers.add(p);
                     
-                    return "Login_SuccessfulLoad all players";
                     
-=======
                     ch.thisUname = p.getUsername();
                     LoggedinPlayers.add(p);
                     ch.outS.println("login::done");
->>>>>>> cc0b412bd2d89f209a1cad064c7bef2eb50f40fa
+
                 }else{
                     ch.outS.println("login::failed");
                     ///Incorrect username or password
-                    return "Login Not successful";
+                    return;
                 }
                 
                 break;
@@ -74,7 +69,8 @@ public class MessageParser {
                     ch.outS.println("signup::done");
                 }else{
                     ch.outS.println("signup::failed");
-                }    
+                }
+              
          /*------------Insert user data from database----------*/
                 
                 break; 
@@ -99,22 +95,22 @@ public class MessageParser {
                
                 break;     
            
-           case "invite": /*-------------------invite::username2----------------------*/
-                
-         /*------------In a game----------*/
-              for (Player p2 : LoggedinPlayers) 
-              {
-                if(p2.getUsername()=="username")
-                {
-                    return p2.getId();
-                    
-                }
-            } 
-               
-               
-               
-               
-                break;      
+//           case "invite": /*-------------------invite::username2----------------------*/
+//                
+//         /*------------In a game----------*/
+//              for (Player p2 : LoggedinPlayers) 
+//              {
+//                if(p2.getUsername()=="username")
+//                {
+//                    return p2.getId();
+//                    
+//                }
+//            } 
+//               
+//               
+//               
+//               
+//                break;      
                 
                 
                 
@@ -144,7 +140,9 @@ public class MessageParser {
            case "accept"://accept::soly
                clientsVector.forEach((e) -> {
                    if(e.thisUname == arrString[1]){
+                       
                        e.player2Vid = ch.getId();
+
                        ch.player2Vid = e.getId();
                        e.outS.println("inviteAccepted");
                        return;

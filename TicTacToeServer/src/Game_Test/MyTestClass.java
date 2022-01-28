@@ -136,9 +136,6 @@ public class MyTestClass implements ActionListener {
     
     public void gamePlayMultiplayer() {
         
-        
-        
-        
         for (int i = 0; i < 9; i++) {
             if (arrPlays[i] != 'X' && arrPlays[i] != 'O') {
                 buttons[i].setText("O");
