@@ -26,6 +26,8 @@ public class LoginController implements Initializable {
 
     @FXML
     private Button GoToRegisterBtn;
+    @FXML
+    private Button loginBtn;
 
     /**
      * Initializes the controller class.
@@ -41,5 +43,14 @@ public class LoginController implements Initializable {
         Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
+
+    @FXML
+    private void goToGame(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+        Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
+        window.setScene(new Scene(root)); 
+    }
+    
+    
     
 }

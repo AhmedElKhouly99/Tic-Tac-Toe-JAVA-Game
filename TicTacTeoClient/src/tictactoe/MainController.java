@@ -20,12 +20,15 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Admin
+ * @author shorook
  */
 public class MainController implements Initializable {
 
     @FXML
     private Button MultiPlayerBtn;
+    @FXML
+    private Button singlePlayerBtn;
+
     /**
      * Initializes the controller class.
      */
@@ -36,10 +39,17 @@ public class MainController implements Initializable {
 
     @FXML
     private void MultiPlayer(ActionEvent event) throws IOException {
-        
-       Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Stage window = (Stage) MultiPlayerBtn.getScene().getWindow();
         window.setScene(new Scene(root));
+    }
+
+    @FXML
+    private void singleplayer(ActionEvent event) throws IOException {
+         Parent root = FXMLLoader.load(getClass().getResource("VsComputerMode.fxml"));
+        Stage window = (Stage) singlePlayerBtn.getScene().getWindow();
+        window.setScene(new Scene(root));
+        
     }
     
 }

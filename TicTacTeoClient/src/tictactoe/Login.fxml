@@ -30,7 +30,7 @@
          </font>
       </Label>
       <PasswordField layoutX="21.0" layoutY="243.0" prefHeight="25.0" prefWidth="536.0" />
-      <Button layoutX="245.0" layoutY="296.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="Sign in" />
+      <Button fx:id="loginBtn" layoutX="245.0" layoutY="296.0" mnemonicParsing="false" onAction="#goToGame" prefHeight="25.0" prefWidth="110.0" text="Sign in" />
       <Label layoutX="369.0" layoutY="369.0" text="don't have an account?">
          <font>
             <Font name="System Bold" size="12.0" />
