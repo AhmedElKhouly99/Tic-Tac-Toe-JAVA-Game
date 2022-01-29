@@ -27,26 +27,26 @@ import javafx.stage.Stage;
  *
  * @author Abanoub Kamal
  */
-public class Client extends Application{
-    
+public class Client extends Application {
+
     Label statusLabel;
     Label statusField;
     FlowPane serverStatusPane;
-    
+
     Button refreshBtn;
     FlowPane flowPane;
-    
-    BorderPane rootPane;  
+
+    BorderPane rootPane;
     Scene myScene;
 
     Socket clientSocket;
     DataInputStream inS;
     PrintStream outS;
     String serverStatus = null;
-    
+
     @Override
-    public void init(){
-        
+    public void init() {
+
         statusLabel = new Label("Server Status : ");
         statusField = new Label();
         serverStatusPane = new FlowPane(statusLabel, statusField);
@@ -55,19 +55,19 @@ public class Client extends Application{
         refreshBtn.setTranslateX(3);
         refreshBtn.setTranslateY(-3);
         flowPane = new FlowPane(refreshBtn);
-        
+
         rootPane = new BorderPane();
         rootPane.setTop(serverStatusPane);
         rootPane.setBottom(flowPane);
 
         myScene = new Scene(rootPane, 375, 400);
 
-        try{
+        try {
             clientSocket = new Socket("127.0.0.1", 5000);
             inS = new DataInputStream(clientSocket.getInputStream());
             outS = new PrintStream(clientSocket.getOutputStream());
-        }catch(Exception e){
-            
+        } catch (Exception e) {
+
             System.out.println("clientapp.ClientApp.init().init client socket and streams");
         }
 
@@ -83,19 +83,18 @@ public class Client extends Application{
 //                Platform.runLater( () -> new TicTacToe().start( new Stage() ) );
             }
         });
-        
+
         primaryStage.setTitle("Chat Client1");
         primaryStage.setScene(myScene);
         primaryStage.show();
-        
+
         startThreadToUpdateClientGui();
     }
-    
+
     /* Actions taken when the client app closed */
     @Override
-    public void stop() throws IOException
-    {
-        if(serverStatus != null) // at the client is not connected yet don't execute this block of code
+    public void stop() throws IOException {
+        if (serverStatus != null) // at the client is not connected yet don't execute this block of code
         {
             /* close the input and output streams of the client */
             inS.close();
@@ -116,39 +115,42 @@ public class Client extends Application{
         MyTestClass tictactoe = new MyTestClass();
         Application.launch(args);
     }
-    
-    
-    /**************************************************************************/
-    /**************** thread to renew the data of client screen ***************/
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * ************** thread to renew the data of client screen **************
+     */
     Thread updatingClientGuiThread;
-    private void startThreadToUpdateClientGui()
-    {
-            Runnable runnable = new Runnable(){
+
+    private void startThreadToUpdateClientGui() {
+        Runnable runnable = new Runnable() {
             @Override
-            public void run(){
-                while(true){
-                    try{
+            public void run() {
+                while (true) {
+                    try {
                         outS.println("signup::Soly::soly::m"); // for client status // give an exception error if there is no server
                         serverStatus = inS.readLine(); // for server status // give an exception error if there is no server
-                        
-                        Platform.runLater(new Runnable(){
-                        @Override
-                            public void run(){
+
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
                                 statusField.setText(serverStatus);  // write the serverStatus on client GUI    
                             }
-                        }); 
-                    }catch(Exception e){
+                        });
+                    } catch (Exception e) {
                         e.getStackTrace();
                         System.out.println("TicTacToe.run().threadUpdateGui");
                         /* in case the server isn't exist */
-                        Platform.runLater(new Runnable(){
+                        Platform.runLater(new Runnable() {
                             @Override
-                            public void run(){
-                                statusField.setText("Offline!");    
+                            public void run() {
+                                statusField.setText("Offline!");
                             }
-                        }); 
+                        });
                     }
-                    
+
                     try {
                         updatingClientGuiThread.sleep(50);
                     } catch (InterruptedException ex) {
@@ -160,18 +162,16 @@ public class Client extends Application{
         updatingClientGuiThread = new Thread(runnable);
         updatingClientGuiThread.start();
     }
-    
-    private void endThreadThatUpdateClientGui()
-    {
+
+    private void endThreadThatUpdateClientGui() {
         updatingClientGuiThread.stop();
     }
-    
-    private static void refreshApplication()
-    {
+
+    private static void refreshApplication() {
 //        primaryStage.close();
 //        Platform.runLater( () -> new ReloadApp().start( new Stage() ) );  
 //        Platform.exit();
 //        Application.launch();
     }
-    
+
 }
