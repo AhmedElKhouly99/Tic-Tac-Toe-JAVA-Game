@@ -16,7 +16,7 @@ import java.util.Vector;
  */
 public class ClientHandler extends Thread{
   
-    long player2Vid;
+//    long player2Vid;
     DataInputStream  inS;
     PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();

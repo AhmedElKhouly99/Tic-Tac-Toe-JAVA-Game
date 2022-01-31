@@ -37,8 +37,7 @@ public class MessageParser {
                 System.out.println("My test succeded");
             }
         }
-        
-        
+      
         switch (arrString[0])
         {
             case "login": /*-------------------login::username::password----------------------*/
@@ -65,11 +64,10 @@ public class MessageParser {
          /*------------Insert user data from database----------*/
                 
                 break; 
+  
+           case "playing"://play::x|o::index 
                 
-                
-           case "playing"://play::x|o::index  this
-               
-               /*-------------------playing::username::turn::indexPlaymove----------------------*/
+                /*-------------------playing::username::turn::indexPlaymove----------------------*/
                 
          /*------------In a game----------*/
                
@@ -118,8 +116,8 @@ public class MessageParser {
 //                       ch.player2Vid = e.getId();
                         ch.player2Handler = e;
                         e.player2Handler = ch;
-                       e.outS.println("inviteAccepted");
-                       return;
+                        e.outS.println("inviteAccepted");
+                        return;
                    }
                });
                     // if accepted start game
