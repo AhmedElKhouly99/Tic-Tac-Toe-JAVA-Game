@@ -26,12 +26,20 @@ public class TicTacToe extends Application {
     @Override 
     public void init()
     {
+<<<<<<< HEAD
         PlayerSocket.socketInit();
+=======
+      //PlayerSocket.socketInit();  
+>>>>>>> d2875746ea91d91e63a94e23c201f77d2e5025fa
     }
     
     @Override
     public void start(Stage primaryStage) throws IOException {
+<<<<<<< HEAD
           
+=======
+        
+>>>>>>> d2875746ea91d91e63a94e23c201f77d2e5025fa
         Parent root = FXMLLoader.load(getClass().getResource("splash.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

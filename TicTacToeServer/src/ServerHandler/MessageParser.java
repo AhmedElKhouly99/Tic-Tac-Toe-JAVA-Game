@@ -20,41 +20,23 @@ import player.Player;
 public class MessageParser {
 
     static Vector<Player> LoggedinPlayers = new Vector<Player>();
-
-//<<<<<<< HEAD
-//
-//    public static void checkClientMsg(String msg, ClientHandler ch)
-//=======
     public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
         String[] arrString = msg.split("::");
-
-//        
-//        if("status".equals(arrString[0]))
-//        {
-//            if("Online".equals(arrString[1]))
-//            {
-//                System.out.println("My test succeded");
-//            }
-//        }
-//        
+      
         switch (arrString[0]) {
             case "login":
                 /*-------------------login::username::password----------------------*/
-                Player p = null;
-                if (isUser(p, arrString[1], arrString[2])) {
+                Player p = isUser(arrString[1], arrString[2]);
+                if (p != null) {
 
                     System.out.println("correct user!!");
-
+                    
                     LoggedinPlayers.add(p);
-
                     ch.thisUname = p.getUsername();
-                    LoggedinPlayers.add(p);
                     ch.outS.println("login::done");
-
+                    System.out.println("correct user!!");
                 } else {
                     ch.outS.println("login::failed");
-                    ///Incorrect username or password
-                    return;
                 }
 
                 break;
@@ -74,21 +56,18 @@ public class MessageParser {
                 /*-------------------playing::username::winnerStatus----------------------*/
 
  /*------------In a game----------*/
-
                 break;
 
             case "paused_playing":
                 /*-------------------playing::username::winnerStatus----------------------*/
 
  /*------------In a game----------*/
-
                 break;
 
             case "notplaying":
                 /*-------------------notplaying::username::waitinginqueue/notwaiting--------------------*/
 
  /*------------Not doing anything----------*/
-
                 break;
 
             //sender1
@@ -106,7 +85,7 @@ public class MessageParser {
                         return;
                     }
                 });
-                
+
                 break;
             case "accept"://accept::soly
                 clientsVector.forEach((e) -> {
@@ -128,7 +107,7 @@ public class MessageParser {
                 ch.player2Handler.outS.println("put::" + arrString[1]);
 
                 break;
-                
+
 //            case "winner"://winner                
 //                /*-------------------playing::username::turn::indexPlaymove----------------------*/
 //
@@ -142,17 +121,12 @@ public class MessageParser {
 //                ch.player2Handler.outS.println("tie");
 //
 //                break;    
-                
-
         }
     }
 
-    private static boolean isUser(Player p, String uname, String password) {
-        p = Database.isPlayer(uname, password);
-        if (p != null) {
-            return true;
-        }
-        return false;
+    private static Player isUser(String uname, String password) {
+        Player p = Database.isPlayer(uname, password);
+        return  p;
     }
 
     private static boolean addUser(Player p) {

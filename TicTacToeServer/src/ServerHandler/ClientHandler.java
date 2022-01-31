@@ -58,7 +58,7 @@ public class ClientHandler extends Thread{
             while(true){
                 
                 clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
-                outS.println("Online"); // for server status // give an exception error if there is no client
+                //outS.println("Online"); // for server status // give an exception error if there is no client
                 //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
@@ -75,8 +75,9 @@ public class ClientHandler extends Thread{
                     
 //                    String respond=MessageParser.checkClientMsg(clientStatus,id);
 //                    outS.println(respond);
-
-                   MessageParser.checkClientMsg(clientStatus, this); 
+                        System.out.println("before msg");
+                   MessageParser.checkClientMsg(clientStatus, this);
+                   //this.outS.println("done");
 
                 }
                 
