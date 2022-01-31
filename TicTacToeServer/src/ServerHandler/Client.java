@@ -16,9 +16,11 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
@@ -27,16 +29,39 @@ import javafx.stage.Stage;
  *
  * @author Abanoub Kamal
  */
+<<<<<<< HEAD
 public class Client extends Application {
 
+=======
+public class Client extends Application{
+    String password;
+    String username;
+    
+    
+>>>>>>> d40a4c3ebeca3ff05f718e130ad9a1a3f061c4ef
     Label statusLabel;
     Label statusField;
     FlowPane serverStatusPane;
 
     Button refreshBtn;
+<<<<<<< HEAD
     FlowPane flowPane;
 
     BorderPane rootPane;
+=======
+    FlowPane flowPane;  
+    
+    Label unamelabel;
+    TextField textfield1;    
+    Label passlabel;
+    TextField textfield2;
+    FlowPane signinpane;
+    
+    Button SigninBtn;
+    FlowPane btnpane;
+    
+    BorderPane rootPane;  
+>>>>>>> d40a4c3ebeca3ff05f718e130ad9a1a3f061c4ef
     Scene myScene;
 
     Socket clientSocket;
@@ -50,7 +75,23 @@ public class Client extends Application {
         statusLabel = new Label("Server Status : ");
         statusField = new Label();
         serverStatusPane = new FlowPane(statusLabel, statusField);
+        
+        
+        
 
+        unamelabel =new Label("User Name");
+        textfield1 = new  TextField();
+        FlowPane usernamePane = new FlowPane(unamelabel, textfield1);
+        
+        passlabel =new Label("Password");
+        textfield2 = new  TextField();
+        FlowPane passwordPane = new FlowPane(passlabel, textfield2);
+        
+        SigninBtn = new Button("Sign in");
+
+        signinpane =new FlowPane(Orientation.VERTICAL, usernamePane, passwordPane, SigninBtn);
+        
+        
         refreshBtn = new Button("Refresh");
         refreshBtn.setTranslateX(3);
         refreshBtn.setTranslateY(-3);
@@ -59,11 +100,19 @@ public class Client extends Application {
         rootPane = new BorderPane();
         rootPane.setTop(serverStatusPane);
         rootPane.setBottom(flowPane);
-
+//        rootPane.setLeft(btnpane);
+        rootPane.setCenter(signinpane);
+        
+        
         myScene = new Scene(rootPane, 375, 400);
 
+<<<<<<< HEAD
         try {
             clientSocket = new Socket("127.0.0.1", 5000);
+=======
+        try{
+            clientSocket = new Socket("192.168.133.1", 5000);
+>>>>>>> d40a4c3ebeca3ff05f718e130ad9a1a3f061c4ef
             inS = new DataInputStream(clientSocket.getInputStream());
             outS = new PrintStream(clientSocket.getOutputStream());
         } catch (Exception e) {
@@ -76,6 +125,7 @@ public class Client extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+<<<<<<< HEAD
         refreshBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -84,6 +134,25 @@ public class Client extends Application {
             }
         });
 
+=======
+//        refreshBtn.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+////                primaryStage.close();
+////                Platform.runLater( () -> new TicTacToe().start( new Stage() ) );
+//            }
+//        });
+
+        SigninBtn.setOnAction(e -> {
+            //Retrieving data
+             username = textfield1.getText();
+             password = textfield2.getText();
+             outS.println(username);
+             outS.println(password);
+          
+            });
+        
+>>>>>>> d40a4c3ebeca3ff05f718e130ad9a1a3f061c4ef
         primaryStage.setTitle("Chat Client1");
         primaryStage.setScene(myScene);
         primaryStage.show();
@@ -127,6 +196,7 @@ public class Client extends Application {
     private void startThreadToUpdateClientGui() {
         Runnable runnable = new Runnable() {
             @Override
+<<<<<<< HEAD
             public void run() {
                 while (true) {
                     try {
@@ -137,6 +207,20 @@ public class Client extends Application {
                             @Override
                             public void run() {
                                 statusField.setText(serverStatus);  // write the serverStatus on client GUI    
+=======
+            public void run(){
+    
+                while(true){
+                    try{
+//                        outS.println("Online"); // for client status // give an exception error if there is no server
+//                        serverStatus = inS.readLine(); // for server status // give an exception error if there is no server
+                        
+                        Platform.runLater(new Runnable(){
+                        @Override
+                            public void run(){
+                                statusField.setText(serverStatus);  // write the serverStatus on client GUI  
+                                            
+>>>>>>> d40a4c3ebeca3ff05f718e130ad9a1a3f061c4ef
                             }
                         });
                     } catch (Exception e) {
@@ -145,10 +229,18 @@ public class Client extends Application {
                         /* in case the server isn't exist */
                         Platform.runLater(new Runnable() {
                             @Override
+<<<<<<< HEAD
                             public void run() {
                                 statusField.setText("Offline!");
                             }
                         });
+=======
+                            public void run(){
+                                statusField.setText("Ofline!");    
+                            }
+
+                        }); 
+>>>>>>> d40a4c3ebeca3ff05f718e130ad9a1a3f061c4ef
                     }
 
                     try {
