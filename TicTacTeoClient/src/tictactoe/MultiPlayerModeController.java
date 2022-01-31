@@ -2,9 +2,13 @@
  
 package tictactoe;
 
+import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -23,23 +29,23 @@ import javafx.stage.Stage;
 public class MultiPlayerModeController implements Initializable {
 
     @FXML
-    private Button btn1;
+    private Button btn1=new Button();
     @FXML
-    private Button btn2;
+    private Button btn2=new Button();
     @FXML
-    private Button btn3;
+    private Button btn3=new Button();
     @FXML
-    private Button btn4;
+    private Button btn4=new Button();
     @FXML
-    private Button btn5;
+    private Button btn5=new Button();
     @FXML
-    private Button btn6;
+    private Button btn6=new Button();
     @FXML
-    private Button btn7;
+    private Button btn7=new Button();
     @FXML
-    private Button btn8;
+    private Button btn8=new Button();
     @FXML
-    private Button btn9;
+    private Button btn9=new Button();
     @FXML
     private Button btnplayagain;
     @FXML
@@ -52,13 +58,65 @@ public class MultiPlayerModeController implements Initializable {
     private Label playerOneScore;
     @FXML
     private Button returnBtn;
-
+    
+    char[] arrPlays = new char[9];
+    
+    boolean playerWins = false;
+    Button[] buttonsArr;
+    
+    String index;
+    String[] msg;
+    
+    boolean player1_turn=true;
     /**
      * Initializes the controller class.
      */
+    
+    private void gameplay()
+    {
+        Thread myGameTh=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true)
+                {
+                try {
+                    msg=PlayerSocket.inS.readLine().split("::");
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            putMove(Integer.parseInt(msg[1])); //To change body of generated methods, choose Tools | Templates.
+                        }
+                    });
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            }
+        });
+        myGameTh.start();
+    }
+    
+    
+    
+    private void putMove(int index)
+    {
+        arrPlays[index]='O';
+        buttonsArr[index].setText("O");
+        player1_turn=true;
+        check();
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
+        for (int i = 0; i < 9; i++) {
+            buttonsArr[i].setFont(new Font("MV Boli", 50));
+        }
+         for (int i = 0; i < arrPlays.length; i++) {
+            arrPlays[i] = (char) i;
+        }
+        gameplay();
     }    
 
     @FXML
@@ -70,11 +128,108 @@ public class MultiPlayerModeController implements Initializable {
 
     @FXML
     private void btnPressed(ActionEvent event) {
-    }
+//        System.out.println(buttonsArr[0]);
+//        System.out.println(event.getSource());
+        for (int i = 0; i < 9; i++) {
+            if (event.getTarget() == buttonsArr[i]) {
+                if (player1_turn) {
+                    if (buttonsArr[i].getText() == "") {
+//                        buttonsArr[i].setForeground(new Color(255, 0, 0));
+                        System.out.println("Hiiii");
+                        buttonsArr[i].setText("X");
+                        player1_turn = false;
+                        arrPlays[i] = buttonsArr[i].getText().charAt(0);
+//                        textfield.setText("O turn");
+                        PlayerSocket.outS.println("play::"+i);
+                            check();
+                            
+                        if (playerWins) {
+                            playerOneName.setText("You win");
+                            
+                        }
 
+                    }
+                }
+                
+    }
+   }
+    }
     @FXML
     private void replayAgain(ActionEvent event) {
+        
     }
     
+    
+    
+     public void check() {
+        //check X win conditions
+        int j;
+
+        for (int i = 0; i < 3; i++) {
+            j = i * 3;
+
+            if (i != 1) {
+                if ((arrPlays[i] == arrPlays[4]) && (arrPlays[4] == arrPlays[8 - i])) {
+                    if (arrPlays[i] == 'X') {
+//                        xWins(i, 4, 8 - i);
+                          playerWins=true;
+                    } else {
+//                        oWins(i, 4, 8 - i);
+                            playerOneName.setText("You lose");
+                    }
+                    return;
+                }
+            }
+            if ((arrPlays[i] == arrPlays[i + 3]) && (arrPlays[i + 3] == arrPlays[i + 6])) // Check Columns 
+            {
+                if (arrPlays[i] == 'X') {
+                    playerWins=true;
+                } else {
+//                    oWins(i, i + 3, i + 6);
+                     playerOneName.setText("You lose");
+                }
+                return;
+            } else if ((arrPlays[j] == arrPlays[j + 1]) && (arrPlays[j + 1] == arrPlays[j + 2])) ///Check Rows
+            {
+                if (arrPlays[j] == 'X') {
+//                    xWins(j, j + 1, j + 2);
+                    playerWins=true;
+                } else {
+//                    oWins(j, j + 1, j + 2);
+                     playerOneName.setText("You lose");
+                      
+                }
+                return;
+            }
+
+        }
+
+
+    }
+     
+     
+//    public void xWins(int a, int b, int c) {
+////        buttons[a].setBackground(Color.GREEN);
+////        buttons[b].setBackground(Color.GREEN);
+////        buttons[c].setBackground(Color.GREEN);
+//
+//        for (int i = 0; i < 9; i++) {
+//            buttonsArr[i].s
+//        }
+////        textfield.setText("X wins");
+//        playerWins = true;
+//    }
+
+//    public void oWins(int a, int b, int c) {
+////        buttons[a].setBackground(Color.GREEN);
+////        buttons[b].setBackground(Color.GREEN);
+////        buttons[c].setBackground(Color.GREEN);
+//
+//        for (int i = 0; i < 9; i++) {
+//            buttons[i].setEnabled(false);
+//        }
+////        textfield.setText("O wins");
+//    } 
+     
 }
 

@@ -58,6 +58,7 @@ public class LoginController implements Initializable {
     @FXML
     private void goToGame(ActionEvent event) throws IOException {
         PlayerSocket.socketInit();
+        
         String message=new String();
        
         message="login::"+unameField.getText()+"::"+passwordField.getText();
@@ -68,9 +69,14 @@ public class LoginController implements Initializable {
         
         if("login::done".equals(respond))
         {
-            Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-            Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
-            window.setScene(new Scene(root));
+            PlayerSocket.outS.println("invite::khouly");
+            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
+            {
+                Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+                Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
+                window.setScene(new Scene(root));
+            }
+            
         }
         else
         {

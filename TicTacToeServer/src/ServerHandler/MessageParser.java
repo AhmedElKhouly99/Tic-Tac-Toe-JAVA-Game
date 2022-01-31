@@ -33,6 +33,7 @@ public class MessageParser {
                     
                     LoggedinPlayers.add(p);
                     ch.thisUname = p.getUsername();
+                    System.out.println(ch.thisUname);
                     ch.outS.println("login::done");
                     System.out.println("correct user!!");
                 } else {
@@ -78,19 +79,22 @@ public class MessageParser {
  /*------------Writting a message----------*/
                 break;
 
-            case "invite"://invite::abanoub_id
+            case "invite"://invite::khouly
+                System.out.println(msg);
                 clientsVector.forEach((e) -> {
-                    if (e.thisUname == arrString[1]) {
-                        e.outS.println("invitedyou::" + ch.thisUname);//invitedyou::soly_id
+                    System.out.println(e.thisUname);
+                    if (e.thisUname.equals(arrString[1])) {
+//                        System.out.println(ch.thisUname+"***");
+                        e.outS.println("invitedyou::" + ch.thisUname);//invitedyou::Soly
                         return;
                     }
                 });
 
                 break;
-            case "accept"://accept::soly
+            case "accept"://accept::Soly
                 clientsVector.forEach((e) -> {
-                    if (e.thisUname == arrString[1]) {
-
+                    if (e.thisUname.equals(arrString[1])) {
+                        System.out.println(e.thisUname);
                         ch.player2Handler = e;
                         e.player2Handler = ch;
 
