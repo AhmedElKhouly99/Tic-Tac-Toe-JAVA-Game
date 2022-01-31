@@ -5,6 +5,7 @@
  */
 package tictactoe;
 
+import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +31,12 @@ public class LoginController implements Initializable {
     private Button GoToRegisterBtn;
     @FXML
     private Button loginBtn;
+    
+    @FXML
+    private TextField unameField;
+    
+    @FXML
+    private PasswordField passwordField;
 
     /**
      * Initializes the controller class.
@@ -46,9 +55,26 @@ public class LoginController implements Initializable {
 
     @FXML
     private void goToGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-        Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
-        window.setScene(new Scene(root)); 
+        
+        String message=new String();
+       
+        message="login::"+unameField.getText()+"::"+passwordField.getText();
+        
+        PlayerSocket.outS.println(message);
+        
+        String respond=PlayerSocket.inS.readLine();
+        
+        if("login::done".equals(respond))
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+            Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
+            window.setScene(new Scene(root));
+        }
+        else
+        {
+            
+        }
+         
     }
     
     

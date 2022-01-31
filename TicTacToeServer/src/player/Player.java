@@ -32,6 +32,15 @@ public class Player {
     int stage;
     int status;
     Game []gs;
+    int handlerId;
+    
+    public int getHandlerId() {
+        return handlerId;
+    }
+
+    public void setHandlerId(int handlerId) {
+        this.handlerId = handlerId;
+    }
     
     public Player(String username, String password, char gender) {
         //this.id = id;
