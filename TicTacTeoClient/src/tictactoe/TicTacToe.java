@@ -5,6 +5,7 @@
  */
 package tictactoe;
 
+import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -22,8 +23,15 @@ import javafx.stage.Stage;
  */
 public class TicTacToe extends Application {
     
+    @Override 
+    public void init()
+    {
+      //PlayerSocket.socketInit();  
+    }
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
+        
         Parent root = FXMLLoader.load(getClass().getResource("splash.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

@@ -16,20 +16,29 @@ import java.util.Vector;
  */
 public class ClientHandler extends Thread{
   
+
     long player2Vid;
+
     DataInputStream  inS;
     PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     String clientStatus;
+
+    int id;
+    static int counter_id=0;
+
     String thisUname;
+
     ClientHandler player2Handler;
+
     
     public ClientHandler(Socket s) {
         try{
             inS = new DataInputStream(s.getInputStream());
             outS = new PrintStream(s.getOutputStream());
             clientStatus = "Online";
-            clientsVector.add(this); 
+            clientsVector.add(this);
+            id =counter_id++;
             start();
         }catch(Exception ex){
              System.out.println("server.ChatHandler.<init>()");
@@ -45,10 +54,11 @@ public class ClientHandler extends Thread{
 //            ifUserExist(username);
             
             ////////////////////////////////////////////////////////////////////
+            
             while(true){
                 
                 clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
-                outS.println("Online"); // for server status // give an exception error if there is no client
+                //outS.println("Online"); // for server status // give an exception error if there is no client
                 //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
@@ -61,7 +71,14 @@ public class ClientHandler extends Thread{
                 }
                 else
                 {
-                   MessageParser.checkClientMsg(clientStatus, this); 
+
+                    
+//                    String respond=MessageParser.checkClientMsg(clientStatus,id);
+//                    outS.println(respond);
+                        System.out.println("before msg");
+                   MessageParser.checkClientMsg(clientStatus, this);
+                   //this.outS.println("done");
+
                 }
                 
                 

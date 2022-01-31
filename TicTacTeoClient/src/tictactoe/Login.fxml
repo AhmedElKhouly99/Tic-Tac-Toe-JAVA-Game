@@ -23,13 +23,13 @@
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="21.0" layoutY="144.0" prefHeight="25.0" prefWidth="529.0" />
+      <TextField fx:id="unameField" layoutX="21.0" layoutY="144.0" prefHeight="25.0" prefWidth="529.0" />
       <Label layoutX="21.0" layoutY="206.0" text="Enter your password">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Label>
-      <PasswordField layoutX="21.0" layoutY="243.0" prefHeight="25.0" prefWidth="536.0" />
+      <PasswordField fx:id="passwordField" layoutX="21.0" layoutY="243.0" prefHeight="25.0" prefWidth="536.0" />
       <Button fx:id="loginBtn" layoutX="245.0" layoutY="296.0" mnemonicParsing="false" onAction="#goToGame" prefHeight="25.0" prefWidth="110.0" text="Sign in" />
       <Label layoutX="369.0" layoutY="369.0" text="don't have an account?">
          <font>
