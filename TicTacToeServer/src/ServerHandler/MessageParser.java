@@ -99,6 +99,8 @@ public class MessageParser {
                         e.player2Handler = ch;
 
                         e.outS.println("inviteAccepted");
+                        e.outS.println("X");
+                        ch.outS.println("O");
                         return;
                     }
                 });
