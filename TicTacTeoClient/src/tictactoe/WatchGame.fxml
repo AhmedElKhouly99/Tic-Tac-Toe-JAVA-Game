@@ -14,9 +14,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FAF9F6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.VsComputerModeController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FAF9F6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.MultiPlayerModeController">
    <children>
-      <Pane layoutX="26.0" layoutY="34.0" prefHeight="159.0" prefWidth="217.0">
+      <Pane layoutX="26.0" layoutY="34.0" prefHeight="38.0" prefWidth="46.0">
          <children>
             <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#backToMainPage" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #FAF9F6;">
                <graphic>
@@ -31,14 +31,14 @@
       </Pane>
       <Pane layoutX="128.0" layoutY="14.0" prefHeight="77.0" prefWidth="391.0">
          <children>
-            <Label layoutX="82.0" layoutY="9.0" prefHeight="60.0" prefWidth="286.0" text="Tic Tac Toe">
+            <Label layoutX="132.0" layoutY="9.0" prefHeight="60.0" prefWidth="286.0" text="Watch Game ">
                <font>
                   <Font name="Comic Sans MS Bold" size="42.0" />
                </font>
                <textFill>
                   <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                      <stops>
-                        <Stop color="#280101" />
+                        <Stop color="#6fc369" />
                         <Stop color="#bf232338" offset="1.0" />
                      </stops>
                   </RadialGradient>
@@ -58,62 +58,76 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btn1" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #12aa44;">
+            <Button fx:id="btn1" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #12aa44;">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn2" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="1">
+            <Button fx:id="btn2" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn3" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="156.0" prefWidth="239.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="2">
+            <Button fx:id="btn3" mnemonicParsing="false" opacity="0.41" prefHeight="156.0" prefWidth="239.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn4" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.rowIndex="1">
+            <Button fx:id="btn4" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn5" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="btn5" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn6" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="btn6" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn7" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.rowIndex="2">
+            <Button fx:id="btn7" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn8" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="btn8" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btn9" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button fx:id="btn9" mnemonicParsing="false" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #11aa44;" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
          </children>
       </GridPane>
-      <Label fx:id="textwin" layoutX="319.0" layoutY="95.0" prefHeight="33.0" prefWidth="200.0" textFill="#e80c0c">
-         <font>
-            <Font name="Comic Sans MS" size="26.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnplayagain" layoutX="554.0" layoutY="93.0" mnemonicParsing="false" onAction="#replayAgain" prefHeight="38.0" prefWidth="157.0" style="-fx-background-color: green;" text="Play Again " textFill="#f4f0f0">
-         <font>
-            <Font name="Constantia" size="20.0" />
-         </font>
-      </Button>
+      <Pane layoutX="55.0" layoutY="91.0" prefHeight="60.0" prefWidth="677.0">
+         <children>
+            <Label fx:id="playerOneName" layoutX="24.0" layoutY="8.0" prefHeight="33.0" prefWidth="105.0" textFill="#4f4b82">
+               <font>
+                  <Font name="DejaVu Sans Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="playerTwoName" layoutX="414.0" layoutY="6.0" prefHeight="38.0" prefWidth="96.0" textFill="#4f4b82">
+               <font>
+                  <Font name="DejaVu Sans Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="playerTwoSymbol" layoutX="504.0" layoutY="10.0" prefHeight="33.0" prefWidth="74.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="playerOneSymbol" layoutX="129.0" layoutY="9.0" prefHeight="33.0" prefWidth="74.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

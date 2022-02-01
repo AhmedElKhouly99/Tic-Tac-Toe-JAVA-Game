@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/shorook/Desktop/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
             <file>file:/C:/Users/shorook/Desktop/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/VsComputerModeController.java</file>
+            <file>file:/C:/Users/shorook/Desktop/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/ListOfRecordsController.java</file>
             <file>file:/C:/Users/shorook/Desktop/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayerModeController.java</file>
+            <file>file:/C:/Users/shorook/Desktop/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/ListOfRecords.fxml</file>
             <file>file:/C:/Users/shorook/Desktop/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayersMode.fxml</file>
+            <file>file:/C:/Users/shorook/Desktop/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/WatchGameController.java</file>
         </group>
     </open-files>
 </project-private>
