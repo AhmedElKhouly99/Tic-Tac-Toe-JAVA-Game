@@ -3,35 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoe;
+/*package tictactoe;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * FXML Controller class
- *
- * @author Admin
- */
+
 public class ScoreListController implements Initializable {
 
     @FXML
-    private TableView<?> table_users;
+    private TableView<users> table_users;
     @FXML
-    private TableColumn<?, ?> col_name;
+    private TableColumn<users, String> col_name;
     @FXML
-    private TableColumn<?, ?> col_score;
+    private TableColumn<users, Integer> col_score;
 
-    /**
-     * Initializes the controller class.
-     */
+    ObservableList<users> listM;
+    int index = -1;
+    
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        col_name.setCellValueFactory(new PropertyValueFactory<users,String>("name"));
+        col_score.setCellValueFactory(new PropertyValueFactory<users,Integer>("score"));
+        listM = mysqlconnect.getDatausers();
+        table_users.setItems(listM);
     }    
     
 }
+*/

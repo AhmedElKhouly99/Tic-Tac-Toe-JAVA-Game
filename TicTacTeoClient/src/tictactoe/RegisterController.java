@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author Admin
  */
 public class RegisterController implements Initializable {
-
+    
     @FXML
     private Button GoToLoginBtn;
 
