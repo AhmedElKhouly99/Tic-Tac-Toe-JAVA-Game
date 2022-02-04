@@ -18,7 +18,7 @@
    <children>
       <Pane layoutX="26.0" layoutY="34.0" prefHeight="38.0" prefWidth="46.0">
          <children>
-            <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#backToMainPage" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #FAF9F6;">
+            <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#backToMainPage" prefHeight="38.0" prefWidth="49.0" style="-fx-background-color: #FAF9F6;">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
