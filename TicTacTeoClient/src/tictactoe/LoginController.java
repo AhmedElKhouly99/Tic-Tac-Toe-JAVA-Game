@@ -91,8 +91,8 @@ public class LoginController implements Initializable {
 //                window.setScene(new Scene(root));
 //            }
             
-            Parent root = FXMLLoader.load(getClass().getResource("ScoreList.fxml"));
-            Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+            Stage window = (Stage) loginBtn.getScene().getWindow();
             window.setScene(new Scene(root));
             
         }
