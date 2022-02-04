@@ -112,7 +112,7 @@ public class MultiPlayerModeController implements Initializable {
         buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
         for (int i = 0; i < 9; i++) {
             buttonsArr[i].setFont(new Font("MV Boli", 50));
-        }
+        }   
          for (int i = 0; i < arrPlays.length; i++) {
             arrPlays[i] = (char) i;
         }
