@@ -6,8 +6,10 @@
 package SocketHandler;
 
 import java.io.DataInputStream;
+import java.io.ObjectInputStream;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -21,6 +23,7 @@ public class PlayerSocket {
     static public Socket clientSocket;
     static public DataInputStream inS;
     static public PrintStream outS;
+    static public ObjectInputStream inObj;
     
     static final String SOCKETIP="127.0.0.1";
     static final int SOCKETPORT=5005;
@@ -34,6 +37,7 @@ public class PlayerSocket {
             clientSocket = new Socket(SOCKETIP, SOCKETPORT);
             inS = new DataInputStream(clientSocket.getInputStream());
             outS = new PrintStream(clientSocket.getOutputStream());
+            //inObj = new ObjectInputStream(clientSocket.getInputStream());
         }catch(Exception e){
             
             System.out.println("clientapp.ClientApp.init().init client socket and streams");
