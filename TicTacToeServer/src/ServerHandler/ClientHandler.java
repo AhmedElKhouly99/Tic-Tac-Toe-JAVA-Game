@@ -6,9 +6,11 @@ package ServerHandler;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Vector;
+import player.AllPlayers;
 
 /**
  *
@@ -18,27 +20,61 @@ public class ClientHandler extends Thread{
   
 
     long player2Vid;
-
+    ObjectOutputStream outObj;
     DataInputStream  inS;
     PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
+    static Vector<Player> playersVector = new Vector<Player>();
+    static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
     String clientStatus;
 
     int id;
     static int counter_id=0;
 
-    String thisUname;
+    public Player p;
 
     ClientHandler player2Handler;
+    
+    public class Player{
+        String username;
+        int score;
+        boolean inGame;
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
+        }
+
+        public boolean isInGame() {
+            return inGame;
+        }
+
+        public void setInGame(boolean inGame) {
+            this.inGame = inGame;
+        }
+    }
 
     
     public ClientHandler(Socket s) {
         try{
             inS = new DataInputStream(s.getInputStream());
             outS = new PrintStream(s.getOutputStream());
+            outObj = new ObjectOutputStream(s.getOutputStream());
             clientStatus = "Online";
             clientsVector.add(this);
             id =counter_id++;
+            this.p = new Player();
             start();
         }catch(Exception ex){
              System.out.println("server.ChatHandler.<init>()");
@@ -67,6 +103,7 @@ public class ClientHandler extends Thread{
                     inS.close();
                     outS.close();
                     clientsVector.removeElement(this);
+                    playersVector.removeElement(this.p);
                     this.currentThread().stop();
                 }
                 else
@@ -92,6 +129,7 @@ public class ClientHandler extends Thread{
                 inS.close();
                 outS.close();
                 clientsVector.removeElement(this);
+                playersVector.removeElement(this.p);
                 this.currentThread().stop();
             }catch(IOException e){}
         }

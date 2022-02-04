@@ -59,9 +59,12 @@ public class MultiPlayerModeController implements Initializable {
     @FXML
     private Button returnBtn;
     
+    private String symbol;
+    
     char[] arrPlays = new char[9];
     
     boolean playerWins = false;
+    private Thread myGameTh;
     Button[] buttonsArr;
     
     String index;
@@ -74,7 +77,7 @@ public class MultiPlayerModeController implements Initializable {
     
     private void gameplay()
     {
-        Thread myGameTh=new Thread(new Runnable() {
+        myGameTh=new Thread(new Runnable() {
             @Override
             public void run() {
                 while(true)
@@ -101,21 +104,37 @@ public class MultiPlayerModeController implements Initializable {
     
     private void putMove(int index)
     {
-        arrPlays[index]='O';
-        buttonsArr[index].setText("O");
+        arrPlays[index]=symbol.charAt(0);
+        if(symbol.equals("X")){
+            buttonsArr[index].setText("O");
+        }else{
+            buttonsArr[index].setText("X");
+        }
+        
         player1_turn=true;
         check();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            // TODO
+            symbol = PlayerSocket.inS.readLine();
+            if(symbol.equals("X")){
+                player1_turn = true;
+            }else{
+                player1_turn = false;
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
         for (int i = 0; i < 9; i++) {
             buttonsArr[i].setFont(new Font("MV Boli", 50));
         }   
          for (int i = 0; i < arrPlays.length; i++) {
             arrPlays[i] = (char) i;
-        }
+        }    
         gameplay();
     }    
 
@@ -136,7 +155,8 @@ public class MultiPlayerModeController implements Initializable {
                     if (buttonsArr[i].getText() == "") {
 //                        buttonsArr[i].setForeground(new Color(255, 0, 0));
                         System.out.println("Hiiii");
-                        buttonsArr[i].setText("X");
+                        //buttonsArr[i].setText("X");
+                        buttonsArr[i].setText(symbol);
                         player1_turn = false;
                         arrPlays[i] = buttonsArr[i].getText().charAt(0);
 //                        textfield.setText("O turn");
@@ -144,6 +164,7 @@ public class MultiPlayerModeController implements Initializable {
                             check();
                             
                         if (playerWins) {
+                            myGameTh.stop();
                             playerOneName.setText("You win");
                             
                         }
@@ -170,11 +191,12 @@ public class MultiPlayerModeController implements Initializable {
 
             if (i != 1) {
                 if ((arrPlays[i] == arrPlays[4]) && (arrPlays[4] == arrPlays[8 - i])) {
-                    if (arrPlays[i] == 'X') {
+                    if (arrPlays[i] == symbol.charAt(0)) {
 //                        xWins(i, 4, 8 - i);
                           playerWins=true;
                     } else {
 //                        oWins(i, 4, 8 - i);
+                            myGameTh.stop();
                             playerOneName.setText("You lose");
                     }
                     return;
@@ -182,20 +204,22 @@ public class MultiPlayerModeController implements Initializable {
             }
             if ((arrPlays[i] == arrPlays[i + 3]) && (arrPlays[i + 3] == arrPlays[i + 6])) // Check Columns 
             {
-                if (arrPlays[i] == 'X') {
+                if (arrPlays[i] == symbol.charAt(0)) {
                     playerWins=true;
                 } else {
 //                    oWins(i, i + 3, i + 6);
+                    myGameTh.stop();
                      playerOneName.setText("You lose");
                 }
                 return;
             } else if ((arrPlays[j] == arrPlays[j + 1]) && (arrPlays[j + 1] == arrPlays[j + 2])) ///Check Rows
             {
-                if (arrPlays[j] == 'X') {
+                if (arrPlays[j] == symbol.charAt(0)) {
 //                    xWins(j, j + 1, j + 2);
                     playerWins=true;
                 } else {
 //                    oWins(j, j + 1, j + 2);
+                    myGameTh.stop();
                      playerOneName.setText("You lose");
                       
                 }
