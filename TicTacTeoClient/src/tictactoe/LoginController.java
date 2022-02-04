@@ -5,10 +5,14 @@
  */
 package tictactoe;
 
+import SocketHandler.Player;
 import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +43,8 @@ public class LoginController implements Initializable {
     
     @FXML
     private PasswordField passwordField;
+    
+    static Vector<Player> playersVector = new Vector<Player>();
 
     /**
      * Initializes the controller class.
@@ -58,7 +64,15 @@ public class LoginController implements Initializable {
     @FXML
     private void goToGame(ActionEvent event) throws IOException {
         PlayerSocket.socketInit();
-        
+        //////////////////////////////////////////////
+//        try {
+//            PlayerSocket.outS.println("onlinePlayers");
+//            playersVector.removeAllElements();
+//            playersVector = (Vector<Player>)PlayerSocket.inObj.readObject();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        /////////////////////////////////////////////////
         String message=new String();
        
         message="login::"+unameField.getText()+"::"+passwordField.getText();
