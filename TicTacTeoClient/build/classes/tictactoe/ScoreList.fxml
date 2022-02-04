@@ -1,11 +1,10 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="tictactoe.ScoreListController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="container" stylesheets="@BackGround.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.ScoreListController">
    <children>
       <TableView fx:id="table_users" layoutX="172.0" layoutY="20.0" prefHeight="362.0" prefWidth="297.0">
         <columns>
@@ -14,4 +13,4 @@
         </columns>
       </TableView>
    </children>
-</AnchorPane>-->
+</AnchorPane>
