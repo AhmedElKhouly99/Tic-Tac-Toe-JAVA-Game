@@ -83,13 +83,17 @@ public class LoginController implements Initializable {
         
         if("login::done".equals(respond))
         {
-            PlayerSocket.outS.println("invite::khouly");
-            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
-            {
-                Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-                Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
-                window.setScene(new Scene(root));
-            }
+//            PlayerSocket.outS.println("invite::khouly");
+//            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
+//            {
+//                Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+//                Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
+//                window.setScene(new Scene(root));
+//            }
+            
+            Parent root = FXMLLoader.load(getClass().getResource("ScoreList.fxml"));
+            Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
+            window.setScene(new Scene(root));
             
         }
         else
