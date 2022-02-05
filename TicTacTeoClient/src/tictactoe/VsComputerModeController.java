@@ -488,9 +488,9 @@ public class VsComputerModeController implements Initializable {
     }
     
     public void xWins(int a, int b, int c) {
-        buttonsArr[a].setStyle("-fx-background-color: darkblue;-fx-text-fill: red;");
-        buttonsArr[b].setStyle("-fx-background-color: darkblue;-fx-text-fill: red;");
-        buttonsArr[c].setStyle("-fx-background-color: darkblue;-fx-text-fill: red;");
+        buttonsArr[a].setStyle("-fx-background-color: darkblue;-fx-text-fill: blue;");
+        buttonsArr[b].setStyle("-fx-background-color: darkblue;-fx-text-fill: blue;");
+        buttonsArr[c].setStyle("-fx-background-color: darkblue;-fx-text-fill: blue;");
 
     }
 
