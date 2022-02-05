@@ -159,13 +159,13 @@ public class MultiPlayerModeController implements Initializable {
                         buttonsArr[i].setText(symbol);
                         player1_turn = false;
                         arrPlays[i] = buttonsArr[i].getText().charAt(0);
-<<<<<<< HEAD
-//                      textfield.setText("O turn");
-                        PlayerSocket.outS.println("play::"+i);
-=======
-//                        textfield.setText("O turn");
+//<<<<<<< HEAD
+////                      textfield.setText("O turn");
+//                        PlayerSocket.outS.println("play::"+i);
+//=======
+////                        textfield.setText("O turn");
                         PlayerSocket.outObj.writeObject("play::"+i);
->>>>>>> e5fe6c013339234420bc07e1af0e79e2545e6aff
+//>>>>>>> e5fe6c013339234420bc07e1af0e79e2545e6aff
                             check();
                             
                         if (playerWins) {
