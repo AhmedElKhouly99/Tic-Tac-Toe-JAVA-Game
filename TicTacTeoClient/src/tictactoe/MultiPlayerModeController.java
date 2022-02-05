@@ -141,8 +141,8 @@ public class MultiPlayerModeController implements Initializable {
     @FXML
     private void backToMainPage(ActionEvent event) throws IOException {
          Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Stage window = (Stage) returnBtn.getScene().getWindow();
-        window.setScene(new Scene(root));
+         Stage window = (Stage) returnBtn.getScene().getWindow();
+         window.setScene(new Scene(root));
     }
 
     @FXML
@@ -153,13 +153,13 @@ public class MultiPlayerModeController implements Initializable {
             if (event.getTarget() == buttonsArr[i]) {
                 if (player1_turn) {
                     if (buttonsArr[i].getText() == "") {
-//                        buttonsArr[i].setForeground(new Color(255, 0, 0));
+//                      buttonsArr[i].setForeground(new Color(255, 0, 0));
                         System.out.println("Hiiii");
                         //buttonsArr[i].setText("X");
                         buttonsArr[i].setText(symbol);
                         player1_turn = false;
                         arrPlays[i] = buttonsArr[i].getText().charAt(0);
-//                        textfield.setText("O turn");
+//                      textfield.setText("O turn");
                         PlayerSocket.outS.println("play::"+i);
                             check();
                             
