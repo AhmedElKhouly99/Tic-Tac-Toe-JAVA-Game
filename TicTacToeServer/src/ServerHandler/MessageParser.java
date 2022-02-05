@@ -21,15 +21,13 @@ import player.Players;
 
 //invite::player2_id"abanoub", id="soly"
 //accept::player1_id"soly"::abanoub
+
 /**
  *
  * @author START
  */
 public class MessageParser {
     
-    
-    
-
     static Vector<Players> LoggedinPlayers = new Vector<Players>();
     public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
         
@@ -73,19 +71,20 @@ public class MessageParser {
                     //ch.outS.println("login::failed");
                     clientsVector.removeElement(ch);
                 }
-
+                
                 break;
-
+                
             case "signup":/*-------------------signup::username::password----------------------*/
-                //Player p1 = new Players(arrString[1], arrString[2], arrString[3].charAt(0));
-                if (addUser(arrString[1], arrString[2])) {
-                    ch.outObj.writeObject("signup::done");
-                } else {
-                    ch.outObj.writeObject("signup::failed");
-                }
 
-                /*------------Insert user data from database----------*/
-                break;
+//                Players p1 = new Players(arrString[1], arrString[2]);
+                if(addUser(arrString[1], arrString[2])){
+                    ch.outS.println("signup::done");
+                }else{
+                    ch.outS.println("signup::failed");
+                }    
+         /*------------Insert user data from database----------*/
+                
+                break; 
                 
             case "onlinePlayers":
                 
@@ -197,5 +196,7 @@ public class MessageParser {
     private static boolean addUser(String uname, String pass) {
         return Database.addPlayer(uname, pass);
     }
-
-}
+       
+    
+    
+}    
