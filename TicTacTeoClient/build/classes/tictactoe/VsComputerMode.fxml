@@ -17,7 +17,6 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="774.0" styleClass="container" stylesheets="@BackGround.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.VsComputerModeController">
  <children>     
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -49,21 +48,27 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="btn1" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css">
+                        <Button fx:id="btn1" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" text="X" textFill="#ff0303">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <font>
+                              <Font size="48.0" />
+                           </font>
                         </Button>
-                        <Button fx:id="btn2" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" GridPane.columnIndex="1">
+                        <Button fx:id="btn2" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" text="O" textFill="#0342ff" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <font>
+                              <Font size="48.0" />
+                           </font>
                         </Button>
                         <Button fx:id="btn3" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="156.0" prefWidth="239.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" GridPane.columnIndex="2">
                            <GridPane.margin>
@@ -72,6 +77,9 @@
                            <effect>
                               <InnerShadow />
                            </effect>
+                           <font>
+                              <Font size="48.0" />
+                           </font>
                         </Button>
                         <Button fx:id="btn4" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" GridPane.rowIndex="1">
                            <GridPane.margin>

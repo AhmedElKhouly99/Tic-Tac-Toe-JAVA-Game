@@ -26,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import player.Players;
 
 /**
  * FXML Controller class
@@ -56,16 +57,18 @@ public class MainController implements Initializable {
     @FXML
     private ImageView activateDeactivateImage;
     @FXML
-    private TableColumn<?, ?> onlinePlayerName;
+    private TableColumn<Players, String> onlinePlayerName;
     @FXML
-    private TableColumn<?, ?> onlinePlayerScore;
+    private TableColumn<Players, Integer> onlinePlayerScore;
     @FXML
-    private TableColumn<?, ?> offlinePlayerName;
+    private TableColumn<Players, String> offlinePlayerName;
     @FXML
-    private TableColumn<?, ?> offlinePlayerScore;
+    private TableColumn<Players, Integer> offlinePlayerScore;
     @FXML
-    private TableView<?> tableViewMembers;
+    private TableView<Players> tableViewMembers;
 
+    
+    
     /**
      * Initializes the controller class.
      */
