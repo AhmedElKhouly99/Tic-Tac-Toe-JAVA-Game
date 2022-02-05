@@ -5,18 +5,23 @@
  */
 package player;
 
-import game.Game;
 import java.io.Serializable;
 
 /**
  *
  * @author ahmed
  */
-public class AllPlayers implements Serializable{
+public class Players implements Serializable{
 
+    public Players(String username, int score) {
+        this.username = username;
+        this.score = score;
+        this.inGame = false;
+    }
     String username;
     int score;
-    
+    boolean inGame;
+
     public String getUsername() {
         return username;
     }
@@ -32,12 +37,12 @@ public class AllPlayers implements Serializable{
     public void setScore(int score) {
         this.score = score;
     }
-    
-    
 
-    public AllPlayers(String username, int score) {
-        this.username = username;
-        this.score = score;
+    public boolean isInGame() {
+        return inGame;
     }
-    
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
+    }
 }

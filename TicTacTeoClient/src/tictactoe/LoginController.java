@@ -5,7 +5,7 @@
  */
 package tictactoe;
 
-import SocketHandler.Player;
+import player.Players;
 import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField passwordField;
     
-    static Vector<Player> playersVector = new Vector<Player>();
+    static Vector<Players> playersVector = new Vector<Players>();
 
     /**
      * Initializes the controller class.
@@ -52,6 +52,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        PlayerSocket.socketInit();
     }    
 
     @FXML
@@ -62,11 +63,11 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void goToGame(ActionEvent event) throws IOException {
-        PlayerSocket.socketInit();
+    private void goToGame(ActionEvent event) throws IOException, ClassNotFoundException {
+//        PlayerSocket.socketInit();
         //////////////////////////////////////////////
 //        try {
-//            PlayerSocket.outS.println("onlinePlayers");
+//            PlayerSocket.outObj.writeObject("onlinePlayers");
 //            playersVector.removeAllElements();
 //            playersVector = (Vector<Player>)PlayerSocket.inObj.readObject();
 //        } catch (ClassNotFoundException ex) {
@@ -77,9 +78,12 @@ public class LoginController implements Initializable {
        
         message="login::"+unameField.getText()+"::"+passwordField.getText();
         
-        PlayerSocket.outS.println(message);
+        //PlayerSocket.outS.println(message);
+        PlayerSocket.outObj.writeObject(message);
         
-        String respond=PlayerSocket.inS.readLine();
+        //String respond=PlayerSocket.inS.readLine();
+        String respond=(String)PlayerSocket.inObj.readObject();
+        System.out.println(respond);
         
         if("login::done".equals(respond))
         {

@@ -3,23 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SocketHandler;
+package player;
+
+import java.io.Serializable;
 
 /**
  *
  * @author ahmed
  */
-public class Player {
+public class AllPlayers implements Serializable{
 
-    public Player(String username, int score) {
-        this.username = username;
-        this.score = score;
-        this.inGame = false;
-    }
     String username;
     int score;
-    boolean inGame;
-
+    
     public String getUsername() {
         return username;
     }
@@ -35,12 +31,12 @@ public class Player {
     public void setScore(int score) {
         this.score = score;
     }
+    
+    
 
-    public boolean isInGame() {
-        return inGame;
+    public AllPlayers(String username, int score) {
+        this.username = username;
+        this.score = score;
     }
-
-    public void setInGame(boolean inGame) {
-        this.inGame = inGame;
-    }
+    
 }
