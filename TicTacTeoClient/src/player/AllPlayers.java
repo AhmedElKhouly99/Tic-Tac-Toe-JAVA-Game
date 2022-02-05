@@ -3,23 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SocketHandler;
+package player;
+
+import java.io.Serializable;
 
 /**
  *
  * @author ahmed
  */
-public class Player {
+public class AllPlayers implements Serializable{
 
-    public Player(String username, int score) {
-        this.username = username;
-        this.score = score;
-        this.inGame = false;
+    Integer rank;
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
     String username;
     int score;
-    boolean inGame;
-
+    
     public String getUsername() {
         return username;
     }
@@ -35,12 +40,13 @@ public class Player {
     public void setScore(int score) {
         this.score = score;
     }
+    
+    
 
-    public boolean isInGame() {
-        return inGame;
+    public AllPlayers(Integer rank, String username, int score) {
+        this.rank = rank;
+        this.username = username;
+        this.score = score;
     }
-
-    public void setInGame(boolean inGame) {
-        this.inGame = inGame;
-    }
+    
 }

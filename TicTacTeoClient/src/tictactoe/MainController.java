@@ -28,6 +28,8 @@ public class MainController implements Initializable {
     private Button MultiPlayerBtn;
     @FXML
     private Button singlePlayerBtn;
+        @FXML
+    private Button ExitBtn;
 
     /**
      * Initializes the controller class.
@@ -46,10 +48,16 @@ public class MainController implements Initializable {
 
     @FXML
     private void singleplayer(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(getClass().getResource("VsComputerMode.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("Levels.fxml"));
         Stage window = (Stage) singlePlayerBtn.getScene().getWindow();
         window.setScene(new Scene(root));
         
     }
     
+      @FXML
+    void Exit(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("splash.fxml"));
+        Stage window = (Stage) ExitBtn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
 }

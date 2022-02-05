@@ -13,11 +13,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import player.AllPlayers;
+import player.Players;
 
 /**
  *
@@ -33,7 +35,7 @@ public class Database {
     final static String EDITSCORE = "update player set score=? where username=?";
     final static String GETPLAYER = "select * from player where username=? and password=?";
     final static String DELETEGAME = "delete from game where username1_x=? and username2_o=?";
-    final static String GETALLPLAYERS = "select username, score from player";
+    final static String GETALLPLAYERS = "select username, score from player order by score desc";
     static Connection con;
     static Statement stm;
     static PreparedStatement preparedStmt;
@@ -76,8 +78,8 @@ public class Database {
     }
     
     @SuppressWarnings("empty-statement")
-    public static void isPlayer(String uname, String pass, ClientHandler.Player p){
-
+    public static boolean isPlayer(String uname, String pass, Players p){
+//        p = new ClientHandler.Player();
         try {
             while(!startConnection());
             preparedStmt = con.prepareStatement(GETPLAYER);
@@ -85,22 +87,25 @@ public class Database {
             preparedStmt.setString (2, pass);
             rs = preparedStmt.executeQuery();
             if(rs.next() && rs.getString(1).equals(uname) && rs.getString(2).equals(pass)){
-                //p = new AllPlayers(rs.getInt(5), rs.getString(1), rs.getString(2), rs.getString(3).charAt(0), rs.getInt(4));
+//                p = new Players(rs.getInt(5), rs.getString(1), rs.getString(2), rs.getString(3).charAt(0), rs.getInt(4));
+//                p = new Players();
                 p.setUsername(rs.getString(1));
                 p.setScore(rs.getInt(3));
                 p.setInGame(false);
+//                return true;
             }else{
                 p = null;
             }
             rs.close();
             preparedStmt.close();
             con.close();
-            //return ch.p;
-        } catch (SQLException ex) {
+            //return p;
+            return true;
+       } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-        p = null;
-        //return null;
+        //p = null;
+        return false;
     }
     
     @SuppressWarnings("empty-statement")
@@ -176,23 +181,23 @@ public class Database {
     }
     
     public static ObservableList<AllPlayers> getAllPlayers()
-    {
+    {       
         ObservableList<AllPlayers> list = FXCollections.observableArrayList();
         try {
             while(!startConnection());
             preparedStmt = con.prepareStatement(GETALLPLAYERS);
             rs = preparedStmt.executeQuery();
+            Integer i = 0;
             while(rs.next()){
-                list.add(new AllPlayers(rs.getString(1), rs.getInt(2)));
+                list.add(new AllPlayers(++i, rs.getString(1), rs.getInt(2)));
             }
             rs.close();
             preparedStmt.close();
             con.close();
-            return list;
+            return    FXCollections.observableList(list);
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-   }
-    
+   }   
 }
