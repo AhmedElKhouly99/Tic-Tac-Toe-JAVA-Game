@@ -5,7 +5,7 @@
  */
 package tictactoe;
 
-import java.awt.Color;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -72,6 +72,7 @@ public class VsComputerModeController implements Initializable {
             arrPlays[i] = (char) i;
         }
          
+         
     }    
 
     @FXML
@@ -99,7 +100,13 @@ public class VsComputerModeController implements Initializable {
                         
                         check();
                         if (!playerWins && (gameCOunter!=9)) {
-                            gamePlay();
+                            if(LevelsController.hardAI){
+                                hardGamePlay();
+                            }
+                            else
+                            {
+                                easyGamePlay();
+                            }
                             gameCOunter++;
                             check();
                         }
@@ -165,7 +172,32 @@ public class VsComputerModeController implements Initializable {
     
     
     
-    public void gamePlay() {
+    public void easyGamePlay(){
+       int index;
+       
+       index=(int) Math.floor(Math.random()*(9));
+       
+       while(!((arrPlays[index]!='X') && (arrPlays[index]!='O'))){
+           
+           index=(int) Math.floor(Math.random()*(9));
+       }
+       
+       buttonsArr[index].setText("O");
+       buttonsArr[index].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+       arrPlays[index] = 'O';
+       //buttonsArr[4].setForeground(new Color(0, 0, 255));
+       player1_turn = true;
+       
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    public void hardGamePlay() {
         
         
         if(arrPlays[4] != 'X' && arrPlays[4] != 'O')
