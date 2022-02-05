@@ -48,7 +48,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void singleplayer(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(getClass().getResource("VsComputerMode.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("Levels.fxml"));
         Stage window = (Stage) singlePlayerBtn.getScene().getWindow();
         window.setScene(new Scene(root));
         

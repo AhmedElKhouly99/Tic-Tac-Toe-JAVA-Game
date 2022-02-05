@@ -15,7 +15,7 @@
          <children>
             <AnchorPane prefHeight="399.0" prefWidth="606.0">
                <children>
-                  <Button fx:id="MultiPlayerBtn" layoutX="139.0" layoutY="231.0" mnemonicParsing="false" onAction="#MultiPlayer" prefHeight="25.0" prefWidth="277.0" style="-fx-background-radius: 50; -fx-background-color: #4adeed; -fx-cursor: hand;" text="Multi Player">
+                  <Button fx:id="MultiPlayerBtn" layoutX="139.0" layoutY="231.0" mnemonicParsing="false" onAction="#MultiPlayer" prefHeight="25.0" prefWidth="277.0" style="-fx-background-radius: 50; -fx-background-color: #4adeed; -fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Multi Player">
                      <font>
                         <Font name="Copperplate Gothic Bold" size="18.0" />
                      </font>
@@ -23,7 +23,7 @@
                         <InnerShadow height="96.37" radius="53.245000000000005" width="118.61" />
                      </effect>
                   </Button>
-                  <Button fx:id="singlePlayerBtn" layoutX="139.0" layoutY="135.0" mnemonicParsing="false" onAction="#singleplayer" prefHeight="25.0" prefWidth="277.0" style="-fx-background-radius: 50; -fx-background-color: #4adeed; -fx-cursor: hand;" text="Single Player">
+                  <Button fx:id="singlePlayerBtn" layoutX="139.0" layoutY="135.0" mnemonicParsing="false" onAction="#singleplayer" prefHeight="25.0" prefWidth="277.0" style="-fx-background-radius: 50; -fx-background-color: #4adeed; -fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Single Player">
                      <font>
                         <Font name="Copperplate Gothic Bold" size="18.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Glow level="1.0" />
                      </effect>
                   </AnchorPane>
-                  <Button fx:id="ExitBtn" layoutX="457.0" layoutY="315.0" mnemonicParsing="false" onAction="#Exit" prefHeight="40.0" prefWidth="116.0" style="-fx-cursor: hand;" text="Exit">
+                  <Button fx:id="ExitBtn" layoutX="457.0" layoutY="315.0" mnemonicParsing="false" onAction="#Exit" prefHeight="40.0" prefWidth="116.0" style="-fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Exit">
                      <font>
                         <Font name="Copperplate Gothic Bold" size="16.0" />
                      </font>

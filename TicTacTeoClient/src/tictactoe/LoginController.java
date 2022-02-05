@@ -45,7 +45,11 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField passwordField;
+    
+    @FXML
+    private Button BackToMainBtn;
 
+    
     static Vector<Players> playersVector = new Vector<Players>();
 
     /**
@@ -55,6 +59,13 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         PlayerSocket.socketInit();
+    }
+
+    @FXML
+    void BackToMain(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Stage window = (Stage) BackToMainBtn.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 
     @FXML
