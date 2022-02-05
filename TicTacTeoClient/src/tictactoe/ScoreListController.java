@@ -81,6 +81,7 @@ public class ScoreListController extends Thread implements Initializable {
                     } catch (ClassNotFoundException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException | InterruptedException ex) {
+                    System.out.println("***************************");
                     Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 Platform.runLater(new Runnable() {
