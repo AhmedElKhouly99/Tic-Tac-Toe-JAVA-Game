@@ -80,6 +80,7 @@ public class Database {
     @SuppressWarnings("empty-statement")
     public static boolean isPlayer(String uname, String pass, Players p){
 //        p = new ClientHandler.Player();
+        boolean flag = false;
         try {
             while(!startConnection());
             preparedStmt = con.prepareStatement(GETPLAYER);
@@ -92,20 +93,21 @@ public class Database {
                 p.setUsername(rs.getString(1));
                 p.setScore(rs.getInt(3));
                 p.setInGame(false);
-//                return true;
+                flag = true;
             }else{
                 p = null;
+                flag = false;
             }
             rs.close();
             preparedStmt.close();
             con.close();
             //return p;
-            return true;
+
        } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         //p = null;
-        return false;
+        return flag;
     }
     
     @SuppressWarnings("empty-statement")

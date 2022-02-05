@@ -35,6 +35,7 @@ import javafx.stage.Stage;
  */
 public class LoginController implements Initializable {
 
+
     @FXML
     private Button GoToRegisterBtn;
     @FXML
@@ -86,29 +87,33 @@ public class LoginController implements Initializable {
             DialogPane dialogPane = alert.getDialogPane();
             dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
             dialogPane.getStyleClass().add("myDialog");
-        } else{
-                   Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-               Stage window = (Stage) loginBtn.getScene().getWindow();
-               window.setScene(new Scene(root));  
-                    }
-//        }else{
-//            PlayerSocket.socketInit();
-//            PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
-//            String respond = (String)PlayerSocket.inObj.readObject();
-//            if("login::done".equals(respond)){
-//                Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-//                Stage window = (Stage) loginBtn.getScene().getWindow();
-//                window.setScene(new Scene(root));
-//            }else{
-//                Alert alert = new Alert(Alert.AlertType.WARNING);
-//                alert.setContentText("Incorrect username or password");
-//                alert.show();
-//                DialogPane dialogPane = alert.getDialogPane();
-//                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-//                dialogPane.getStyleClass().add("myDialog");
-//            
-//                PlayerSocket.closeSoket();
-//            }
+        
+        }else{
+            PlayerSocket.socketInit();
+            PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
+            String respond = (String)PlayerSocket.inObj.readObject(); System.out.println(respond);
+            if("login::done".equals(respond)){
+                Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+                Stage window = (Stage) loginBtn.getScene().getWindow();
+                window.setScene(new Scene(root));
+            }else if("login::exist".equals(respond)){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("User logged in from other device!");
+                alert.show();
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                dialogPane.getStyleClass().add("myDialog");
+                PlayerSocket.closeSoket();
+            }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Incorrect username or password");
+                alert.show();
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                dialogPane.getStyleClass().add("myDialog");
+            
+                PlayerSocket.closeSoket();
+            }
 
     
        
@@ -125,5 +130,4 @@ public class LoginController implements Initializable {
         }
 
     } 
-
-
+}

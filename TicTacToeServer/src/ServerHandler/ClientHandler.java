@@ -4,6 +4,7 @@
  */
 package ServerHandler;
 
+import static ServerHandler.MessageParser.LoggedinPlayers;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -32,7 +33,7 @@ public class ClientHandler extends Thread{
 
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     static Vector<Players> playersVector = new Vector<Players>();
-    static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
+//    static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
     String clientStatus;
 
     String thisUname;
@@ -125,7 +126,7 @@ public class ClientHandler extends Thread{
 //                    inS.close();
 //                    outS.close();
                     clientsVector.removeElement(this);
-                    playersVector.removeElement(this.p);
+                    LoggedinPlayers.removeElement(this.p);
                     this.currentThread().stop();
                 }
                 else
@@ -156,7 +157,7 @@ public class ClientHandler extends Thread{
 //                inS.close();
 //                outS.close();
                 clientsVector.removeElement(this);
-                playersVector.removeElement(this.p);
+                LoggedinPlayers.removeElement(this.p);
                 this.currentThread().stop();
             }catch(Exception e){}
         }
