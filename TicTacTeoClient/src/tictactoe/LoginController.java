@@ -5,17 +5,23 @@
  */
 package tictactoe;
 
+import player.Players;
 import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 
 import javafx.scene.control.PasswordField;
 
@@ -29,16 +35,26 @@ import javafx.stage.Stage;
  */
 public class LoginController implements Initializable {
 
+<<<<<<< HEAD
+     @FXML
+=======
     @FXML
+>>>>>>> 791b02148e27de909795e3283b04bc060442cc3b
     private Button GoToRegisterBtn;
     @FXML
     private Button loginBtn;
-    
+
     @FXML
     private TextField unameField;
-    
+
     @FXML
     private PasswordField passwordField;
+    
+    @FXML
+    private Button BackToMainBtn;
+
+    
+    static Vector<Players> playersVector = new Vector<Players>();
 
     /**
      * Initializes the controller class.
@@ -48,6 +64,14 @@ public class LoginController implements Initializable {
         // TODO
     }    
 
+
+    @FXML
+    void BackToMain(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Stage window = (Stage) BackToMainBtn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
     @FXML
     private void GoToRegister(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Register.fxml"));
@@ -56,35 +80,54 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void goToGame(ActionEvent event) throws IOException {
-        PlayerSocket.socketInit();
-        
-        String message=new String();
+    private void goToGame(ActionEvent event) throws IOException, ClassNotFoundException {
+
+        if(unameField.getText().equals("") || passwordField.getText().equals("") ){
+            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("please enter your username and password");
+            alert.show();
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+            dialogPane.getStyleClass().add("myDialog");
+        } else{
+                   Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+               Stage window = (Stage) loginBtn.getScene().getWindow();
+               window.setScene(new Scene(root));  
+                    }
+//        }else{
+//            PlayerSocket.socketInit();
+//            PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
+//            String respond = (String)PlayerSocket.inObj.readObject();
+//            if("login::done".equals(respond)){
+//                Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+//                Stage window = (Stage) loginBtn.getScene().getWindow();
+//                window.setScene(new Scene(root));
+//            }else{
+//                Alert alert = new Alert(Alert.AlertType.WARNING);
+//                alert.setContentText("Incorrect username or password");
+//                alert.show();
+//                DialogPane dialogPane = alert.getDialogPane();
+//                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+//                dialogPane.getStyleClass().add("myDialog");
+//            
+//                PlayerSocket.closeSoket();
+//            }
+
+    
        
-        message="login::"+unameField.getText()+"::"+passwordField.getText();
-        
-        PlayerSocket.outS.println(message);
-        
-        String respond=PlayerSocket.inS.readLine();
-        
-        if("login::done".equals(respond))
-        {
-            PlayerSocket.outS.println("invite::khouly");
-            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
-            {
-                Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-                Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
-                window.setScene(new Scene(root));
-            }
-            
+//        PlayerSocket.socketInit();
+        //////////////////////////////////////////////
+//        try {
+//            PlayerSocket.outObj.writeObject("onlinePlayers");
+//            playersVector.removeAllElements();
+//            playersVector = (Vector<Player>)PlayerSocket.inObj.readObject();
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
         }
-        else
-        {
-            
-        }
-         
-    }
-    
-    
-    
-}
+
+    } 
+
+

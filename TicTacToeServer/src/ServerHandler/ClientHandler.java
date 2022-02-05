@@ -6,9 +6,13 @@ package ServerHandler;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Vector;
+import player.AllPlayers;
+import player.Players;
 
 /**
  *
@@ -17,19 +21,80 @@ import java.util.Vector;
 public class ClientHandler extends Thread{
   
     long player2Vid;
+<<<<<<< HEAD
     DataInputStream  inS;
     PrintStream outS;
+=======
+    ObjectOutputStream outObj;
+    ObjectInputStream inObj;
+//    DataInputStream  inS;
+//    PrintStream outS;
+>>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
+    static Vector<Players> playersVector = new Vector<Players>();
+    static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
     String clientStatus;
+<<<<<<< HEAD
     String thisUname;
     ClientHandler player2Handler;
+=======
+//    public Player p;
+    public boolean status;
+
+    int id;
+    static int counter_id=0;
+
+    public Players p;
+
+    ClientHandler player2Handler;
+    
+//    public class Player{
+//        String username;
+//        int score;
+//        boolean inGame;
+//
+//        public String getUsername() {
+//            return username;
+//        }
+//
+//        public void setUsername(String username) {
+//            this.username = username;
+//        }
+//
+//        public int getScore() {
+//            return score;
+//        }
+//
+//        public void setScore(int score) {
+//            this.score = score;
+//        }
+//
+//        public boolean isInGame() {
+//            return inGame;
+//        }
+//
+//        public void setInGame(boolean inGame) {
+//            this.inGame = inGame;
+//        }
+//    }
+
+>>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
     
     public ClientHandler(Socket s) {
         try{
-            inS = new DataInputStream(s.getInputStream());
-            outS = new PrintStream(s.getOutputStream());
+            //inS = new DataInputStream(s.getInputStream());
+            //outS = new PrintStream(s.getOutputStream());
+            inObj = new ObjectInputStream(s.getInputStream());
+            outObj = new ObjectOutputStream(s.getOutputStream());
             clientStatus = "Online";
+<<<<<<< HEAD
             clientsVector.add(this); 
+=======
+            clientsVector.add(this);
+            id =counter_id++;
+            this.p = new Players();
+            status = true;
+>>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
             start();
         }catch(Exception ex){
              System.out.println("server.ChatHandler.<init>()");
@@ -46,22 +111,41 @@ public class ClientHandler extends Thread{
             
             ////////////////////////////////////////////////////////////////////
             while(true){
+<<<<<<< HEAD
                 
                 clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
                 outS.println("Online"); // for server status // give an exception error if there is no client
+=======
+                clientStatus = (String)inObj.readObject();
+                //clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
+                //outS.println("Online"); // for server status // give an exception error if there is no client
+>>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
                 //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
-                    System.out.println(clientStatus);
-                    System.out.println("tic.tac.toe_server.ClientHandler.run() from outside exception");
-                    inS.close();
-                    outS.close();
+//                    System.out.println(clientStatus);
+//                    System.out.println("tic.tac.toe_server.ClientHandler.run() from outside exception");
+//                    inS.close();
+//                    outS.close();
                     clientsVector.removeElement(this);
+                    playersVector.removeElement(this.p);
                     this.currentThread().stop();
                 }
                 else
                 {
+<<<<<<< HEAD
                    MessageParser.checkClientMsg(clientStatus, this); 
+=======
+
+                    
+//                    String respond=MessageParser.checkClientMsg(clientStatus,id);
+//                    outS.println(respond);
+                        System.out.println("before msg");
+                        System.out.println(clientStatus);
+                   MessageParser.checkClientMsg(clientStatus, this);
+                   //this.outS.println("done");
+
+>>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
                 }
                 
                 
@@ -70,13 +154,14 @@ public class ClientHandler extends Thread{
             }
         }catch(Exception ex){       // i don't know why this exception is not fire at the client is fallen
             try{
-                System.out.println(clientStatus);
-                System.out.println("tic.tac.toe_server.ClientHandler.run() from iside exception");
-                inS.close();
-                outS.close();
+//                System.out.println(clientStatus);
+//                System.out.println("tic.tac.toe_server.ClientHandler.run() from iside exception");
+//                inS.close();
+//                outS.close();
                 clientsVector.removeElement(this);
+                playersVector.removeElement(this.p);
                 this.currentThread().stop();
-            }catch(IOException e){}
+            }catch(Exception e){}
         }
         
     }
