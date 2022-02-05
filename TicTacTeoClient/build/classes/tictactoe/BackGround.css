@@ -13,6 +13,23 @@ and open the template in the editor.
     -fx-background-size: cover;
     -fx-background-position: center;
 }
+
+.BtnLive:hover {
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 0.9;
+}
+
+.EasyPane:hover{
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.2;
+    /*-fx-background-color: aqua;*/
+}
+
+.HardPane:hover{
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.2;
+    /*-fx-background-color: red;*/
+}
 /*.txtField{
     -fx-text-fill: -fx-text-inner-color;
     -fx-highlight-fill: derive(-fx-control-inner-background,-20%);

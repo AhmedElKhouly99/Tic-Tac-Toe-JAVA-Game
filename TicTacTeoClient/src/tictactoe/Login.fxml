@@ -30,7 +30,7 @@
                         <Font name="Comic Sans MS" size="12.0" />
                      </font>
                   </PasswordField>
-                  <Button fx:id="loginBtn" alignment="CENTER" layoutX="181.0" layoutY="255.0" mnemonicParsing="false" onAction="#goToGame" prefHeight="28.0" prefWidth="204.0" style="-fx-background-radius: 50; -fx-background-color: #4adeed; -fx-cursor: hand;" text="Sign in" textAlignment="CENTER">
+                  <Button fx:id="loginBtn" alignment="CENTER" layoutX="181.0" layoutY="255.0" mnemonicParsing="false" onAction="#goToGame" prefHeight="28.0" prefWidth="204.0" style="-fx-background-radius: 50; -fx-background-color: #4adeed; -fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Sign in" textAlignment="CENTER">
                      <font>
                         <Font name="Copperplate Gothic Bold" size="18.0" />
                      </font>
@@ -38,7 +38,7 @@
                         <InnerShadow height="29.65" radius="36.565" width="118.61" />
                      </effect>
                   </Button>
-                  <Button fx:id="GoToRegisterBtn" alignment="CENTER" layoutX="455.0" layoutY="292.0" mnemonicParsing="false" onAction="#GoToRegister" prefHeight="22.0" prefWidth="80.0" style="-fx-background-radius: 50; -fx-background-color: transparet; -fx-cursor: hand;" text="Sign Up" textAlignment="CENTER" textFill="WHITE" underline="true">
+                  <Button fx:id="GoToRegisterBtn" alignment="CENTER" layoutX="455.0" layoutY="292.0" mnemonicParsing="false" onAction="#GoToRegister" prefHeight="22.0" prefWidth="80.0" style="-fx-background-radius: 50; -fx-background-color: transparet; -fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Sign Up" textAlignment="CENTER" textFill="WHITE" underline="true">
                      <font>
                         <Font name="Comic Sans MS Bold" size="15.0" />
                      </font>
@@ -87,6 +87,14 @@
                         <Glow level="1.0" />
                      </effect>
                   </AnchorPane>
+                  <Button fx:id="BackToMainBtn" layoutX="14.0" layoutY="284.0" mnemonicParsing="false" onAction="#BackToMain" prefHeight="32.0" prefWidth="98.0" style="-fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Back">
+                     <effect>
+                        <InnerShadow height="96.37" radius="53.245000000000005" width="118.61" />
+                     </effect>
+                     <font>
+                        <Font name="Copperplate Gothic Bold" size="16.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

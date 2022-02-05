@@ -13,21 +13,21 @@
          <children>
             <AnchorPane prefHeight="400.0" prefWidth="616.0">
                <children>
-                  <Button fx:id="RankBtn" layoutX="202.0" layoutY="77.0" mnemonicParsing="false" onAction="#GoToRanks" prefHeight="44.0" prefWidth="198.0" style="-fx-cursor: hand; -fx-background-color: #4adeed; -fx-background-radius: 50;" text="Ranking">
+                  <Button fx:id="RankBtn" layoutX="202.0" layoutY="77.0" mnemonicParsing="false" onAction="#GoToRanks" prefHeight="44.0" prefWidth="198.0" style="-fx-cursor: hand; -fx-background-color: #4adeed; -fx-background-radius: 50;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Ranking">
                      <font>
                         <Font name="Copperplate Gothic Bold" size="18.0" />
                      </font>
                      <effect>
                         <InnerShadow height="74.13" radius="47.685" width="118.61" />
                      </effect></Button>
-                  <Button fx:id="StartGameBtn" layoutX="201.0" layoutY="156.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="44.0" prefWidth="198.0" style="-fx-cursor: hand; -fx-background-color: #4adeed; -fx-background-radius: 50;" text="play">
+                  <Button fx:id="StartGameBtn" layoutX="201.0" layoutY="156.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="44.0" prefWidth="198.0" style="-fx-cursor: hand; -fx-background-color: #4adeed; -fx-background-radius: 50;" styleClass="BtnLive" stylesheets="@BackGround.css" text="play">
                      <font>
                         <Font name="Copperplate Gothic Bold" size="18.0" />
                      </font>
                      <effect>
                         <InnerShadow height="74.13" radius="47.685" width="118.61" />
                      </effect></Button>
-                  <Button fx:id="LogoutBtn" layoutX="209.0" layoutY="236.0" mnemonicParsing="false" onAction="#Logout" prefHeight="44.0" prefWidth="184.0" style="-fx-background-color: #4adeed; -fx-cursor: hand; -fx-background-radius: 50;" text="Logout">
+                  <Button fx:id="LogoutBtn" layoutX="209.0" layoutY="236.0" mnemonicParsing="false" onAction="#Logout" prefHeight="44.0" prefWidth="184.0" style="-fx-background-color: #4adeed; -fx-cursor: hand; -fx-background-radius: 50;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Logout">
                      <font>
                         <Font name="Copperplate Gothic Bold" size="18.0" />
                      </font>

@@ -35,7 +35,7 @@ import javafx.stage.Stage;
  */
 public class LoginController implements Initializable {
 
-    
+    @FXML
     private Button GoToRegisterBtn;
     @FXML
     private Button loginBtn;
@@ -45,7 +45,11 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField passwordField;
+    
+    @FXML
+    private Button BackToMainBtn;
 
+    
     static Vector<Players> playersVector = new Vector<Players>();
 
     /**
@@ -56,6 +60,13 @@ public class LoginController implements Initializable {
         // TODO
     }    
 
+
+    @FXML
+    void BackToMain(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Stage window = (Stage) BackToMainBtn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
 
     @FXML
     private void GoToRegister(ActionEvent event) throws IOException {
@@ -72,6 +83,9 @@ public class LoginController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("please enter your username and password");
             alert.show();
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+            dialogPane.getStyleClass().add("myDialog");
         }else{
             PlayerSocket.socketInit();
             PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
@@ -84,6 +98,10 @@ public class LoginController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setContentText("Incorrect username or password");
                 alert.show();
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                dialogPane.getStyleClass().add("myDialog");
+            
                 PlayerSocket.closeSoket();
             }
 
@@ -98,33 +116,8 @@ public class LoginController implements Initializable {
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        /////////////////////////////////////////////////
-//        String message=new String();
-//       
-//        message="login::"+unameField.getText()+"::"+passwordField.getText();
-//        
-//        PlayerSocket.outS.println(message);
-//        
-//        String respond=PlayerSocket.inS.readLine();
-//        
-//        if("login::done".equals(respond))
-//        {
 
-//            PlayerSocket.outS.println("invite::khouly");
-//            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
-//            {
-//                Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-//                Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
-//                window.setScene(new Scene(root));
-//            }
-//            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-//            Stage window = (Stage) loginBtn.getScene().getWindow();
-//            window.setScene(new Scene(root));
-//        }
-//        else
-//        {
-//        }
         }
 
-    }
+    } 
 }

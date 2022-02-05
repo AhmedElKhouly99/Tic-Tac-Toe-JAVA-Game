@@ -71,7 +71,7 @@ public class RegisterController implements Initializable {
             
         }else if(!(unameRegField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
             Alert alertUsername = new Alert(Alert.AlertType.ERROR);
-            alertUsername.setContentText("Username must be: \n - At least 8 chars \n - Contains at least one digit \n - Contains at least one lower alpha char and one upper alpha char \n - Contains at least one special char (@#%$^ etc.)\n - Does not contain space, tab, etc.");
+            alertUsername.setContentText("Username must be: \n - At least 8 chars \n - Contains at least one digit \n - Contains at least one lower alpha char and one upper alpha char \n - Contains at least one char within a set of special chars (@#%$^ etc.)\n - Does not contain space, tab, etc.");
             alertUsername.show();
             DialogPane dialogPane = alertUsername.getDialogPane();
             dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
@@ -80,7 +80,7 @@ public class RegisterController implements Initializable {
             
         }else if(!(PassRegField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
             Alert alertPass = new Alert(Alert.AlertType.ERROR);
-            alertPass.setContentText("Password must be:\n - At least 8 chars \n - Contains at least one digit\n - Contains at least one lower alpha char and one upper alpha char\n - Contains at least one special char (@#%$^ etc.)\n - Does not contain space, tab, etc.");
+            alertPass.setContentText("Password must be:\n - At least 8 chars \n - Contains at least one digit\n - Contains at least one lower alpha char and one upper alpha char\n - Contains at least one char within a set of special chars (@#%$^ etc.)\n - Does not contain space, tab, etc.");
             alertPass.show();
             DialogPane dialogPane = alertPass.getDialogPane();
             dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
