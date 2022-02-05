@@ -83,7 +83,7 @@ public class MultiPlayerModeController implements Initializable {
                 while(true)
                 {
                 try {
-                    msg=PlayerSocket.inS.readLine().split("::");
+                    msg= (String[])(((String)PlayerSocket.inObj.readObject()).split("::"));
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -91,7 +91,7 @@ public class MultiPlayerModeController implements Initializable {
                         }
                     });
                     
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -118,14 +118,14 @@ public class MultiPlayerModeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            symbol = PlayerSocket.inS.readLine();
+            symbol = (String)PlayerSocket.inObj.readObject();
             if(symbol.equals("X")){
                 player1_turn = true;
             }else{
                 player1_turn = false;
             }
             
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
         }
         buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
@@ -146,7 +146,7 @@ public class MultiPlayerModeController implements Initializable {
     }
 
     @FXML
-    private void btnPressed(ActionEvent event) {
+    private void btnPressed(ActionEvent event) throws IOException {
 //        System.out.println(buttonsArr[0]);
 //        System.out.println(event.getSource());
         for (int i = 0; i < 9; i++) {
@@ -159,8 +159,13 @@ public class MultiPlayerModeController implements Initializable {
                         buttonsArr[i].setText(symbol);
                         player1_turn = false;
                         arrPlays[i] = buttonsArr[i].getText().charAt(0);
+<<<<<<< HEAD
 //                      textfield.setText("O turn");
                         PlayerSocket.outS.println("play::"+i);
+=======
+//                        textfield.setText("O turn");
+                        PlayerSocket.outObj.writeObject("play::"+i);
+>>>>>>> e5fe6c013339234420bc07e1af0e79e2545e6aff
                             check();
                             
                         if (playerWins) {
