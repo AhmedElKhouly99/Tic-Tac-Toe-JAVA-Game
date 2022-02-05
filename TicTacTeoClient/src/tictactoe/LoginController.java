@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 
 import javafx.scene.control.PasswordField;
 
@@ -38,13 +39,13 @@ public class LoginController implements Initializable {
     private Button GoToRegisterBtn;
     @FXML
     private Button loginBtn;
-    
+
     @FXML
     private TextField unameField;
-    
+
     @FXML
     private PasswordField passwordField;
-    
+
     static Vector<Players> playersVector = new Vector<Players>();
 
     /**
@@ -54,7 +55,7 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         PlayerSocket.socketInit();
-    }    
+    }
 
     @FXML
     private void GoToRegister(ActionEvent event) throws IOException {
@@ -64,28 +65,25 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-<<<<<<< HEAD
-    private void goToGame(ActionEvent event) throws IOException {
+
+    private void goToGame(ActionEvent event) throws IOException, ClassNotFoundException {
         ///////////////////////////////////////////
-        if(unameField.getText().equals("") || passwordField.getText().equals("") ){
-            
+        if (unameField.getText().equals("") || passwordField.getText().equals("")) {
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("please enter your username and password");
             alert.show();
-        }
-        else{
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+            dialogPane.getStyleClass().add("myDialog");
+        } else {
             Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
             Stage window = (Stage) loginBtn.getScene().getWindow();
             window.setScene(new Scene(root));
         }
         
-        
-        
-        
+
         ///////////////////////////////////////////////////
-=======
-    private void goToGame(ActionEvent event) throws IOException, ClassNotFoundException {
->>>>>>> e8f88bddecb413c91ea982aac4c0ffdfcf702bda
 //        PlayerSocket.socketInit();
         //////////////////////////////////////////////
 //        try {
@@ -95,9 +93,7 @@ public class LoginController implements Initializable {
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
         /////////////////////////////////////////////////
-<<<<<<< HEAD
 //        String message=new String();
 //       
 //        message="login::"+unameField.getText()+"::"+passwordField.getText();
@@ -108,21 +104,19 @@ public class LoginController implements Initializable {
 //        
 //        if("login::done".equals(respond))
 //        {
-=======
-        String message=new String();
-       
-        message="login::"+unameField.getText()+"::"+passwordField.getText();
-        
+        String message = new String();
+
+        message = "login::" + unameField.getText() + "::" + passwordField.getText();
+
         //PlayerSocket.outS.println(message);
         PlayerSocket.outObj.writeObject(message);
-        
+
         //String respond=PlayerSocket.inS.readLine();
-        String respond=(String)PlayerSocket.inObj.readObject();
+        String respond = (String) PlayerSocket.inObj.readObject();
         System.out.println(respond);
-        
-        if("login::done".equals(respond))
-        {
->>>>>>> e8f88bddecb413c91ea982aac4c0ffdfcf702bda
+
+        if ("login::done".equals(respond)) {
+
 //            PlayerSocket.outS.println("invite::khouly");
 //            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
 //            {
@@ -130,19 +124,14 @@ public class LoginController implements Initializable {
 //                Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
 //                window.setScene(new Scene(root));
 //            }
-            
 //            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
 //            Stage window = (Stage) loginBtn.getScene().getWindow();
 //            window.setScene(new Scene(root));
-            
 //        }
 //        else
 //        {
-            
 //        }
-         
+        }
+
     }
-    
-    
-    
 }
