@@ -38,6 +38,8 @@ public class ScoreListController implements Initializable {
     private TableColumn<AllPlayers, String> col_name;
     @FXML
     private TableColumn<AllPlayers, Integer> col_score;
+    @FXML
+    private TableColumn<AllPlayers, Integer> col_rank;
 
     ObservableList<AllPlayers> listM;
     int index = -1;
@@ -84,6 +86,7 @@ public class ScoreListController implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
+                            col_rank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
                             col_name.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
                             col_score.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
                             table_users.setItems(listM);
