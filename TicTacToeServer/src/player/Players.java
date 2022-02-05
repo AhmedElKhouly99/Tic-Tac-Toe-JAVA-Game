@@ -13,6 +13,9 @@ import java.io.Serializable;
  */
 public class Players implements Serializable{
 
+    public Players() {
+    }
+
     public Players(String username, int score) {
         this.username = username;
         this.score = score;

@@ -5,6 +5,7 @@
  */
 package tictactoe;
 
+import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,6 +59,7 @@ public class MenuController implements Initializable {
     
        @FXML
     void Logout(ActionEvent event) throws IOException {
+        PlayerSocket.closeSoket();
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         Stage window = (Stage) LogoutBtn.getScene().getWindow();
         window.setScene(new Scene(root));

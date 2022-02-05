@@ -14,6 +14,15 @@ import java.io.Serializable;
  */
 public class AllPlayers implements Serializable{
 
+    Integer rank;
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
+    }
     String username;
     int score;
     
@@ -35,7 +44,8 @@ public class AllPlayers implements Serializable{
     
     
 
-    public AllPlayers(String username, int score) {
+    public AllPlayers(Integer rank, String username, int score) {
+        this.rank = rank;
         this.username = username;
         this.score = score;
     }

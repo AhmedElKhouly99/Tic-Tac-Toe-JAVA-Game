@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Vector;
 import player.AllPlayers;
+import player.Players;
 
 /**
  *
@@ -26,46 +27,48 @@ public class ClientHandler extends Thread{
 //    DataInputStream  inS;
 //    PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
-    static Vector<Player> playersVector = new Vector<Player>();
+    static Vector<Players> playersVector = new Vector<Players>();
     static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
     String clientStatus;
+//    public Player p;
+    public boolean status;
 
     int id;
     static int counter_id=0;
 
-    public Player p;
+    public Players p;
 
     ClientHandler player2Handler;
     
-    public class Player{
-        String username;
-        int score;
-        boolean inGame;
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public int getScore() {
-            return score;
-        }
-
-        public void setScore(int score) {
-            this.score = score;
-        }
-
-        public boolean isInGame() {
-            return inGame;
-        }
-
-        public void setInGame(boolean inGame) {
-            this.inGame = inGame;
-        }
-    }
+//    public class Player{
+//        String username;
+//        int score;
+//        boolean inGame;
+//
+//        public String getUsername() {
+//            return username;
+//        }
+//
+//        public void setUsername(String username) {
+//            this.username = username;
+//        }
+//
+//        public int getScore() {
+//            return score;
+//        }
+//
+//        public void setScore(int score) {
+//            this.score = score;
+//        }
+//
+//        public boolean isInGame() {
+//            return inGame;
+//        }
+//
+//        public void setInGame(boolean inGame) {
+//            this.inGame = inGame;
+//        }
+//    }
 
     
     public ClientHandler(Socket s) {
@@ -77,7 +80,8 @@ public class ClientHandler extends Thread{
             clientStatus = "Online";
             clientsVector.add(this);
             id =counter_id++;
-            this.p = new Player();
+            this.p = new Players();
+            status = true;
             start();
         }catch(Exception ex){
              System.out.println("server.ChatHandler.<init>()");

@@ -6,7 +6,7 @@
 package ServerHandler;
 
 import Database.Database;
-import ServerHandler.ClientHandler.Player;
+//import ServerHandler.ClientHandler.Player;
 import static ServerHandler.ClientHandler.clientsVector;
 import static ServerHandler.ClientHandler.playersVector;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class MessageParser {
                     
                     //LoggedinPlayers.add(p);
                     //ch.thisUname = ch.p.getUsername();
-                    //System.out.println(ch.thisUname);
+                    System.out.println(ch.p.getUsername());
                     
                     System.out.println(ch.p.getUsername());
                     playersVector.add(ch.p);
@@ -183,7 +183,7 @@ public class MessageParser {
         }
     }
 
-    private static boolean isUser(String uname, String password, ClientHandler.Player p) {
+    private static boolean isUser(String uname, String password, Players p) {
         return Database.isPlayer(uname, password, p);
     }
 
