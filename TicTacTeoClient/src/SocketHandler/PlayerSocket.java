@@ -50,6 +50,13 @@ public class PlayerSocket {
         
     }
     
+    public static void refresh() throws IOException{
+//        outObj.close();
+        inObj.close();
+//        outObj = new ObjectOutputStream(clientSocket.getOutputStream());
+//        inObj = new ObjectInputStream(clientSocket.getInputStream());
+    }
+    
     
     public static void closeSoket(){
         try {

@@ -30,12 +30,8 @@ public class MessageParser {
     
     
 
-    //static Vector<Player> LoggedinPlayers = new Vector<Player>();
+    static Vector<Players> LoggedinPlayers = new Vector<Players>();
     public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
-        Vector<Players> p11 = new Vector<Players>();
-        p11.add(new Players("ahmed", 100));
-        p11.add(new Players("ahmed", 100));
-        p11.add(new Players("ahmed", 100));
         
         String[] arrString = msg.split("::");
         
@@ -46,6 +42,17 @@ public class MessageParser {
       
         switch (arrString[0]) {
             case "login":
+               LoggedinPlayers.forEach(e->{
+                    if(e.getUsername().equals(arrString[1])){
+                        try {
+                            ch.outObj.writeObject("login::exist");
+                            return;
+                        } catch (IOException ex) {
+                            Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+                
                 //ch.outS.println("3abat");
                 /*-------------------login::username::password----------------------*/
                 if(isUser(arrString[1], arrString[2], ch.p)){
@@ -58,7 +65,7 @@ public class MessageParser {
                     System.out.println(ch.p.getUsername());
                     
                     System.out.println(ch.p.getUsername());
-                    playersVector.add(ch.p);
+                    LoggedinPlayers.add(ch.p);
                     ch.outObj.writeObject("login::done");
                     //ch.outS.println("login::done");
                 } else {
@@ -87,7 +94,7 @@ public class MessageParser {
                 
             case "rankings":
                 System.out.println("rankings");
-                System.out.println(Database.getAllPlayers());
+//                System.out.println(Database.getAllPlayers());
 //                ObservableList<AllPlayers> list = Database.getAllPlayers();
 //                System.out.println(list);
 //                ch.outObj.writeObject(list);
