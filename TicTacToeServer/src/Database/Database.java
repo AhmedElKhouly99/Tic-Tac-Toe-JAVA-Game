@@ -187,8 +187,9 @@ public class Database {
             while(!startConnection());
             preparedStmt = con.prepareStatement(GETALLPLAYERS);
             rs = preparedStmt.executeQuery();
+            Integer i = 0;
             while(rs.next()){
-                list.add(new AllPlayers(rs.getString(1), rs.getInt(2)));
+                list.add(new AllPlayers(++i, rs.getString(1), rs.getInt(2)));
             }
             rs.close();
             preparedStmt.close();

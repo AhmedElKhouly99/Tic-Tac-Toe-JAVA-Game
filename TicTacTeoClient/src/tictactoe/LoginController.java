@@ -54,13 +54,8 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-<<<<<<< HEAD
-        
     }    
-=======
-        PlayerSocket.socketInit();
-    }
->>>>>>> 8550502bad017944ae6f3c663a809c57204a7883
+
 
     @FXML
     private void GoToRegister(ActionEvent event) throws IOException {
@@ -70,7 +65,6 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-<<<<<<< HEAD
     private void goToGame(ActionEvent event) throws IOException, ClassNotFoundException {
 
         if(unameField.getText().equals("") || passwordField.getText().equals("") ){
@@ -92,31 +86,9 @@ public class LoginController implements Initializable {
                 alert.show();
                 PlayerSocket.closeSoket();
             }
-=======
 
-    private void goToGame(ActionEvent event) throws IOException, ClassNotFoundException {
-        ///////////////////////////////////////////
-        if (unameField.getText().equals("") || passwordField.getText().equals("")) {
-
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("please enter your username and password");
-            alert.show();
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-            dialogPane.getStyleClass().add("myDialog");
-        } else {
-            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-            Stage window = (Stage) loginBtn.getScene().getWindow();
-            window.setScene(new Scene(root));
->>>>>>> 8550502bad017944ae6f3c663a809c57204a7883
-        }
-        
-
-        ///////////////////////////////////////////////////
-<<<<<<< HEAD
     
-=======
->>>>>>> 8550502bad017944ae6f3c663a809c57204a7883
+       
 //        PlayerSocket.socketInit();
         //////////////////////////////////////////////
 //        try {
@@ -137,35 +109,7 @@ public class LoginController implements Initializable {
 //        
 //        if("login::done".equals(respond))
 //        {
-<<<<<<< HEAD
-//        String message=new String();
-//       
-//        message="login::"+unameField.getText()+"::"+passwordField.getText();
-//        
-//        //PlayerSocket.outS.println(message);
-//        PlayerSocket.outObj.writeObject(message);
-//        
-//        //String respond=PlayerSocket.inS.readLine();
-//        String respond=(String)PlayerSocket.inObj.readObject();
-//        System.out.println(respond);
-        
-//        if("login::done".equals(respond))
-//        {
-=======
-        String message = new String();
 
-        message = "login::" + unameField.getText() + "::" + passwordField.getText();
-
-        //PlayerSocket.outS.println(message);
-        PlayerSocket.outObj.writeObject(message);
-
-        //String respond=PlayerSocket.inS.readLine();
-        String respond = (String) PlayerSocket.inObj.readObject();
-        System.out.println(respond);
-
-        if ("login::done".equals(respond)) {
-
->>>>>>> 8550502bad017944ae6f3c663a809c57204a7883
 //            PlayerSocket.outS.println("invite::khouly");
 //            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
 //            {

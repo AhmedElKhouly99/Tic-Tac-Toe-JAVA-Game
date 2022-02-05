@@ -58,12 +58,12 @@ public class ScoreListController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        try {
-//            getAllUsers();
-////            allUsersTh.sleep(5000);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            getAllUsers();
+//            allUsersTh.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
     
     
