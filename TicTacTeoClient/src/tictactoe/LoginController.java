@@ -35,7 +35,11 @@ import javafx.stage.Stage;
  */
 public class LoginController implements Initializable {
 
+<<<<<<< HEAD
      @FXML
+=======
+    @FXML
+>>>>>>> 791b02148e27de909795e3283b04bc060442cc3b
     private Button GoToRegisterBtn;
     @FXML
     private Button loginBtn;
@@ -86,24 +90,29 @@ public class LoginController implements Initializable {
             DialogPane dialogPane = alert.getDialogPane();
             dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
             dialogPane.getStyleClass().add("myDialog");
-        }else{
-            PlayerSocket.socketInit();
-            PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
-            String respond = (String)PlayerSocket.inObj.readObject();
-            if("login::done".equals(respond)){
-                Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-                Stage window = (Stage) loginBtn.getScene().getWindow();
-                window.setScene(new Scene(root));
-            }else{
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Incorrect username or password");
-                alert.show();
-                DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-                dialogPane.getStyleClass().add("myDialog");
-            
-                PlayerSocket.closeSoket();
-            }
+        } else{
+                   Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+               Stage window = (Stage) loginBtn.getScene().getWindow();
+               window.setScene(new Scene(root));  
+                    }
+//        }else{
+//            PlayerSocket.socketInit();
+//            PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
+//            String respond = (String)PlayerSocket.inObj.readObject();
+//            if("login::done".equals(respond)){
+//                Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+//                Stage window = (Stage) loginBtn.getScene().getWindow();
+//                window.setScene(new Scene(root));
+//            }else{
+//                Alert alert = new Alert(Alert.AlertType.WARNING);
+//                alert.setContentText("Incorrect username or password");
+//                alert.show();
+//                DialogPane dialogPane = alert.getDialogPane();
+//                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+//                dialogPane.getStyleClass().add("myDialog");
+//            
+//                PlayerSocket.closeSoket();
+//            }
 
     
        
@@ -116,33 +125,9 @@ public class LoginController implements Initializable {
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        /////////////////////////////////////////////////
-//        String message=new String();
-//       
-//        message="login::"+unameField.getText()+"::"+passwordField.getText();
-//        
-//        PlayerSocket.outS.println(message);
-//        
-//        String respond=PlayerSocket.inS.readLine();
-//        
-//        if("login::done".equals(respond))
-//        {
 
-//            PlayerSocket.outS.println("invite::khouly");
-//            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
-//            {
-//                Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-//                Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
-//                window.setScene(new Scene(root));
-//            }
-//            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-//            Stage window = (Stage) loginBtn.getScene().getWindow();
-//            window.setScene(new Scene(root));
-//        }
-//        else
-//        {
-//        }
         }
 
-    }
-}
+    } 
+
+
