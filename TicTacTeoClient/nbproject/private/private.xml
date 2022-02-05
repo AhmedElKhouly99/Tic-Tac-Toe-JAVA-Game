@@ -3,8 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Admin/Desktop/New%20folder%20(2)/TicTacTeoClient/src/tictactoe/LoginController.java</file>
             <file>file:/C:/Users/Admin/Desktop/New%20folder%20(2)/TicTacTeoClient/src/tictactoe/Login.fxml</file>
+=======
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/ScoreListController.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/player/Players.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/Login.fxml</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/SocketHandler/AllPlayers.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayerModeController.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
+>>>>>>> e8f88bddecb413c91ea982aac4c0ffdfcf702bda
         </group>
     </open-files>
 </project-private>

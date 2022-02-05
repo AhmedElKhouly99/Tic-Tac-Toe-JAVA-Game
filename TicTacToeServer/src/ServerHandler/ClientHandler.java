@@ -6,6 +6,7 @@ package ServerHandler;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -21,8 +22,9 @@ public class ClientHandler extends Thread{
 
     long player2Vid;
     ObjectOutputStream outObj;
-    DataInputStream  inS;
-    PrintStream outS;
+    ObjectInputStream inObj;
+//    DataInputStream  inS;
+//    PrintStream outS;
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     static Vector<Player> playersVector = new Vector<Player>();
     static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
@@ -68,8 +70,9 @@ public class ClientHandler extends Thread{
     
     public ClientHandler(Socket s) {
         try{
-            inS = new DataInputStream(s.getInputStream());
-            outS = new PrintStream(s.getOutputStream());
+            //inS = new DataInputStream(s.getInputStream());
+            //outS = new PrintStream(s.getOutputStream());
+            inObj = new ObjectInputStream(s.getInputStream());
             outObj = new ObjectOutputStream(s.getOutputStream());
             clientStatus = "Online";
             clientsVector.add(this);
@@ -92,16 +95,16 @@ public class ClientHandler extends Thread{
             ////////////////////////////////////////////////////////////////////
             
             while(true){
-                
-                clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
+                clientStatus = (String)inObj.readObject();
+                //clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
                 //outS.println("Online"); // for server status // give an exception error if there is no client
                 //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
-                    System.out.println(clientStatus);
-                    System.out.println("tic.tac.toe_server.ClientHandler.run() from outside exception");
-                    inS.close();
-                    outS.close();
+//                    System.out.println(clientStatus);
+//                    System.out.println("tic.tac.toe_server.ClientHandler.run() from outside exception");
+//                    inS.close();
+//                    outS.close();
                     clientsVector.removeElement(this);
                     playersVector.removeElement(this.p);
                     this.currentThread().stop();
@@ -113,6 +116,7 @@ public class ClientHandler extends Thread{
 //                    String respond=MessageParser.checkClientMsg(clientStatus,id);
 //                    outS.println(respond);
                         System.out.println("before msg");
+                        System.out.println(clientStatus);
                    MessageParser.checkClientMsg(clientStatus, this);
                    //this.outS.println("done");
 
@@ -124,14 +128,14 @@ public class ClientHandler extends Thread{
             }
         }catch(Exception ex){       // i don't know why this exception is not fire at the client is fallen
             try{
-                System.out.println(clientStatus);
-                System.out.println("tic.tac.toe_server.ClientHandler.run() from iside exception");
-                inS.close();
-                outS.close();
+//                System.out.println(clientStatus);
+//                System.out.println("tic.tac.toe_server.ClientHandler.run() from iside exception");
+//                inS.close();
+//                outS.close();
                 clientsVector.removeElement(this);
                 playersVector.removeElement(this.p);
                 this.currentThread().stop();
-            }catch(IOException e){}
+            }catch(Exception e){}
         }
         
     }

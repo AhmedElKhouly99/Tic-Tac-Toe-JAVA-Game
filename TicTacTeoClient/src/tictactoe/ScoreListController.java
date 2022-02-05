@@ -5,14 +5,16 @@
  */
 package tictactoe;
 
-import SocketHandler.AllPlayers;
-import SocketHandler.Player;
+import player.AllPlayers;
+import player.Players;
 import SocketHandler.PlayerSocket;
+import static SocketHandler.PlayerSocket.inObj;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -40,8 +42,11 @@ public class ScoreListController implements Initializable {
     ObservableList<AllPlayers> listM;
     int index = -1;
     
+    Vector<AllPlayers> test ;
     
-    ObservableList<AllPlayers> list;
+//    = new Vector<Players>();
+//    ObservableList<AllPlayers> list;
+//    ObservableList<Object> aabdoh;
     
     Connection conn = null;
     ResultSet rs = null;
@@ -50,27 +55,22 @@ public class ScoreListController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-//        col_name.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
-//        col_score.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
-//        table_users.setItems(listM);
-        //listM = mysqlconnect.getDatausers();
         getAllUsers();
     }    
     
     
-    public ObservableList<AllPlayers> getAllUsers()
+    public void getAllUsers()
     {
-        ObservableList<AllPlayers> list = FXCollections.observableArrayList();
         Thread allUsersTh = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {                    
                     try {
-                        PlayerSocket.outS.println("rankings");
+                        PlayerSocket.outObj.writeObject("rankings");
                         playersVector.removeAllElements();
-                        listM = (ObservableList<AllPlayers>) PlayerSocket.inObj.readObject();
-                    } catch (ClassNotFoundException ex) {
+                        List<AllPlayers> list = (List<AllPlayers>) PlayerSocket.inObj.readObject() ;
+                        listM = FXCollections.observableArrayList(list);
+                        } catch (ClassNotFoundException ex) {
                         Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
                         Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,16 +80,12 @@ public class ScoreListController implements Initializable {
                         public void run() {
                             col_name.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
                             col_score.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
-                            table_users.refresh();
                             table_users.setItems(listM);
                         }
                     });
                 }
             }
         });
-        allUsersTh.start();
-        
-        
-        return list;
+        allUsersTh.start(); 
     }
 }

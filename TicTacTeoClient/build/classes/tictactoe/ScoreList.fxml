@@ -4,7 +4,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<<<<<<< HEAD
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="container" stylesheets="@BackGround.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.ScoreListController">
+=======
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="container" stylesheets="@BackGround.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.ScoreListController">
+>>>>>>> e8f88bddecb413c91ea982aac4c0ffdfcf702bda
    <children>
       <TableView fx:id="table_users" layoutX="31.0" layoutY="62.0" prefHeight="276.0" prefWidth="538.0">
         <columns>
