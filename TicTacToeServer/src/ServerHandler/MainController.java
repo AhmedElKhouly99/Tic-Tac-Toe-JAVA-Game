@@ -21,6 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
@@ -32,25 +34,37 @@ import javafx.scene.layout.FlowPane;
  */
 public class MainController implements Initializable {
 
-    private int lastNumberOfLoginPlayers;
+    private int lastNumberOfOnlinePlayers;
+    private int lastNumberOfOfflinePlayers;
     private boolean startStatusFlag;
-//    private boolean stopStatusFlag;
+    private boolean stopStatusFlag;
     private int SERVER_SOCKET_PORT;    
     
     static ServerSocket myServerSocket;
-    static Vector<MyClientHandler> clietnsVector;
+    static Vector<ClientHandler> clietnsVector;
     
-    private Button startBtn;
-    private Button stopBtn;
-    private FlowPane listOfOnlinePlayers;
-    @FXML
-    private Label status;
     @FXML
     private Button activateBtn;
     @FXML
     private Tab onlinePlayersTab;
     @FXML
     private Tab offlinePlayersTab;
+    @FXML
+    private Label serverStatus;
+    @FXML
+    private Label activateDeactivateLabel;
+    @FXML
+    private ImageView activateDeactivateImage;
+    @FXML
+    private TableColumn<?, ?> onlinePlayerName;
+    @FXML
+    private TableColumn<?, ?> onlinePlayerScore;
+    @FXML
+    private TableColumn<?, ?> offlinePlayerName;
+    @FXML
+    private TableColumn<?, ?> offlinePlayerScore;
+    @FXML
+    private TableView<?> tableViewMembers;
 
     /**
      * Initializes the controller class.
@@ -59,26 +73,36 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         SERVER_SOCKET_PORT = 5005;
-        lastNumberOfLoginPlayers = 0;
+        lastNumberOfOnlinePlayers = 0;
         startStatusFlag = false;
-//        stopStatusFlag = false;
+        stopStatusFlag = false;
     } 
     
     
     @FXML
     private void handleActivateAndDeactivateAction(ActionEvent event) {
-        if(event.getSource() == activateBtn && startStatusFlag == false)
+        if(event.getSource() == activateBtn && startStatusFlag == false && stopStatusFlag == true)
         {
             startStatusFlag = true;
+            stopStatusFlag = false;
             StartThreadToAcceptClients();
             startThreedToUpdateServerGui();
             
             /* change the button image to deactive next time (execute in UpdateThread)*/ 
-            
+            ImageView imageView = new ImageView(getClass().getResource("images/power-off.png").toExternalForm());
+            imageView.setFitWidth(56);
+            imageView.setFitHeight(56);
+            activateBtn.setGraphic(imageView);
+            /* change label */
+            activateDeactivateLabel.setText("Deactivate");
+            /* server status */
+            serverStatus.setText("On");
             
             System.out.println("ServerHandler.MainController.handleStartButtonAction()");
         }else{
+            
             startStatusFlag = false;
+            stopStatusFlag = true;
             try {
                 actionAtServerAppClose();
             } catch (IOException ex) {
@@ -87,7 +111,14 @@ public class MainController implements Initializable {
             }
             
             /* change the button image to active next time */ 
-            
+            ImageView imageView = new ImageView(getClass().getResource("images/power-on-button.png").toExternalForm());
+            imageView.setFitWidth(56);
+            imageView.setFitHeight(56);
+            activateBtn.setGraphic(imageView);
+            /* change label */
+            activateDeactivateLabel.setText("Activate");
+            /* server status */
+            serverStatus.setText("Off");
             
             System.out.println("ServerHandler.MainController.handleStopButtonAction()");
         }
@@ -106,31 +137,7 @@ public class MainController implements Initializable {
         
     }
     
-    
-    
-    
-
-//    private void handleStartButtonAction(ActionEvent event) {
-//        if(event.getSource() == startBtn && startStatusFlag == false)
-//        {
-//            startStatusFlag = true;
-//            stopStatusFlag = false;
-//            StartThreadToAcceptClients();
-//            startThreedToUpdateServerGui();
-//            System.out.println("ServerHandler.MainController.handleStartButtonAction()");
-//        }
-//    }
-//
-//    private void handleStopButtonAction(ActionEvent event) throws IOException {
-//        if(event.getSource() == stopBtn && stopStatusFlag == false)
-//        {
-//            startStatusFlag = false;
-//            stopStatusFlag = true;
-//            actionAtServerAppClose();
-//            System.out.println("ServerHandler.MainController.handleStopButtonAction()");
-//        }
-//    }
-    
+   
     
     
     /**************************************************************************/
@@ -147,7 +154,7 @@ public class MainController implements Initializable {
                     while(true){
                         Socket internalSocket = myServerSocket.accept();
                         
-                        new MyClientHandler(internalSocket);
+                        new ClientHandler(internalSocket);
 //                        System.out.println("A player accepted");
                     }    
                 }catch(Exception e){
@@ -185,9 +192,10 @@ public class MainController implements Initializable {
             try
             {
                 /* get the online players */
-                clietnsVector = MyClientHandler.getClientsVector();
+                clietnsVector = ClientHandler.getClientsVector();
                 /* get the ofline players */
-                                ///////////// \\\\\\\\\\\\\
+                // code to do
+                
                 Platform.runLater( new Runnable(){
                     public void run(){ 
                         /* change the button image to active next time */
@@ -196,14 +204,14 @@ public class MainController implements Initializable {
                         
                         
                         /* for online players */
-                        if(lastNumberOfLoginPlayers != clietnsVector.size())
-                        {
-                            lastNumberOfLoginPlayers = clietnsVector.size();
-                            listOfOnlinePlayers.getChildren().removeAll(listOfOnlinePlayers.getChildren());
-                            for(MyClientHandler ch: clietnsVector){                          
-                                listOfOnlinePlayers.getChildren().add(new Label(ch.thisUname + " score = " + ch.score));
-                            }
-                        }
+//                        if(lastNumberOfOnlinePlayers != clietnsVector.size())
+//                        {
+//                            lastNumberOfOnlinePlayers = clietnsVector.size();
+//                            listOfOnlinePlayers.getChildren().removeAll(listOfOnlinePlayers.getChildren());
+//                            for(MyClientHandler ch: clietnsVector){                          
+//                                listOfOnlinePlayers.getChildren().add(new Label(ch.thisUname + " score = " + ch.score));
+//                            }
+//                        }
                         /* for ofline players */
 //                        if(lastNumberOfLoginPlayers != clietnsVector.size())
 //                        {
@@ -232,15 +240,15 @@ public class MainController implements Initializable {
     /******************* action should take at close the server ***************/
     static void actionAtServerAppClose() throws IOException
     {
-        clietnsVector = MyClientHandler.getClientsVector();
+        clietnsVector = ClientHandler.getClientsVector();
         
         /* end all internal sockets (threads that stands against) */
-        for(MyClientHandler ch: clietnsVector)
+        for(ClientHandler ch: clietnsVector)
         {
             try {
                 ch.currentThread().wait();
             } catch (InterruptedException ex) {
-                Logger.getLogger(MyTicTacToeServer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TicTacToeServer.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("ServerHandler.MainController.actionAtServerAppClose().InterruptedException");
             }
         }

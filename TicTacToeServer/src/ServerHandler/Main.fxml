@@ -54,19 +54,19 @@
                                     <Font size="22.0" />
                                  </font>
                                  <graphic>
-                                    <Label fx:id="status" contentDisplay="RIGHT" text="OFF" textFill="#fcfcfc" />
+                                    <Label fx:id="serverStatus" contentDisplay="RIGHT" text="Off" textFill="#fcfcfc" />
                                  </graphic>
                                  <padding>
                                     <Insets left="8.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="13.0" text="Activate" textFill="#fffbfb">
+                              <Label fx:id="activateDeactivateLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="13.0" text="Activate" textFill="#fffbfb">
                                  <graphic>
                                     <Button fx:id="activateBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleActivateAndDeactivateAction" style="-fx-background-color: #94eb94; -fx-background-radius: 2em;">
                                        <graphic>
-                                          <ImageView fitHeight="56.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="activateDeactivateImage" fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@images/power-button.png" />
+                                                <Image url="@images/power-on-button.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -99,8 +99,8 @@
                                              <children>
                                                 <TableView prefHeight="415.0" prefWidth="515.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="242.0" text="Player name" />
-                                                    <TableColumn minWidth="0.0" prefWidth="103.0" text="Score" />
+                                                    <TableColumn fx:id="onlinePlayerName" prefWidth="247.0" text="Player name" />
+                                                    <TableColumn fx:id="onlinePlayerScore" minWidth="0.0" prefWidth="104.0" text="Score" />
                                                   </columns>
                                                 </TableView>
                                              </children>
@@ -111,10 +111,10 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView prefHeight="415.0" prefWidth="514.0">
+                                                <TableView fx:id="tableViewMembers" prefHeight="415.0" prefWidth="514.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="244.0" text="Player name" />
-                                                    <TableColumn prefWidth="95.0" text="Score" />
+                                                    <TableColumn fx:id="offlinePlayerName" prefWidth="248.0" text="Player name" />
+                                                    <TableColumn fx:id="offlinePlayerScore" prefWidth="102.0" text="Score" />
                                                   </columns>
                                                 </TableView>
                                              </children>
