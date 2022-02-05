@@ -29,7 +29,7 @@
                         <Glow level="1.0" />
                      </effect>
                   </Circle>
-                  <Button fx:id="StartBtn" layoutX="114.0" layoutY="328.0" mnemonicParsing="false" onAction="#play" style="-fx-background-color: #4adeede0; -fx-border-color: #954bebe0; -fx-border-radius: 20; -fx-background-radius: 20; -fx-cursor: hand;" text="START" textFill="#111111">
+                  <Button fx:id="StartBtn" layoutX="114.0" layoutY="328.0" mnemonicParsing="false" onAction="#play" style="-fx-background-color: #4adeede0; -fx-border-color: #954bebe0; -fx-border-radius: 20; -fx-background-radius: 20; -fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="START" textFill="#111111">
                      <font>
                         <Font name="System Bold Italic" size="23.0" />
                      </font>

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="container" stylesheets="@BackGround.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.ScoreListController">
    <children>
@@ -24,6 +25,11 @@
                         <InnerShadow color="#a346bf" height="255.0" radius="127.0" width="255.0" />
                      </effect>
                   </TableView>
+                  <Button fx:id="BackBtn" layoutX="517.0" layoutY="22.0" mnemonicParsing="false" onAction="#GoBackToMainMenu" style="-fx-background-color: transparent; -fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Back" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>
