@@ -6,7 +6,7 @@
 package ServerHandler;
 
 import Database.Database;
-import static ServerHandler.ClientHandler.clientsVector;
+import static ServerHandler.MyClientHandler.clientsVector;
 import java.io.IOException;
 import java.util.Vector;
 import player.Player;
@@ -20,7 +20,7 @@ import player.Player;
 public class MessageParser {
 
     static Vector<Player> LoggedinPlayers = new Vector<Player>();
-    public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
+    public static void checkClientMsg(String msg, MyClientHandler ch) throws IOException {
         String[] arrString = msg.split("::");
       
         switch (arrString[0]) {

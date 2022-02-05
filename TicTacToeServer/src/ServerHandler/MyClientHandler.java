@@ -14,47 +14,46 @@ import java.util.Vector;
  *
  * @author Abanoub Kamal
  */
-public class ClientHandler extends Thread{
+public class MyClientHandler extends Thread{
   
 
     long player2Vid;
 
     DataInputStream  inS;
     PrintStream outS;
-    static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
+    static Vector<MyClientHandler> clientsVector = new Vector<MyClientHandler>();
     String clientStatus;
 
     int id;
     static int counter_id=0;
 
     String thisUname;
+    
+    int score;
 
-    ClientHandler player2Handler;
+    MyClientHandler player2Handler;
 
     
-    public ClientHandler(Socket s) {
+    public MyClientHandler(Socket s) {
         try{
             inS = new DataInputStream(s.getInputStream());
             outS = new PrintStream(s.getOutputStream());
             clientStatus = "Online";
             clientsVector.add(this);
+            ////////////
+            thisUname = "abanoub " ;
+            score = 500;
+            System.out.println("adding player.");
+            ////\\\\\\\\\\\\\\\
             id =counter_id++;
             start();
         }catch(Exception ex){
-             System.out.println("server.ChatHandler.<init>()");
+             System.out.println("ServerHandler.MyClientHandler.<init>()");
         }
     }
 
     public void run(){
-        try{
-            /////////////////////////////////////////////////////////////////////
-//            String username = inS.readLine();
-//            String password = inS.readLine();
-//            
-//            ifUserExist(username);
-            
-            ////////////////////////////////////////////////////////////////////
-            
+        try{            
             while(true){
                 
                 clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
@@ -63,7 +62,7 @@ public class ClientHandler extends Thread{
                 if(clientStatus == null) // done at the client fallen
                 {
                     System.out.println(clientStatus);
-                    System.out.println("tic.tac.toe_server.ClientHandler.run() from outside exception");
+                    System.out.println("ServerHandler.MyClientHandler.run()");
                     inS.close();
                     outS.close();
                     clientsVector.removeElement(this);
@@ -71,67 +70,35 @@ public class ClientHandler extends Thread{
                 }
                 else
                 {
-
-                    
 //                    String respond=MessageParser.checkClientMsg(clientStatus,id);
 //                    outS.println(respond);
-                        System.out.println("before msg");
-                   MessageParser.checkClientMsg(clientStatus, this);
-                   //this.outS.println("done");
-
-                }
-                
-                
+//                    System.out.println("before msg");
+                    MessageParser.checkClientMsg(clientStatus, this);
+                    //this.outS.println("done");
+                }  
                 
                 this.currentThread().sleep(50);
             }
         }catch(Exception ex){       // i don't know why this exception is not fire at the client is fallen
             try{
                 System.out.println(clientStatus);
-                System.out.println("tic.tac.toe_server.ClientHandler.run() from iside exception");
+                System.out.println("ServerHandler.MyClientHandler.run().Exception");
                 inS.close();
                 outS.close();
                 clientsVector.removeElement(this);
                 this.currentThread().stop();
-            }catch(IOException e){}
+            }catch(IOException e){
+                System.out.println("ServerHandler.MyClientHandler.run().IOException");
+            }
         }
         
     }
 
-    public static Vector<ClientHandler> getClientsVector()
+    public static Vector<MyClientHandler> getClientsVector()
     {
         return clientsVector;
     }
-    
-    
-    
-        
-        
-        
-        
-        
-//        if("login".equals(arrString[0]))
-//        {
-//            if("Username from database".equals(arrString[1]))
-//            {
-//                
-//                if("Password from database".equals(arrString[2]))
-//                {
-//                    System.out.println("My test succeded");
-//                }
-//                
-//            }
-//        }
-//        
-//        
-//        /*------------Insert user data from database----------*/
-//        
-//        if("signup".equals(arrString[0]))   
-//        {
-//            
-//        }
-        
-/* handling the user existness */        
+      
         
 }
     
