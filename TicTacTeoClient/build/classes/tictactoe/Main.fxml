@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -51,6 +53,15 @@
                      <effect>
                         <InnerShadow height="74.13" radius="47.685" width="118.61" />
                      </effect>
+                  </Button>
+                  <Button fx:id="InfoBtn" layoutX="541.0" layoutY="15.0" mnemonicParsing="false" onAction="#GoToInfo" prefHeight="34.0" prefWidth="35.0" style="-fx-background-color: transparent;" styleClass="BtnLive" stylesheets="@BackGround.css">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/info.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </AnchorPane>
