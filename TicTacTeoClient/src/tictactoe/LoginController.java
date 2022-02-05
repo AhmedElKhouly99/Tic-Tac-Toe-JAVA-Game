@@ -35,11 +35,8 @@ import javafx.stage.Stage;
  */
 public class LoginController implements Initializable {
 
-<<<<<<< HEAD
-     @FXML
-=======
+
     @FXML
->>>>>>> 791b02148e27de909795e3283b04bc060442cc3b
     private Button GoToRegisterBtn;
     @FXML
     private Button loginBtn;

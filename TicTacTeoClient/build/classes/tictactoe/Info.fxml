@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="700.0" prefHeight="400.0" prefWidth="700.0" styleClass="info" stylesheets="@BackGround.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe.InfoController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="403.0" prefWidth="600.0">
+         <children>
+            <AnchorPane prefHeight="400.0" prefWidth="619.0">
+               <children>
+                  <Button fx:id="InfoBackBtn" layoutX="486.0" layoutY="324.0" mnemonicParsing="false" onAction="#BackFromInfo" prefHeight="36.0" prefWidth="87.0" style="-fx-background-radius: 20; -fx-cursor: hand;" styleClass="BtnLive" stylesheets="@BackGround.css" text="Back">
+                     <font>
+                        <Font name="Copperplate Gothic Bold" size="12.0" />
+                     </font>
+                     <effect>
+                        <InnerShadow height="96.37" radius="53.245000000000005" width="118.61" />
+                     </effect>
+                  </Button>
+                  <Text fill="#fff4f4" layoutX="194.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This game is made by" wrappingWidth="211.232421875">
+                     <font>
+                        <Font name="Copperplate Gothic Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#fff4f4" layoutX="257.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ahmed Elkhouly" wrappingWidth="105.232421875">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#fff4f4" layoutX="243.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abdelrahman Soliman" wrappingWidth="132.232421875">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#fff4f4" layoutX="257.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abanoub Kamal" wrappingWidth="105.232421875">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#fff4f4" layoutX="257.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shorook Nabil" wrappingWidth="105.232421875">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#fff4f4" layoutX="257.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eman Hesham" wrappingWidth="105.232421875">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#fff4f4" layoutX="257.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mai Abdelmajid" wrappingWidth="105.232421875">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</VBox>
