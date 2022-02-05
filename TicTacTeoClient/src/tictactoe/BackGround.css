@@ -14,8 +14,20 @@ and open the template in the editor.
     -fx-background-position: center;
 }
 
+.info{
+    -fx-background-image: url('images/infobg.jpg');
+    -fx-background-repeat: no-repeat; 
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
 .BtnLive:hover {
     -fx-scale-y: 1.1;
+    -fx-scale-x: 0.9;
+}
+
+.GameBtnLive:hover {
+    -fx-scale-y: 0.9;
     -fx-scale-x: 0.9;
 }
 
