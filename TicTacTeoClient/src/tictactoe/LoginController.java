@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.PasswordField;
@@ -63,7 +64,24 @@ public class LoginController implements Initializable {
 
     @FXML
     private void goToGame(ActionEvent event) throws IOException {
-        PlayerSocket.socketInit();
+        ///////////////////////////////////////////
+        if(unameField.getText().equals("") || passwordField.getText().equals("") ){
+            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("please enter your username and password");
+            alert.show();
+        }
+        else{
+            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+            Stage window = (Stage) loginBtn.getScene().getWindow();
+            window.setScene(new Scene(root));
+        }
+        
+        
+        
+        
+        ///////////////////////////////////////////////////
+//        PlayerSocket.socketInit();
         //////////////////////////////////////////////
 //        try {
 //            PlayerSocket.outS.println("onlinePlayers");
@@ -72,17 +90,18 @@ public class LoginController implements Initializable {
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+
         /////////////////////////////////////////////////
-        String message=new String();
-       
-        message="login::"+unameField.getText()+"::"+passwordField.getText();
-        
-        PlayerSocket.outS.println(message);
-        
-        String respond=PlayerSocket.inS.readLine();
-        
-        if("login::done".equals(respond))
-        {
+//        String message=new String();
+//       
+//        message="login::"+unameField.getText()+"::"+passwordField.getText();
+//        
+//        PlayerSocket.outS.println(message);
+//        
+//        String respond=PlayerSocket.inS.readLine();
+//        
+//        if("login::done".equals(respond))
+//        {
 //            PlayerSocket.outS.println("invite::khouly");
 //            if("inviteAccepted".equals(PlayerSocket.inS.readLine()))
 //            {
@@ -91,15 +110,15 @@ public class LoginController implements Initializable {
 //                window.setScene(new Scene(root));
 //            }
             
-            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-            Stage window = (Stage) loginBtn.getScene().getWindow();
-            window.setScene(new Scene(root));
+//            Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+//            Stage window = (Stage) loginBtn.getScene().getWindow();
+//            window.setScene(new Scene(root));
             
-        }
-        else
-        {
+//        }
+//        else
+//        {
             
-        }
+//        }
          
     }
     

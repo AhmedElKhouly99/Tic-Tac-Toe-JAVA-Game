@@ -30,6 +30,8 @@ public class MenuController implements Initializable {
     @FXML
     private Button StartGameBtn;
 
+      @FXML
+    private Button LogoutBtn;
 
     /**
      * Initializes the controller class.
@@ -54,4 +56,10 @@ public class MenuController implements Initializable {
         window.setScene(new Scene(root));
     }
     
+       @FXML
+    void Logout(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Stage window = (Stage) LogoutBtn.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
 }
