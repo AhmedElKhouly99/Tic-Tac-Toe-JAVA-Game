@@ -28,41 +28,8 @@ import player.Players;
  */
 public class MessageParser {
     
-<<<<<<< HEAD
-    static Vector<Player> LoggedinPlayers = new Vector<Player>();
-    
-    
-    public static void checkClientMsg(String msg, ClientHandler ch) throws IOException
-    {
-        String[] arrString=msg.split("::");
-        //System.out.println(msg);
-      //  System.out.println(arrString[0]);
-        //System.out.println(arrString[1]);
-        
-        if("status".equals(arrString[0]))
-        {
-            if("Online".equals(arrString[1]))
-            {
-                System.out.println("My test succeded");
-            }
-        }
-        
-        
-        switch (arrString[0])
-        {
-            case "login": /*-------------------login::username::password----------------------*/
-                Player p = null;
-                if(isUser(p, arrString[1], arrString[2])){
-                    System.out.println("correct user!!");
-                    ch.thisUname = p.getUsername();
-                    LoggedinPlayers.add(p);
-                    ch.outS.println("login::done");
-                }else{
-                    ch.outS.println("login::failed");
-                    ///Incorrect username or password
-=======
-    
-    
+
+    static Vector<Players> LoggedinPlayers = new Vector<Players>();
 
     //static Vector<Player> LoggedinPlayers = new Vector<Player>();
     public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
@@ -99,15 +66,14 @@ public class MessageParser {
                     ch.outObj.writeObject("login::failed");
                     //ch.outS.println("login::failed");
                     clientsVector.removeElement(ch);
->>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
                 }
                 
                 break;
                 
             case "signup":/*-------------------signup::username::password----------------------*/
-<<<<<<< HEAD
-                Player p1 = new Player(arrString[1], arrString[2], arrString[3].charAt(0));
-                if(addUser(p1)){
+
+//                Players p1 = new Players(arrString[1], arrString[2]);
+                if(addUser(arrString[1], arrString[2])){
                     ch.outS.println("signup::done");
                 }else{
                     ch.outS.println("signup::failed");
@@ -115,90 +81,6 @@ public class MessageParser {
          /*------------Insert user data from database----------*/
                 
                 break; 
-                
-                
-           case "playing"://play::x|o::index  this
-               
-               /*-------------------playing::username::turn::indexPlaymove----------------------*/
-                
-         /*------------In a game----------*/
-               
-                break;
-                
-           case "finished_playing": /*-------------------playing::username::winnerStatus----------------------*/
-                
-         /*------------In a game----------*/
-               
-                break; 
-           
-           case "paused_playing": /*-------------------playing::username::winnerStatus----------------------*/
-                
-         /*------------In a game----------*/
-               
-                break;     
-                
-                
-           
-           case "notplaying": /*-------------------notplaying::username::waitinginqueue/notwaiting--------------------*/
-                
-         /*------------Not doing anything----------*/
-               
-                break;  
-                
-                                                            //sender1
-           case "message":  /*-------------------message::username1::username2/all chat----------------------*/
-    
-               
-         /*------------Writting a message----------*/
-               
-                break;     
-              
-           case "invite"://invite::abanoub_id
-               clientsVector.forEach((e) -> {
-                   if(e.thisUname == arrString[1]){
-                       e.outS.println("invitedyou::"+ch.thisUname);//invitedyou::soly_id
-                       return;
-                   }
-               });
-               break;
-           case "accept"://accept::soly
-               clientsVector.forEach((e) -> {
-                   if(e.thisUname == arrString[1]){
-//                       e.player2Vid = ch.getId();
-//                       ch.player2Vid = e.getId();
-                        ch.player2Handler = e;
-                        e.player2Handler = ch;
-                       e.outS.println("inviteAccepted");
-                       return;
-                   }
-               });
-                    // if accepted start game
-               break;
-                
-        }
-    }
-    
-    private static boolean isUser(Player p, String uname, String password)
-    {
-        p = Database.isPlayer(uname, password);
-        if(p != null){
-            return true;
-        }
-        return false;
-    }
-    
-    private static boolean addUser(Player p){
-        return Database.addPlayer(p);
-=======
-                //Player p1 = new Players(arrString[1], arrString[2], arrString[3].charAt(0));
-                if (addUser(arrString[1], arrString[2])) {
-                    ch.outObj.writeObject("signup::done");
-                } else {
-                    ch.outObj.writeObject("signup::failed");
-                }
-
-                /*------------Insert user data from database----------*/
-                break;
                 
             case "onlinePlayers":
                 
@@ -309,7 +191,6 @@ public class MessageParser {
 
     private static boolean addUser(String uname, String pass) {
         return Database.addPlayer(uname, pass);
->>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
     }
        
     

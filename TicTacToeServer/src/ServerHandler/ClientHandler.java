@@ -21,23 +21,23 @@ import player.Players;
 public class ClientHandler extends Thread{
   
     long player2Vid;
-<<<<<<< HEAD
+
     DataInputStream  inS;
     PrintStream outS;
-=======
+
     ObjectOutputStream outObj;
     ObjectInputStream inObj;
 //    DataInputStream  inS;
 //    PrintStream outS;
->>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
+
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     static Vector<Players> playersVector = new Vector<Players>();
     static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
     String clientStatus;
-<<<<<<< HEAD
+
     String thisUname;
     ClientHandler player2Handler;
-=======
+
 //    public Player p;
     public boolean status;
 
@@ -46,7 +46,6 @@ public class ClientHandler extends Thread{
 
     public Players p;
 
-    ClientHandler player2Handler;
     
 //    public class Player{
 //        String username;
@@ -78,7 +77,6 @@ public class ClientHandler extends Thread{
 //        }
 //    }
 
->>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
     
     public ClientHandler(Socket s) {
         try{
@@ -87,14 +85,14 @@ public class ClientHandler extends Thread{
             inObj = new ObjectInputStream(s.getInputStream());
             outObj = new ObjectOutputStream(s.getOutputStream());
             clientStatus = "Online";
-<<<<<<< HEAD
+
             clientsVector.add(this); 
-=======
+
             clientsVector.add(this);
             id =counter_id++;
             this.p = new Players();
             status = true;
->>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
+
             start();
         }catch(Exception ex){
              System.out.println("server.ChatHandler.<init>()");
@@ -111,15 +109,14 @@ public class ClientHandler extends Thread{
             
             ////////////////////////////////////////////////////////////////////
             while(true){
-<<<<<<< HEAD
-                
+              
                 clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
                 outS.println("Online"); // for server status // give an exception error if there is no client
-=======
+
                 clientStatus = (String)inObj.readObject();
                 //clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
                 //outS.println("Online"); // for server status // give an exception error if there is no client
->>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
+
                 //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
@@ -133,9 +130,9 @@ public class ClientHandler extends Thread{
                 }
                 else
                 {
-<<<<<<< HEAD
+
                    MessageParser.checkClientMsg(clientStatus, this); 
-=======
+
 
                     
 //                    String respond=MessageParser.checkClientMsg(clientStatus,id);
@@ -145,7 +142,7 @@ public class ClientHandler extends Thread{
                    MessageParser.checkClientMsg(clientStatus, this);
                    //this.outS.println("done");
 
->>>>>>> 0940e864bda16540a6381ebcce2f727e396bffa6
+
                 }
                 
                 
