@@ -2,11 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MessageParser.java</file>
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/Database/Database.java</file>
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/player/AllPlayers.java</file>
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/ClientHandler.java</file>
         </group>
+>>>>>>> e8f88bddecb413c91ea982aac4c0ffdfcf702bda
     </open-files>
 </project-private>

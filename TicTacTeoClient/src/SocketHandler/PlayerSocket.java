@@ -6,6 +6,7 @@
 package SocketHandler;
 
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
@@ -47,6 +48,17 @@ public class PlayerSocket {
         }
   
         
+    }
+    
+    
+    public static void closeSoket(){
+        try {
+            outObj.close();
+            inObj.close();
+            clientSocket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 //    Thread updatingClientGuiThread;
