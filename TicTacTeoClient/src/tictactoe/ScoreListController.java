@@ -41,6 +41,7 @@ public class ScoreListController implements Initializable {
 
     ObservableList<AllPlayers> listM;
     int index = -1;
+     Thread allUsersTh;
     
     Vector<AllPlayers> test ;
     
@@ -55,13 +56,18 @@ public class ScoreListController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        getAllUsers();
+        try {
+            getAllUsers();
+            allUsersTh.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
     
     
-    public void getAllUsers()
+    public void getAllUsers() throws InterruptedException
     {
-        Thread allUsersTh = new Thread(new Runnable() {
+        allUsersTh = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {                    
@@ -87,5 +93,6 @@ public class ScoreListController implements Initializable {
             }
         });
         allUsersTh.start(); 
+        
     }
 }
