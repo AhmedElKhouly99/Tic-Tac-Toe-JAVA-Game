@@ -37,7 +37,7 @@
                               </ImageView>
                               <Label text="Tic Tac Toe Server" textFill="WHITE">
                                  <font>
-                                    <Font name="Times New Roman" size="20.0" />
+                                    <Font name="Times New Roman Bold" size="20.0" />
                                  </font>
                                  <padding>
                                     <Insets left="20.0" />
@@ -47,14 +47,21 @@
                         </HBox>
                      </top>
                      <left>
+<<<<<<< HEAD
                         <FlowPane fx:id="leftSide" alignment="TOP_CENTER" prefHeight="454.0" prefWidth="220.0" style="-fx-background-color: #2d5f81; -fx-blend-mode: 5;" BorderPane.alignment="CENTER">
+=======
+                        <FlowPane alignment="TOP_CENTER" prefHeight="454.0" prefWidth="220.0" style="-fx-background-color: #2d5f81;" BorderPane.alignment="CENTER">
+>>>>>>> mai2
                            <children>
                               <Label contentDisplay="RIGHT" prefHeight="64.0" prefWidth="222.0" style="-fx-background-color: #71c213;" text="Server Status: " textFill="#f5f4f4">
                                  <font>
-                                    <Font size="22.0" />
+                                    <Font name="Times New Roman Bold" size="22.0" />
                                  </font>
                                  <graphic>
-                                    <Label fx:id="serverStatus" contentDisplay="RIGHT" text="Off" textFill="#fcfcfc" />
+                                    <Label fx:id="serverStatus" contentDisplay="RIGHT" text="Off" textFill="#fcfcfc">
+                                       <font>
+                                          <Font name="Times New Roman Bold" size="22.0" />
+                                       </font></Label>
                                  </graphic>
                                  <padding>
                                     <Insets left="8.0" />
@@ -97,7 +104,11 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
+<<<<<<< HEAD
                                                 <TableView prefHeight="415.0" prefWidth="515.0" style="-fx-background-color: #969ceb;">
+=======
+                                                <TableView prefHeight="426.0" prefWidth="515.0" style="-fx-background-color: C8CAE8;">
+>>>>>>> mai2
                                                   <columns>
                                                     <TableColumn fx:id="onlinePlayerName" prefWidth="247.0" text="Player name" />
                                                     <TableColumn fx:id="onlinePlayerScore" minWidth="0.0" prefWidth="104.0" text="Score" />
@@ -111,7 +122,11 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
+<<<<<<< HEAD
                                                 <TableView fx:id="tableViewMembers" prefHeight="415.0" prefWidth="514.0" style="-fx-background-color: #969ceb;">
+=======
+                                                <TableView fx:id="tableViewMembers" prefHeight="426.0" prefWidth="514.0" style="-fx-background-color: C8CAE8;">
+>>>>>>> mai2
                                                   <columns>
                                                     <TableColumn fx:id="offlinePlayerName" prefWidth="248.0" text="Player name" />
                                                     <TableColumn fx:id="offlinePlayerScore" prefWidth="102.0" text="Score" />
