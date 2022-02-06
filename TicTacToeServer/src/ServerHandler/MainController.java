@@ -23,9 +23,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import static javafx.scene.effect.BlendMode.RED;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.rgb;
 import player.Players;
 
 /**
@@ -37,8 +42,8 @@ public class MainController implements Initializable {
 
     private int lastNumberOfOnlinePlayers;
     private int lastNumberOfOfflinePlayers;
-    private boolean startStatusFlag;
-    private boolean stopStatusFlag;
+    static boolean startStatusFlag;
+    static boolean stopStatusFlag;
     private int SERVER_SOCKET_PORT;    
     
     static ServerSocket myServerSocket;
@@ -78,7 +83,7 @@ public class MainController implements Initializable {
         SERVER_SOCKET_PORT = 5005;
         lastNumberOfOnlinePlayers = 0;
         startStatusFlag = false;
-        stopStatusFlag = false;
+        stopStatusFlag = true;
     } 
     
     
@@ -92,17 +97,22 @@ public class MainController implements Initializable {
             startThreedToUpdateServerGui();
             
             /* change the button image to deactive next time (execute in UpdateThread)*/ 
-            ImageView imageView = new ImageView(getClass().getResource("images/power-off.png").toExternalForm());
+            ImageView imageView = new ImageView(getClass().getResource("images/power-off.jpg").toExternalForm());
             imageView.setFitWidth(56);
             imageView.setFitHeight(56);
             activateBtn.setGraphic(imageView);
             /* change label */
             activateDeactivateLabel.setText("Deactivate");
             /* server status */
-            serverStatus.setText("On");
-            
+            serverStatus.setText("ON");
+          //  activateBtn.setBackground(Color.RED);
+           activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
+           activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");
+          
+                   
+          // activateBtn.setStyle(" "); 
             System.out.println("ServerHandler.MainController.handleStartButtonAction()");
-        }else{
+        }else {
             
             startStatusFlag = false;
             stopStatusFlag = true;
@@ -121,8 +131,12 @@ public class MainController implements Initializable {
             /* change label */
             activateDeactivateLabel.setText("Activate");
             /* server status */
-            serverStatus.setText("Off");
-            
+            serverStatus.setText("OFF");
+            activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
+            activateBtn.setStyle("-fx-background-color: #71c213; -fx-background-radius: 2em; ");
+           
+            // activateBtn.setStyle(" "); 
+              
             System.out.println("ServerHandler.MainController.handleStopButtonAction()");
         }
         
@@ -157,7 +171,7 @@ public class MainController implements Initializable {
                     while(true){
                         Socket internalSocket = myServerSocket.accept();
                         
-                        new ClientHandler(internalSocket);
+                        new MyClientHandler(internalSocket);
 //                        System.out.println("A player accepted");
                     }    
                 }catch(Exception e){
