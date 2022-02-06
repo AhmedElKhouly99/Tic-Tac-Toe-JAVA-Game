@@ -43,7 +43,8 @@ public class MyTicTacToeServer extends Application {
     public void stop() throws IOException
     {
         /* close all threads opened by the server */
-        MainController.actionAtServerAppClose();
+        if (MainController.startStatusFlag == true && MainController.stopStatusFlag== false)
+            MainController.actionAtServerAppClose();
         /* terminate the  JavaFX application explicitly */
         Platform.exit();
     }
