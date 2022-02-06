@@ -13,8 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -64,9 +62,6 @@ public class Client extends Application{
         statusField = new Label();
         serverStatusPane = new FlowPane(statusLabel, statusField);
         
-        
-        
-
         unamelabel =new Label("User Name");
         textfield1 = new  TextField();
         FlowPane usernamePane = new FlowPane(unamelabel, textfield1);
@@ -88,14 +83,13 @@ public class Client extends Application{
         rootPane = new BorderPane();
         rootPane.setTop(serverStatusPane);
         rootPane.setBottom(flowPane);
-//        rootPane.setLeft(btnpane);
         rootPane.setCenter(signinpane);
         
         
         myScene = new Scene(rootPane, 375, 400);
 
         try{
-            clientSocket = new Socket("192.168.133.1", 5000);
+            clientSocket = new Socket("192.168.133.1", 5005);
             inS = new DataInputStream(clientSocket.getInputStream());
             outS = new PrintStream(clientSocket.getOutputStream());
         }catch(Exception e){
@@ -107,14 +101,6 @@ public class Client extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-
-//        refreshBtn.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-////                primaryStage.close();
-////                Platform.runLater( () -> new TicTacToe().start( new Stage() ) );
-//            }
-//        });
 
         SigninBtn.setOnAction(e -> {
             //Retrieving data

@@ -11,8 +11,8 @@ package game;
  */
 public class Game {
     
-    int player1_id;
-    int player2_id;
+    String username1_x;
+    String username2_o;
     char one;
     char two;
     char three;
@@ -22,24 +22,33 @@ public class Game {
     char seven;
     char eight;
     char nine;
-    char turn;
-
-    public int getPlayer1_id() {
-        return player1_id;
+    int turn;
+    public String getUsername1_x() {
+        return username1_x;
     }
 
-    public void setPlayer1_id(int player1_id) {
-        this.player1_id  = player1_id;
+    public void setUsername1_x(String username1_x) {
+        this.username1_x = username1_x;
     }
 
-    public int getPlayer2_id() {
-        return player2_id;
+    public String getUsername2_o() {
+        return username2_o;
     }
 
-    public void setPlayer2_id(int player2_id) {
-        this.player2_id = player2_id;
+    public void setUsername2_o(String username2_o) {
+        this.username2_o = username2_o;
     }
 
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+    
+
+   
     public char getOne() {
         return one;
     }
@@ -112,9 +121,9 @@ public class Game {
         this.nine = nine;
     }
     
-    public Game(int player1_id, int player2_id, char one, char two, char three, char four, char five, char six, char seven, char eight, char nine) {
-        this.player1_id = player1_id;
-        this.player2_id = player2_id;
+    public Game(String username1_x, String username2_o, char one, char two, char three, char four, char five, char six, char seven, char eight, char nine) {
+        this.username1_x = username1_x;
+        this.username2_o = username2_o;
         this.one = one;
         this.two = two;
         this.three = three;
@@ -124,6 +133,22 @@ public class Game {
         this.seven = seven;
         this.eight = eight;
         this.nine = nine;
+        this.turn = 1;
+    }
+    
+    public Game(String username1_x, String username2_o, char one, char two, char three, char four, char five, char six, char seven, char eight, char nine, int turn) {
+        this.username1_x = username1_x;
+        this.username2_o = username2_o;
+        this.one = one;
+        this.two = two;
+        this.three = three;
+        this.four = four;
+        this.five = five;
+        this.six = six;
+        this.seven = seven;
+        this.eight = eight;
+        this.nine = nine;
+        this.turn = turn;
     }
     
 }
