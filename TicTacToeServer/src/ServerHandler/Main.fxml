@@ -25,7 +25,7 @@
                <children>
                   <BorderPane prefHeight="542.0" prefWidth="736.0" AnchorPane.topAnchor="0.0">
                      <top>
-                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="736.0" style="-fx-background-color: rgb(85, 28, 59);" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="736.0" style="-fx-background-color: #2d5f81;" BorderPane.alignment="CENTER">
                            <children>
                               <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -47,9 +47,9 @@
                         </HBox>
                      </top>
                      <left>
-                        <FlowPane alignment="TOP_CENTER" prefHeight="454.0" prefWidth="220.0" style="-fx-background-color: rgb(128, 34, 85);" BorderPane.alignment="CENTER">
+                        <FlowPane fx:id="leftSide" alignment="TOP_CENTER" prefHeight="454.0" prefWidth="220.0" style="-fx-background-color: #2d5f81; -fx-blend-mode: 5;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label contentDisplay="RIGHT" prefHeight="64.0" prefWidth="222.0" style="-fx-background-color: red;" text="Server Status: " textFill="#f5f4f4">
+                              <Label contentDisplay="RIGHT" prefHeight="64.0" prefWidth="222.0" style="-fx-background-color: #71c213;" text="Server Status: " textFill="#f5f4f4">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
@@ -62,7 +62,7 @@
                               </Label>
                               <Label fx:id="activateDeactivateLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="13.0" text="Activate" textFill="#fffbfb">
                                  <graphic>
-                                    <Button fx:id="activateBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleActivateAndDeactivateAction" style="-fx-background-color: #94eb94; -fx-background-radius: 2em;">
+                                    <Button fx:id="activateBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleActivateAndDeactivateAction" style="-fx-background-color: #71c213; -fx-background-radius: 2em;">
                                        <graphic>
                                           <ImageView fx:id="activateDeactivateImage" fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -97,7 +97,7 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView prefHeight="415.0" prefWidth="515.0">
+                                                <TableView prefHeight="415.0" prefWidth="515.0" style="-fx-background-color: #969ceb;">
                                                   <columns>
                                                     <TableColumn fx:id="onlinePlayerName" prefWidth="247.0" text="Player name" />
                                                     <TableColumn fx:id="onlinePlayerScore" minWidth="0.0" prefWidth="104.0" text="Score" />
@@ -111,7 +111,7 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tableViewMembers" prefHeight="415.0" prefWidth="514.0">
+                                                <TableView fx:id="tableViewMembers" prefHeight="415.0" prefWidth="514.0" style="-fx-background-color: #969ceb;">
                                                   <columns>
                                                     <TableColumn fx:id="offlinePlayerName" prefWidth="248.0" text="Player name" />
                                                     <TableColumn fx:id="offlinePlayerScore" prefWidth="102.0" text="Score" />
