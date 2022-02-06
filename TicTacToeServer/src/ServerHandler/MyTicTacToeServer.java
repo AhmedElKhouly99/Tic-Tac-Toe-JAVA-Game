@@ -41,12 +41,13 @@ public class MyTicTacToeServer extends Application {
     /* Actions taken when the server app closed */
     @Override
     public void stop() throws IOException
-    {
-        /* close all threads opened by the server */
+    {// commint
+       /* close all threads opened by the server */
         if (MainController.startStatusFlag == true && MainController.stopStatusFlag== false)
             MainController.actionAtServerAppClose();
         /* terminate the  JavaFX application explicitly */
         Platform.exit();
+       
     }
     
     
