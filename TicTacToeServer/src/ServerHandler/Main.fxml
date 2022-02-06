@@ -100,8 +100,9 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView prefHeight="426.0" prefWidth="515.0" style="-fx-background-color: C8CAE8;">
+                                                <TableView layoutY="-5.0" prefHeight="426.0" prefWidth="515.0" style="-fx-background-color: C8CAE8;">
                                                   <columns>
+                                                      <TableColumn fx:id="onlinePlayerRank" prefWidth="75.0" text="Rank" />
                                                     <TableColumn fx:id="onlinePlayerName" prefWidth="247.0" text="Player name" />
                                                     <TableColumn fx:id="onlinePlayerScore" minWidth="0.0" prefWidth="104.0" text="Score" />
                                                   </columns>
@@ -114,10 +115,11 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tableViewMembers" prefHeight="426.0" prefWidth="514.0" style="-fx-background-color: C8CAE8;">
+                                                <TableView fx:id="tableViewMembers" layoutX="-10.0" layoutY="-5.0" prefHeight="426.0" prefWidth="524.0" style="-fx-background-color: C8CAE8;">
                                                   <columns>
-                                                    <TableColumn fx:id="offlinePlayerName" prefWidth="248.0" text="Player name" />
-                                                    <TableColumn fx:id="offlinePlayerScore" prefWidth="102.0" text="Score" />
+                                                      <TableColumn fx:id="offlinePlayerRank" prefWidth="75.0" text="Rank" />
+                                                    <TableColumn fx:id="offlinePlayerName" prefWidth="256.0" text="Player name" />
+                                                    <TableColumn fx:id="offlinePlayerScore" prefWidth="107.0" text="Score" />
                                                   </columns>
                                                 </TableView>
                                              </children>
