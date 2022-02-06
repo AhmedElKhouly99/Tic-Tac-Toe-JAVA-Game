@@ -4,7 +4,7 @@
  */
 package ServerHandler;
 
-import static ServerHandler.MessageParser.LoggedinPlayers;
+//import static ServerHandler.MessageParser.LoggedinPlayers;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,79 +21,27 @@ import player.Players;
  */
 public class ClientHandler extends Thread{
   
-    long player2Vid;
-
-    DataInputStream  inS;
-    PrintStream outS;
-
     ObjectOutputStream outObj;
     ObjectInputStream inObj;
-//    DataInputStream  inS;
-//    PrintStream outS;
 
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
     static Vector<Players> playersVector = new Vector<Players>();
-//    static Vector<AllPlayers> AllplayersVector = new Vector<AllPlayers>();
     String clientStatus;
 
-    String thisUname;
     ClientHandler player2Handler;
 
-//    public Player p;
     public boolean status;
 
-    int id;
-    static int counter_id=0;
-
     public Players p;
-
-    
-//    public class Player{
-//        String username;
-//        int score;
-//        boolean inGame;
-//
-//        public String getUsername() {
-//            return username;
-//        }
-//
-//        public void setUsername(String username) {
-//            this.username = username;
-//        }
-//
-//        public int getScore() {
-//            return score;
-//        }
-//
-//        public void setScore(int score) {
-//            this.score = score;
-//        }
-//
-//        public boolean isInGame() {
-//            return inGame;
-//        }
-//
-//        public void setInGame(boolean inGame) {
-//            this.inGame = inGame;
-//        }
-//    }
-
     
     public ClientHandler(Socket s) {
         try{
-            //inS = new DataInputStream(s.getInputStream());
-            //outS = new PrintStream(s.getOutputStream());
             inObj = new ObjectInputStream(s.getInputStream());
             outObj = new ObjectOutputStream(s.getOutputStream());
             clientStatus = "Online";
-
             clientsVector.add(this); 
-
-            clientsVector.add(this);
-            id =counter_id++;
             this.p = new Players();
             status = true;
-
             start();
         }catch(Exception ex){
              System.out.println("server.ChatHandler.<init>()");
@@ -102,62 +50,27 @@ public class ClientHandler extends Thread{
 
     public void run(){
         try{
-            /////////////////////////////////////////////////////////////////////
-//            String username = inS.readLine();
-//            String password = inS.readLine();
-//            
-//            ifUserExist(username);
             
-            ////////////////////////////////////////////////////////////////////
             while(true){
-              
-                clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
-                outS.println("Online"); // for server status // give an exception error if there is no client
-
                 clientStatus = (String)inObj.readObject();
-                //clientStatus = inS.readLine(); // for client status // give an exception error if there is no client
-                //outS.println("Online"); // for server status // give an exception error if there is no client
-
-                //System.out.println(clientStatus);
                 if(clientStatus == null) // done at the client fallen
                 {
-//                    System.out.println(clientStatus);
-//                    System.out.println("tic.tac.toe_server.ClientHandler.run() from outside exception");
-//                    inS.close();
-//                    outS.close();
                     clientsVector.removeElement(this);
-                    LoggedinPlayers.removeElement(this.p);
+                    playersVector.removeElement(this.p);
                     this.currentThread().stop();
                 }
                 else
                 {
-
-                   MessageParser.checkClientMsg(clientStatus, this); 
-
-
-                    
-//                    String respond=MessageParser.checkClientMsg(clientStatus,id);
-//                    outS.println(respond);
-                        System.out.println("before msg");
-                        System.out.println(clientStatus);
+                    System.out.println("before msg");
+                    System.out.println(clientStatus);
                    MessageParser.checkClientMsg(clientStatus, this);
-                   //this.outS.println("done");
-
-
-                }
-                
-                
-                
+                } 
                 this.currentThread().sleep(50);
             }
         }catch(Exception ex){       // i don't know why this exception is not fire at the client is fallen
             try{
-//                System.out.println(clientStatus);
-//                System.out.println("tic.tac.toe_server.ClientHandler.run() from iside exception");
-//                inS.close();
-//                outS.close();
                 clientsVector.removeElement(this);
-                LoggedinPlayers.removeElement(this.p);
+                playersVector.removeElement(this.p);
                 this.currentThread().stop();
             }catch(Exception e){}
         }
@@ -167,36 +80,5 @@ public class ClientHandler extends Thread{
     public static Vector<ClientHandler> getClientsVector()
     {
         return clientsVector;
-    }
-    
-    
-    
-        
-        
-        
-        
-        
-//        if("login".equals(arrString[0]))
-//        {
-//            if("Username from database".equals(arrString[1]))
-//            {
-//                
-//                if("Password from database".equals(arrString[2]))
-//                {
-//                    System.out.println("My test succeded");
-//                }
-//                
-//            }
-//        }
-//        
-//        
-//        /*------------Insert user data from database----------*/
-//        
-//        if("signup".equals(arrString[0]))   
-//        {
-//            
-//        }
-        
-/* handling the user existness */        
-        
+    }       
 }

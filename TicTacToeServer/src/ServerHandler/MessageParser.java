@@ -28,7 +28,7 @@ import player.Players;
  */
 public class MessageParser {
     
-    static Vector<Players> LoggedinPlayers = new Vector<Players>();
+//    static Vector<Players> LoggedinPlayers = new Vector<Players>();
     public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
         
         String[] arrString = msg.split("::");
@@ -40,7 +40,7 @@ public class MessageParser {
       
         switch (arrString[0]) {
             case "login":
-               LoggedinPlayers.forEach(e->{
+               playersVector.forEach(e->{
                     if(e.getUsername().equals(arrString[1])){
                         try {
                             ch.outObj.writeObject("login::exist");
@@ -63,7 +63,7 @@ public class MessageParser {
                     System.out.println(ch.p.getUsername());
                     
                     System.out.println(ch.p.getUsername());
-                    LoggedinPlayers.add(ch.p);
+                    playersVector.add(ch.p);
                     ch.outObj.writeObject("login::done");
                     //ch.outS.println("login::done");
                 } else {
@@ -78,9 +78,9 @@ public class MessageParser {
 
 //                Players p1 = new Players(arrString[1], arrString[2]);
                 if(addUser(arrString[1], arrString[2])){
-                    ch.outS.println("signup::done");
+                    ch.outObj.writeObject("signup::done");
                 }else{
-                    ch.outS.println("signup::failed");
+                    ch.outObj.writeObject("signup::failed");
                 }    
          /*------------Insert user data from database----------*/
                 
@@ -93,15 +93,8 @@ public class MessageParser {
                 
             case "rankings":
                 System.out.println("rankings");
-//                System.out.println(Database.getAllPlayers());
-//                ObservableList<AllPlayers> list = Database.getAllPlayers();
-//                System.out.println(list);
-//                ch.outObj.writeObject(list);
+                System.out.println(Database.getAllPlayers());
                 ch.outObj.writeObject(new ArrayList<AllPlayers>(Database.getAllPlayers()));
-//                ch.outObj.writeObject(p11);
-                //ch.outObj.writeObject(p11);
-//                ch.outObj.writeObject(test);
-//               ch.outObj.writeObject(Database.getAllPlayers());
                 break;
 
             case "finished_playing":

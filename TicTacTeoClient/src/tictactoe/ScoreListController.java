@@ -54,7 +54,7 @@ public class ScoreListController extends Thread implements Initializable {
 //    static List<AllPlayers> list;
     ObservableList<AllPlayers> listM;
 
-    List<AllPlayers> list;
+//    List<AllPlayers> list;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -75,9 +75,9 @@ public class ScoreListController extends Thread implements Initializable {
         while (true) {                    
                 try {
                     PlayerSocket.outObj.writeObject("rankings");                        
-                    list = (List<AllPlayers>) PlayerSocket.inObj.readObject();                  
+                    List<AllPlayers>list = (List<AllPlayers>) PlayerSocket.inObj.readObject();                  
                     listM = FXCollections.observableArrayList(list);
-                    sleep(100);
+                    sleep(200);
                     } catch (ClassNotFoundException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException | InterruptedException ex) {
