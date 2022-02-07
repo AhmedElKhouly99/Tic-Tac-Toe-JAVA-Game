@@ -240,6 +240,7 @@ public class MainController implements Initializable {
                     {
                         onlinePlayersList.add(new AllPlayers(0 , player.getUsername(), player.getScore()));
                     }
+                    onlinePlayersList = setPlayersRank(onlinePlayersList);
                     listOfOnlinePlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
                 }
 
@@ -288,15 +289,46 @@ public class MainController implements Initializable {
         /* close the thread resposible for make changes on the GUI */
         endThreadThatUpdateServerGui();
     }
+    
+    
+    private List<AllPlayers> setPlayersRank(List<AllPlayers> list)
+    {
+        int sorted = 0;
+        for(int counter = 0; counter < list.size() - 1 && sorted == 0; counter++)
+        {
+            sorted = 1;
 
+            for(int index = 0; index < list.size() - 1 - counter; index++)
+            {
+                if(list.get(index).getScore() < list.get(index+1).getScore())
+                {
+                    AllPlayers temp = list.get(index);
+                    list.set(index, list.get(index+1));
+                    list.set(index+1, temp);
+                    
+                    sorted = 0;
+                }
+            }
+        }
+        for(int counter=0 ; counter<list.size() ; counter++)
+        {
+            list.get(counter).setRank(counter+1);
+        }
+  
+        return list;
+    }
+
+    
     
     private void testFunc()
     {
         listOfAllPlayers.add(new AllPlayers(0 , "soly", 100));
+        listOfAllPlayers = setPlayersRank(listOfAllPlayers);
         listOfOnlinePlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
         onlinePlayersList.add(new AllPlayers(0 , "khouly", 100));
         onlinePlayersList.add(new AllPlayers(0 , "abanoub", 90));
         onlinePlayersList.add(new AllPlayers(0 , "soly", 100));
+        onlinePlayersList = setPlayersRank(onlinePlayersList);
         listOfAllPlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
     }
     
