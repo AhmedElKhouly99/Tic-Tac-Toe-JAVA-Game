@@ -15,6 +15,7 @@ import java.util.Vector;
 public class Players implements Serializable{
 
     public static Players myPlayer;
+    public static Players vsPlayer;
     public Players() {
     }
 
@@ -26,7 +27,7 @@ public class Players implements Serializable{
     String username;
     int score;
     boolean inGame;
-
+    
     public String getUsername() {
         return username;
     }

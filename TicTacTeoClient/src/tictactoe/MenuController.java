@@ -119,11 +119,14 @@ public class MenuController extends Thread implements Initializable {
             newGame.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    String[] invitePlay=label.getText().split("\t");
+                    
                     turnThread = false;
                         System.out.println(label.getText());
 
                        Parent root = null;
                     try {
+<<<<<<< HEAD
                         PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                         
                         
@@ -146,11 +149,19 @@ public class MenuController extends Thread implements Initializable {
 
                         
                         
+=======
+                        PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
+>>>>>>> abd45cb624f80c1c9b27fe7258043b30e29894c0
                         String respond = (String)PlayerSocket.inObj.readObject();
                         System.out.println(respond);
                         if(respond.equals("inviteAccepted")){
                             waitTh = false;
                             turnThread = false;
+                            Players.vsPlayer=new Players();
+                            Players.vsPlayer.setScore(Integer.parseInt(invitePlay[1]));
+                            Players.vsPlayer.setUsername(invitePlay[0]);
+                            Players.vsPlayer.setInGame(true);
+                            Players.myPlayer.setInGame(true);
                             root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                             Stage window = (Stage) newGame.getScene().getWindow();
                             window.setScene(new Scene(root));
@@ -256,6 +267,17 @@ public class MenuController extends Thread implements Initializable {
                         try {
                             PlayerSocket.outObj.writeObject("accept::" + user);
                             PlayerSocket.inObj.readObject();
+                            Players.vsPlayer=new Players();
+                            Players.vsPlayer.setUsername(user);
+                            ConnectedPlayers.forEach(p->
+                            {
+                                if(p.getUsername().equals(user))
+                                Players.vsPlayer.setScore(p.getScore());
+                            });
+                            
+                            Players.vsPlayer.setInGame(true);
+                            Players.myPlayer.setInGame(true);
+                            
                             Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                             Stage window = (Stage) pane.getScene().getWindow();
                             window.setScene(new Scene(root));
@@ -346,6 +368,7 @@ public class MenuController extends Thread implements Initializable {
                 if(checkType.getClass()== msg.getClass()){
                     System.out.println((String)checkType);
                     String[] arrString = ((String)checkType).split("::");
+                    
                     checkInvite(arrString[1]);
 
 //                    PlayerSocket.outObj.writeObject("accept::"+arrString[1]);
