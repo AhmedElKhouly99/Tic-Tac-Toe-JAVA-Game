@@ -281,7 +281,7 @@ public class MultiPlayerModeController implements Initializable {
 //        playerWins = true;
 //    }
 
-//    public void oWins(int a, int b, int c) {
+//          public void oWins(int a, int b, int c) {
 ////        buttons[a].setBackground(Color.GREEN);
 ////        buttons[b].setBackground(Color.GREEN);
 ////        buttons[c].setBackground(Color.GREEN);
