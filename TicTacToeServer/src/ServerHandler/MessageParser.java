@@ -72,7 +72,7 @@ public class MessageParser {
             case "signup":/*-------------------signup::username::password----------------------*/
 
 //                Players p1 = new Players(arrString[1], arrString[2]);
-                if(addUser(arrString[1], arrString[2])){
+                if(addUser(arrString[1], arrString[2], ch.p)){
                     ch.outObj.writeObject("signup::done");
                 }else{
                     ch.outObj.writeObject("signup::failed");
@@ -141,7 +141,8 @@ public class MessageParser {
                             System.out.println(e.p.getUsername());
                             ch.player2Handler = e;
                             e.player2Handler = ch;
-                            
+                            ch.p.setInGame(true);
+                            e.p.setInGame(true);
                             e.outObj.writeObject("inviteAccepted");
                             e.outObj.writeObject("X");
                             ch.outObj.writeObject("O");
@@ -174,12 +175,12 @@ public class MessageParser {
 
                 break;
 
-//            case "winner"://winner                
-//                /*-------------------playing::username::turn::indexPlaymove----------------------*/
-//
-//                ch.println("youlose");
-//
-//                break;  
+            case "winner"://winner                
+                /*-------------------playing::username::turn::indexPlaymove----------------------*/
+
+                Database.editPlayer(ch.p);
+
+                break;  
 ////            
 //            case "tie"://winner                
 //                /*-------------------playing::username::turn::indexPlaymove----------------------*/
@@ -194,7 +195,10 @@ public class MessageParser {
         return Database.isPlayer(uname, password, p);
     }
 
-    private static boolean addUser(String uname, String pass) {
+    private static boolean addUser(String uname, String pass, Players p) {
+        if(Database.isPlayer(uname, pass, p)){
+            return false;
+        }
         return Database.addPlayer(uname, pass);
     }
        

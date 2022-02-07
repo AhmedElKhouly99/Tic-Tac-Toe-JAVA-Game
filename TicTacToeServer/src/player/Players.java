@@ -14,6 +14,8 @@ import java.util.Vector;
  */
 public class Players implements Serializable{
 
+    public static Players myPlayer;
+    public static Players vsPlayer;
     public Players() {
     }
 

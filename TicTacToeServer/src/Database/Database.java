@@ -165,7 +165,7 @@ public class Database {
     }
     
     @SuppressWarnings("empty-statement")
-    public static boolean editPlayer(AllPlayers p){
+    public static boolean editPlayer(Players p){
          try {
             while(!startConnection());
             preparedStmt = con.prepareStatement(EDITSCORE);
