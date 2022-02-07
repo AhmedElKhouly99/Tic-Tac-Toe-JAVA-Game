@@ -126,32 +126,27 @@ public class MenuController extends Thread implements Initializable {
 
                        Parent root = null;
                     try {
-<<<<<<< HEAD
-                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
-                        
-                        
-//                    Alert alert = new Alert(AlertType.CONFIRMATION);
-//                    alert.initModality(Modality.APPLICATION_MODAL);
-//                    ButtonType buttonSave = new ButtonType("Invite");
-//                    ButtonType buttonDontSave = new ButtonType("Cancel");
-//                    alert.setTitle("Invitation");
-//                    alert.setHeaderText("Do you want to play with ?");
-//                    DialogPane dialogPane = alert.getDialogPane();
-//                    dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-//                    dialogPane.getStyleClass().add("myDialog");
-//                    alert.getButtonTypes().setAll(buttonSave, buttonDontSave );
-//
-//                    Optional<ButtonType> result = alert.showAndWait();
-//
-//                    if (result.get() == buttonSave) {
-//                    
-//                    }
 
+//                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                         
                         
-=======
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.initModality(Modality.APPLICATION_MODAL);
+                    ButtonType buttonSave = new ButtonType("Invite");
+                    ButtonType buttonDontSave = new ButtonType("Cancel");
+                    alert.setTitle("Invitation");
+                    alert.setHeaderText("Do you want to play with ?");
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                    dialogPane.getStyleClass().add("myDialog");
+                    alert.getButtonTypes().setAll(buttonSave, buttonDontSave );
+
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    if (result.get() == buttonSave) {
+                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                         PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
->>>>>>> abd45cb624f80c1c9b27fe7258043b30e29894c0
+
                         String respond = (String)PlayerSocket.inObj.readObject();
                         System.out.println(respond);
                         if(respond.equals("inviteAccepted")){
@@ -170,6 +165,31 @@ public class MenuController extends Thread implements Initializable {
                             turnThread = true;
                             
                         }
+                    }
+
+                        
+                        
+
+//                        PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
+//
+//                        String respond = (String)PlayerSocket.inObj.readObject();
+//                        System.out.println(respond);
+//                        if(respond.equals("inviteAccepted")){
+//                            waitTh = false;
+//                            turnThread = false;
+//                            Players.vsPlayer=new Players();
+//                            Players.vsPlayer.setScore(Integer.parseInt(invitePlay[1]));
+//                            Players.vsPlayer.setUsername(invitePlay[0]);
+//                            Players.vsPlayer.setInGame(true);
+//                            Players.myPlayer.setInGame(true);
+//                            root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+//                            Stage window = (Stage) newGame.getScene().getWindow();
+//                            window.setScene(new Scene(root));
+//                            
+//                        }else{
+//                            turnThread = true;
+//                            
+//                        }
                         
 //                        root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                     } catch (IOException ex) {
