@@ -15,6 +15,8 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="736.0" style="-fx-background-color: white;" styleClass="container" stylesheets="@CascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHandler.MainController">
@@ -25,7 +27,7 @@
                <children>
                   <BorderPane prefHeight="542.0" prefWidth="736.0" AnchorPane.topAnchor="0.0">
                      <top>
-                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="736.0" style="-fx-background-color: #2d5f81;" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="736.0" style="-fx-background-color: #226272;" BorderPane.alignment="CENTER">
                            <children>
                               <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -35,21 +37,29 @@
                                     <Insets left="20.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label text="Tic Tac Toe Server" textFill="WHITE">
+                              <Label text="Tic Tac Toe Server">
                                  <font>
                                     <Font name="Times New Roman Bold" size="20.0" />
                                  </font>
                                  <padding>
                                     <Insets left="20.0" />
                                  </padding>
+                                 <textFill>
+                                    <LinearGradient endX="0.9571428571428572" endY="1.0" startX="0.2619047619047619" startY="0.14285714285714285">
+                                       <stops>
+                                          <Stop color="#fffd8e" />
+                                          <Stop color="WHITE" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
                               </Label>
                            </children>
                         </HBox>
                      </top>
                      <left>
-                        <FlowPane alignment="TOP_CENTER" prefHeight="454.0" prefWidth="193.0" style="-fx-background-color: #2d5f81;" BorderPane.alignment="CENTER">
+                        <FlowPane alignment="TOP_CENTER" prefHeight="454.0" prefWidth="193.0" style="-fx-background-color: #226272;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label contentDisplay="RIGHT" prefHeight="64.0" prefWidth="192.0" style="-fx-background-color: #71c213;" text="Server Status: " textFill="#f5f4f4">
+                              <Label contentDisplay="RIGHT" prefHeight="64.0" prefWidth="192.0" style="-fx-background-color: #71c213;" text="Server Status: ">
                                  <font>
                                     <Font name="Times New Roman Bold" size="22.0" />
                                  </font>
@@ -62,8 +72,16 @@
                                  <padding>
                                     <Insets left="8.0" />
                                  </padding>
+                                 <textFill>
+                                    <LinearGradient endX="0.5523809523809524" endY="0.6857142857142857" startX="0.5380952380952381" startY="0.15714285714285708">
+                                       <stops>
+                                          <Stop color="#fffd8e" />
+                                          <Stop color="WHITE" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
                               </Label>
-                              <Label fx:id="activateDeactivateLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="13.0" text="Activate" textFill="#fffbfb">
+                              <Label fx:id="activateDeactivateLabel" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="13.0" text="Activate">
                                  <graphic>
                                     <Button fx:id="activateBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleActivateAndDeactivateAction" style="-fx-background-color: #71c213; -fx-background-radius: 2em;">
                                        <graphic>
@@ -82,11 +100,19 @@
                                     <Insets top="100.0" />
                                  </FlowPane.margin>
                                  <font>
-                                    <Font name="Times New Roman" size="18.0" />
+                                    <Font name="Times New Roman Bold" size="22.0" />
                                  </font>
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
+                                 <textFill>
+                                    <LinearGradient endX="0.5523809523809524" endY="1.0" startX="0.4809523809523809" startY="0.2571428571428571">
+                                       <stops>
+                                          <Stop color="#fffd8e" />
+                                          <Stop color="WHITE" offset="1.0" />
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
                               </Label>
                            </children>
                         </FlowPane>
@@ -94,13 +120,13 @@
                      <center>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <center>
-                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                              <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: F5F5F5;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                                 <tabs>
                                   <Tab fx:id="tabViewOnlineName" text="Online Players">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tabViewOnlinePlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="545.0" style="-fx-background-color: C8CAE8;">
+                                                <TableView fx:id="tabViewOnlinePlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="545.0" style="-fx-background-color: C8CAEF5F5F58;">
                                                   <columns>
                                                       <TableColumn fx:id="onlinePlayerRank" prefWidth="75.0" text="Rank" />
                                                     <TableColumn fx:id="onlinePlayerName" prefWidth="255.0" text="Player name" />
@@ -115,7 +141,7 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tabViewAllPlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="543.0" style="-fx-background-color: C8CAE8;">
+                                                <TableView fx:id="tabViewAllPlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="543.0" style="-fx-background-color: F5F5F5;">
                                                   <columns>
                                                       <TableColumn fx:id="offlinePlayerRank" prefWidth="75.0" text="Rank" />
                                                     <TableColumn fx:id="offlinePlayerName" prefWidth="257.0" text="Player name" />
