@@ -79,7 +79,9 @@ public class LoginController implements Initializable {
     @FXML
     private void goToGame(ActionEvent event) throws IOException, ClassNotFoundException {
 
-        if(unameField.getText().equals("") || passwordField.getText().equals("") ){
+        String uname = unameField.getText();
+        String pass = passwordField.getText();
+        if(uname.equals("") || pass.equals("") ){
             
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("please enter your username and password");
@@ -93,10 +95,11 @@ public class LoginController implements Initializable {
             PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
             String respond = (String)PlayerSocket.inObj.readObject(); System.out.println(respond);
             if("login::done".equals(respond)){
+                Players.myPlayer = new Players(uname, 0);
                 Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
                 Stage window = (Stage) loginBtn.getScene().getWindow();
                 window.setScene(new Scene(root));
-            }else if("login::exist".equals(respond)){
+            }else if("login::exist".equals(respond)){               
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setContentText("User logged in from other device!");
                 alert.show();

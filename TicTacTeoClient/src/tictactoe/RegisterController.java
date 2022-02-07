@@ -5,9 +5,12 @@
  */
 package tictactoe;
 
+import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,9 +61,9 @@ public class RegisterController implements Initializable {
     
     @FXML
     void GoToMenu(ActionEvent event) throws IOException {
-
-         
-        if(unameRegField.getText().equals("") || PassRegField.getText().equals("") ){
+        String uname = unameRegField.getText();
+        String pass = PassRegField.getText();
+        if(uname.equals("") || pass.equals("") ){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("please enter your username and password");
             alert.show();
@@ -69,7 +72,7 @@ public class RegisterController implements Initializable {
             dialogPane.getStyleClass().add("myDialog");
             
             
-        }else if(!(unameRegField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
+        }else if(!(uname.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
             Alert alertUsername = new Alert(Alert.AlertType.ERROR);
             alertUsername.setContentText("Username must be: \n - At least 8 chars \n - Contains at least one digit \n - Contains at least one lower alpha char and one upper alpha char \n - Contains at least one char within a set of special chars (@#%$^ etc.)\n - Does not contain space, tab, etc.");
             alertUsername.show();
@@ -78,7 +81,7 @@ public class RegisterController implements Initializable {
             dialogPane.getStyleClass().add("myDialog");
             
             
-        }else if(!(PassRegField.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
+        }else if(!(pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"))){
             Alert alertPass = new Alert(Alert.AlertType.ERROR);
             alertPass.setContentText("Password must be:\n - At least 8 chars \n - Contains at least one digit\n - Contains at least one lower alpha char and one upper alpha char\n - Contains at least one char within a set of special chars (@#%$^ etc.)\n - Does not contain space, tab, etc.");
             alertPass.show();
@@ -87,9 +90,24 @@ public class RegisterController implements Initializable {
             dialogPane.getStyleClass().add("myDialog");
         }
         else{
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Stage window = (Stage) SignUpBtn.getScene().getWindow();
-        window.setScene(new Scene(root));
+            try {
+                PlayerSocket.socketInit();
+                PlayerSocket.outObj.writeObject("signup::"+uname+"::"+pass);
+                String respond = (String)PlayerSocket.inObj.readObject();
+                if(respond.equals("signup::failed")){
+                    Alert alertPass = new Alert(Alert.AlertType.ERROR);
+                    alertPass.setContentText("Username already exists!!");
+                    alertPass.show();
+                    DialogPane dialogPane = alertPass.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                    dialogPane.getStyleClass().add("myDialog");
+                }else{
+                Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                Stage window = (Stage) SignUpBtn.getScene().getWindow();
+                window.setScene(new Scene(root));}
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
