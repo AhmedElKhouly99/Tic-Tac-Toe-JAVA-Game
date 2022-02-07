@@ -47,9 +47,9 @@
                         </HBox>
                      </top>
                      <left>
-                        <FlowPane alignment="TOP_CENTER" prefHeight="454.0" prefWidth="220.0" style="-fx-background-color: #2d5f81;" BorderPane.alignment="CENTER">
+                        <FlowPane alignment="TOP_CENTER" prefHeight="454.0" prefWidth="193.0" style="-fx-background-color: #2d5f81;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label contentDisplay="RIGHT" prefHeight="64.0" prefWidth="222.0" style="-fx-background-color: #71c213;" text="Server Status: " textFill="#f5f4f4">
+                              <Label contentDisplay="RIGHT" prefHeight="64.0" prefWidth="192.0" style="-fx-background-color: #71c213;" text="Server Status: " textFill="#f5f4f4">
                                  <font>
                                     <Font name="Times New Roman Bold" size="22.0" />
                                  </font>
@@ -96,30 +96,30 @@
                            <center>
                               <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                                 <tabs>
-                                  <Tab fx:id="onlinePlayersTab" onSelectionChanged="#displayOnlinePlayers" text="Online Players">
+                                  <Tab fx:id="tabViewOnlineName" text="Online Players">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView layoutY="-5.0" prefHeight="426.0" prefWidth="515.0" style="-fx-background-color: C8CAE8;">
+                                                <TableView fx:id="tabViewOnlinePlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="545.0" style="-fx-background-color: C8CAE8;">
                                                   <columns>
                                                       <TableColumn fx:id="onlinePlayerRank" prefWidth="75.0" text="Rank" />
-                                                    <TableColumn fx:id="onlinePlayerName" prefWidth="247.0" text="Player name" />
-                                                    <TableColumn fx:id="onlinePlayerScore" minWidth="0.0" prefWidth="104.0" text="Score" />
+                                                    <TableColumn fx:id="onlinePlayerName" prefWidth="255.0" text="Player name" />
+                                                    <TableColumn fx:id="onlinePlayerScore" minWidth="0.0" prefWidth="101.0" text="Score" />
                                                   </columns>
                                                 </TableView>
                                              </children>
                                           </AnchorPane>
                                     </content>
                                   </Tab>
-                                  <Tab fx:id="offlinePlayersTab" onSelectionChanged="#displayOfflinePlayers" text="Offline Players">
+                                  <Tab fx:id="tabViewAllNames" text="All Players">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tableViewMembers" layoutX="-10.0" layoutY="-5.0" prefHeight="426.0" prefWidth="524.0" style="-fx-background-color: C8CAE8;">
+                                                <TableView fx:id="tabViewAllPlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="543.0" style="-fx-background-color: C8CAE8;">
                                                   <columns>
                                                       <TableColumn fx:id="offlinePlayerRank" prefWidth="75.0" text="Rank" />
-                                                    <TableColumn fx:id="offlinePlayerName" prefWidth="256.0" text="Player name" />
-                                                    <TableColumn fx:id="offlinePlayerScore" prefWidth="107.0" text="Score" />
+                                                    <TableColumn fx:id="offlinePlayerName" prefWidth="257.0" text="Player name" />
+                                                    <TableColumn fx:id="offlinePlayerScore" prefWidth="102.0" text="Score" />
                                                   </columns>
                                                 </TableView>
                                              </children>
