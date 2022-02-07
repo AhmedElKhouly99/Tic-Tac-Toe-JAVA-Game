@@ -59,7 +59,7 @@ public class MultiPlayerModeController implements Initializable {
     @FXML
     private Button returnBtn;
     
-    private String symbol;
+    private String symbol = new String();
     
     char[] arrPlays = new char[9];
     

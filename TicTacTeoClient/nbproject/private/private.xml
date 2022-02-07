@@ -14,10 +14,14 @@
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/VsComputerMode.fxml</file>
 =======
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/ScoreListController.java</file>
-            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/SocketHandler/PlayerSocket.java</file>
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MenuController.java</file>
+<<<<<<< HEAD
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
 >>>>>>> bf2ac233a55c5cbe60b119d6365d3d26f836eaf2
+=======
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayerModeController.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/SplashController.java</file>
+>>>>>>> 410c018b9dbed385b65459186e2d2ea72c235477
         </group>
     </open-files>
 </project-private>

@@ -4,8 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/ClientHandler.java</file>
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/Game_Test/MyTestClass.java</file>
+=======
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MessageParser.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/TicTacToeServer.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/ClientHandler.java</file>
+>>>>>>> 410c018b9dbed385b65459186e2d2ea72c235477
 =======
             <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/FXMLmai.fxml</file>
             <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/TicTacToeServer.java</file>

@@ -184,7 +184,7 @@ public class MainController implements Initializable {
                     while(true){
                         Socket internalSocket = myServerSocket.accept();
                         
-                        new MyClientHandler(internalSocket);
+                        new ClientHandler(internalSocket);
 //                        System.out.println("A player accepted");
                     }    
                 }catch(Exception e){
@@ -227,19 +227,20 @@ public class MainController implements Initializable {
                 PlayersList = FXCollections.observableArrayList(list);
                 /* get the ofline players */
                 // code to do
-                
+//                System.out.println(Database.getAllPlayers());
+                System.out.println(list);
                 Platform.runLater( new Runnable(){
                     public void run(){ 
                         
                         /* for online players */
-                        if(lastNumberOfOnlinePlayers != clietnsVector.size())
-                        {
-                            lastNumberOfOnlinePlayers = clietnsVector.size();
+//                        if(lastNumberOfOnlinePlayers != clietnsVector.size())
+//                        {
+//                            lastNumberOfOnlinePlayers = clietnsVector.size();
                             onlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
                             onlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
                             onlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
                             tableViewMembers.setItems(PlayersList);
-                        }
+//                        }
                         /* for ofline players */
 //                        if(lastNumberOfLoginPlayers != clietnsVector.size())
 //                        {
