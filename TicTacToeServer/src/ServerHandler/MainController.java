@@ -92,7 +92,6 @@ public class MainController implements Initializable {
 //    ObservableList<AllPlayers> listOfOfflinePlayersForTable;
     
    
-    
     /**
      * Initializes the controller class.
      */
@@ -138,7 +137,7 @@ public class MainController implements Initializable {
             activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");
              
             /////////       /* for test */
-            testFunc();
+//            testFunc();
             System.out.println("ServerHandler.MainController.handleStartButtonAction()");
         }else {
             
@@ -163,7 +162,7 @@ public class MainController implements Initializable {
             activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
             activateBtn.setStyle("-fx-background-color: #71c213; -fx-background-radius: 2em; ");
            
-          //////  /* for test list*/
+            /* for delete the list from the screen when teh server deactivated */
             tabViewOnlinePlayers.getItems().clear();
             tabViewAllPlayers.getItems().clear();
             onlinePlayersList.clear();
@@ -228,19 +227,21 @@ public class MainController implements Initializable {
             try
             {
                 /* get all players */
-//                listOfAllPlayers = Database.getAllPlayers();
-//                listOfAllPlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
+                listOfAllPlayers = Database.getAllPlayers();
+                listOfAllPlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
                 /* get the online players */
                 onlinePlayersVector = Players.playersVector;
                 if(lastNumberOfOnlinePlayers != onlinePlayersVector.size())
                 {
                     lastNumberOfOnlinePlayers = onlinePlayersVector.size();
                     listOfOnlinePlayersForTable.clear();
+                    onlinePlayersList.clear();
                     for(Players player: onlinePlayersVector)
                     {
                         onlinePlayersList.add(new AllPlayers(0 , player.getUsername(), player.getScore()));
                     }
                     onlinePlayersList = setPlayersRank(onlinePlayersList);
+                    System.out.println(onlinePlayersList);
                     listOfOnlinePlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
                 }
 
@@ -275,12 +276,7 @@ public class MainController implements Initializable {
         /* end all internal sockets (threads that stands against) */
         for(ClientHandler ch: clietnsVector)
         {
-            try {
-                ch.currentThread().wait();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(TicTacToeServer.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("ServerHandler.MainController.actionAtServerAppClose().InterruptedException");
-            }
+            ch.currentThread().stop();  
         }
         /* close the thread resposible for accept clients */
         endThreadThatAcceptClients();
@@ -319,7 +315,7 @@ public class MainController implements Initializable {
     }
 
     
-    
+    /// for test
     private void testFunc()
     {
         listOfAllPlayers.add(new AllPlayers(0 , "soly", 100));

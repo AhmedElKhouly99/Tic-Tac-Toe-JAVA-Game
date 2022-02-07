@@ -126,7 +126,7 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tabViewOnlinePlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="545.0" style="-fx-background-color: C8CAEF5F5F58;">
+                                                <TableView fx:id="tabViewOnlinePlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="545.0">
                                                   <columns>
                                                       <TableColumn fx:id="onlinePlayerRank" prefWidth="75.0" text="Rank" />
                                                     <TableColumn fx:id="onlinePlayerName" prefWidth="255.0" text="Player name" />
@@ -141,7 +141,7 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tabViewAllPlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="543.0" style="-fx-background-color: F5F5F5;">
+                                                <TableView fx:id="tabViewAllPlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="543.0">
                                                   <columns>
                                                       <TableColumn fx:id="offlinePlayerRank" prefWidth="75.0" text="Rank" />
                                                     <TableColumn fx:id="offlinePlayerName" prefWidth="257.0" text="Player name" />
