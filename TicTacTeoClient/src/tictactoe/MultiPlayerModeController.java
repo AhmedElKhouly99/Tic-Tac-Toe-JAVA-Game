@@ -104,11 +104,13 @@ public class MultiPlayerModeController implements Initializable {
     
     private void putMove(int index)
     {
-        arrPlays[index]=symbol.charAt(0);
+        
         if(symbol.equals("X")){
             buttonsArr[index].setText("O");
+            arrPlays[index]='O';
         }else{
             buttonsArr[index].setText("X");
+            arrPlays[index]='X';
         }
         
         player1_turn=true;
@@ -131,7 +133,7 @@ public class MultiPlayerModeController implements Initializable {
         buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
         for (int i = 0; i < 9; i++) {
             buttonsArr[i].setFont(new Font("MV Boli", 50));
-        }
+        }   
          for (int i = 0; i < arrPlays.length; i++) {
             arrPlays[i] = (char) i;
         }    
@@ -141,8 +143,8 @@ public class MultiPlayerModeController implements Initializable {
     @FXML
     private void backToMainPage(ActionEvent event) throws IOException {
          Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Stage window = (Stage) returnBtn.getScene().getWindow();
-        window.setScene(new Scene(root));
+         Stage window = (Stage) returnBtn.getScene().getWindow();
+         window.setScene(new Scene(root));
     }
 
     @FXML
@@ -153,21 +155,26 @@ public class MultiPlayerModeController implements Initializable {
             if (event.getTarget() == buttonsArr[i]) {
                 if (player1_turn) {
                     if (buttonsArr[i].getText() == "") {
-//                        buttonsArr[i].setForeground(new Color(255, 0, 0));
+//                      buttonsArr[i].setForeground(new Color(255, 0, 0));
                         System.out.println("Hiiii");
                         //buttonsArr[i].setText("X");
                         buttonsArr[i].setText(symbol);
                         player1_turn = false;
                         arrPlays[i] = buttonsArr[i].getText().charAt(0);
-//                        textfield.setText("O turn");
+//<<<<<<< HEAD
+////                      textfield.setText("O turn");
+//                        PlayerSocket.outS.println("play::"+i);
+//=======
+////                        textfield.setText("O turn");
                         PlayerSocket.outObj.writeObject("play::"+i);
+//>>>>>>> e5fe6c013339234420bc07e1af0e79e2545e6aff
                             check();
                             
-                        if (playerWins) {
-                            myGameTh.stop();
-                            playerOneName.setText("You win");
-                            
-                        }
+//                        if (playerWins) {
+////                            myGameTh.stop();
+////                            playerOneName.setText("You win");
+////                            
+////                        }
 
                     }
                 }
@@ -193,11 +200,13 @@ public class MultiPlayerModeController implements Initializable {
                 if ((arrPlays[i] == arrPlays[4]) && (arrPlays[4] == arrPlays[8 - i])) {
                     if (arrPlays[i] == symbol.charAt(0)) {
 //                        xWins(i, 4, 8 - i);
-                          playerWins=true;
+                          playerWins=true;     
+                          playerOneName.setText("You Win");
                     } else {
 //                        oWins(i, 4, 8 - i);
-                            myGameTh.stop();
+                            player1_turn=false;
                             playerOneName.setText("You lose");
+                            
                     }
                     return;
                 }
@@ -206,9 +215,12 @@ public class MultiPlayerModeController implements Initializable {
             {
                 if (arrPlays[i] == symbol.charAt(0)) {
                     playerWins=true;
+               
+                    playerOneName.setText("You Win");
                 } else {
 //                    oWins(i, i + 3, i + 6);
-                    myGameTh.stop();
+                    //myGameTh.stop();
+                     player1_turn=false;
                      playerOneName.setText("You lose");
                 }
                 return;
@@ -217,9 +229,11 @@ public class MultiPlayerModeController implements Initializable {
                 if (arrPlays[j] == symbol.charAt(0)) {
 //                    xWins(j, j + 1, j + 2);
                     playerWins=true;
+                    playerOneName.setText("You Win");
                 } else {
 //                    oWins(j, j + 1, j + 2);
-                    myGameTh.stop();
+                    //myGameTh.stop();
+                    player1_turn=false;
                      playerOneName.setText("You lose");
                       
                 }
