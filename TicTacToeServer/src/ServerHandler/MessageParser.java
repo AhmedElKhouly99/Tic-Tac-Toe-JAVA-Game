@@ -21,21 +21,15 @@ import player.Players;
 
 //invite::player2_id"abanoub", id="soly"
 //accept::player1_id"soly"::abanoub
+
 /**
  *
  * @author START
  */
 public class MessageParser {
     
-    
-    
-
-    //static Vector<Player> LoggedinPlayers = new Vector<Player>();
+//    static Vector<Players> LoggedinPlayers = new Vector<Players>();
     public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
-        Vector<Players> p11 = new Vector<Players>();
-        p11.add(new Players("ahmed", 100));
-        p11.add(new Players("ahmed", 100));
-        p11.add(new Players("ahmed", 100));
         
         String[] arrString = msg.split("::");
         
@@ -46,6 +40,17 @@ public class MessageParser {
       
         switch (arrString[0]) {
             case "login":
+               playersVector.forEach(e->{
+                    if(e.getUsername().equals(arrString[1])){
+                        try {
+                            ch.outObj.writeObject("login::exist");
+                            return;
+                        } catch (IOException ex) {
+                            Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+                
                 //ch.outS.println("3abat");
                 /*-------------------login::username::password----------------------*/
                 if(isUser(arrString[1], arrString[2], ch.p)){
@@ -66,19 +71,20 @@ public class MessageParser {
                     //ch.outS.println("login::failed");
                     clientsVector.removeElement(ch);
                 }
-
+                
                 break;
-
+                
             case "signup":/*-------------------signup::username::password----------------------*/
-                //Player p1 = new Players(arrString[1], arrString[2], arrString[3].charAt(0));
-                if (addUser(arrString[1], arrString[2])) {
-                    ch.outObj.writeObject("signup::done");
-                } else {
-                    ch.outObj.writeObject("signup::failed");
-                }
 
-                /*------------Insert user data from database----------*/
-                break;
+//                Players p1 = new Players(arrString[1], arrString[2]);
+                if(addUser(arrString[1], arrString[2])){
+                    ch.outObj.writeObject("signup::done");
+                }else{
+                    ch.outObj.writeObject("signup::failed");
+                }    
+         /*------------Insert user data from database----------*/
+                
+                break; 
                 
             case "onlinePlayers":
                 
@@ -88,14 +94,7 @@ public class MessageParser {
             case "rankings":
                 System.out.println("rankings");
                 System.out.println(Database.getAllPlayers());
-//                ObservableList<AllPlayers> list = Database.getAllPlayers();
-//                System.out.println(list);
-//                ch.outObj.writeObject(list);
                 ch.outObj.writeObject(new ArrayList<AllPlayers>(Database.getAllPlayers()));
-//                ch.outObj.writeObject(p11);
-                //ch.outObj.writeObject(p11);
-//                ch.outObj.writeObject(test);
-//               ch.outObj.writeObject(Database.getAllPlayers());
                 break;
 
             case "finished_playing":
@@ -190,5 +189,7 @@ public class MessageParser {
     private static boolean addUser(String uname, String pass) {
         return Database.addPlayer(uname, pass);
     }
-
-}
+       
+    
+    
+}    
