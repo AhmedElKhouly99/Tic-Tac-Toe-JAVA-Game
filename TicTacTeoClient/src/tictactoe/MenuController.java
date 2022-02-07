@@ -216,13 +216,12 @@ public class MenuController extends Thread implements Initializable {
          
                     Alert alertSave = new Alert(AlertType.CONFIRMATION);
 
-                    ButtonType buttonSave = new ButtonType("Save");
-                    ButtonType buttonDontSave = new ButtonType("Don't Save");
-                    ButtonType buttonCancel = new ButtonType("Cancel");
-                    alertSave.setTitle("Sotepad");
-                    alertSave.setHeaderText("Do you want to save changes?");
+                    ButtonType buttonSave = new ButtonType("Accept");
+                    ButtonType buttonDontSave = new ButtonType("Reject");
+                    alertSave.setTitle("Invitation");
+                    alertSave.setHeaderText("Do you want to play with "+user+"?");
 
-                    alertSave.getButtonTypes().setAll(buttonSave, buttonDontSave, buttonCancel);
+                    alertSave.getButtonTypes().setAll(buttonSave, buttonDontSave );
 
                     Optional<ButtonType> result = alertSave.showAndWait();
 
