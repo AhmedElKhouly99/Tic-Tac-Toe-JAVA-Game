@@ -124,8 +124,8 @@ public class MenuController extends Thread implements Initializable {
                     turnThread = false;
                         System.out.println(label.getText());
 
-                       Parent root = null;
-                    try {
+//                       Parent root = null;
+//                    try {
 
 //                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                         
@@ -144,32 +144,44 @@ public class MenuController extends Thread implements Initializable {
                     Optional<ButtonType> result = alert.showAndWait();
 
                     if (result.get() == buttonSave) {
-                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
-                        PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
-
-                        String respond = (String)PlayerSocket.inObj.readObject();
-                        System.out.println(respond);
-                        if(respond.equals("inviteAccepted")){
-                            waitTh = false;
-                            turnThread = false;
-                            Players.vsPlayer=new Players();
-                            Players.vsPlayer.setScore(Integer.parseInt(invitePlay[1]));
-                            Players.vsPlayer.setUsername(invitePlay[0]);
-                            Players.vsPlayer.setInGame(true);
-                            Players.myPlayer.setInGame(true);
-                            root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-                            Stage window = (Stage) newGame.getScene().getWindow();
-                            window.setScene(new Scene(root));
-                            
-                        }else{
-                            turnThread = true;
-                            
-                        }
-                    }
-
-                        
-                        
-
+                        ConnectedPlayers.forEach(p->
+                            {Parent root = null;
+                                if(p.getUsername().equals(invitePlay[0]) && !p.isInGame()){
+                                try {
+//                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+                                    PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
+                                    
+                                    String respond = (String)PlayerSocket.inObj.readObject();
+                                    System.out.println(respond);
+                                    if(respond.equals("inviteAccepted")){
+                                        try {
+                                            waitTh = false;
+                                            turnThread = false;
+                                            Players.vsPlayer=new Players();
+                                            Players.vsPlayer.setScore(Integer.parseInt(invitePlay[1]));
+                                            Players.vsPlayer.setUsername(invitePlay[0]);
+                                            Players.vsPlayer.setInGame(true);
+                                            Players.myPlayer.setInGame(true);
+                                            root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+                                            Stage window = (Stage) newGame.getScene().getWindow();
+                                            window.setScene(new Scene(root));
+                                        } catch (IOException ex) {
+                                            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                        
+                                    }else{
+                                        turnThread = true;
+                                        
+                                    }       } catch (IOException ex) {
+                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (ClassNotFoundException ex) {
+                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                    
+                                }
+                                
+                            });
+//                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
 //                        PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
 //
 //                        String respond = (String)PlayerSocket.inObj.readObject();
@@ -190,13 +202,16 @@ public class MenuController extends Thread implements Initializable {
 //                            turnThread = true;
 //                            
 //                        }
-                        
-//                        root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
+                        
+                        
+
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (ClassNotFoundException ex) {
+//                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                       
         
                 }
@@ -368,7 +383,7 @@ public class MenuController extends Thread implements Initializable {
       }
       
       
- Vector<Players>ConnectedPlayers;
+ public static Vector<Players>ConnectedPlayers;
 
     @Override
     public void run() {
