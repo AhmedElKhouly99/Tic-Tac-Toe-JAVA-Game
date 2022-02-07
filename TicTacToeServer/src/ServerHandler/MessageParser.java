@@ -177,17 +177,19 @@ public class MessageParser {
 
             case "winner"://winner                
                 /*-------------------playing::username::turn::indexPlaymove----------------------*/
-
+                
+                ch.p.setScore(ch.p.getScore()+10);
                 Database.editPlayer(ch.p);
 
                 break;  
 ////            
-//            case "tie"://winner                
-//                /*-------------------playing::username::turn::indexPlaymove----------------------*/
-//
-//                ch.player2Handler.outS.println("tie");
-//
-//                break;    
+            case "tie"://winner                
+                /*-------------------playing::username::turn::indexPlaymove----------------------*/
+
+                ch.p.setScore(ch.p.getScore()+5);
+                Database.editPlayer(ch.p);
+
+                break;    
         }
     }
 
