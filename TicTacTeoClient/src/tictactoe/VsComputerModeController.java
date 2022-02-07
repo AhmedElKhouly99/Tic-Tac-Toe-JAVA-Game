@@ -77,7 +77,7 @@ public class VsComputerModeController implements Initializable {
 
     @FXML
     private void backToMainPage(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         Stage window = (Stage) returnBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
@@ -90,7 +90,7 @@ public class VsComputerModeController implements Initializable {
                 if (player1_turn) {
                     if (buttonsArr[i].getText() == "") {
                         //buttonsArr[i].set(new Color(255, 0, 0));
-                        buttonsArr[i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: blue;");
+                        buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #ff0303;");
                         buttonsArr[i].setText("X");
                         player1_turn = false;
                         gameCOunter++;
@@ -122,6 +122,8 @@ public class VsComputerModeController implements Initializable {
     public void check() {
         //check X win conditions
         int j;
+        
+        
 
         for (int i = 0; i < 3; i++) {
             j = i * 3;
@@ -166,6 +168,11 @@ public class VsComputerModeController implements Initializable {
             }
 
         }
+        
+        if(gameCOunter==9)
+        {
+            textwin.setText("Tie");
+        }
 
 
     }
@@ -183,7 +190,7 @@ public class VsComputerModeController implements Initializable {
        }
        
        buttonsArr[index].setText("O");
-       buttonsArr[index].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+       buttonsArr[index].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #00b100;");
        arrPlays[index] = 'O';
        //buttonsArr[4].setForeground(new Color(0, 0, 255));
        player1_turn = true;
@@ -203,7 +210,7 @@ public class VsComputerModeController implements Initializable {
         if(arrPlays[4] != 'X' && arrPlays[4] != 'O')
         {
             buttonsArr[4].setText("O");
-            buttonsArr[4].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+            buttonsArr[4].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
             arrPlays[4] = 'O';
             //buttonsArr[4].setForeground(new Color(0, 0, 255));
             player1_turn = true;
@@ -222,7 +229,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[8-i]!='O'){
                               arrPlays[8-i]='O';
-                              buttonsArr[8-i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                              buttonsArr[8-i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                               buttonsArr[8-i].setText("O");
                               player1_turn = true;
                               //buttons[8-i].setForeground(new Color(0, 0, 255));
@@ -233,7 +240,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[4] != 'O'){
                               arrPlays[4]='O';
-                              buttonsArr[4].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                              buttonsArr[4].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                               buttonsArr[4].setText("O");
                               player1_turn = true;
                               //buttons[4].setForeground(new Color(0, 0, 255));
@@ -245,7 +252,7 @@ public class VsComputerModeController implements Initializable {
                     {
                         if((arrPlays[i]!='O')&&(arrPlays[i]!='X')){
                             arrPlays[i]='O';
-                            buttonsArr[i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                            buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                             buttonsArr[i].setText("O");
                             player1_turn = true;
                             //buttons[i].setForeground(new Color(0, 0, 255));
@@ -258,7 +265,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[i]!='O'){
                                 arrPlays[i]='O';
-                                buttonsArr[i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[i].setText("O");
                                 player1_turn = true;
                                 //buttons[i].setForeground(new Color(0, 0, 255));
@@ -267,7 +274,7 @@ public class VsComputerModeController implements Initializable {
                             else if((arrPlays[8-i]!='O')&&(arrPlays[8-i]!='X'))
                             {
                                 arrPlays[8-i]='O';
-                                buttonsArr[8-i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[8-i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[8-i].setText("O");
                                 player1_turn = true;
                                 //buttons[8-i].setForeground(new Color(0, 0, 255));
@@ -278,7 +285,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[4]!='O'){
                                 arrPlays[4]='O';
-                                buttonsArr[4].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[4].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[4].setText("O");
                                 player1_turn = true;
                                 //buttons[4].setForeground(new Color(0, 0, 255));
@@ -287,7 +294,7 @@ public class VsComputerModeController implements Initializable {
                             else if((arrPlays[8-i]!='O')&&(arrPlays[8-i]!='X'))
                             {
                                 arrPlays[8-i]='O';
-                                buttonsArr[8-i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[8-i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[8-i].setText("O");
                                 player1_turn = true;
                                 //buttons[8-i].setForeground(new Color(0, 0, 255));
@@ -308,7 +315,7 @@ public class VsComputerModeController implements Initializable {
                           if(arrPlays[i+6] != 'O'){
                               
                             arrPlays[i+6]='O';
-                            buttonsArr[i+6].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                            buttonsArr[i+6].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                             buttonsArr[i+6].setText("O");
                             player1_turn = true;
                             //buttons[i+6].setForeground(new Color(0, 0, 255));
@@ -320,7 +327,7 @@ public class VsComputerModeController implements Initializable {
                       {
                           if(arrPlays[i+3]!='O'){
                             arrPlays[i+3]='O';
-                            buttonsArr[i+3].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                            buttonsArr[i+3].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                             buttonsArr[i+3].setText("O");
                             player1_turn = true;
                             //buttons[i+3].setForeground(new Color(0, 0, 255));
@@ -332,7 +339,7 @@ public class VsComputerModeController implements Initializable {
                     {   
                         if((arrPlays[i]!='O')&& (arrPlays[i]!='X')){
                             arrPlays[i]='O';
-                            buttonsArr[i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                            buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                             buttonsArr[i].setText("O");
                             player1_turn = true;
                             //buttons[i].setForeground(new Color(0, 0, 255));
@@ -345,7 +352,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[i]!='O'){
                                 arrPlays[i]='O';
-                                buttonsArr[i].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[i].setText("O");
                                 player1_turn = true;
                                 //buttons[i].setForeground(new Color(0, 0, 255));
@@ -354,7 +361,7 @@ public class VsComputerModeController implements Initializable {
                             else if((arrPlays[i+6] != 'O')&&(arrPlays[i+6]!='X'))
                             {
                                 arrPlays[i+6]='O';
-                                buttonsArr[i+6].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[i+6].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[i+6].setText("O");
                                 player1_turn = true;
                                 //buttons[i+6].setForeground(new Color(0, 0, 255));
@@ -365,7 +372,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[i+3]!='O'){
                                 arrPlays[i+3]='O';
-                                buttonsArr[i+3].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[i+3].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[i+3].setText("O");
                                 player1_turn = true;
                                 //buttons[i+3].setForeground(new Color(0, 0, 255));
@@ -374,7 +381,7 @@ public class VsComputerModeController implements Initializable {
                             else if((arrPlays[i+6] != 'O') &&(arrPlays[i+6]!='X'))
                             {
                                 arrPlays[i+6]='O';
-                                buttonsArr[i+6].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[i+6].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[i+6].setText("O");
                                 player1_turn = true;
                                // buttons[i+6].setForeground(new Color(0, 0, 255));
@@ -392,7 +399,7 @@ public class VsComputerModeController implements Initializable {
                       {
                           if(arrPlays[j+2]!='O'){
                             arrPlays[j+2]='O';
-                            buttonsArr[j+2].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                            buttonsArr[j+2].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                             buttonsArr[j+2].setText("O");
                             player1_turn = true;
                             //buttons[j+2].setForeground(new Color(0, 0, 255));
@@ -403,7 +410,7 @@ public class VsComputerModeController implements Initializable {
                       {
                           if(arrPlays[j+1]!='O'){
                             arrPlays[j+1]='O';
-                            buttonsArr[j+1].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                            buttonsArr[j+1].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                             buttonsArr[j+1].setText("O");
                             player1_turn = true;
                             //buttons[j+1].setForeground(new Color(0, 0, 255));
@@ -415,7 +422,7 @@ public class VsComputerModeController implements Initializable {
                     {
                         if((arrPlays[j]!='O') && (arrPlays[j]!='X')){
                             arrPlays[j]='O';
-                            buttonsArr[j].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                            buttonsArr[j].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                             buttonsArr[j].setText("O");
                             player1_turn = true;
                             //buttons[j].setForeground(new Color(0, 0, 255));
@@ -428,7 +435,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[j]!='O'){
                                 arrPlays[j]='O';
-                                buttonsArr[j].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[j].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[j].setText("O");
                                 player1_turn = true;
                                 //buttons[j].setForeground(new Color(0, 0, 255));
@@ -437,7 +444,7 @@ public class VsComputerModeController implements Initializable {
                             else if((arrPlays[j+2] != 'O')&&(arrPlays[j+2]!='X'))
                             {
                                 arrPlays[j+2]='O';
-                                buttonsArr[j+2].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[j+2].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[j+2].setText("O");
                                 player1_turn = true;
                                 //buttons[j+2].setForeground(new Color(0, 0, 255));
@@ -448,7 +455,7 @@ public class VsComputerModeController implements Initializable {
                         {
                             if(arrPlays[j+1]!='O'){
                                 arrPlays[j+1]='O';
-                                buttonsArr[j+1].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[j+1].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[j+1].setText("O");
                                 player1_turn = true;
                                // buttons[j+1].setForeground(new Color(0, 0, 255));
@@ -457,7 +464,7 @@ public class VsComputerModeController implements Initializable {
                             else if((arrPlays[j+2] != 'O') &&(arrPlays[j+2]!='X'))
                             {
                                 arrPlays[j+2]='O';
-                                buttonsArr[j+2].setStyle("-fx-background-color: #11aa44;;-fx-text-fill: red;");
+                                buttonsArr[j+2].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                                 buttonsArr[j+2].setText("O");
                                 player1_turn = true;
                                 //buttonsArr[j+2].setForeground(new Color(0, 0, 255));
@@ -477,7 +484,7 @@ public class VsComputerModeController implements Initializable {
         
         for (int i = 0; i < 9; i++) {
             if (arrPlays[i] != 'X' && arrPlays[i] != 'O') {
-                buttonsArr[i].setStyle("-fx-background-color: #11aa44;-fx-text-fill: red;");
+                buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #0342ff;");
                 buttonsArr[i].setText("O");
                 arrPlays[i] = 'O';
                 //buttonsArr[i].setForeground(new Color(0, 0, 255));
@@ -488,16 +495,21 @@ public class VsComputerModeController implements Initializable {
     }
     
     public void xWins(int a, int b, int c) {
-        buttonsArr[a].setStyle("-fx-background-color: darkblue;-fx-text-fill: blue;");
-        buttonsArr[b].setStyle("-fx-background-color: darkblue;-fx-text-fill: blue;");
-        buttonsArr[c].setStyle("-fx-background-color: darkblue;-fx-text-fill: blue;");
+        
+        buttonsArr[a].setStyle("-fx-background-color: #0342ff;-fx-text-fill: #ff0303;");
+        buttonsArr[b].setStyle("-fx-background-color: #0342ff;-fx-text-fill: #ff0303;");
+        buttonsArr[c].setStyle("-fx-background-color: #0342ff;-fx-text-fill: #ff0303;");
+        textwin.setStyle("-fx-text-fill: #4adeed;");
+        textwin.setText("X won");
 
     }
 
     public void oWins(int a, int b, int c) {
-        buttonsArr[a].setStyle("-fx-background-color: darkred;-fx-text-fill: red;");
-        buttonsArr[b].setStyle("-fx-background-color: darkred;-fx-text-fill: red;");
-        buttonsArr[c].setStyle("-fx-background-color: darkred;-fx-text-fill: red;");
+        buttonsArr[a].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
+        buttonsArr[b].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
+        buttonsArr[c].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
+        textwin.setStyle("-fx-text-fill: #4adeed;");
+        textwin.setText("O won");
 
     }
 
@@ -510,13 +522,15 @@ public class VsComputerModeController implements Initializable {
         
         for (int i = 0; i < 9; i++) {
             buttonsArr[i].setText("");
-            buttonsArr[i].setStyle("-fx-background-color: #11aa44;");
+            buttonsArr[i].setStyle("-fx-background-color: #4adeed;");
         }
          for (int i = 0; i < arrPlays.length; i++) {
             arrPlays[i] = (char) i;
         }
+        textwin.setText(""); 
         player1_turn=true;
         playerWins=false;
+        gameCOunter=0;
     }
    
 }
