@@ -3,18 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MessageParser.java</file>
-            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/TicTacToeServer.java</file>
-            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/ClientHandler.java</file>
-=======
-            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/FXMLmai.fxml</file>
-            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/TicTacToeServer.java</file>
-            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MessageParser.java</file>
-            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MyTicTacToeServer.java</file>
-            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/CascadeStyleSheet.css</file>
-            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/Client.java</file>
->>>>>>> bf2ac233a55c5cbe60b119d6365d3d26f836eaf2
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MainController.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/Database/Database.java</file>
         </group>
     </open-files>
 </project-private>
