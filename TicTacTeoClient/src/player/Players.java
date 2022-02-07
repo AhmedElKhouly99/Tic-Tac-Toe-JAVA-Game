@@ -25,7 +25,7 @@ public class Players implements Serializable{
     String username;
     int score;
     boolean inGame;
-
+    
     public String getUsername() {
         return username;
     }

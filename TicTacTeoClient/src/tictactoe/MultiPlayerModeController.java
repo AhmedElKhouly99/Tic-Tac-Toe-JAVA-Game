@@ -106,9 +106,11 @@ public class MultiPlayerModeController implements Initializable {
     {
         
         if(symbol.equals("X")){
+            buttonsArr[index].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #00b100;");
             buttonsArr[index].setText("O");
             arrPlays[index]='O';
         }else{
+            buttonsArr[index].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #ff0303;");
             buttonsArr[index].setText("X");
             arrPlays[index]='X';
         }
@@ -158,6 +160,14 @@ public class MultiPlayerModeController implements Initializable {
 //                      buttonsArr[i].setForeground(new Color(255, 0, 0));
                         System.out.println("Hiiii");
                         //buttonsArr[i].setText("X");
+                        if(symbol.equals("X"))
+                        {
+                            buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #ff0303;");
+                        }
+                        else
+                        {
+                            buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #00b100;");
+                        }
                         buttonsArr[i].setText(symbol);
                         player1_turn = false;
                         arrPlays[i] = buttonsArr[i].getText().charAt(0);
@@ -199,11 +209,16 @@ public class MultiPlayerModeController implements Initializable {
             if (i != 1) {
                 if ((arrPlays[i] == arrPlays[4]) && (arrPlays[4] == arrPlays[8 - i])) {
                     if (arrPlays[i] == symbol.charAt(0)) {
-//                        xWins(i, 4, 8 - i);
+                          
+                            youWin(i, 4, 8 - i);
+                          
+                          
                           playerWins=true;     
                           playerOneName.setText("You Win");
                     } else {
 //                        oWins(i, 4, 8 - i);
+                          
+                            youLose(i, 4, 8 - i);
                             player1_turn=false;
                             playerOneName.setText("You lose");
                             
@@ -214,12 +229,16 @@ public class MultiPlayerModeController implements Initializable {
             if ((arrPlays[i] == arrPlays[i + 3]) && (arrPlays[i + 3] == arrPlays[i + 6])) // Check Columns 
             {
                 if (arrPlays[i] == symbol.charAt(0)) {
+                    youWin(i, 4, 8 - i);
+                    
                     playerWins=true;
                
                     playerOneName.setText("You Win");
                 } else {
 //                    oWins(i, i + 3, i + 6);
                     //myGameTh.stop();
+                    youLose(i, 4, 8 - i);
+                    
                      player1_turn=false;
                      playerOneName.setText("You lose");
                 }
@@ -228,11 +247,15 @@ public class MultiPlayerModeController implements Initializable {
             {
                 if (arrPlays[j] == symbol.charAt(0)) {
 //                    xWins(j, j + 1, j + 2);
+                    youWin(i, 4, 8 - i);
+
                     playerWins=true;
                     playerOneName.setText("You Win");
                 } else {
 //                    oWins(j, j + 1, j + 2);
                     //myGameTh.stop();
+                    youLose(i, 4, 8 - i);
+                    
                     player1_turn=false;
                      playerOneName.setText("You lose");
                       
@@ -268,6 +291,30 @@ public class MultiPlayerModeController implements Initializable {
 //        }
 ////        textfield.setText("O wins");
 //    } 
+public void youWin(int a, int b, int c) {
+        
+        buttonsArr[a].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
+        buttonsArr[b].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
+        buttonsArr[c].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
+        try {
+            PlayerSocket.outObj.writeObject("Winner");
+        } catch (IOException ex) {
+            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+
+    public void youLose(int a, int b, int c) {
+        buttonsArr[a].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
+        buttonsArr[b].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
+        buttonsArr[c].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
+        
+
+    }
+     
+     
+     
+     
      
 }
 
