@@ -2,9 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
 <<<<<<< HEAD
-        <group/>
+<<<<<<< HEAD
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/ClientHandler.java</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/Game_Test/MyTestClass.java</file>
 =======
+<<<<<<< HEAD
         <group>
 <<<<<<< HEAD
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MessageParser.java</file>
@@ -17,7 +21,20 @@
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/player/AllPlayers.java</file>
             <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/ClientHandler.java</file>
 >>>>>>> 791b02148e27de909795e3283b04bc060442cc3b
+=======
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MessageParser.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/TicTacToeServer.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/ClientHandler.java</file>
+>>>>>>> 410c018b9dbed385b65459186e2d2ea72c235477
+=======
+            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/FXMLmai.fxml</file>
+            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/TicTacToeServer.java</file>
+            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MessageParser.java</file>
+            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/MyTicTacToeServer.java</file>
+            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/CascadeStyleSheet.css</file>
+            <file>file:/D:/JavaFx/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/Client.java</file>
+>>>>>>> bf2ac233a55c5cbe60b119d6365d3d26f836eaf2
+>>>>>>> ASoliman
         </group>
->>>>>>> e8f88bddecb413c91ea982aac4c0ffdfcf702bda
     </open-files>
 </project-private>

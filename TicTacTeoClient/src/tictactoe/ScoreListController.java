@@ -36,7 +36,7 @@ import javafx.stage.Stage;
 import static tictactoe.LoginController.playersVector;
 
 
-public class ScoreListController implements Initializable {
+public class ScoreListController extends Thread implements Initializable {
 
     @FXML
     private TableView<AllPlayers> table_users;
@@ -51,72 +51,53 @@ public class ScoreListController implements Initializable {
     private Button BackBtn;
 
     
-
+//    static List<AllPlayers> list;
     ObservableList<AllPlayers> listM;
-    int index = -1;
-     Thread allUsersTh;
-    
-    Vector<AllPlayers> test ;
-    
-//    = new Vector<Players>();
-//    ObservableList<AllPlayers> list;
-//    ObservableList<Object> aabdoh;
-    
-    Connection conn = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
-    
-    
+
+//    List<AllPlayers> list;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            getAllUsers();
-//            allUsersTh.sleep(5000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        start();
     }    
     
 
     @FXML
     void GoBackToMainMenu(ActionEvent event) throws IOException {
+        stop();
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Stage window = (Stage) BackBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
-    
 
-    
-    public void getAllUsers() throws InterruptedException
-
-    {
-        allUsersTh = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {                    
-                    try {
-                        PlayerSocket.outObj.writeObject("rankings");
-                        playersVector.removeAllElements();
-                        List<AllPlayers> list = (List<AllPlayers>) PlayerSocket.inObj.readObject() ;
-                        listM = FXCollections.observableArrayList(list);
-                        } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            col_rank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
-                            col_name.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
-                            col_score.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
-                            table_users.setItems(listM);
-                        }
-                    });
+    @Override
+    public void run() {
+        while (true) {                    
+                try {
+                    PlayerSocket.outObj.writeObject("rankings");                        
+                    List<AllPlayers>list = (List<AllPlayers>) PlayerSocket.inObj.readObject();                  
+                    listM = FXCollections.observableArrayList(list);
+                    
+                    } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    System.out.println("***************************");
+                    Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        col_rank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
+                        col_name.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
+                        col_score.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
+                        table_users.setItems(listM);
+                    }
+                });
+            try {
+                sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        });
-        allUsersTh.start(); 
-        
+            }
+        }
     }
-}

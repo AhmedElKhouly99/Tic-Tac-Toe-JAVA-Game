@@ -14,9 +14,25 @@
 >>>>>>> 95c438dbe3dbbc12a16c0ac821426b1e269216d5
 =======
         <group>
-            <file>file:/C:/Users/shorook/Desktop/javagamee/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
-            <file>file:/C:/Users/shorook/Desktop/javagamee/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MenuController.java</file>
-            <file>file:/C:/Users/shorook/Desktop/javagamee/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/player/Players.java</file>
+<<<<<<< HEAD
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/TicTacToe.java</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LevelsController.java</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MainController.java</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayerModeController.java</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/Login.fxml</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/VsComputerModeController.java</file>
+            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/VsComputerMode.fxml</file>
+=======
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/ScoreListController.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MenuController.java</file>
+<<<<<<< HEAD
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
+>>>>>>> bf2ac233a55c5cbe60b119d6365d3d26f836eaf2
+=======
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayerModeController.java</file>
+            <file>file:/G:/iti%209-month/java/JAVA%20Tic%20Tac%20Toe%20project/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/SplashController.java</file>
+>>>>>>> 410c018b9dbed385b65459186e2d2ea72c235477
         </group>
 >>>>>>> 791b02148e27de909795e3283b04bc060442cc3b
     </open-files>

@@ -6,6 +6,7 @@
 package player;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 /**
  *
@@ -48,4 +49,5 @@ public class Players implements Serializable{
     public void setInGame(boolean inGame) {
         this.inGame = inGame;
     }
+    public static Vector<Players> playersVector = new Vector<Players>();
 }
