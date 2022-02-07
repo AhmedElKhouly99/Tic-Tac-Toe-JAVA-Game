@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.security.AllPermission;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -18,6 +20,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -28,14 +31,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import static javafx.scene.effect.BlendMode.RED;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
-import static javafx.scene.paint.Color.rgb;
 import player.AllPlayers;
 import player.Players;
 
@@ -47,7 +43,7 @@ import player.Players;
 public class MainController implements Initializable {
 
     private int lastNumberOfOnlinePlayers;
-    private int lastNumberOfOfflinePlayers;
+//    private int lastNumberOfOfflinePlayers;
     static boolean startStatusFlag;
     static boolean stopStatusFlag;
     private int SERVER_SOCKET_PORT;    
@@ -58,15 +54,15 @@ public class MainController implements Initializable {
     @FXML
     private Button activateBtn;
     @FXML
-    private Tab onlinePlayersTab;
-    @FXML
-    private Tab offlinePlayersTab;
-    @FXML
     private Label serverStatus;
     @FXML
     private Label activateDeactivateLabel;
     @FXML
     private ImageView activateDeactivateImage;
+    @FXML
+    private Tab tabViewOnlineName;
+    @FXML
+    private Tab tabViewAllNames;
     @FXML
     private TableColumn<AllPlayers, String> onlinePlayerName;
     @FXML
@@ -80,23 +76,43 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<AllPlayers, Integer> offlinePlayerRank;
     @FXML
-    private TableView<AllPlayers> tableViewMembers;
+    private TableView<AllPlayers> tabViewOnlinePlayers;
+    @FXML
+    private TableView<AllPlayers> tabViewAllPlayers;
+    
 
     
-    ObservableList<AllPlayers> PlayersList;
-    List<AllPlayers> list;
+    List<AllPlayers> listOfAllPlayers = new ArrayList<AllPlayers>();  
+    ObservableList<AllPlayers> listOfAllPlayersForTable;
+    // online
+    Vector<Players> onlinePlayersVector;
+    List<AllPlayers> onlinePlayersList = new ArrayList<AllPlayers>();  
+    ObservableList<AllPlayers> listOfOnlinePlayersForTable;
+    // offline
+//    ObservableList<AllPlayers> listOfOfflinePlayersForTable;
     
+   
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
         SERVER_SOCKET_PORT = 5005;
         lastNumberOfOnlinePlayers = 0;
+//        lastNumberOfOfflinePlayers = 0;
         startStatusFlag = false;
         stopStatusFlag = true;
+        
+        /* for list of players */
+        onlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
+        onlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
+        onlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
+        offlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
+        offlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
+        offlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
+        
     } 
     
     
@@ -118,12 +134,11 @@ public class MainController implements Initializable {
             activateDeactivateLabel.setText("Deactivate");
             /* server status */
             serverStatus.setText("ON");
-          //  activateBtn.setBackground(Color.RED);
             activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
             activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");
-          
-                   
-          // activateBtn.setStyle(" "); 
+             
+            /////////       /* for test */
+            testFunc();
             System.out.println("ServerHandler.MainController.handleStartButtonAction()");
         }else {
             
@@ -148,30 +163,21 @@ public class MainController implements Initializable {
             activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
             activateBtn.setStyle("-fx-background-color: #71c213; -fx-background-radius: 2em; ");
            
-            // activateBtn.setStyle(" "); 
-              
+          //////  /* for test list*/
+            tabViewOnlinePlayers.getItems().clear();
+            tabViewAllPlayers.getItems().clear();
+            onlinePlayersList.clear();
+            listOfAllPlayers.clear();
             System.out.println("ServerHandler.MainController.handleStopButtonAction()");
-        }
-        
+        }    
     }
 
-    @FXML
-    private void displayOnlinePlayers(Event event) {
-        
-        
-    }
 
-    @FXML
-    private void displayOfflinePlayers(Event event) {
-        
-        
-    }
     
-   
-    
-    
+ 
     /**************************************************************************/
     /***************** thread for the server to accept clients ****************/
+    
     private static Thread acceptClientsThread;
     private void StartThreadToAcceptClients()
     {
@@ -221,35 +227,30 @@ public class MainController implements Initializable {
         { 
             try
             {
+                /* get all players */
+//                listOfAllPlayers = Database.getAllPlayers();
+//                listOfAllPlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
                 /* get the online players */
-//                clietnsVector = ClientHandler.getClientsVector();
-                list = Database.getAllPlayers();
-                PlayersList = FXCollections.observableArrayList(list);
-                /* get the ofline players */
-                // code to do
-//                System.out.println(Database.getAllPlayers());
-                System.out.println(list);
+                onlinePlayersVector = Players.playersVector;
+                if(lastNumberOfOnlinePlayers != onlinePlayersVector.size())
+                {
+                    lastNumberOfOnlinePlayers = onlinePlayersVector.size();
+                    listOfOnlinePlayersForTable.clear();
+                    for(Players player: onlinePlayersVector)
+                    {
+                        onlinePlayersList.add(new AllPlayers(0 , player.getUsername(), player.getScore()));
+                    }
+                    onlinePlayersList = setPlayersRank(onlinePlayersList);
+                    listOfOnlinePlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
+                }
+
                 Platform.runLater( new Runnable(){
-                    public void run(){ 
-                        
+                    public void run(){    
                         /* for online players */
-//                        if(lastNumberOfOnlinePlayers != clietnsVector.size())
-//                        {
-//                            lastNumberOfOnlinePlayers = clietnsVector.size();
-                            onlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
-                            onlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
-                            onlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
-                            tableViewMembers.setItems(PlayersList);
-//                        }
+                        tabViewOnlinePlayers.setItems(listOfOnlinePlayersForTable);
+
                         /* for ofline players */
-//                        if(lastNumberOfLoginPlayers != clietnsVector.size())
-//                        {
-//                            lastNumberOfLoginPlayers = clietnsVector.size();
-//                            listOfOnlinePlayers.getChildren().removeAll(listOfOnlinePlayers.getChildren());
-//                            for(MyClientHandler ch: clietnsVector){                          
-//                                listOfOnlinePlayers.getChildren().add(new Label(ch.thisUname + " score = " + ch.score));
-//                            }
-//                        }
+                        tabViewAllPlayers.setItems(listOfAllPlayersForTable);
                     }
                 });
                 
@@ -288,8 +289,47 @@ public class MainController implements Initializable {
         /* close the thread resposible for make changes on the GUI */
         endThreadThatUpdateServerGui();
     }
+    
+    
+    private List<AllPlayers> setPlayersRank(List<AllPlayers> list)
+    {
+        int sorted = 0;
+        for(int counter = 0; counter < list.size() - 1 && sorted == 0; counter++)
+        {
+            sorted = 1;
+
+            for(int index = 0; index < list.size() - 1 - counter; index++)
+            {
+                if(list.get(index).getScore() < list.get(index+1).getScore())
+                {
+                    AllPlayers temp = list.get(index);
+                    list.set(index, list.get(index+1));
+                    list.set(index+1, temp);
+                    
+                    sorted = 0;
+                }
+            }
+        }
+        for(int counter=0 ; counter<list.size() ; counter++)
+        {
+            list.get(counter).setRank(counter+1);
+        }
+  
+        return list;
+    }
 
     
-
+    
+    private void testFunc()
+    {
+        listOfAllPlayers.add(new AllPlayers(0 , "soly", 100));
+        listOfAllPlayers = setPlayersRank(listOfAllPlayers);
+        listOfOnlinePlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
+        onlinePlayersList.add(new AllPlayers(0 , "khouly", 100));
+        onlinePlayersList.add(new AllPlayers(0 , "abanoub", 90));
+        onlinePlayersList.add(new AllPlayers(0 , "soly", 100));
+        onlinePlayersList = setPlayersRank(onlinePlayersList);
+        listOfAllPlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
+    }
     
 }
