@@ -8,6 +8,7 @@ package tictactoe;
 import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import java.net.URL;
+import java.security.Provider.Service;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -41,6 +43,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -122,6 +125,27 @@ public class MenuController extends Thread implements Initializable {
                        Parent root = null;
                     try {
                         PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+                        
+                        
+//                    Alert alert = new Alert(AlertType.CONFIRMATION);
+//                    alert.initModality(Modality.APPLICATION_MODAL);
+//                    ButtonType buttonSave = new ButtonType("Invite");
+//                    ButtonType buttonDontSave = new ButtonType("Cancel");
+//                    alert.setTitle("Invitation");
+//                    alert.setHeaderText("Do you want to play with ?");
+//                    DialogPane dialogPane = alert.getDialogPane();
+//                    dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+//                    dialogPane.getStyleClass().add("myDialog");
+//                    alert.getButtonTypes().setAll(buttonSave, buttonDontSave );
+//
+//                    Optional<ButtonType> result = alert.showAndWait();
+//
+//                    if (result.get() == buttonSave) {
+//                    
+//                    }
+
+                        
+                        
                         String respond = (String)PlayerSocket.inObj.readObject();
                         System.out.println(respond);
                         if(respond.equals("inviteAccepted")){
@@ -216,7 +240,7 @@ public class MenuController extends Thread implements Initializable {
                 public void run() {
          
                     Alert alert = new Alert(AlertType.CONFIRMATION);
-
+                    alert.initModality(Modality.APPLICATION_MODAL);
                     ButtonType buttonSave = new ButtonType("Accept");
                     ButtonType buttonDontSave = new ButtonType("Reject");
                     alert.setTitle("Invitation");
