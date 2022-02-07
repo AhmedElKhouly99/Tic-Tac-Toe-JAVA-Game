@@ -35,7 +35,8 @@ public class LevelsController implements Initializable {
     private Button HardBtn;
     @FXML
     private Button BackToMainBtn;
-
+    
+    static boolean hardAI=false;
     /**
      * Initializes the controller class.
      */
@@ -46,14 +47,18 @@ public class LevelsController implements Initializable {
 
     @FXML
     private void GoToEasyGame(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(getClass().getResource("VsComputerMode.fxml"));
+         
+        hardAI=false;    
+        Parent root = FXMLLoader.load(getClass().getResource("VsComputerMode.fxml"));
         Stage window = (Stage) EasyBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
     @FXML
     private void GoToHardGame(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(getClass().getResource("VsComputerMode.fxml"));
+        
+        hardAI=true;
+        Parent root = FXMLLoader.load(getClass().getResource("VsComputerMode.fxml"));
         Stage window = (Stage) HardBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }

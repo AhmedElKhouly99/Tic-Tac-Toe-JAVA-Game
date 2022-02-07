@@ -77,10 +77,10 @@ public class ScoreListController extends Thread implements Initializable {
                     PlayerSocket.outObj.writeObject("rankings");                        
                     List<AllPlayers>list = (List<AllPlayers>) PlayerSocket.inObj.readObject();                  
                     listM = FXCollections.observableArrayList(list);
-                    sleep(200);
+                    
                     } catch (ClassNotFoundException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException | InterruptedException ex) {
+                } catch (IOException ex) {
                     System.out.println("***************************");
                     Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -93,6 +93,11 @@ public class ScoreListController extends Thread implements Initializable {
                         table_users.setItems(listM);
                     }
                 });
+            try {
+                sleep(200);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             }
         }
     }

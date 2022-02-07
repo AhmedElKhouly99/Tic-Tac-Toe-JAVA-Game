@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -48,7 +49,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="btn1" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" text="X" textFill="#ff0303">
+                        <Button fx:id="btn1" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
@@ -59,7 +60,7 @@
                               <Font size="48.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btn2" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" text="O" textFill="#0342ff" GridPane.columnIndex="1">
+                        <Button fx:id="btn2" mnemonicParsing="false" onAction="#btnPressed" opacity="0.41" prefHeight="153.0" prefWidth="237.0" style="-fx-background-color: #4adeed;" styleClass="GameBtnLive" stylesheets="@BackGround.css" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
@@ -130,8 +131,11 @@
                            </effect>
                         </Button>
                      </children>
+                     <effect>
+                        <Glow level="0.8" />
+                     </effect>
                   </GridPane>
-                  <Label fx:id="textwin" layoutX="225.0" layoutY="96.0" prefHeight="37.0" prefWidth="335.0" textFill="#e80c0c">
+                  <Label fx:id="textwin" alignment="CENTER" layoutX="225.0" layoutY="96.0" prefHeight="37.0" prefWidth="335.0" textAlignment="CENTER" textFill="#e80c0c">
                      <font>
                         <Font name="Comic Sans MS" size="26.0" />
                      </font>

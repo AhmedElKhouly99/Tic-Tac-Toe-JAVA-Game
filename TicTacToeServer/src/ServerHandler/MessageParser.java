@@ -6,9 +6,7 @@
 package ServerHandler;
 
 import Database.Database;
-//import ServerHandler.ClientHandler.Player;
 import static ServerHandler.ClientHandler.clientsVector;
-import static ServerHandler.ClientHandler.playersVector;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -18,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import player.AllPlayers;
 import player.Players;
+import static player.Players.playersVector;
 
 //invite::player2_id"abanoub", id="soly"
 //accept::player1_id"soly"::abanoub
@@ -33,11 +32,7 @@ public class MessageParser {
         
         String[] arrString = msg.split("::");
         
-        Vector<Integer> test = new Vector<>();
-        test.add(10);
-        test.add(20);
-        test.add(30);
-      
+      ch.outObj.flush();
         switch (arrString[0]) {
             case "login":
                playersVector.forEach(e->{
@@ -88,7 +83,7 @@ public class MessageParser {
                 
             case "onlinePlayers":
                 
-                //ch.outObj.writeObject(playersVector);
+                ch.outObj.writeObject(new Vector<Players>(playersVector));
                 break;
                 
             case "rankings":
@@ -157,6 +152,19 @@ public class MessageParser {
                     }
                 });
                 // if accepted start game
+                break;
+                
+            case "reject":
+                    clientsVector.forEach((e) -> {
+                    if (e.p.getUsername().equals(arrString[1])) {
+                        try {                            
+                            e.outObj.writeObject("inviteRejected");
+                            return;
+                        } catch (IOException ex) {
+                            Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
                 break;
 
             case "play"://play::index                

@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.util.Vector;
 import player.AllPlayers;
 import player.Players;
+import static player.Players.playersVector;
 
 /**
  *
@@ -25,7 +26,7 @@ public class ClientHandler extends Thread{
     ObjectInputStream inObj;
 
     static Vector<ClientHandler> clientsVector = new Vector<ClientHandler>();
-    static Vector<Players> playersVector = new Vector<Players>();
+
     String clientStatus;
 
     ClientHandler player2Handler;

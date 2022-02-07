@@ -231,6 +231,7 @@ public class MainController implements Initializable {
 //                listOfAllPlayers = Database.getAllPlayers();
 //                listOfAllPlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
                 /* get the online players */
+<<<<<<< HEAD
                 onlinePlayersVector = ClientHandler.playersVector;
                 if(lastNumberOfOnlinePlayers != onlinePlayersVector.size())
                 {
@@ -243,11 +244,31 @@ public class MainController implements Initializable {
                     listOfOnlinePlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
                 }
                 
+=======
+//                clietnsVector = ClientHandler.getClientsVector();
+                list = Database.getAllPlayers();
+                PlayersList = FXCollections.observableArrayList(list);
+                /* get the ofline players */
+                // code to do
+//                System.out.println(Database.getAllPlayers());
+                System.out.println(list);
+>>>>>>> 9ed85f875ed4badf3f66f4125e30c211854a9686
                 Platform.runLater( new Runnable(){
                     public void run(){    
                         /* for online players */
+<<<<<<< HEAD
                         tabViewOnlinePlayers.setItems(listOfOnlinePlayersForTable);
 
+=======
+//                        if(lastNumberOfOnlinePlayers != clietnsVector.size())
+//                        {
+//                            lastNumberOfOnlinePlayers = clietnsVector.size();
+                            onlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
+                            onlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
+                            onlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
+                            tableViewMembers.setItems(PlayersList);
+//                        }
+>>>>>>> 9ed85f875ed4badf3f66f4125e30c211854a9686
                         /* for ofline players */
                         tabViewAllPlayers.setItems(listOfAllPlayersForTable);
                     }
