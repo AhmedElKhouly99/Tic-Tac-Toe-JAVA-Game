@@ -138,7 +138,7 @@ public class MainController implements Initializable {
             activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");
              
             /////////       /* for test */
-            testFunc();
+//            testFunc();
             System.out.println("ServerHandler.MainController.handleStartButtonAction()");
         }else {
             
@@ -228,8 +228,8 @@ public class MainController implements Initializable {
             try
             {
                 /* get all players */
-//                listOfAllPlayers = Database.getAllPlayers();
-//                listOfAllPlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
+                listOfAllPlayers = Database.getAllPlayers();
+                listOfAllPlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
                 /* get the online players */
                 onlinePlayersVector = Players.playersVector;
                 if(lastNumberOfOnlinePlayers != onlinePlayersVector.size())

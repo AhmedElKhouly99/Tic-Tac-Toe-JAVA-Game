@@ -175,12 +175,12 @@ public class MessageParser {
 
                 break;
 
-//            case "winner"://winner                
-//                /*-------------------playing::username::turn::indexPlaymove----------------------*/
-//
-//                ch.println("youlose");
-//
-//                break;  
+            case "winner"://winner                
+                /*-------------------playing::username::turn::indexPlaymove----------------------*/
+
+                Database.editPlayer(ch.p);
+
+                break;  
 ////            
 //            case "tie"://winner                
 //                /*-------------------playing::username::turn::indexPlaymove----------------------*/

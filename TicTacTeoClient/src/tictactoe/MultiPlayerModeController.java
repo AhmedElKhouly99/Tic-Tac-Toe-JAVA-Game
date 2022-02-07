@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import player.Players;
 
 /**
  * FXML Controller class
@@ -114,8 +115,11 @@ public class MultiPlayerModeController implements Initializable {
             buttonsArr[index].setText("X");
             arrPlays[index]='X';
         }
+        playerOneName.setStyle("-fx-text-fill: green;");
+        playerTwoName.setStyle("-fx-text-fill: red;");
         
         player1_turn=true;
+        
         check();
     }
     @Override
@@ -138,7 +142,13 @@ public class MultiPlayerModeController implements Initializable {
         }   
          for (int i = 0; i < arrPlays.length; i++) {
             arrPlays[i] = (char) i;
-        }    
+        }
+         
+        playerOneName.setText(Players.myPlayer.getUsername());
+        playerTwoName.setText(Players.vsPlayer.getUsername());
+        playerOneScore.setText(String.valueOf(Players.myPlayer.getScore()));
+        playerTwoScore.setText(String.valueOf(Players.vsPlayer.getScore()));
+        
         gameplay();
     }    
 
@@ -171,21 +181,13 @@ public class MultiPlayerModeController implements Initializable {
                         buttonsArr[i].setText(symbol);
                         player1_turn = false;
                         arrPlays[i] = buttonsArr[i].getText().charAt(0);
-//<<<<<<< HEAD
-////                      textfield.setText("O turn");
-//                        PlayerSocket.outS.println("play::"+i);
-//=======
-////                        textfield.setText("O turn");
-                        PlayerSocket.outObj.writeObject("play::"+i);
-//>>>>>>> e5fe6c013339234420bc07e1af0e79e2545e6aff
-                            check();
-                            
-//                        if (playerWins) {
-////                            myGameTh.stop();
-////                            playerOneName.setText("You win");
-////                            
-////                        }
+                        playerOneName.setStyle("-fx-text-fill: red;");
+                        playerTwoName.setStyle("-fx-text-fill: green;");
 
+                        PlayerSocket.outObj.writeObject("play::"+i);
+
+                        check();
+                            
                     }
                 }
                 
@@ -216,12 +218,10 @@ public class MultiPlayerModeController implements Initializable {
                           playerWins=true;     
                           playerOneName.setText("You Win");
                     } else {
-//                        oWins(i, 4, 8 - i);
                           
                             youLose(i, 4, 8 - i);
                             player1_turn=false;
-                            playerOneName.setText("You lose");
-                            
+                            playerOneName.setText("You lose");            
                     }
                     return;
                 }
@@ -229,15 +229,14 @@ public class MultiPlayerModeController implements Initializable {
             if ((arrPlays[i] == arrPlays[i + 3]) && (arrPlays[i + 3] == arrPlays[i + 6])) // Check Columns 
             {
                 if (arrPlays[i] == symbol.charAt(0)) {
-                    youWin(i, 4, 8 - i);
+                    youWin(i, i+3, i+6);
                     
                     playerWins=true;
                
                     playerOneName.setText("You Win");
                 } else {
-//                    oWins(i, i + 3, i + 6);
-                    //myGameTh.stop();
-                    youLose(i, 4, 8 - i);
+
+                    youLose(i, i+3, i+6);
                     
                      player1_turn=false;
                      playerOneName.setText("You lose");
@@ -246,19 +245,17 @@ public class MultiPlayerModeController implements Initializable {
             } else if ((arrPlays[j] == arrPlays[j + 1]) && (arrPlays[j + 1] == arrPlays[j + 2])) ///Check Rows
             {
                 if (arrPlays[j] == symbol.charAt(0)) {
-//                    xWins(j, j + 1, j + 2);
-                    youWin(i, 4, 8 - i);
+
+                    youWin(j, j+1,  j+2);
 
                     playerWins=true;
                     playerOneName.setText("You Win");
                 } else {
-//                    oWins(j, j + 1, j + 2);
-                    //myGameTh.stop();
-                    youLose(i, 4, 8 - i);
+
+                    youLose(j, j+1, j+2);
                     
                     player1_turn=false;
                      playerOneName.setText("You lose");
-                      
                 }
                 return;
             }
@@ -268,40 +265,16 @@ public class MultiPlayerModeController implements Initializable {
 
     }
      
-     
-//    public void xWins(int a, int b, int c) {
-////        buttons[a].setBackground(Color.GREEN);
-////        buttons[b].setBackground(Color.GREEN);
-////        buttons[c].setBackground(Color.GREEN);
-//
-//        for (int i = 0; i < 9; i++) {
-//            buttonsArr[i].s
-//        }
-////        textfield.setText("X wins");
-//        playerWins = true;
-//    }
-
-//          public void oWins(int a, int b, int c) {
-////        buttons[a].setBackground(Color.GREEN);
-////        buttons[b].setBackground(Color.GREEN);
-////        buttons[c].setBackground(Color.GREEN);
-//
-//        for (int i = 0; i < 9; i++) {
-//            buttons[i].setEnabled(false);
-//        }
-////        textfield.setText("O wins");
-//    } 
 public void youWin(int a, int b, int c) {
         
         buttonsArr[a].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
         buttonsArr[b].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
         buttonsArr[c].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
         try {
-            PlayerSocket.outObj.writeObject("Winner");
+            PlayerSocket.outObj.writeObject("winner");
         } catch (IOException ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
+        }     
     }
 
     public void youLose(int a, int b, int c) {
@@ -309,12 +282,5 @@ public void youWin(int a, int b, int c) {
         buttonsArr[b].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
         buttonsArr[c].setStyle("-fx-background-color: #ff0303;-fx-text-fill: #0342ff;");
         
-
-    }
-     
-     
-     
-     
-     
+    }      
 }
-
