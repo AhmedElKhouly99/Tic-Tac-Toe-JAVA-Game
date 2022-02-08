@@ -285,6 +285,8 @@ public class MenuController extends Thread implements Initializable {
                                              } catch (IOException ex) {
                                                  Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                                              }
+                                         }else{
+                                             PlayerSocket.outObj.writeObject(Game.myGame);
                                          }
                                          } else {
                                              turnThread = true;
