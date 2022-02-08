@@ -5,6 +5,7 @@
 package ServerHandler;
 
 //import static ServerHandler.MessageParser.LoggedinPlayers;
+import game.Game;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -53,7 +54,13 @@ public class ClientHandler extends Thread{
         try{
             
             while(status){
-                clientStatus = (String)inObj.readObject();
+                Object res = (Object)inObj.readObject();
+                if(!(res.getClass()== clientStatus.getClass())){
+                    Database.Database.addGame((Game)res);
+                }else{
+                    clientStatus = (String)res;
+                }
+                
                 if(clientStatus == null) // done at the client fallen
                 {
                     clientsVector.removeElement(this);

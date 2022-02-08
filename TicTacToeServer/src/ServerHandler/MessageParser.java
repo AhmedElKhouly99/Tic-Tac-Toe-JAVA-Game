@@ -1,5 +1,5 @@
 
-./*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -192,23 +192,10 @@ public class MessageParser {
             
             case "recordaccept":
                 ch.player2Handler.outObj.writeObject("recordaccepted");
-                ch.player2Handler.outObj.flush();
-                System.out.println("Heeeeelllllllo from the");
-               
-                    
-                        String stupidserver=null;
-        try {
-            stupidserver = (String)ch.inObj.readObject();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                        System.out.println(stupidserver);
-                        //Database.addGame(recordedGame
-                
+
                 break;
             
             case "finishgame":
-                System.out.println("Heeeeelllllllo from the other siiiiiiiiiiide");
                 ch.player2Handler.player2Handler=null;
                 ch.player2Handler=null;
                             
