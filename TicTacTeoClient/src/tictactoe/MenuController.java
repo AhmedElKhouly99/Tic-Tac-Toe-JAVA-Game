@@ -447,14 +447,15 @@ public class MenuController extends Thread implements Initializable {
                         });
                         
                         Players.vsPlayer.setInGame(true);
-                        Players.myPlayer.setInGame(true);
+                        Players.myPlayer.setInGame(true);waitTh = false;
                         if(Game.myGame.getUsername1_x() != null){
                             if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
                                 PlayerSocket.inObj.readObject();}
+                        waitTh = false;
                         Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                         Stage window = (Stage) pane.getScene().getWindow();
                         window.setScene(new Scene(root));
-                        stop();
+//                        stop();
 
                     } catch (IOException ex) {
                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);

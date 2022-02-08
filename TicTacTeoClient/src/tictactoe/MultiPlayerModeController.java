@@ -275,7 +275,10 @@ public class MultiPlayerModeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            symbol = (String)PlayerSocket.inObj.readObject();
+            Object res = PlayerSocket.inObj.readObject();
+            if(res.getClass() == symbol.getClass()){
+                symbol = (String)res;
+//            symbol = (String)PlayerSocket.inObj.readObject();
             if(symbol.equals("X")){
                 player1_turn = true;
                 playerOneName.setStyle("-fx-text-fill: green;");
@@ -284,7 +287,7 @@ public class MultiPlayerModeController implements Initializable {
                 playerOneName.setStyle("-fx-text-fill: red;");
                 playerTwoName.setStyle("-fx-text-fill: green;");
                 player1_turn = false;
-            }
+            }}
             
             
         } catch (Exception ex) {
