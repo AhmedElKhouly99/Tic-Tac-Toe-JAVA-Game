@@ -126,7 +126,7 @@ public class Database {
             preparedStmt.setString(9, g.getSeven()+"");
             preparedStmt.setString(10, g.getEight()+"");
             preparedStmt.setString(11, g.getNine()+"");
-             preparedStmt.setString(12, g.getTurn()+"");
+             preparedStmt.setInt(12, g.getTurn());
             preparedStmt.execute();
             preparedStmt.close();
             con.close();
