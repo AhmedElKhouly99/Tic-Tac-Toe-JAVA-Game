@@ -52,7 +52,7 @@ public class ClientHandler extends Thread{
     public void run(){
         try{
             
-            while(true){
+            while(status){
                 clientStatus = (String)inObj.readObject();
                 if(clientStatus == null) // done at the client fallen
                 {
@@ -66,7 +66,7 @@ public class ClientHandler extends Thread{
                     System.out.println(clientStatus);
                    MessageParser.checkClientMsg(clientStatus, this);
                 } 
-                this.currentThread().sleep(50);
+//                this.currentThread().sleep(50);
             }
         }catch(Exception ex){       // i don't know why this exception is not fire at the client is fallen
             try{

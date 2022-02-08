@@ -26,7 +26,7 @@ import player.Players;
  * @author ahmed
  */
 public class Database {
-    
+    //jdbc:mysql://localhost:3306/xogame?useSSL=true (for abanoub)
     final static String CONSTR = "jdbc:mysql://:3306/xogame?useSSL=true";
     final static String INSERTPLAYER = "insert into player (username,password,score) values(?,?,?)";
     //final static String SEARCHPLAYER = "select * from player where username=? and password=?";
