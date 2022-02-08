@@ -27,7 +27,7 @@ import player.Players;
  */
 public class Database {
     //jdbc:mysql://localhost:3306/xogame?useSSL=true (for abanoub)
-    final static String CONSTR = "jdbc:mysql://localhost:3306/xogame?useSSL=true";
+    final static String CONSTR = "jdbc:mysql://:3306/xogame?useSSL=true";
     final static String INSERTPLAYER = "insert into player (username,password,score) values(?,?,?)";
     //final static String SEARCHPLAYER = "select * from player where username=? and password=?";
     final static String INSERTGAME = "insert into game values(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -51,7 +51,7 @@ public class Database {
     
     public static boolean startConnection(){
         try {
-            con = DriverManager.getConnection(CONSTR, "root", "");
+            con = DriverManager.getConnection(CONSTR, "javagame", "123");
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);

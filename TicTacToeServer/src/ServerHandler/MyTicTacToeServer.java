@@ -6,7 +6,10 @@
 package ServerHandler;
 
 import Database.Database;
+import static ServerHandler.MainController.clietnsVector;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +47,10 @@ public class MyTicTacToeServer extends Application {
     {
         /* close all threads opened by the server */
         if (MainController.startStatusFlag == true && MainController.stopStatusFlag== false)
+        {
             MainController.actionAtServerAppClose();
+        }
+
         /* terminate the  JavaFX application explicitly */
         Platform.exit();
     }

@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
-import java.security.AllPermission;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,9 +19,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -43,7 +40,6 @@ import player.Players;
 public class MainController implements Initializable {
 
     private int lastNumberOfOnlinePlayers;
-//    private int lastNumberOfOfflinePlayers;
     static boolean startStatusFlag;
     static boolean stopStatusFlag;
     private int SERVER_SOCKET_PORT;    
@@ -81,15 +77,13 @@ public class MainController implements Initializable {
     private TableView<AllPlayers> tabViewAllPlayers;
     
 
-    
+    // all players
     List<AllPlayers> listOfAllPlayers = new ArrayList<AllPlayers>();  
     ObservableList<AllPlayers> listOfAllPlayersForTable;
     // online
     Vector<Players> onlinePlayersVector;
     List<AllPlayers> onlinePlayersList = new ArrayList<AllPlayers>();  
     ObservableList<AllPlayers> listOfOnlinePlayersForTable;
-    // offline
-//    ObservableList<AllPlayers> listOfOfflinePlayersForTable;
     
    
     /**
@@ -100,7 +94,6 @@ public class MainController implements Initializable {
         
         SERVER_SOCKET_PORT = 5005;
         lastNumberOfOnlinePlayers = 0;
-//        lastNumberOfOfflinePlayers = 0;
         startStatusFlag = false;
         stopStatusFlag = true;
         
@@ -121,6 +114,7 @@ public class MainController implements Initializable {
         {
             startStatusFlag = true;
             stopStatusFlag = false;
+            
             StartThreadToAcceptClients();
             startThreedToUpdateServerGui();
             
@@ -134,22 +128,28 @@ public class MainController implements Initializable {
             /* server status */
             serverStatus.setText("ON");
             activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
-            activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");
-             
-            /////////       /* for test */
-//            testFunc();
-            System.out.println("ServerHandler.MainController.handleStartButtonAction()");
+            activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");   
+            
         }else {
             
             startStatusFlag = false;
             stopStatusFlag = true;
-            try {
-                actionAtServerAppClose();
-            } catch (IOException ex) {
-                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("ServerHandler.MainController.handleActivateAndDeactivateAction().IOException");
+            
+            /* for delete the list from the screen when teh server deactivated */
+            if(onlinePlayersList.size() != 0)
+            {
+                tabViewOnlinePlayers.getItems().clear();
+                onlinePlayersList.clear();
+            }
+            if(listOfAllPlayers.size() != 0)
+            {
+                tabViewAllPlayers.getItems().clear();
+                listOfAllPlayers.clear();
             }
             
+            /* reset this variable to relist online players */
+            lastNumberOfOnlinePlayers = 0;
+  
             /* change the button image to active next time */ 
             ImageView imageView = new ImageView(getClass().getResource("images/power-on-button.png").toExternalForm());
             imageView.setFitWidth(56);
@@ -162,17 +162,10 @@ public class MainController implements Initializable {
             activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
             activateBtn.setStyle("-fx-background-color: #71c213; -fx-background-radius: 2em; ");
            
-            /* for delete the list from the screen when teh server deactivated */
-            tabViewOnlinePlayers.getItems().clear();
-            tabViewAllPlayers.getItems().clear();
-            onlinePlayersList.clear();
-            listOfAllPlayers.clear();
-            System.out.println("ServerHandler.MainController.handleStopButtonAction()");
+            actionAtServerAppClose();
         }    
     }
-
-
-    
+   
  
     /**************************************************************************/
     /***************** thread for the server to accept clients ****************/
@@ -190,10 +183,8 @@ public class MainController implements Initializable {
                         Socket internalSocket = myServerSocket.accept();
                         
                         new ClientHandler(internalSocket);
-//                        System.out.println("A player accepted");
                     }    
                 }catch(Exception e){
-                    System.out.println("ServerHandler.MainController.StartThreadToAcceptClients().Exception");
                 }   
             }
         };
@@ -202,7 +193,7 @@ public class MainController implements Initializable {
         acceptClientsThread.start();
     }
     
-    private static void endThreadThatAcceptClients()
+    static void endThreadThatAcceptClients()
     {
         acceptClientsThread.stop();
     }
@@ -233,15 +224,16 @@ public class MainController implements Initializable {
                 onlinePlayersVector = Players.playersVector;
                 if(lastNumberOfOnlinePlayers != onlinePlayersVector.size())
                 {
+                    if(lastNumberOfOnlinePlayers != 0)
+                        tabViewOnlinePlayers.getItems().clear();
+
                     lastNumberOfOnlinePlayers = onlinePlayersVector.size();
-                    listOfOnlinePlayersForTable.clear();
                     onlinePlayersList.clear();
                     for(Players player: onlinePlayersVector)
                     {
                         onlinePlayersList.add(new AllPlayers(0 , player.getUsername(), player.getScore()));
                     }
                     onlinePlayersList = setPlayersRank(onlinePlayersList);
-                    System.out.println(onlinePlayersList);
                     listOfOnlinePlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
                 }
 
@@ -257,33 +249,42 @@ public class MainController implements Initializable {
                 
                 updateServerGuiThread.sleep(500);
             }catch(InterruptedException e){
-                System.out.println("ServerHandler.MainController.runTask().InterruptedException");
             }
         }
     }
     
-    private static void endThreadThatUpdateServerGui()
+    static void endThreadThatUpdateServerGui()
     {
         updateServerGuiThread.stop();
     }
     
     /**************************************************************************/
     /******************* action should take at close the server ***************/
-    static void actionAtServerAppClose() throws IOException
+    static void actionAtServerAppClose()
     {
-        clietnsVector = ClientHandler.getClientsVector();
-        
-        /* end all internal sockets (threads that stands against) */
-        for(ClientHandler ch: clietnsVector)
-        {
-            ch.currentThread().stop();  
-        }
         /* close the thread resposible for accept clients */
         endThreadThatAcceptClients();
-        /* close the socket of the server */
-        myServerSocket.close();
         /* close the thread resposible for make changes on the GUI */
         endThreadThatUpdateServerGui();
+
+        /* wait all internal sockets (threads that stands against) */
+        clietnsVector = ClientHandler.getClientsVector();
+        for(ClientHandler ch: clietnsVector)
+        {
+            try {
+                ch.status = false;
+                ch.inObj.close();
+                ch.outObj.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        /* close the socket of the server */
+        try {
+            myServerSocket.close();
+        } catch (IOException ex) {
+        }
     }
     
     
@@ -293,7 +294,6 @@ public class MainController implements Initializable {
         for(int counter = 0; counter < list.size() - 1 && sorted == 0; counter++)
         {
             sorted = 1;
-
             for(int index = 0; index < list.size() - 1 - counter; index++)
             {
                 if(list.get(index).getScore() < list.get(index+1).getScore())
@@ -301,7 +301,6 @@ public class MainController implements Initializable {
                     AllPlayers temp = list.get(index);
                     list.set(index, list.get(index+1));
                     list.set(index+1, temp);
-                    
                     sorted = 0;
                 }
             }
@@ -312,20 +311,6 @@ public class MainController implements Initializable {
         }
   
         return list;
-    }
-
-    
-    /// for test
-    private void testFunc()
-    {
-        listOfAllPlayers.add(new AllPlayers(0 , "soly", 100));
-        listOfAllPlayers = setPlayersRank(listOfAllPlayers);
-        listOfOnlinePlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
-        onlinePlayersList.add(new AllPlayers(0 , "khouly", 100));
-        onlinePlayersList.add(new AllPlayers(0 , "abanoub", 90));
-        onlinePlayersList.add(new AllPlayers(0 , "soly", 100));
-        onlinePlayersList = setPlayersRank(onlinePlayersList);
-        listOfAllPlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
     }
     
 }

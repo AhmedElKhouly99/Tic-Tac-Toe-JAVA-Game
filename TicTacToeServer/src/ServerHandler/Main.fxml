@@ -19,15 +19,15 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="736.0" style="-fx-background-color: white;" styleClass="container" stylesheets="@CascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHandler.MainController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="735.0" style="-fx-background-color: white;" styleClass="container" stylesheets="@CascadeStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServerHandler.MainController">
    <children>
-      <HBox alignment="CENTER" prefHeight="545.0" prefWidth="736.0">
+      <HBox alignment="CENTER" prefHeight="542.0" prefWidth="735.0">
          <children>
-            <AnchorPane id="AnchorPane" opacity="0.98" prefHeight="553.0" prefWidth="738.0" style="-fx-background-color: white;">
+            <AnchorPane id="AnchorPane" opacity="0.98" prefHeight="542.0" prefWidth="735.0" style="-fx-background-color: white;">
                <children>
-                  <BorderPane prefHeight="542.0" prefWidth="736.0" AnchorPane.topAnchor="0.0">
+                  <BorderPane prefHeight="542.0" prefWidth="735.0" AnchorPane.topAnchor="0.0">
                      <top>
-                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="736.0" style="-fx-background-color: #226272;" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" prefHeight="88.0" prefWidth="735.0" style="-fx-background-color: #226272;" BorderPane.alignment="CENTER">
                            <children>
                               <ImageView fitHeight="48.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -126,7 +126,7 @@
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView fx:id="tabViewOnlinePlayers" layoutY="-5.0" prefHeight="426.0" prefWidth="545.0">
+                                                <TableView fx:id="tabViewOnlinePlayers" layoutY="-5.0" prefHeight="420.0" prefWidth="543.0">
                                                   <columns>
                                                       <TableColumn fx:id="onlinePlayerRank" prefWidth="75.0" text="Rank" />
                                                     <TableColumn fx:id="onlinePlayerName" prefWidth="255.0" text="Player name" />
