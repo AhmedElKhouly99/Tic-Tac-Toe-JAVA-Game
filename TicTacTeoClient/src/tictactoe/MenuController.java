@@ -446,10 +446,14 @@ public class MenuController extends Thread implements Initializable {
                                 Players.vsPlayer.setScore(p.getScore());
                             }
                         });
-
+                        
                         Players.vsPlayer.setInGame(true);
                         Players.myPlayer.setInGame(true);
+<<<<<<< HEAD
                         waitTh=false;
+=======
+                        PlayerSocket.inObj.readObject();
+>>>>>>> 62d28ba1fbdfded4c3d2af164f5dc2ac1caa3241
                         Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                         Stage window = (Stage) pane.getScene().getWindow();
                         window.setScene(new Scene(root));
@@ -522,6 +526,7 @@ public class MenuController extends Thread implements Initializable {
                     } else //                ConnectedPlayers = (Vector<Players>)PlayerSocket.inObj.readObject();    
                     if(checkType.getClass() == Game.myGame.getClass()){
                         Game.myGame = (Game)checkType;
+//                        turnThread = true;
                     }
                     else{
                         ConnectedPlayers = (Vector<Players>) checkType;
