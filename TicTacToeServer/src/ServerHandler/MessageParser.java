@@ -205,7 +205,17 @@ public class MessageParser {
                 
                 ch.player2Handler.outObj.writeObject("exitgame");
                 
-                break;    
+                break; 
+                
+            case "getGame":
+                Game g = Database.getGame(arrString[1], arrString[2]);
+                if(g != null){
+                    ch.outObj.writeObject(g);
+                }else{
+                    ch.outObj.writeObject(null);
+                }
+                
+                break;
                 
 ////            
             case "tie"://winner                

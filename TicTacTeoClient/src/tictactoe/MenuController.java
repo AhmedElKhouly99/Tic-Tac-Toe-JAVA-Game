@@ -6,6 +6,7 @@
 package tictactoe;
 
 import SocketHandler.PlayerSocket;
+import game.Game;
 
 import java.io.IOException;
 import java.net.URL;
@@ -227,12 +228,82 @@ public class MenuController extends Thread implements Initializable {
             });
             //----------Resume Button Event Handler ----------------------------//
             resume.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
+//
+                     @Override
+                     public void handle(ActionEvent event) {
+                         String[] invitePlay = label.getText().split("\t");
 
-                }
-            });
-        }
+                         turnThread = false;
+                         System.out.println(label.getText());
+
+//                       Parent root = null;
+//                    try {
+//                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+                         Alert alert = new Alert(AlertType.CONFIRMATION);
+                         alert.initModality(Modality.APPLICATION_MODAL);
+                         ButtonType buttonSave = new ButtonType("resum");
+                         ButtonType buttonDontSave = new ButtonType("Cancel");
+                         alert.setTitle("Invitation");
+                         alert.setHeaderText("Do you want to resume the game with ?");
+                         DialogPane dialogPane = alert.getDialogPane();
+                         dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                         dialogPane.getStyleClass().add("myDialog");
+                         alert.getButtonTypes().setAll(buttonSave, buttonDontSave);
+
+                         Optional<ButtonType> result = alert.showAndWait();
+
+                         if (result.get() == buttonSave) {
+                             ConnectedPlayers.forEach(p
+                                     -> {
+                                 Parent root = null;
+                                 if (p.getUsername().equals(invitePlay[0]) && !p.isInGame()) {
+                                     try {
+//                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+                                         PlayerSocket.outObj.writeObject("getGame::"+Players.myPlayer.getUsername()+"::"+ invitePlay[0]);
+                                         Object res = (Object)PlayerSocket.inObj.readObject();
+                                         Game myGame = null;
+                                         if(res != null){
+                                             myGame = (Game)res;
+                                             PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+                                             System.out.println(myGame);
+//                                         }
+//!(res.getClass() == myGame.getClass())
+                                         String respond = (String) PlayerSocket.inObj.readObject();
+                                         System.out.println(respond);
+                                         if (respond.equals("inviteAccepted")) {
+                                             try {
+                                                 waitTh = false;
+                                                 turnThread = false;
+                                                 Players.vsPlayer = new Players();
+                                                 Players.vsPlayer.setScore(Integer.parseInt(invitePlay[1]));
+                                                 Players.vsPlayer.setUsername(invitePlay[0]);
+                                                 Players.vsPlayer.setInGame(true);
+                                                 Players.myPlayer.setInGame(true);
+                                                 root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+                                                 Stage window = (Stage) newGame.getScene().getWindow();
+                                                 window.setScene(new Scene(root));
+                                             } catch (IOException ex) {
+                                                 Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                             }
+                                         }
+                                         } else {
+                                             turnThread = true;
+
+                                         }
+                                     } catch (IOException ex) {
+                                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                     } catch (ClassNotFoundException ex) {
+                                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                     }
+
+                                 }
+
+                             });
+                         }
+                     }
+                 });
+             }
+        
 
 //        public void setStage(){
 //            Parent root = null;
