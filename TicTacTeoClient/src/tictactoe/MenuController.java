@@ -228,7 +228,7 @@ public class MenuController extends Thread implements Initializable {
             });
             //----------Resume Button Event Handler ----------------------------//
             resume.setOnAction(new EventHandler<ActionEvent>() {
-<<<<<<< HEAD
+//
                      @Override
                      public void handle(ActionEvent event) {
                          String[] invitePlay = label.getText().split("\t");
@@ -304,15 +304,7 @@ public class MenuController extends Thread implements Initializable {
                  });
              }
         
-=======
-                @Override
-                public void handle(ActionEvent event) {
 
-                }
-            });
-        }
-
->>>>>>> ba486f87cf71195b7b8cb58653399e529f444b50
 //        public void setStage(){
 //            Parent root = null;
 //            root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
