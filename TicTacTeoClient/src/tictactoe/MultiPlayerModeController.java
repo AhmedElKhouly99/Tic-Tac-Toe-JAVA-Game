@@ -294,6 +294,7 @@ public class MultiPlayerModeController implements Initializable {
                 gameCOunter=(byte)Game.myGame.getTurn();
                 if(Players.myPlayer.getUsername().equals(Game.myGame.getUsername1_x()))
                 {
+                    
                     symbol="X";
                     if((gameCOunter%2)==0)
                         player1_turn=true;

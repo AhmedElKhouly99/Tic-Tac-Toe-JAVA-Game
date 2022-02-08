@@ -261,11 +261,9 @@ public class MenuController extends Thread implements Initializable {
 //                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                                          PlayerSocket.outObj.writeObject("getGame::"+Players.myPlayer.getUsername()+"::"+ invitePlay[0]);
                                          Object res = (Object)PlayerSocket.inObj.readObject();
-<<<<<<< HEAD
+
                                          Game.myGame= null;
-=======
-                                         Game.myGame = null;
->>>>>>> 8d05a8ac716840a592d0418af112749898174293
+
                                          if(res != null){
                                              Game.myGame = (Game)res;
                                              PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
@@ -451,7 +449,7 @@ public class MenuController extends Thread implements Initializable {
 
                         Players.vsPlayer.setInGame(true);
                         Players.myPlayer.setInGame(true);
-
+                        waitTh=false;
                         Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                         Stage window = (Stage) pane.getScene().getWindow();
                         window.setScene(new Scene(root));
