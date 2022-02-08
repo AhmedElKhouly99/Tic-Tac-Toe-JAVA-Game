@@ -12,7 +12,13 @@ import java.io.Serializable;
  * @author ahmed
  */
 public class Game implements Serializable{
-    
+
+
+    public Game() {
+    }
+
+    public static Game myGame = new Game();
+
     String username1_x;
     String username2_o;
     char one;

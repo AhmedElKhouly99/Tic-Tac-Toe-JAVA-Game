@@ -79,6 +79,7 @@ public class MultiPlayerModeController implements Initializable {
     
     boolean player1_turn=true;
     byte gameCOunter=0;
+    static public boolean gameTh;
     /**
      * Initializes the controller class.
      */
@@ -87,7 +88,7 @@ public class MultiPlayerModeController implements Initializable {
         myGameTh = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (gameTh) {
                     try {
                         msg = (String[]) (((String) PlayerSocket.inObj.readObject()).split("::"));
                         System.err.println(msg[0]);
@@ -114,10 +115,14 @@ public class MultiPlayerModeController implements Initializable {
                                     if (result.get() == buttonSave) {
 
                                         try {
+                                            gameTh=false;
+                                            myGameTh.stop();
                                             PlayerSocket.outObj.writeObject("recordaccept");
                                             Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
                                             Stage window = (Stage) returnBtn.getScene().getWindow();
+                                            PlayerSocket.closeSoket();
                                             window.setScene(new Scene(root));
+                                            //myGameTh.stop();
                                         } catch (IOException ex) {
                                             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -134,7 +139,7 @@ public class MultiPlayerModeController implements Initializable {
                             });
 
                         } else if (msg[0].equals("recordaccepted")) {
-                            System.out.println("I entered here record accepted========");
+                            
                             try {
                                 String xplayer = null;
                                 String oplayer = null;
@@ -148,23 +153,27 @@ public class MultiPlayerModeController implements Initializable {
                                     xplayer = Players.vsPlayer.getUsername();
 
                                 }
-                                System.out.println("This is just stupid");
+                                
                                 Game cuurentGame = new Game(xplayer, oplayer, arrPlays[0], arrPlays[1], arrPlays[2], arrPlays[3], arrPlays[4], arrPlays[5], arrPlays[6], arrPlays[7], arrPlays[8], gameCOunter);
-                               // System.out.println("This is just stupid"+c);
+                               
                                 try {
                                     PlayerSocket.outObj.writeObject(cuurentGame);
                                 } catch (IOException ex) {
                                     Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                                 PlayerSocket.outObj.writeObject("finishgame");
-                                System.out.println("Wazzzzzzap");
+                                
                                 Platform.runLater(new Runnable() {
                                     @Override
                                     public void run() {
                                         try {
+                                            gameTh=false;
+                                            myGameTh.stop();
                                             Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
                                             Stage window = (Stage) returnBtn.getScene().getWindow();
+                                            PlayerSocket.closeSoket();
                                             window.setScene(new Scene(root));
+                                            //myGameTh.stop();
                                         } catch (IOException ex) {
                                             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
@@ -197,17 +206,26 @@ public class MultiPlayerModeController implements Initializable {
                                     try {
                                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                                         alert1.setTitle("Your Opponent has quit the game");
-                                        alert1.setHeaderText("You have won!!\tScore:"+Players.myPlayer.getScore()+"10");
+                                        alert1.setHeaderText("You have won!!\tScore:"+Players.myPlayer.getScore()+" +10");
                                         DialogPane dialogPane1 = alert1.getDialogPane();
                                         dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                                         dialogPane1.getStyleClass().add("myDialog");
-                                        
+                                        alert1.show();
+//                                        try {
+//                                            Thread.sleep(500);
+//                                        } catch (InterruptedException ex) {
+//                                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                                        }
                                         PlayerSocket.outObj.writeObject("winner");
                                         
+                                        gameTh=false;
+                                        myGameTh.stop();
                                         PlayerSocket.outObj.writeObject("finishgame");
                                         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                                        PlayerSocket.closeSoket();
                                         Stage window = (Stage) returnBtn.getScene().getWindow();
                                         window.setScene(new Scene(root));
+                                        //myGameTh.stop();
                                     } catch (IOException ex) {
                                         Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
                                     }
@@ -260,7 +278,96 @@ public class MultiPlayerModeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            symbol = (String)PlayerSocket.inObj.readObject();
+//<<<<<<< HEAD
+//            Object res = PlayerSocket.inObj.readObject();
+//            if(res.getClass() == symbol.getClass()){
+//                symbol = (String)res;
+////            symbol = (String)PlayerSocket.inObj.readObject();
+//=======
+            Object response;
+            do{
+            
+                response=PlayerSocket.inObj.readObject();
+                
+            }while(response.getClass()!=symbol.getClass());
+            symbol = (String)response;
+            System.out.println(symbol);
+            buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
+            for (int i = 0; i < 9; i++) {
+                buttonsArr[i].setFont(new Font("MV Boli", 50));
+            }   
+             for (int i = 0; i < arrPlays.length; i++) {
+                arrPlays[i] = (char) i;
+            }
+            
+            //System.out.println(Game.myGame.getUsername1_x());
+            System.out.println(Game.myGame.getUsername2_o());
+            if((Game.myGame.getUsername1_x())!=null)
+            {
+                gameCOunter=(byte)Game.myGame.getTurn();
+                if(Players.myPlayer.getUsername().equals(Game.myGame.getUsername1_x()))
+                {
+                    
+                    symbol="X";
+                    if((gameCOunter%2)==0)
+                        player1_turn=true;
+                    else
+                        player1_turn=false;
+                }
+                else
+                {
+                    symbol="O";
+                    if((gameCOunter%2)==1)
+                        player1_turn=true;
+                    else
+                        player1_turn=false;
+                    
+                }
+                System.out.println(player1_turn);
+                arrPlays[0]=Game.myGame.getOne();
+                arrPlays[1]=Game.myGame.getTwo();
+                arrPlays[2]=Game.myGame.getThree();
+                arrPlays[3]=Game.myGame.getFour();
+                arrPlays[4]=Game.myGame.getFive();
+                arrPlays[5]=Game.myGame.getSix();
+                arrPlays[6]=Game.myGame.getSeven();
+                arrPlays[7]=Game.myGame.getEight();
+                arrPlays[8]=Game.myGame.getNine();
+                
+                
+                for(int i=0;i<9;i++)
+                {
+                    if(arrPlays[i]=='X')
+                    {
+                        buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #ff0303;");
+                        buttonsArr[i].setText("X");
+                    }
+                    else if(arrPlays[i]=='O')
+                    {
+                        buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #00b100;");
+                        buttonsArr[i].setText("O");
+                    }
+                    else
+                    {
+                        arrPlays[i]=(char)i;
+                    }
+                }
+                
+                if(symbol.equals("X")){
+                playerOneName.setStyle("-fx-text-fill: green;");
+                playerTwoName.setStyle("-fx-text-fill: red;");
+              } else{
+                playerOneName.setStyle("-fx-text-fill: red;");
+                playerTwoName.setStyle("-fx-text-fill: green;");
+                }
+                
+                
+                
+                
+            }
+            
+            else
+//>>>>>>> 756c6ec035dfa3d0059270be825de9364bb53a87
             if(symbol.equals("X")){
                 player1_turn = true;
                 playerOneName.setStyle("-fx-text-fill: green;");
@@ -269,18 +376,17 @@ public class MultiPlayerModeController implements Initializable {
                 playerOneName.setStyle("-fx-text-fill: red;");
                 playerTwoName.setStyle("-fx-text-fill: green;");
                 player1_turn = false;
-            }
-            
-        } catch (Exception ex) {
+            }} catch (IOException ex) {
+            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
-        for (int i = 0; i < 9; i++) {
-            buttonsArr[i].setFont(new Font("MV Boli", 50));
-        }   
-         for (int i = 0; i < arrPlays.length; i++) {
-            arrPlays[i] = (char) i;
-        }
+            
+            
+//        } catch (Exception ex) {
+//            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
         
         
         
@@ -293,7 +399,7 @@ public class MultiPlayerModeController implements Initializable {
         playerOneScore.setText(String.valueOf(Players.myPlayer.getScore()));
         
         playerTwoScore.setText(String.valueOf(Players.vsPlayer.getScore()));
-        
+        gameTh=true;
         gameplay();
     }    
 
@@ -305,7 +411,7 @@ public class MultiPlayerModeController implements Initializable {
                 public void run() {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.initModality(Modality.APPLICATION_MODAL);
-                    ButtonType buttonSave = new ButtonType("Record and Exit");
+                    ButtonType buttonSave = new ButtonType("Save and Exit");
                     ButtonType buttonDontSave = new ButtonType("Exit");
                     ButtonType buttonCancel = new ButtonType("Cancel");
                     alert.setTitle("Exit");
@@ -336,9 +442,14 @@ public class MultiPlayerModeController implements Initializable {
                                 @Override
                                 public void run() {
                                     try {
+                                        gameTh=false;
+                                        myGameTh.stop();
                                         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                                        PlayerSocket.closeSoket();
                                         Stage window = (Stage) returnBtn.getScene().getWindow();
                                         window.setScene(new Scene(root));
+                                       
+                                        //myGameTh.stop();
                                     } catch (IOException ex) {
                                         Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
                                     }
@@ -354,26 +465,30 @@ public class MultiPlayerModeController implements Initializable {
             });
         }
         else {
-                        try {
-                            PlayerSocket.outObj.writeObject("finishgame");
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-                                        Stage window = (Stage) returnBtn.getScene().getWindow();
-                                        window.setScene(new Scene(root));
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                }
-                            });
-                            
-                        } //To change body of generated methods, choose Tools | Templates.
-                        catch (IOException ex) {
-                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    PlayerSocket.outObj.writeObject("finishgame");
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                gameTh=false;
+                                myGameTh.stop();
+                                Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                                PlayerSocket.closeSoket();
+                                Stage window = (Stage) returnBtn.getScene().getWindow();
+                                window.setScene(new Scene(root));
+                                //myGameTh.stop();
+                            } catch (IOException ex) {
+                                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
-                    }
+                    });
+
+                } //To change body of generated methods, choose Tools | Templates.
+                catch (IOException ex) {
+                    Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
     }
 
