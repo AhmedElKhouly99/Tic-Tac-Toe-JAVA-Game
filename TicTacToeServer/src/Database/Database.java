@@ -114,23 +114,25 @@ public class Database {
     public static boolean addGame(Game g){
         try {
             while(!startConnection());
-            preparedStmt = con.prepareStatement(INSERTGAME);
-            preparedStmt.setString(1, g.getUsername1_x());
-            preparedStmt.setString(2, g.getUsername2_o());
-            preparedStmt.setString(3,g.getOne()+"");
-            preparedStmt.setString(4, g.getTwo()+"");
-            preparedStmt.setString(5, g.getThree()+"");
-            preparedStmt.setString(6, g.getFour()+"");
-            preparedStmt.setString(7, g.getFive()+"");
-            preparedStmt.setString(8, g.getSix()+"");
-            preparedStmt.setString(9, g.getSeven()+"");
-            preparedStmt.setString(10, g.getEight()+"");
-            preparedStmt.setString(11, g.getNine()+"");
-             preparedStmt.setInt(12, g.getTurn());
-            preparedStmt.execute();
-            preparedStmt.close();
-            con.close();
+            if(getGame(g.getUsername1_x(), g.getUsername2_o()) == null){
+                preparedStmt = con.prepareStatement(INSERTGAME);
+                preparedStmt.setString(1, g.getUsername1_x());
+                preparedStmt.setString(2, g.getUsername2_o());
+                preparedStmt.setString(3,g.getOne()+"");
+                preparedStmt.setString(4, g.getTwo()+"");
+                preparedStmt.setString(5, g.getThree()+"");
+                preparedStmt.setString(6, g.getFour()+"");
+                preparedStmt.setString(7, g.getFive()+"");
+                preparedStmt.setString(8, g.getSix()+"");
+                preparedStmt.setString(9, g.getSeven()+"");
+                preparedStmt.setString(10, g.getEight()+"");
+                preparedStmt.setString(11, g.getNine()+"");
+                 preparedStmt.setInt(12, g.getTurn());
+                preparedStmt.execute();
+                preparedStmt.close();
+                con.close();
             return true;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
