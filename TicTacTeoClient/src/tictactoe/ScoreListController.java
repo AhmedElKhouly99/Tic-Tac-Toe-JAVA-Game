@@ -74,8 +74,14 @@ public class ScoreListController extends Thread implements Initializable {
     public void run() {
         while (true) {                    
                 try {
-                    PlayerSocket.outObj.writeObject("rankings");                        
-                    List<AllPlayers>list = (List<AllPlayers>) PlayerSocket.inObj.readObject();                  
+                    PlayerSocket.outObj.writeObject("rankings");
+                    Object res = (Object)PlayerSocket.inObj.readObject();
+                    String garbage = "hhh";
+                    if(res.getClass() == garbage.getClass()){
+                        continue;
+                    }
+                    List<AllPlayers>list = (List<AllPlayers>)res;
+//                    List<AllPlayers>list = (List<AllPlayers>) PlayerSocket.inObj.readObject();                  
                     listM = FXCollections.observableArrayList(list);
                     
                     } catch (ClassNotFoundException ex) {
