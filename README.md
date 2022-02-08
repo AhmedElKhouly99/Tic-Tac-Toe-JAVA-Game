@@ -1,48 +1,37 @@
-# Beasts Game by pure javascript (vanilla)
+# Tic-tac-Toe Game using JAVAFX
 ## ITI students IoT and Telecom departments intake 42 (2022)
-## Project for Javascript and HTML Course.
+## Project for JAVA course
 
 
 # Usage
-this project for learning and practice JavaScript
+this project for learning and practice JAVA
 
-# Note
-this game running stand alone you don`t need to refersh everthing is Dynamic into it.
-# Link
--  https://upbeat-euclid-481af0.netlify.app/
-# image
+# Database
 
-![img](https://drive.google.com/uc?export=view&id=13E4m3NXvh3EWEXgpyPZhggabkEujV14_)
+![img](https://drive.google.com/file/d/17x-1k7MXSoPDW2koE0Iovem1cPpXbUnv/view?usp=sharing)
 
 # Video Link 
 - https://www.youtube.com/watch?v=NtsC6gxJ_DA&ab_channel=ahmedshafey 
-# Built With
-- Javascript
-- HTML
-- Canvas
-- CSS
 
 # Contributors
 - Ahmed El khouly
-- Asmaa Mohammed
-- islam Kortam
-- salma Mohammed
-- Mustafa Hammad
-- Ahmed shafey
+- AbdelRahman Soliman
+- Eman Hesham
+- Mai Abdelmajid
+- Abanoub Kamaml
+- Shorook Nabil
 
 # Getting Started
 ## Installation
 ```
 get clone from this Repo
 Open Bash and write git clone and the link
-Open index.html
+
 ```
 
 # License
 this project under the GNU General Public License v2.0.
 
-# Acknowledgments
-- https://craftpix.net/freebies/free-space-shooter-game-gui/
-- https://bevouliin.com/free-game-asset-blue-bat-sprites/
+
 
 
