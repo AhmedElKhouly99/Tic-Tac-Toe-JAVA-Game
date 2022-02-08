@@ -236,6 +236,7 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
             resume.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    
                 }
                     });
         }
@@ -292,7 +293,7 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
         Label onlinePlayers = new Label ("List of Online Players , send a game request to start a game !");
         onlinePlayers.setStyle("-fx-text-fill: purple; -fx-font-size: 16px;");
         HBox hboxheader = new HBox();
-       
+        waitTh=true;
         returnBtn.getStyleClass().add("BtnLive");
          hboxheader.setStyle("-fx-background-color: #dcf5f5; ");
          //lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
@@ -307,6 +308,8 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
          returnBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    waitTh = false;stop();
+                    PlayerSocket.closeSoket();
                   Parent root = null;
                     try {
                         root = FXMLLoader.load(getClass().getResource("Main.fxml"));
@@ -331,7 +334,7 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
 //        window.setScene(new Scene(root));
     @FXML
       void Logout(ActionEvent event) throws IOException {
-        PlayerSocket.closeSoket();
+        PlayerSocket.closeSoket();stop();
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         Stage window = (Stage) LogoutBtn.getScene().getWindow();
         window.setScene(new Scene(root));
