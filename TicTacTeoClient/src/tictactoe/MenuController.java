@@ -449,11 +449,9 @@ public class MenuController extends Thread implements Initializable {
                         
                         Players.vsPlayer.setInGame(true);
                         Players.myPlayer.setInGame(true);
-<<<<<<< HEAD
-                        waitTh=false;
-=======
+
                         PlayerSocket.inObj.readObject();
->>>>>>> 62d28ba1fbdfded4c3d2af164f5dc2ac1caa3241
+
                         Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                         Stage window = (Stage) pane.getScene().getWindow();
                         window.setScene(new Scene(root));
