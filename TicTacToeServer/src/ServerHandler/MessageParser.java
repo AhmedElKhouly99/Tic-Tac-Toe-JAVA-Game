@@ -7,6 +7,7 @@ package ServerHandler;
 
 import Database.Database;
 import static ServerHandler.ClientHandler.clientsVector;
+import game.Game;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -182,6 +183,42 @@ public class MessageParser {
                 Database.editPlayer(ch.p);
 
                 break;  
+            
+            case "recordrequest":
+                ch.player2Handler.outObj.writeObject("record");
+                
+                break;
+            
+            case "recordaccept":
+                ch.player2Handler.outObj.writeObject("recordaccepted");
+                ch.player2Handler.outObj.flush();
+                System.out.println("Heeeeelllllllo from the");
+               
+                    
+                        String stupidserver=null;
+        try {
+            stupidserver = (String)ch.inObj.readObject();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                        System.out.println(stupidserver);
+                        //Database.addGame(recordedGame
+                
+                break;
+            
+            case "finishgame":
+                System.out.println("Heeeeelllllllo from the other siiiiiiiiiiide");
+                ch.player2Handler.player2Handler=null;
+                ch.player2Handler=null;
+                            
+                break;
+                
+            case "exited":
+                
+                ch.player2Handler.outObj.writeObject("exitgame");
+                
+                break;    
+                
 ////            
             case "tie"://winner                
                 /*-------------------playing::username::turn::indexPlaymove----------------------*/
