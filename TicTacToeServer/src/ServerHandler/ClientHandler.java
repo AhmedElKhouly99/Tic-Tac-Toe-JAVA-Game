@@ -52,7 +52,7 @@ public class ClientHandler extends Thread{
     public void run(){
         try{
             
-            while(true){
+            while(status){
                 clientStatus = (String)inObj.readObject();
                 if(clientStatus == null) // done at the client fallen
                 {
