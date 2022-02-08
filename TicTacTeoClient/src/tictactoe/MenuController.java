@@ -528,7 +528,7 @@ public class MenuController extends Thread implements Initializable {
 //          return ok;
     }
 
-    public static Vector<Players> ConnectedPlayers;
+    public static Vector<Players> ConnectedPlayers=new Vector<>();
 
     @Override
     public void run() {
@@ -574,7 +574,7 @@ public class MenuController extends Thread implements Initializable {
                         Game.myGame = (Game)checkType;
 //                        turnThread = true;
                     }
-                    else{
+                    else if(checkType.getClass() == ConnectedPlayers.getClass()){
                         ConnectedPlayers = (Vector<Players>) checkType;
                     }
                     Platform.runLater(new Runnable() {

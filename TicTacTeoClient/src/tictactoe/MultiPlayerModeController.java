@@ -69,7 +69,7 @@ public class MultiPlayerModeController implements Initializable {
 
     char[] arrPlays = new char[9];
 
-    boolean playerWins = false;
+    byte playerWins =2;
     private Thread myGameTh;
     Button[] buttonsArr;
 
@@ -78,6 +78,7 @@ public class MultiPlayerModeController implements Initializable {
 
     boolean player1_turn = true;
     byte gameCOunter = 0;
+    
     static public boolean gameTh;
 
     /**
@@ -192,7 +193,7 @@ public class MultiPlayerModeController implements Initializable {
                                 arrPlays[i] = (char) i;
                             }
 
-                            playerWins = false;
+                            playerWins = 2;
                             gameCOunter = 0;
                             if (symbol.equals("X")) {
                                 player1_turn = true;
@@ -226,11 +227,9 @@ public class MultiPlayerModeController implements Initializable {
                                     try {
                                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                                         alert1.setTitle("Your Opponent has quit the game");
-<<<<<<< HEAD
+
                                         alert1.setHeaderText("You have won!!\tScore:" + Players.myPlayer.getScore() + "+10");
-=======
-                                        alert1.setHeaderText("You have won!!\tScore:"+Players.myPlayer.getScore()+" +10");
->>>>>>> 10e537ea9b75fc3f70ddd63b4617c967752b82a1
+
                                         DialogPane dialogPane1 = alert1.getDialogPane();
                                         dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                                         dialogPane1.getStyleClass().add("myDialog");
@@ -292,7 +291,7 @@ public class MultiPlayerModeController implements Initializable {
                                             arrPlays[i] = (char) i;
                                         }
 
-                                        playerWins = false;
+                                        playerWins = 2;
                                         gameCOunter = 0;
                                         if (symbol.equals("X")) {
                                             player1_turn = true;
@@ -427,20 +426,11 @@ public class MultiPlayerModeController implements Initializable {
                     playerOneName.setStyle("-fx-text-fill: red;");
                     playerTwoName.setStyle("-fx-text-fill: green;");
                 }
-<<<<<<< HEAD
 
-            } else if (symbol.equals("X")) {
-=======
-                
-                
-                
-                
-            }
-            
-            else
-//>>>>>>> 756c6ec035dfa3d0059270be825de9364bb53a87
-            if(symbol.equals("X")){
->>>>>>> 10e537ea9b75fc3f70ddd63b4617c967752b82a1
+
+            } 
+            else if(symbol.equals("X")){
+
                 player1_turn = true;
                 playerOneName.setStyle("-fx-text-fill: green;");
                 playerTwoName.setStyle("-fx-text-fill: red;");
@@ -448,19 +438,19 @@ public class MultiPlayerModeController implements Initializable {
                 playerOneName.setStyle("-fx-text-fill: red;");
                 playerTwoName.setStyle("-fx-text-fill: green;");
                 player1_turn = false;
-<<<<<<< HEAD
+
             }
 
         } catch (Exception ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-=======
-            }} catch (IOException ex) {
-            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+//         catch (IOException ex) {
+//            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
             
             
 //        } catch (Exception ex) {
@@ -470,7 +460,7 @@ public class MultiPlayerModeController implements Initializable {
         
         
         
->>>>>>> 10e537ea9b75fc3f70ddd63b4617c967752b82a1
+
         playerOneScore.setStyle("-fx-text-fill:#4adeed");
         playerTwoScore.setStyle("-fx-text-fill:#4adeed");
 
@@ -486,7 +476,7 @@ public class MultiPlayerModeController implements Initializable {
 
     @FXML
     private void backToMainPage(ActionEvent event) throws IOException {
-        if (gameCOunter != 9) {
+        if (playerWins == 2) {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -607,38 +597,39 @@ public class MultiPlayerModeController implements Initializable {
     @FXML
     private void replayAgain(ActionEvent event) {
 
-        
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.initModality(Modality.APPLICATION_MODAL);
-                    ButtonType buttonSave = new ButtonType("Invite");
-                    ButtonType buttonDontSave = new ButtonType("Cancel");
-                    alert.setTitle("Invitation");
-                    alert.setHeaderText("Do you want to send an invite to " + Players.vsPlayer.getUsername() + "?");
-                    DialogPane dialogPane = alert.getDialogPane();
-                    dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-                    dialogPane.getStyleClass().add("myDialog");
-                    alert.getButtonTypes().setAll(buttonSave, buttonDontSave);
+            if(playerWins != 2)
+            {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.initModality(Modality.APPLICATION_MODAL);
+                        ButtonType buttonSave = new ButtonType("Invite");
+                        ButtonType buttonDontSave = new ButtonType("Cancel");
+                        alert.setTitle("Invitation");
+                        alert.setHeaderText("Do you want to send an invite to " + Players.vsPlayer.getUsername() + "?");
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                        dialogPane.getStyleClass().add("myDialog");
+                        alert.getButtonTypes().setAll(buttonSave, buttonDontSave);
 
-                    Optional<ButtonType> result = alert.showAndWait();
+                        Optional<ButtonType> result = alert.showAndWait();
 
-                    if (result.get() == buttonSave) {
-                        try {
-                            PlayerSocket.outObj.writeObject("invite::" + Players.vsPlayer.getUsername());    
+                        if (result.get() == buttonSave) {
+                            try {
+                                PlayerSocket.outObj.writeObject("invite::" + Players.vsPlayer.getUsername());    
 
-                        } catch (IOException ex) {
-                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-//                        } catch (ClassNotFoundException ex) {
-//                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IOException ex) {
+                                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+    //                        } catch (ClassNotFoundException ex) {
+    //                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+
                         }
-                    } else {
-
                     }
-                }
-            });
-
+                });
+            }
 
     }
 
@@ -665,12 +656,13 @@ public class MultiPlayerModeController implements Initializable {
 
                         youWin(i, 4, 8 - i);
 
-                        playerWins = true;
+                        playerWins = 1;
                         playerOneName.setText("You Win");
                         playerOneScore.setText("");
                     } else {
 
                         youLose(i, 4, 8 - i);
+                        playerWins=0;
                         player1_turn = false;
                         playerOneName.setText("You lose");
                         playerOneScore.setText("");
@@ -683,14 +675,14 @@ public class MultiPlayerModeController implements Initializable {
                 if (arrPlays[i] == symbol.charAt(0)) {
                     youWin(i, i + 3, i + 6);
 
-                    playerWins = true;
+                    playerWins = 1;
 
                     playerOneName.setText("You Win");
                     playerOneScore.setText("");
                 } else {
 
                     youLose(i, i + 3, i + 6);
-
+                    playerWins = 0;
                     player1_turn = false;
                     playerOneName.setText("You lose");
                     playerOneScore.setText("");
@@ -702,13 +694,13 @@ public class MultiPlayerModeController implements Initializable {
 
                     youWin(j, j + 1, j + 2);
 
-                    playerWins = true;
+                    playerWins = 1;
                     playerOneName.setText("You Win");
                     playerOneScore.setText("");
                 } else {
 
                     youLose(j, j + 1, j + 2);
-
+                    playerWins=0;
                     player1_turn = false;
                     playerOneName.setText("You lose");
                     playerOneScore.setText("");
