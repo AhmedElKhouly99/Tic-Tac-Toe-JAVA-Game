@@ -206,7 +206,7 @@ public class MultiPlayerModeController implements Initializable {
                                     try {
                                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                                         alert1.setTitle("Your Opponent has quit the game");
-                                        alert1.setHeaderText("You have won!!\tScore:"+Players.myPlayer.getScore()+"10");
+                                        alert1.setHeaderText("You have won!!\tScore:"+Players.myPlayer.getScore()+" +10");
                                         DialogPane dialogPane1 = alert1.getDialogPane();
                                         dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                                         dialogPane1.getStyleClass().add("myDialog");
@@ -278,12 +278,12 @@ public class MultiPlayerModeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-<<<<<<< HEAD
-            Object res = PlayerSocket.inObj.readObject();
-            if(res.getClass() == symbol.getClass()){
-                symbol = (String)res;
-//            symbol = (String)PlayerSocket.inObj.readObject();
-=======
+//<<<<<<< HEAD
+//            Object res = PlayerSocket.inObj.readObject();
+//            if(res.getClass() == symbol.getClass()){
+//                symbol = (String)res;
+////            symbol = (String)PlayerSocket.inObj.readObject();
+//=======
             Object response;
             do{
             
@@ -367,7 +367,7 @@ public class MultiPlayerModeController implements Initializable {
             }
             
             else
->>>>>>> 756c6ec035dfa3d0059270be825de9364bb53a87
+//>>>>>>> 756c6ec035dfa3d0059270be825de9364bb53a87
             if(symbol.equals("X")){
                 player1_turn = true;
                 playerOneName.setStyle("-fx-text-fill: green;");
@@ -376,12 +376,16 @@ public class MultiPlayerModeController implements Initializable {
                 playerOneName.setStyle("-fx-text-fill: red;");
                 playerTwoName.setStyle("-fx-text-fill: green;");
                 player1_turn = false;
-            }}
-            
-            
-        } catch (Exception ex) {
+            }} catch (IOException ex) {
+            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+            
+//        } catch (Exception ex) {
+//            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         
         
@@ -407,7 +411,7 @@ public class MultiPlayerModeController implements Initializable {
                 public void run() {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.initModality(Modality.APPLICATION_MODAL);
-                    ButtonType buttonSave = new ButtonType("Record and Exit");
+                    ButtonType buttonSave = new ButtonType("Save and Exit");
                     ButtonType buttonDontSave = new ButtonType("Exit");
                     ButtonType buttonCancel = new ButtonType("Cancel");
                     alert.setTitle("Exit");

@@ -184,6 +184,14 @@ public class MenuController extends Thread implements Initializable {
                                         }
 
                                     } else {
+                                        Alert alert1 = new Alert(AlertType.INFORMATION);
+                                        alert1.initModality(Modality.APPLICATION_MODAL);
+                                        alert1.setTitle("Invitation");
+                                        alert1.setHeaderText("Invite rejected");
+                                        DialogPane dialogPane1 = alert1.getDialogPane();
+                                        dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                                        dialogPane1.getStyleClass().add("myDialog");
+                                        alert1.show();
                                         turnThread = true;
 
                                     }
@@ -193,6 +201,15 @@ public class MenuController extends Thread implements Initializable {
                                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
 
+                            }else{
+//                                Alert alert2 = new Alert(AlertType.INFORMATION);
+//                                alert2.initModality(Modality.APPLICATION_MODAL);
+//                                alert2.setTitle("Invitation");
+//                                alert2.setHeaderText(invitePlay[0] + "is in a game!");
+//                                DialogPane dialogPane2 = alert2.getDialogPane();
+//                                dialogPane2.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+//                                dialogPane2.getStyleClass().add("myDialog");
+//                                alert2.show();
                             }
 
                         });
@@ -217,6 +234,15 @@ public class MenuController extends Thread implements Initializable {
 //                            turnThread = true;
 //                            
 //                        }
+                    }else{
+                        Alert alert1 = new Alert(AlertType.INFORMATION);
+                        alert1.initModality(Modality.APPLICATION_MODAL);
+                        alert1.setTitle("Invitation");
+                        alert1.setHeaderText("Invite rejected!!");
+                        DialogPane dialogPane1 = alert1.getDialogPane();
+                        dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                        dialogPane1.getStyleClass().add("myDialog");
+                        alert1.show();
                     }
 
 //                    } catch (IOException ex) {
@@ -244,7 +270,7 @@ public class MenuController extends Thread implements Initializable {
                          ButtonType buttonSave = new ButtonType("resume");
                          ButtonType buttonDontSave = new ButtonType("Cancel");
                          alert.setTitle("Invitation");
-                         alert.setHeaderText("Do you want to resume the game with ?");
+                         alert.setHeaderText("Do you want to resume the game with "+invitePlay[0]+"?");
                          DialogPane dialogPane = alert.getDialogPane();
                          dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                          dialogPane.getStyleClass().add("myDialog");
@@ -451,17 +477,17 @@ public class MenuController extends Thread implements Initializable {
                         });
                         
                         Players.vsPlayer.setInGame(true);
-<<<<<<< HEAD
-                        Players.myPlayer.setInGame(true);waitTh = false;
-                        if(Game.myGame.getUsername1_x() != null){
-                            if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
-                                PlayerSocket.inObj.readObject();}
-                        waitTh = false;
-                        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-                        Stage window = (Stage) pane.getScene().getWindow();
-                        window.setScene(new Scene(root));
-//                        stop();
-=======
+//<<<<<<< HEAD
+//                        Players.myPlayer.setInGame(true);waitTh = false;
+//                        if(Game.myGame.getUsername1_x() != null){
+//                            if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
+//                                PlayerSocket.inObj.readObject();}
+//                        waitTh = false;
+//                        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+//                        Stage window = (Stage) pane.getScene().getWindow();
+//                        window.setScene(new Scene(root));
+////                        stop();
+//=======
                         Players.myPlayer.setInGame(true);
 
 
@@ -478,7 +504,6 @@ public class MenuController extends Thread implements Initializable {
                         window.setScene(new Scene(root));
                         waitTh=false;
                         stop();
->>>>>>> 756c6ec035dfa3d0059270be825de9364bb53a87
 
                     } catch (IOException ex) {
                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
