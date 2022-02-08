@@ -55,6 +55,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import javax.swing.ImageIcon;
 import player.Players;
 
 /**
@@ -63,7 +64,7 @@ import player.Players;
  * @author Admin
  */
 public class MenuController extends Thread implements Initializable {
-
+ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
     @FXML
     private Button RankBtn;
     
