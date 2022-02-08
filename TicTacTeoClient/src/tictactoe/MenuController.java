@@ -266,6 +266,7 @@ public class MenuController extends Thread implements Initializable {
         // TODO
 //        onlineUsrs.start();
           waitTh=false;
+          turnThread=true;
      
     }
 
