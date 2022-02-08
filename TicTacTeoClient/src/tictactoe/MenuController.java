@@ -261,7 +261,9 @@ public class MenuController extends Thread implements Initializable {
 //                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                                          PlayerSocket.outObj.writeObject("getGame::"+Players.myPlayer.getUsername()+"::"+ invitePlay[0]);
                                          Object res = (Object)PlayerSocket.inObj.readObject();
-                                         Game.myGame = null;
+
+                                         Game.myGame= null;
+
                                          if(res != null){
                                              Game.myGame = (Game)res;
                                              PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
@@ -339,6 +341,7 @@ public class MenuController extends Thread implements Initializable {
         // TODO
 //        onlineUsrs.start();
           waitTh=false;
+          turnThread=true;
      
     }
 
@@ -413,7 +416,8 @@ public class MenuController extends Thread implements Initializable {
         Stage window = (Stage) LogoutBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
-
+    static Game anyGame=new Game();
+    
     private void checkInvite(String user) {
 //          boolean ok = false;
         Platform.runLater(new Runnable() {
@@ -436,7 +440,7 @@ public class MenuController extends Thread implements Initializable {
                 if (result.get() == buttonSave) {
                     try {
                         PlayerSocket.outObj.writeObject("accept::" + user);
-                        PlayerSocket.inObj.readObject();
+                        //PlayerSocket.inObj.readObject();
                         Players.vsPlayer = new Players();
                         Players.vsPlayer.setUsername(user);
                         ConnectedPlayers.forEach(p
@@ -447,6 +451,7 @@ public class MenuController extends Thread implements Initializable {
                         });
                         
                         Players.vsPlayer.setInGame(true);
+<<<<<<< HEAD
                         Players.myPlayer.setInGame(true);waitTh = false;
                         if(Game.myGame.getUsername1_x() != null){
                             if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
@@ -456,11 +461,29 @@ public class MenuController extends Thread implements Initializable {
                         Stage window = (Stage) pane.getScene().getWindow();
                         window.setScene(new Scene(root));
 //                        stop();
+=======
+                        Players.myPlayer.setInGame(true);
+
+
+//                        PlayerSocket.inObj.readObject();
+
+
+//                        if(Game.myGame.getUsername1_x() != null){
+//                            if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
+//                                PlayerSocket.inObj.readObject(); 
+//                        }
+
+                        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+                        Stage window = (Stage) pane.getScene().getWindow();
+                        window.setScene(new Scene(root));
+                        waitTh=false;
+                        stop();
+>>>>>>> 756c6ec035dfa3d0059270be825de9364bb53a87
 
                     } catch (IOException ex) {
                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (ClassNotFoundException ex) {G
+//                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if (result.get() == buttonDontSave) {
                     //System.out.println("reject********************************************");
@@ -497,7 +520,7 @@ public class MenuController extends Thread implements Initializable {
                     Object checkType = PlayerSocket.inObj.readObject();
                     System.out.println(checkType.getClass());
                     String msg = new String();
-                    Game.myGame = new Game();
+//                    Game.myGame = new Game();
                     if (checkType.getClass() == msg.getClass()) {
                         System.out.println((String) checkType);
                         String[] arrString = ((String) checkType).split("::");
@@ -522,7 +545,7 @@ public class MenuController extends Thread implements Initializable {
 //                    waitTh = false;
 //                    turnThread = true;
                     } else //                ConnectedPlayers = (Vector<Players>)PlayerSocket.inObj.readObject();    
-                    if(checkType.getClass() == Game.myGame.getClass()){
+                    if(checkType.getClass() == anyGame.getClass()){
                         Game.myGame = (Game)checkType;
 //                        turnThread = true;
                     }
