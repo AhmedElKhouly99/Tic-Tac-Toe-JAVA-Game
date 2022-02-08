@@ -236,6 +236,7 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
             resume.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    
                 }
                     });
         }
@@ -292,13 +293,18 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
         Label onlinePlayers = new Label("List of Online Players , send a game request to start a game !");
         onlinePlayers.setStyle("-fx-text-fill: purple; -fx-font-size: 16px;");
         HBox hboxheader = new HBox();
+<<<<<<< HEAD
 
+=======
+        waitTh=true;
+>>>>>>> ed9b659c5d76bfab01ae03af81a6cba7db975c83
         returnBtn.getStyleClass().add("BtnLive");
         hboxheader.setStyle("-fx-background-color: #dcf5f5; ");
         //lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
         pane = new StackPane();
         BorderPane borderpane = new BorderPane();
         hboxheader.setPrefHeight(70);
+<<<<<<< HEAD
         onlinePlayers.setTranslateX(-35);
         onlinePlayers.setTranslateY(35);
         hboxheader.getChildren().addAll(returnBtn, onlinePlayers);
@@ -319,6 +325,30 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
         });
 
         start();
+=======
+          onlinePlayers.setTranslateX(-35);
+         onlinePlayers.setTranslateY(35);
+        hboxheader.getChildren().addAll(returnBtn,onlinePlayers);
+         borderpane.setTop(hboxheader);
+       borderpane.setCenter(pane);
+         returnBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    waitTh = false;stop();
+                    PlayerSocket.closeSoket();
+                  Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                  Stage window = (Stage) returnBtn.getScene().getWindow();
+                 window.setScene(new Scene(root));
+                 }
+         });
+      
+        start();    
+>>>>>>> ed9b659c5d76bfab01ae03af81a6cba7db975c83
         Stage window = (Stage) StartGameBtn.getScene().getWindow();
         Scene scene = new Scene(borderpane, 500, 500);
         scene.getStylesheets().add(getClass().getResource("BackGround.css").toString());
@@ -330,7 +360,7 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
 //        window.setScene(new Scene(root));
     @FXML
       void Logout(ActionEvent event) throws IOException {
-        PlayerSocket.closeSoket();
+        PlayerSocket.closeSoket();stop();
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         Stage window = (Stage) LogoutBtn.getScene().getWindow();
         window.setScene(new Scene(root));
