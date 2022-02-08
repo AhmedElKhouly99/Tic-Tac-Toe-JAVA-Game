@@ -416,7 +416,8 @@ public class MenuController extends Thread implements Initializable {
         Stage window = (Stage) LogoutBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
-
+    static Game anyGame=new Game();
+    
     private void checkInvite(String user) {
 //          boolean ok = false;
         Platform.runLater(new Runnable() {
@@ -439,7 +440,7 @@ public class MenuController extends Thread implements Initializable {
                 if (result.get() == buttonSave) {
                     try {
                         PlayerSocket.outObj.writeObject("accept::" + user);
-                        PlayerSocket.inObj.readObject();
+                        //PlayerSocket.inObj.readObject();
                         Players.vsPlayer = new Players();
                         Players.vsPlayer.setUsername(user);
                         ConnectedPlayers.forEach(p
@@ -451,24 +452,26 @@ public class MenuController extends Thread implements Initializable {
                         
                         Players.vsPlayer.setInGame(true);
                         Players.myPlayer.setInGame(true);
-<<<<<<< HEAD
 
-                        PlayerSocket.inObj.readObject();
 
-=======
-                        if(Game.myGame.getUsername1_x() != null){
-                            if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
-                                PlayerSocket.inObj.readObject();}
->>>>>>> 5df82f1e5e0fbda5181eaab0efadcbc78511db44
+//                        PlayerSocket.inObj.readObject();
+
+
+//                        if(Game.myGame.getUsername1_x() != null){
+//                            if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
+//                                PlayerSocket.inObj.readObject(); 
+//                        }
+
                         Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                         Stage window = (Stage) pane.getScene().getWindow();
                         window.setScene(new Scene(root));
+                        waitTh=false;
                         stop();
 
                     } catch (IOException ex) {
                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (ClassNotFoundException ex) {G
+//                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if (result.get() == buttonDontSave) {
                     //System.out.println("reject********************************************");
@@ -505,7 +508,7 @@ public class MenuController extends Thread implements Initializable {
                     Object checkType = PlayerSocket.inObj.readObject();
                     System.out.println(checkType.getClass());
                     String msg = new String();
-                    Game.myGame = new Game();
+//                    Game.myGame = new Game();
                     if (checkType.getClass() == msg.getClass()) {
                         System.out.println((String) checkType);
                         String[] arrString = ((String) checkType).split("::");
@@ -530,7 +533,7 @@ public class MenuController extends Thread implements Initializable {
 //                    waitTh = false;
 //                    turnThread = true;
                     } else //                ConnectedPlayers = (Vector<Players>)PlayerSocket.inObj.readObject();    
-                    if(checkType.getClass() == Game.myGame.getClass()){
+                    if(checkType.getClass() == anyGame.getClass()){
                         Game.myGame = (Game)checkType;
 //                        turnThread = true;
                     }

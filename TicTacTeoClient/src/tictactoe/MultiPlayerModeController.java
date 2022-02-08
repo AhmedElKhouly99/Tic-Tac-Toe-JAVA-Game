@@ -278,8 +278,14 @@ public class MultiPlayerModeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // TODO
-            symbol = (String)PlayerSocket.inObj.readObject();
+            Object response;
+            do{
             
+                response=PlayerSocket.inObj.readObject();
+                
+            }while(response.getClass()!=symbol.getClass());
+            symbol = (String)response;
+            System.out.println(symbol);
             buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
             for (int i = 0; i < 9; i++) {
                 buttonsArr[i].setFont(new Font("MV Boli", 50));
@@ -288,8 +294,9 @@ public class MultiPlayerModeController implements Initializable {
                 arrPlays[i] = (char) i;
             }
             
-            
-            if(Game.myGame!=null)
+            //System.out.println(Game.myGame.getUsername1_x());
+            System.out.println(Game.myGame.getUsername2_o());
+            if((Game.myGame.getUsername1_x())!=null)
             {
                 gameCOunter=(byte)Game.myGame.getTurn();
                 if(Players.myPlayer.getUsername().equals(Game.myGame.getUsername1_x()))
@@ -310,6 +317,7 @@ public class MultiPlayerModeController implements Initializable {
                         player1_turn=false;
                     
                 }
+                System.out.println(player1_turn);
                 arrPlays[0]=Game.myGame.getOne();
                 arrPlays[1]=Game.myGame.getTwo();
                 arrPlays[2]=Game.myGame.getThree();
@@ -338,6 +346,7 @@ public class MultiPlayerModeController implements Initializable {
                         arrPlays[i]=(char)i;
                     }
                 }
+                
                 if(symbol.equals("X")){
                 playerOneName.setStyle("-fx-text-fill: green;");
                 playerTwoName.setStyle("-fx-text-fill: red;");
