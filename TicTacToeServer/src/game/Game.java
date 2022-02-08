@@ -13,6 +13,11 @@ import java.io.Serializable;
  */
 public class Game implements Serializable{
 
+<<<<<<< HEAD
+=======
+    public Game() {
+    }
+>>>>>>> 8d05a8ac716840a592d0418af112749898174293
     public static Game myGame = null;
 
     String username1_x;

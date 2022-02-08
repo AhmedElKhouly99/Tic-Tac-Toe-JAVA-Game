@@ -211,7 +211,23 @@ public class MessageParser {
                 Game g = Database.getGame(arrString[1], arrString[2]);
                 if(g != null){
                     ch.outObj.writeObject(g);
-                    ch.player2Handler.outObj.writeObject(g);
+                    
+                    clientsVector.forEach((e) -> {
+                    System.out.println(e.p.getUsername());
+                    if (e.p.getUsername().equals(arrString[2])) {
+                        try {
+                            //                        System.out.println(ch.thisUname+"***");
+                            e.outObj.writeObject(g);//invitedyou::Soly
+                        } catch (IOException ex) {
+                            Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        return;
+                    }
+                });
+                    
+                    
+//                    ch.player2Handler.outObj.writeObject(g);
+                    
                 }else{
                     ch.outObj.writeObject(null);
                 }
