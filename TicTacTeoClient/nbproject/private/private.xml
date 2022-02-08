@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MenuController.java</file>
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LevelsController.java</file>
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayerModeController.java</file>
@@ -16,6 +17,9 @@
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MainController.java</file>
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
             <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/game/Game.java</file>
+=======
+            <file>file:/C:/Users/shorook/Desktop/last%20inshallah/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MenuController.java</file>
+>>>>>>> 44493ff0066a9072b38d10e4696b364f7255a415
         </group>
     </open-files>
 </project-private>
