@@ -12,6 +12,9 @@ import java.io.Serializable;
  * @author ahmed
  */
 public class Game implements Serializable{
+
+    public Game() {
+    }
     public static Game myGame = null;
     String username1_x;
     String username2_o;

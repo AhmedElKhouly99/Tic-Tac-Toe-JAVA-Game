@@ -261,11 +261,11 @@ public class MenuController extends Thread implements Initializable {
 //                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                                          PlayerSocket.outObj.writeObject("getGame::"+Players.myPlayer.getUsername()+"::"+ invitePlay[0]);
                                          Object res = (Object)PlayerSocket.inObj.readObject();
-                                         Game myGame = null;
+                                         Game.myGame = null;
                                          if(res != null){
-                                             myGame = (Game)res;
+                                             Game.myGame = (Game)res;
                                              PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
-                                             System.out.println(myGame);
+                                             System.out.println(Game.myGame);
 //                                         }
 //!(res.getClass() == myGame.getClass())
                                          String respond = (String) PlayerSocket.inObj.readObject();
@@ -492,6 +492,7 @@ public class MenuController extends Thread implements Initializable {
                     Object checkType = PlayerSocket.inObj.readObject();
                     System.out.println(checkType.getClass());
                     String msg = new String();
+                    Game.myGame = new Game();
                     if (checkType.getClass() == msg.getClass()) {
                         System.out.println((String) checkType);
                         String[] arrString = ((String) checkType).split("::");

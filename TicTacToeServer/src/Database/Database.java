@@ -161,8 +161,8 @@ public class Database {
                 }else if(rs.getString(1).equals(player2)){
                     Game g = new Game(rs.getString(2), rs.getString(1), rs.getString(3).charAt(0),rs.getString(4).charAt(0), rs.getString(5).charAt(0), rs.getString(6).charAt(0), rs.getString(7).charAt(0), rs.getString(8).charAt(0), rs.getString(9).charAt(0), rs.getString(10).charAt(0), rs.getString(11).charAt(0), rs.getInt(12));
                     preparedStmt = con.prepareStatement(DELETEGAME);
-                    preparedStmt.setString(1, g.getUsername1_x());
-                    preparedStmt.setString(2, g.getUsername2_o());
+                    preparedStmt.setString(2, g.getUsername1_x());
+                    preparedStmt.setString(1, g.getUsername2_o());
                     preparedStmt.execute();
                     rs.close();
                     preparedStmt.close();
