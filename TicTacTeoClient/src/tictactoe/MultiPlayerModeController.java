@@ -587,8 +587,7 @@ public class MultiPlayerModeController implements Initializable {
 
                     if (result.get() == buttonSave) {
                         try {
-                            PlayerSocket.outObj.writeObject("invite::" + Players.vsPlayer.getUsername());
-                            
+                            PlayerSocket.outObj.writeObject("invite::" + Players.vsPlayer.getUsername());    
 
                         } catch (IOException ex) {
                             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -601,7 +600,6 @@ public class MultiPlayerModeController implements Initializable {
                 }
             });
 
-        
 
     }
 
