@@ -35,7 +35,6 @@ public class MyTicTacToeServer extends Application {
         primaryStage.setTitle("TicTacToe Server!");
         primaryStage.setScene(myScene);
         primaryStage.show();
-
     }
     
     /* Actions taken when the server app closed */
