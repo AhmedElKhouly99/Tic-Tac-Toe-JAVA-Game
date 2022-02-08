@@ -280,7 +280,77 @@ public class MultiPlayerModeController implements Initializable {
             // TODO
             symbol = (String)PlayerSocket.inObj.readObject();
             
+            buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
+            for (int i = 0; i < 9; i++) {
+                buttonsArr[i].setFont(new Font("MV Boli", 50));
+            }   
+             for (int i = 0; i < arrPlays.length; i++) {
+                arrPlays[i] = (char) i;
+            }
             
+            
+            if(Game.myGame!=null)
+            {
+                gameCOunter=(byte)Game.myGame.getTurn();
+                if(Players.myPlayer.getUsername().equals(Game.myGame.getUsername1_x()))
+                {
+                    symbol="X";
+                    if((gameCOunter%2)==0)
+                        player1_turn=true;
+                    else
+                        player1_turn=false;
+                }
+                else
+                {
+                    symbol="O";
+                    if((gameCOunter%2)==1)
+                        player1_turn=true;
+                    else
+                        player1_turn=false;
+                    
+                }
+                arrPlays[0]=Game.myGame.getOne();
+                arrPlays[1]=Game.myGame.getTwo();
+                arrPlays[2]=Game.myGame.getThree();
+                arrPlays[3]=Game.myGame.getFour();
+                arrPlays[4]=Game.myGame.getFive();
+                arrPlays[5]=Game.myGame.getSix();
+                arrPlays[6]=Game.myGame.getSeven();
+                arrPlays[7]=Game.myGame.getEight();
+                arrPlays[8]=Game.myGame.getNine();
+                
+                
+                for(int i=0;i<9;i++)
+                {
+                    if(arrPlays[i]=='X')
+                    {
+                        buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #ff0303;");
+                        buttonsArr[i].setText("X");
+                    }
+                    else if(arrPlays[i]=='O')
+                    {
+                        buttonsArr[i].setStyle("-fx-background-color: #4adeed;-fx-text-fill: #00b100;");
+                        buttonsArr[i].setText("O");
+                    }
+                    else
+                    {
+                        arrPlays[i]=(char)i;
+                    }
+                }
+                if(symbol.equals("X")){
+                playerOneName.setStyle("-fx-text-fill: green;");
+                playerTwoName.setStyle("-fx-text-fill: red;");
+              } else{
+                playerOneName.setStyle("-fx-text-fill: red;");
+                playerTwoName.setStyle("-fx-text-fill: green;");
+                }
+                
+                
+                
+                
+            }
+            
+            else
             if(symbol.equals("X")){
                 player1_turn = true;
                 playerOneName.setStyle("-fx-text-fill: green;");
@@ -295,13 +365,7 @@ public class MultiPlayerModeController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        buttonsArr=new Button[]{btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9};
-        for (int i = 0; i < 9; i++) {
-            buttonsArr[i].setFont(new Font("MV Boli", 50));
-        }   
-         for (int i = 0; i < arrPlays.length; i++) {
-            arrPlays[i] = (char) i;
-        }
+        
         
         
         

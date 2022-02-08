@@ -12,11 +12,9 @@ import java.io.Serializable;
  * @author ahmed
  */
 public class Game implements Serializable{
-<<<<<<< HEAD
-    public static Game myGame;
-=======
+
     public static Game myGame = null;
->>>>>>> 20702a5f4989b9fe164edf7b5acfba0edb46e48e
+
     String username1_x;
     String username2_o;
     char one;
