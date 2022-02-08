@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MenuController.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LevelsController.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayerModeController.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/VsComputerModeController.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/player/AllPlayers.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/player/Players.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MultiPlayersMode.fxml</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/Menu.fxml</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/TicTacToe.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/Login.fxml</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/MainController.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/LoginController.java</file>
-            <file>file:/E:/Iti/Java_Advanced/Java_Project3/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/game/Game.java</file>
+            <file>file:/E:/ITI_IoT/15-%20Java/Tic-Tac-Toe-JAVA-Game/TicTacTeoClient/src/tictactoe/TicTacToe.java</file>
         </group>
     </open-files>
 </project-private>
