@@ -151,7 +151,7 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
                     ButtonType buttonSave = new ButtonType("Invite");
                     ButtonType buttonDontSave = new ButtonType("Cancel");
                     alert.setTitle("Invitation");
-                    alert.setHeaderText("Do you want to play with ?");
+                    alert.setHeaderText("Do you want to send an invite to "+invitePlay[0]+"?");
                     DialogPane dialogPane = alert.getDialogPane();
                     dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                     dialogPane.getStyleClass().add("myDialog");
@@ -283,49 +283,48 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
     
     @FXML
     void StartGame(ActionEvent event) throws IOException {
-         Button returnBtn=new Button();
-          ImageView returnImg = new ImageView("returnn.png");
-              returnImg.setFitHeight(25);
-              returnImg.setFitWidth(25);
-                returnImg.setPreserveRatio(true);
-              returnBtn.setGraphic(returnImg);
-        Label onlinePlayers = new Label ("List of Online Players , send a game request to start a game !");
+        Button returnBtn = new Button();
+        ImageView returnImg = new ImageView("returnn.png");
+        returnImg.setFitHeight(25);
+        returnImg.setFitWidth(25);
+        returnImg.setPreserveRatio(true);
+        returnBtn.setGraphic(returnImg);
+        Label onlinePlayers = new Label("List of Online Players , send a game request to start a game !");
         onlinePlayers.setStyle("-fx-text-fill: purple; -fx-font-size: 16px;");
         HBox hboxheader = new HBox();
-       
+
         returnBtn.getStyleClass().add("BtnLive");
-         hboxheader.setStyle("-fx-background-color: #dcf5f5; ");
-         //lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
+        hboxheader.setStyle("-fx-background-color: #dcf5f5; ");
+        //lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
         pane = new StackPane();
         BorderPane borderpane = new BorderPane();
         hboxheader.setPrefHeight(70);
-          onlinePlayers.setTranslateX(-35);
-         onlinePlayers.setTranslateY(35);
-        hboxheader.getChildren().addAll(returnBtn,onlinePlayers);
-         borderpane.setTop(hboxheader);
-       borderpane.setCenter(pane);
-         returnBtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                  Parent root = null;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                  Stage window = (Stage) returnBtn.getScene().getWindow();
-                 window.setScene(new Scene(root));
-                 }
-         });
-      
-        start();    
+        onlinePlayers.setTranslateX(-35);
+        onlinePlayers.setTranslateY(35);
+        hboxheader.getChildren().addAll(returnBtn, onlinePlayers);
+        borderpane.setTop(hboxheader);
+        borderpane.setCenter(pane);
+        returnBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Stage window = (Stage) returnBtn.getScene().getWindow();
+                window.setScene(new Scene(root));
+            }
+        });
+
+        start();
         Stage window = (Stage) StartGameBtn.getScene().getWindow();
-        Scene scene= new Scene( borderpane,500,500);
+        Scene scene = new Scene(borderpane, 500, 500);
         scene.getStylesheets().add(getClass().getResource("BackGround.css").toString());
         window.setScene(scene);
-        
 
-       }
+    }
 //        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayerMode.fxml"));
 //        Stage window = (Stage) StartGameBtn.getScene().getWindow();
 //        window.setScene(new Scene(root));
@@ -375,13 +374,14 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
                             Stage window = (Stage) pane.getScene().getWindow();
                             window.setScene(new Scene(root));
                             stop();
+                            
                         } catch (IOException ex) {
                             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else if (result.get() == buttonDontSave){                               
-                        System.out.println("reject********************************************");
+                        //System.out.println("reject********************************************");
 
                          try {
                                 PlayerSocket.outObj.writeObject("reject::"+user);
@@ -395,46 +395,6 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
                     }
 
                     
-                    
-                    
-                    
-//                    waitTh = false;
-//                    turnThread = true;
-//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//                    alert.setTitle("Invitation");
-//                    alert.setContentText("Do you want to play with"+user+"?!");
-//                    ButtonType okButton = new ButtonType("Accept", ButtonBar.ButtonData.YES);
-//                    ButtonType noButton = new ButtonType("Reject", ButtonBar.ButtonData.NO);
-//                    ButtonType cancelButton = new ButtonType("cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//                    alert.getButtonTypes().setAll(okButton, cancelButton);
-//                    alert.showAndWait().ifPresent(type -> {
-//                            if (type == okButton) {
-//                                try {
-//                                    PlayerSocket.outObj.writeObject("accept::"+user);
-//                                    PlayerSocket.inObj.readObject();
-//                                     Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-//                                    Stage window = (Stage) pane.getScene().getWindow();
-//                                    window.setScene(new Scene(root));
-//                                    stop();
-//                                } catch (IOException ex) {
-//                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//                                } catch (ClassNotFoundException ex) {
-//                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//                                }
-//                            } else if (type == cancelButton){
-//                                try {
-//                                    System.out.println("reject********************************************");
-//                                    PlayerSocket.outObj.writeObject("reject::"+user);
-//                                    PlayerSocket.inObj.readObject();
-//                                } catch (IOException ex) {
-//                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//                                } catch (ClassNotFoundException ex) {
-//                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//                                }
-//                            }
-//                    });
-//                    waitTh = true;
-//                    turnThread = false;
           }
             });
 //          return ok;
@@ -526,23 +486,6 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
         }stop();
     }
      
-//    Thread checkInvite = new Thread(new Runnable() {
-//        @Override
-//        public void run() {
-//            try {
-//                String msg = (String)PlayerSocket.inObj.readObject();
-//            } catch (IOException ex) {
-//                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//    });
-    
-//    Timer timer = new Timer();
-//    timer.schedule(new TimeOutTask(t, timer), 30*1000);
-//    t.start();
-
 }
     
        
