@@ -241,7 +241,7 @@ public class MenuController extends Thread implements Initializable {
 //                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
                          Alert alert = new Alert(AlertType.CONFIRMATION);
                          alert.initModality(Modality.APPLICATION_MODAL);
-                         ButtonType buttonSave = new ButtonType("resum");
+                         ButtonType buttonSave = new ButtonType("resume");
                          ButtonType buttonDontSave = new ButtonType("Cancel");
                          alert.setTitle("Invitation");
                          alert.setHeaderText("Do you want to resume the game with ?");
@@ -460,7 +460,7 @@ public class MenuController extends Thread implements Initializable {
                     }
                 } else if (result.get() == buttonDontSave) {
                     //System.out.println("reject********************************************");
-
+                    Game.myGame = null;
                     try {
                         PlayerSocket.outObj.writeObject("reject::" + user);
                         PlayerSocket.inObj.readObject();
@@ -517,7 +517,10 @@ public class MenuController extends Thread implements Initializable {
 //                    waitTh = false;
 //                    turnThread = true;
                     } else //                ConnectedPlayers = (Vector<Players>)PlayerSocket.inObj.readObject();    
-                    {
+                    if(checkType.getClass() == Game.myGame.getClass()){
+                        Game.myGame = (Game)checkType;
+                    }
+                    else{
                         ConnectedPlayers = (Vector<Players>) checkType;
                     }
                     Platform.runLater(new Runnable() {
