@@ -286,6 +286,7 @@ public class MultiPlayerModeController implements Initializable {
                 player1_turn = false;
             }
             
+            
         } catch (Exception ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
         }
