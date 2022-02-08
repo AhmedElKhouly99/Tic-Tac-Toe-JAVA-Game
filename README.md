@@ -8,7 +8,7 @@ this project for learning and practice JAVA
 
 # Database
 
-![img](https://drive.google.com/file/d/17x-1k7MXSoPDW2koE0Iovem1cPpXbUnv/view?usp=sharing)
+![img](https://fv9-4.failiem.lv/thumb_show.php?i=nrfeucg2t&view)
 
 # Video Link 
 - https://www.youtube.com/watch?v=NtsC6gxJ_DA&ab_channel=ahmedshafey 
