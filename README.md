@@ -11,7 +11,7 @@ this project for learning and practice JAVA
 ![img](https://fv9-4.failiem.lv/thumb_show.php?i=nrfeucg2t&view)
 
 # Video Link 
-- https://www.youtube.com/watch?v=NtsC6gxJ_DA&ab_channel=ahmedshafey 
+- https://youtu.be/EUCLO864xrQ 
 
 # Contributors
 - Ahmed El khouly
