@@ -7,9 +7,6 @@ package tictactoe;
 
 import SocketHandler.PlayerSocket;
 
-
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.security.Provider.Service;
@@ -64,116 +61,116 @@ import player.Players;
  * @author Admin
  */
 public class MenuController extends Thread implements Initializable {
-ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
+
+    ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
     @FXML
     private Button RankBtn;
-    
+
     @FXML
     private Button StartGameBtn = new Button();
-    
+
     static StackPane pane;
     Stage window;
 //    public static Stage homeStage;
-    
 
     static boolean turnThread = true;
-    static boolean waitTh = true;
+    static boolean waitTh = false;
 //    Timer time;
 //    InterruptTimerTask interruptTimerTask;
-    
-      @FXML
+
+    @FXML
     private Button LogoutBtn;
-         static class XCell extends ListCell<String> {
+
+    static class XCell extends ListCell<String> {
+
         HBox hbox = new HBox();
-        
+
         Label label = new Label("(empty)");
         Pane pane = new Pane();
         Button newGame = new Button();
-        Button resume=new Button();
+        Button resume = new Button();
         String lastItem;
-        String names[]=new String[3];
-        int score[]=new int[3];
-      
-        public XCell(){
+        String names[] = new String[3];
+        int score[] = new int[3];
+
+        public XCell() {
             super();
-          
+
             label.setFont(new Font(20));
             label.setTranslateX(10);
             newGame.setPrefSize(50, 50);
-                newGame.getStyleClass().add("btn");
+            newGame.getStyleClass().add("btn");
             resume.setPrefSize(50, 50);
-                newGame.setTranslateX(-30);
+            newGame.setTranslateX(-30);
 //            File file = new File();
-              newGame.getStyleClass().add("BtnLive");
-              resume.getStyleClass().add("BtnLive");
-               newGame.setStyle("-fx-background-color: #4adeed ");
-                resume.setStyle("-fx-background-color: #4adeed ");
-               
+            newGame.getStyleClass().add("BtnLive");
+            resume.getStyleClass().add("BtnLive");
+            newGame.setStyle("-fx-background-color: #4adeed ");
+            resume.setStyle("-fx-background-color: #4adeed ");
+
 //Image image = new Image(new FileInputStream("file:images/newgame.png"));
 //        Image image = new Image("file:images/newgame.png");
-        ImageView  newGameImg= new ImageView("newgame.png");
+            ImageView newGameImg = new ImageView("newgame.png");
 //        newGameImg.setImage();
 //             ImageView newGameImg = new ImageView("tictactoe.images/newgame.png");
-              newGameImg.setFitHeight(20);
-              newGameImg.setFitWidth(20);
-                newGameImg.setPreserveRatio(true);
-              newGame.setGraphic(newGameImg);
-              ImageView resumeImg = new ImageView("resum.png");
-              resumeImg.setFitHeight(35);
-              resumeImg.setFitWidth(35);
-                newGameImg.setPreserveRatio(true);
-              resume.setGraphic(resumeImg);
-              
-              ImageView onlineImg = new ImageView("online.png");
-              onlineImg.setTranslateY(10);
-              onlineImg.setTranslateX(-3);
-              onlineImg.setFitHeight(10);
-              onlineImg.setFitWidth(10);
-            
-            hbox.getChildren().addAll(onlineImg,label,pane,newGame,resume);
+            newGameImg.setFitHeight(20);
+            newGameImg.setFitWidth(20);
+            newGameImg.setPreserveRatio(true);
+            newGame.setGraphic(newGameImg);
+            ImageView resumeImg = new ImageView("resum.png");
+            resumeImg.setFitHeight(35);
+            resumeImg.setFitWidth(35);
+            newGameImg.setPreserveRatio(true);
+            resume.setGraphic(resumeImg);
+
+            ImageView onlineImg = new ImageView("online.png");
+            onlineImg.setTranslateY(10);
+            onlineImg.setTranslateX(-3);
+            onlineImg.setFitHeight(10);
+            onlineImg.setFitWidth(10);
+
+            hbox.getChildren().addAll(onlineImg, label, pane, newGame, resume);
             HBox.setHgrow(pane, Priority.ALWAYS);
             newGame.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    String[] invitePlay=label.getText().split("\t");
-                    
+                    String[] invitePlay = label.getText().split("\t");
+
                     turnThread = false;
-                        System.out.println(label.getText());
+                    System.out.println(label.getText());
 
 //                       Parent root = null;
 //                    try {
-
 //                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
-                        
-                        
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.initModality(Modality.APPLICATION_MODAL);
                     ButtonType buttonSave = new ButtonType("Invite");
                     ButtonType buttonDontSave = new ButtonType("Cancel");
                     alert.setTitle("Invitation");
-                    alert.setHeaderText("Do you want to send an invite to "+invitePlay[0]+"?");
+                    alert.setHeaderText("Do you want to send an invite to " + invitePlay[0] + "?");
                     DialogPane dialogPane = alert.getDialogPane();
                     dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                     dialogPane.getStyleClass().add("myDialog");
-                    alert.getButtonTypes().setAll(buttonSave, buttonDontSave );
+                    alert.getButtonTypes().setAll(buttonSave, buttonDontSave);
 
                     Optional<ButtonType> result = alert.showAndWait();
 
                     if (result.get() == buttonSave) {
-                        ConnectedPlayers.forEach(p->
-                            {Parent root = null;
-                                if(p.getUsername().equals(invitePlay[0]) && !p.isInGame()){
+                        ConnectedPlayers.forEach(p
+                                -> {
+                            Parent root = null;
+                            if (p.getUsername().equals(invitePlay[0]) && !p.isInGame()) {
                                 try {
 //                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
-                                    PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
-                                    
-                                    String respond = (String)PlayerSocket.inObj.readObject();
+                                    PlayerSocket.outObj.writeObject("invite::" + invitePlay[0]);
+
+                                    String respond = (String) PlayerSocket.inObj.readObject();
                                     System.out.println(respond);
-                                    if(respond.equals("inviteAccepted")){
+                                    if (respond.equals("inviteAccepted")) {
                                         try {
                                             waitTh = false;
                                             turnThread = false;
-                                            Players.vsPlayer=new Players();
+                                            Players.vsPlayer = new Players();
                                             Players.vsPlayer.setScore(Integer.parseInt(invitePlay[1]));
                                             Players.vsPlayer.setUsername(invitePlay[0]);
                                             Players.vsPlayer.setInGame(true);
@@ -184,19 +181,20 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
                                         } catch (IOException ex) {
                                             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                                         }
-                                        
-                                    }else{
+
+                                    } else {
                                         turnThread = true;
-                                        
-                                    }       } catch (IOException ex) {
+
+                                    }
+                                } catch (IOException ex) {
                                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                                 } catch (ClassNotFoundException ex) {
                                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                                    
-                                }
-                                
-                            });
+
+                            }
+
+                        });
 //                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
 //                        PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
 //
@@ -220,51 +218,46 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
 //                        }
                     }
 
-                        
-                        
-
 //                    } catch (IOException ex) {
 //                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
 //                    } catch (ClassNotFoundException ex) {
 //                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
-                      
-        
                 }
             });
             //----------Resume Button Event Handler ----------------------------//
             resume.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    
+
                 }
-                    });
+            });
         }
-        
+
 //        public void setStage(){
 //            Parent root = null;
 //            root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
 //            Stage window = (Stage) newGame.getScene().getWindow();
 //            window.setScene(new Scene(root));
 //        }
-
         @Override
         protected void updateItem(String item, boolean empty) {
-           super.updateItem(item, empty);
-            setText(null);  
-                if (empty) {
-                    lastItem = null;
-                    setGraphic(null);
-                } else {
-                    lastItem = item;
-                    label.setText(item!=null ? item : "<null>");
+            super.updateItem(item, empty);
+            setText(null);
+            if (empty) {
+                lastItem = null;
+                setGraphic(null);
+            } else {
+                lastItem = item;
+                label.setText(item != null ? item : "<null>");
 
-                    setGraphic(hbox);
-                }
+                setGraphic(hbox);
             }
         }
+    }
 //Vector<Players> ConnectedPlayers;
 //Thread onlineUsrs;
+
     /**
      * Initializes the controller class.
      */
@@ -272,16 +265,18 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 //        onlineUsrs.start();
-    }    
+          waitTh=false;
+     
+    }
 
     @FXML
     private void GoToRanks(ActionEvent event) throws IOException {
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("ScoreList.fxml"));
         Stage window = (Stage) RankBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
-    
+
     @FXML
     void StartGame(ActionEvent event) throws IOException {
         Button returnBtn = new Button();
@@ -293,18 +288,16 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
         Label onlinePlayers = new Label("List of Online Players , send a game request to start a game !");
         onlinePlayers.setStyle("-fx-text-fill: purple; -fx-font-size: 16px;");
         HBox hboxheader = new HBox();
-<<<<<<< HEAD
 
-=======
-        waitTh=true;
->>>>>>> ed9b659c5d76bfab01ae03af81a6cba7db975c83
+        waitTh = true;
+
         returnBtn.getStyleClass().add("BtnLive");
         hboxheader.setStyle("-fx-background-color: #dcf5f5; ");
         //lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
         pane = new StackPane();
         BorderPane borderpane = new BorderPane();
         hboxheader.setPrefHeight(70);
-<<<<<<< HEAD
+
         onlinePlayers.setTranslateX(-35);
         onlinePlayers.setTranslateY(35);
         hboxheader.getChildren().addAll(returnBtn, onlinePlayers);
@@ -313,6 +306,9 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
         returnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                waitTh = false;
+                stop();
+                PlayerSocket.closeSoket();
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("Main.fxml"));
@@ -325,30 +321,7 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
         });
 
         start();
-=======
-          onlinePlayers.setTranslateX(-35);
-         onlinePlayers.setTranslateY(35);
-        hboxheader.getChildren().addAll(returnBtn,onlinePlayers);
-         borderpane.setTop(hboxheader);
-       borderpane.setCenter(pane);
-         returnBtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    waitTh = false;stop();
-                    PlayerSocket.closeSoket();
-                  Parent root = null;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                  Stage window = (Stage) returnBtn.getScene().getWindow();
-                 window.setScene(new Scene(root));
-                 }
-         });
-      
-        start();    
->>>>>>> ed9b659c5d76bfab01ae03af81a6cba7db975c83
+//>>>>>>> ed9b659c5d76bfab01ae03af81a6cba7db975c83
         Stage window = (Stage) StartGameBtn.getScene().getWindow();
         Scene scene = new Scene(borderpane, 500, 500);
         scene.getStylesheets().add(getClass().getResource("BackGround.css").toString());
@@ -358,101 +331,101 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
 //        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayerMode.fxml"));
 //        Stage window = (Stage) StartGameBtn.getScene().getWindow();
 //        window.setScene(new Scene(root));
+
     @FXML
-      void Logout(ActionEvent event) throws IOException {
-        PlayerSocket.closeSoket();stop();
+    void Logout(ActionEvent event) throws IOException {
+        PlayerSocket.closeSoket();
+        stop();
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         Stage window = (Stage) LogoutBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
-      
-      private void checkInvite(String user){
+
+    private void checkInvite(String user) {
 //          boolean ok = false;
-          Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-         
-                    Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.initModality(Modality.APPLICATION_MODAL);
-                    ButtonType buttonSave = new ButtonType("Accept");
-                    ButtonType buttonDontSave = new ButtonType("Reject");
-                    alert.setTitle("Invitation");
-                    alert.setHeaderText("Do you want to play with "+user+"?");
-                    DialogPane dialogPane = alert.getDialogPane();
-                    dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-                    dialogPane.getStyleClass().add("myDialog");
-                    alert.getButtonTypes().setAll(buttonSave, buttonDontSave );
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
 
-                    Optional<ButtonType> result = alert.showAndWait();
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.initModality(Modality.APPLICATION_MODAL);
+                ButtonType buttonSave = new ButtonType("Accept");
+                ButtonType buttonDontSave = new ButtonType("Reject");
+                alert.setTitle("Invitation");
+                alert.setHeaderText("Do you want to play with " + user + "?");
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                dialogPane.getStyleClass().add("myDialog");
+                alert.getButtonTypes().setAll(buttonSave, buttonDontSave);
 
-                    if (result.get() == buttonSave) {
-                        try {
-                            PlayerSocket.outObj.writeObject("accept::" + user);
-                            PlayerSocket.inObj.readObject();
-                            Players.vsPlayer=new Players();
-                            Players.vsPlayer.setUsername(user);
-                            ConnectedPlayers.forEach(p->
-                            {
-                                if(p.getUsername().equals(user))
+                Optional<ButtonType> result = alert.showAndWait();
+
+                if (result.get() == buttonSave) {
+                    try {
+                        PlayerSocket.outObj.writeObject("accept::" + user);
+                        PlayerSocket.inObj.readObject();
+                        Players.vsPlayer = new Players();
+                        Players.vsPlayer.setUsername(user);
+                        ConnectedPlayers.forEach(p
+                                -> {
+                            if (p.getUsername().equals(user)) {
                                 Players.vsPlayer.setScore(p.getScore());
-                            });
-                            
-                            Players.vsPlayer.setInGame(true);
-                            Players.myPlayer.setInGame(true);
-                            
-                            Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-                            Stage window = (Stage) pane.getScene().getWindow();
-                            window.setScene(new Scene(root));
-                            stop();
-                            
-                        } catch (IOException ex) {
-                            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else if (result.get() == buttonDontSave){                               
-                        //System.out.println("reject********************************************");
-
-                         try {
-                                PlayerSocket.outObj.writeObject("reject::"+user);
-                                PlayerSocket.inObj.readObject();
-                            } catch (IOException ex) {
-                                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-                            } 
-                         catch (ClassNotFoundException ex) {
-                                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                    }
+                        });
 
-                    
-          }
-            });
+                        Players.vsPlayer.setInGame(true);
+                        Players.myPlayer.setInGame(true);
+
+                        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
+                        Stage window = (Stage) pane.getScene().getWindow();
+                        window.setScene(new Scene(root));
+                        stop();
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if (result.get() == buttonDontSave) {
+                    //System.out.println("reject********************************************");
+
+                    try {
+                        PlayerSocket.outObj.writeObject("reject::" + user);
+                        PlayerSocket.inObj.readObject();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            }
+        });
 //          return ok;
-      }
-      
-      
- public static Vector<Players>ConnectedPlayers;
+    }
+
+    public static Vector<Players> ConnectedPlayers;
 
     @Override
     public void run() {
-        while(waitTh){
-            if(!turnThread){
+        while (waitTh) {
+            if (!turnThread) {
                 try {
                     sleep(500);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else
-            try {
-                PlayerSocket.outObj.writeObject("onlinePlayers"); 
-                Object checkType = PlayerSocket.inObj.readObject();
-                System.out.println(checkType.getClass());
-                String msg = new String();
-                if(checkType.getClass()== msg.getClass()){
-                    System.out.println((String)checkType);
-                    String[] arrString = ((String)checkType).split("::");
-                    
-                    checkInvite(arrString[1]);
+            } else {
+                try {
+                    PlayerSocket.outObj.writeObject("onlinePlayers");
+                    Object checkType = PlayerSocket.inObj.readObject();
+                    System.out.println(checkType.getClass());
+                    String msg = new String();
+                    if (checkType.getClass() == msg.getClass()) {
+                        System.out.println((String) checkType);
+                        String[] arrString = ((String) checkType).split("::");
+
+                        checkInvite(arrString[1]);
 
 //                    PlayerSocket.outObj.writeObject("accept::"+arrString[1]);
 //                    PlayerSocket.inObj.readObject();
@@ -471,56 +444,50 @@ ImageIcon imageCursorGomme = new ImageIcon("cursor.png");
 //                    stop();
 //                    waitTh = false;
 //                    turnThread = true;
-                    
-                    
-                }else
-//                ConnectedPlayers = (Vector<Players>)PlayerSocket.inObj.readObject();    
-                ConnectedPlayers = (Vector<Players>)checkType;
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        pane.getChildren().removeAll();
-                        String [] info = new String[ConnectedPlayers.size()-1];
-                        System.out.println(ConnectedPlayers);
-                        int i = 0;
-                        for(Players p : ConnectedPlayers){
-                            if(p.getUsername().equals(Players.myPlayer.getUsername())){
-                                Players.myPlayer.setScore(p.getScore());
-                                continue;
-                            }
-                            info[i] = p.getUsername()+"\t"+p.getScore();
-                            i++;
-                        }
-                         ObservableList<String> list = FXCollections.observableArrayList(info);
-                        ListView<String> lv = new ListView<>(list);
-                        lv.setPrefWidth(Screen.getPrimary().getVisualBounds().getWidth()-200);
-                        lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
-
-                        lv.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-                            @Override
-                            public ListCell<String> call(ListView<String> param) {
-                                return new XCell();
-                            }
-                        });
-                        pane.getChildren().addAll(lv);
+                    } else //                ConnectedPlayers = (Vector<Players>)PlayerSocket.inObj.readObject();    
+                    {
+                        ConnectedPlayers = (Vector<Players>) checkType;
                     }
-                });
-                sleep(2000);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-            }   catch (InterruptedException ex) {
-                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            pane.getChildren().removeAll();
+                            String[] info = new String[ConnectedPlayers.size() - 1];
+                            System.out.println(ConnectedPlayers);
+                            int i = 0;
+                            for (Players p : ConnectedPlayers) {
+                                if (p.getUsername().equals(Players.myPlayer.getUsername())) {
+                                    Players.myPlayer.setScore(p.getScore());
+                                    continue;
+                                }
+                                info[i] = p.getUsername() + "\t" + p.getScore();
+                                i++;
+                            }
+                            ObservableList<String> list = FXCollections.observableArrayList(info);
+                            ListView<String> lv = new ListView<>(list);
+                            lv.setPrefWidth(Screen.getPrimary().getVisualBounds().getWidth() - 200);
+                            lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
+
+                            lv.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+                                @Override
+                                public ListCell<String> call(ListView<String> param) {
+                                    return new XCell();
+                                }
+                            });
+                            pane.getChildren().addAll(lv);
+                        }
+                    });
+                    sleep(2000);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }stop();
+        }
+        stop();
     }
-     
+
 }
-    
-       
-
-
-
-
-
