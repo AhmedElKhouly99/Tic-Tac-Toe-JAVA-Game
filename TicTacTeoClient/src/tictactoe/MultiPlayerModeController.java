@@ -279,6 +279,8 @@ public class MultiPlayerModeController implements Initializable {
         try {
             // TODO
             symbol = (String)PlayerSocket.inObj.readObject();
+            
+            
             if(symbol.equals("X")){
                 player1_turn = true;
                 playerOneName.setStyle("-fx-text-fill: green;");
@@ -288,6 +290,7 @@ public class MultiPlayerModeController implements Initializable {
                 playerTwoName.setStyle("-fx-text-fill: green;");
                 player1_turn = false;
             }
+            
             
         } catch (Exception ex) {
             Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
