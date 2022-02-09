@@ -14,7 +14,7 @@ This project aims to develop a Tic Tac Toe game using Java. It mainly consists o
 
 ![img](https://fv9-4.failiem.lv/thumb_show.php?i=nrfeucg2t&view)
 <p align="center">
-  <img width="550" height="350" src="TicTacToeServer/src/ServerHandler/images/db.PNG">
+  <img width="550" src="TicTacToeServer/src/ServerHandler/images/db.PNG">
 </p>
 
 
