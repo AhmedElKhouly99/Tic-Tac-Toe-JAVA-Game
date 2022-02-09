@@ -3,7 +3,7 @@
 <h3 align="center">Project for JAVA course</h3> 
 
 <p align="center">
-  <img width="550" height="350" src="TicTacToeServer/src/ServerHandler/images/2.PNG">
+  <img width="550" src="TicTacToeServer/src/ServerHandler/images/2.PNG">
 </p>
 
 
