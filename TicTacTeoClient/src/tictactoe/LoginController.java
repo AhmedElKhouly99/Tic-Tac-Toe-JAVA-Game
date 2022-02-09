@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +33,6 @@ import javafx.stage.Stage;
  */
 public class LoginController implements Initializable {
 
-
     @FXML
     private Button GoToRegisterBtn;
     @FXML
@@ -46,11 +43,10 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField passwordField;
-    
+
     @FXML
     private Button BackToMainBtn;
 
-    
     static Vector<Players> playersVector = new Vector<Players>();
 
     /**
@@ -59,8 +55,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
+    }
 
     @FXML
     void BackToMain(ActionEvent event) throws IOException {
@@ -81,25 +76,26 @@ public class LoginController implements Initializable {
 
         String uname = unameField.getText();
         String pass = passwordField.getText();
-        if(uname.equals("") || pass.equals("") ){
-            
+        if (uname.equals("") || pass.equals("")) {
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("please enter your username and password");
             alert.show();
             DialogPane dialogPane = alert.getDialogPane();
             dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
             dialogPane.getStyleClass().add("myDialog");
-        
-        }else{
+
+        } else {
             PlayerSocket.socketInit();
-            PlayerSocket.outObj.writeObject("login::"+unameField.getText()+"::"+passwordField.getText());
-            String respond = (String)PlayerSocket.inObj.readObject(); System.out.println(respond);
-            if("login::done".equals(respond)){
+            PlayerSocket.outObj.writeObject("login::" + unameField.getText() + "::" + passwordField.getText());
+            String respond = (String) PlayerSocket.inObj.readObject();
+
+            if ("login::done".equals(respond)) {
                 Players.myPlayer = new Players(uname, 0);
                 Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
                 Stage window = (Stage) loginBtn.getScene().getWindow();
                 window.setScene(new Scene(root));
-            }else if("login::exist".equals(respond)){               
+            } else if ("login::exist".equals(respond)) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setContentText("User logged in from other device!");
                 alert.show();
@@ -107,30 +103,18 @@ public class LoginController implements Initializable {
                 dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                 dialogPane.getStyleClass().add("myDialog");
                 PlayerSocket.closeSoket();
-            }else{
+            } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setContentText("Incorrect username or password");
                 alert.show();
                 DialogPane dialogPane = alert.getDialogPane();
                 dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                 dialogPane.getStyleClass().add("myDialog");
-            
+
                 PlayerSocket.closeSoket();
             }
 
-    
-       
-//        PlayerSocket.socketInit();
-        //////////////////////////////////////////////
-//        try {
-//            PlayerSocket.outObj.writeObject("onlinePlayers");
-//            playersVector.removeAllElements();
-//            playersVector = (Vector<Player>)PlayerSocket.inObj.readObject();
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
         }
 
-    } 
+    }
 }

@@ -13,6 +13,9 @@ this project for learning and practice JAVA
 ## Database
 
 ![img](https://fv9-4.failiem.lv/thumb_show.php?i=nrfeucg2t&view)
+<p align="center">
+  <img width="550" height="350" src="https://github.com/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/images/db.PNG">
+</p>
 
 ## Video Link 
 - https://youtu.be/EUCLO864xrQ 

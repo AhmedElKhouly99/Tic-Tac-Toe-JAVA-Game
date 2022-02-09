@@ -14,31 +14,28 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import player.AllPlayers;
 import player.Players;
 import static player.Players.playersVector;
 
 //invite::player2_id"abanoub", id="soly"
 //accept::player1_id"soly"::abanoub
-
 /**
  *
  * @author START
  */
 public class MessageParser {
-    
-//    static Vector<Players> LoggedinPlayers = new Vector<Players>();
+
+
     public static void checkClientMsg(String msg, ClientHandler ch) throws IOException {
-        
+
         String[] arrString = msg.split("::");
-        
-      ch.outObj.flush();
+
+        ch.outObj.flush();
         switch (arrString[0]) {
             case "login":
-               playersVector.forEach(e->{
-                    if(e.getUsername().equals(arrString[1])){
+                playersVector.forEach(e -> {
+                    if (e.getUsername().equals(arrString[1])) {
                         try {
                             ch.outObj.writeObject("login::exist");
                             return;
@@ -47,86 +44,50 @@ public class MessageParser {
                         }
                     }
                 });
-                
-                //ch.outS.println("3abat");
-                /*-------------------login::username::password----------------------*/
-                if(isUser(arrString[1], arrString[2], ch.p)){
-                //if (ch.p != null) {
 
-                    System.out.println("correct user!!");
-                    
-                    //LoggedinPlayers.add(p);
-                    //ch.thisUname = ch.p.getUsername();
-                    System.out.println(ch.p.getUsername());
-                    
-                    System.out.println(ch.p.getUsername());
+
+                /*-------------------login::username::password----------------------*/
+                if (isUser(arrString[1], arrString[2], ch.p)) {
+
                     playersVector.add(ch.p);
                     ch.outObj.writeObject("login::done");
-                    //ch.outS.println("login::done");
+
                 } else {
                     ch.outObj.writeObject("login::failed");
-                    //ch.outS.println("login::failed");
+
                     clientsVector.removeElement(ch);
                 }
-                
+
                 break;
-                
+
             case "signup":/*-------------------signup::username::password----------------------*/
 
-//                Players p1 = new Players(arrString[1], arrString[2]);
-                if(addUser(arrString[1], arrString[2], ch.p)){
+                if (addUser(arrString[1], arrString[2], ch.p)) {
                     ch.outObj.writeObject("signup::done");
-                }else{
+                } else {
                     ch.outObj.writeObject("signup::failed");
-                }    
-         /*------------Insert user data from database----------*/
-                
-                break; 
-                
+                }
+                /*------------Insert user data from database----------*/
+
+                break;
+
             case "onlinePlayers":
-                
+
                 ch.outObj.writeObject(new Vector<Players>(playersVector));
                 break;
-                
+
             case "rankings":
-                System.out.println("rankings");
-                System.out.println(Database.getAllPlayers());
+
                 ch.outObj.writeObject(new ArrayList<AllPlayers>(Database.getAllPlayers()));
                 break;
 
-            case "finished_playing":
-                /*-------------------playing::username::winnerStatus----------------------*/
-
- /*------------In a game----------*/
-                break;
-
-            case "paused_playing":
-                /*-------------------playing::username::winnerStatus----------------------*/
-
- /*------------In a game----------*/
-                break;
-
-            case "notplaying":
-                /*-------------------notplaying::username::waitinginqueue/notwaiting--------------------*/
-
- /*------------Not doing anything----------*/
-                break;
-
-            //sender1
-            case "message":
-                /*-------------------message::username1::username2/all chat----------------------*/
-
-
- /*------------Writting a message----------*/
-                break;
+           
 
             case "invite"://invite::khouly
-                System.out.println(msg);
+
                 clientsVector.forEach((e) -> {
-                    System.out.println(e.p.getUsername());
                     if (e.p.getUsername().equals(arrString[1])) {
                         try {
-                            //                        System.out.println(ch.thisUname+"***");
                             e.outObj.writeObject("invitedyou::" + ch.p.getUsername());//invitedyou::Soly
                         } catch (IOException ex) {
                             Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
@@ -140,7 +101,6 @@ public class MessageParser {
                 clientsVector.forEach((e) -> {
                     if (e.p.getUsername().equals(arrString[1])) {
                         try {
-                            System.out.println(e.p.getUsername());
                             ch.player2Handler = e;
                             e.player2Handler = ch;
                             ch.p.setInGame(true);
@@ -156,11 +116,11 @@ public class MessageParser {
                 });
                 // if accepted start game
                 break;
-                
+
             case "reject":
-                    clientsVector.forEach((e) -> {
+                clientsVector.forEach((e) -> {
                     if (e.p.getUsername().equals(arrString[1])) {
-                        try {                            
+                        try {
                             e.outObj.writeObject("inviteRejected");
                             return;
                         } catch (IOException ex) {
@@ -179,69 +139,64 @@ public class MessageParser {
 
             case "winner"://winner                
                 /*-------------------playing::username::turn::indexPlaymove----------------------*/
-                
-                ch.p.setScore(ch.p.getScore()+10);
+
+                ch.p.setScore(ch.p.getScore() + 10);
                 Database.editPlayer(ch.p);
 
-                break;  
-            
+                break;
+
             case "recordrequest":
                 ch.player2Handler.outObj.writeObject("record");
-                
+
                 break;
-            
+
             case "recordaccept":
                 ch.player2Handler.outObj.writeObject("recordaccepted");
 
                 break;
-            
+
             case "finishgame":
-                ch.player2Handler.player2Handler=null;
-                ch.player2Handler=null;
-                            
+                ch.player2Handler.player2Handler = null;
+                ch.player2Handler = null;
+
                 break;
-                
+
             case "exited":
-                
+
                 ch.player2Handler.outObj.writeObject("exitgame");
-                
-                break; 
-                
+
+                break;
+
             case "getGame":
                 Game g = Database.getGame(arrString[1], arrString[2]);
-                if(g != null){
+                if (g != null) {
                     ch.outObj.writeObject(g);
-                    
+
                     clientsVector.forEach((e) -> {
-                    System.out.println(e.p.getUsername());
-                    if (e.p.getUsername().equals(arrString[2])) {
-                        try {
-                            //                        System.out.println(ch.thisUname+"***");
-                            e.outObj.writeObject(g);//invitedyou::Soly
-                        } catch (IOException ex) {
-                            Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
+                        if (e.p.getUsername().equals(arrString[2])) {
+                            try {
+                                e.outObj.writeObject(g);//invitedyou::Soly
+                            } catch (IOException ex) {
+                                Logger.getLogger(MessageParser.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            return;
                         }
-                        return;
-                    }
-                });
-                    
-                    
-//                    ch.player2Handler.outObj.writeObject(g);
-                    
-                }else{
+                    });
+
+                } else {
                     ch.outObj.writeObject(null);
                 }
-                
+
                 break;
-                
-////            
+
+      
             case "tie"://winner                
                 /*-------------------playing::username::turn::indexPlaymove----------------------*/
 
-                ch.p.setScore(ch.p.getScore()+5);
+                ch.p.setScore(ch.p.getScore() + 5);
                 Database.editPlayer(ch.p);
 
-                break;    
+                break;
         }
     }
 
@@ -250,12 +205,10 @@ public class MessageParser {
     }
 
     private static boolean addUser(String uname, String pass, Players p) {
-        if(Database.isPlayer(uname, pass, p)){
+        if (Database.isPlayer(uname, pass, p)) {
             return false;
         }
         return Database.addPlayer(uname, pass);
     }
-       
-    
-    
-}    
+
+}

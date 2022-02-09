@@ -42,11 +42,11 @@ public class MainController implements Initializable {
     private int lastNumberOfOnlinePlayers;
     static boolean startStatusFlag;
     static boolean stopStatusFlag;
-    private int SERVER_SOCKET_PORT;    
-    
+    private int SERVER_SOCKET_PORT;
+
     static ServerSocket myServerSocket;
     static Vector<ClientHandler> clietnsVector;
-    
+
     @FXML
     private Button activateBtn;
     @FXML
@@ -75,50 +75,46 @@ public class MainController implements Initializable {
     private TableView<AllPlayers> tabViewOnlinePlayers;
     @FXML
     private TableView<AllPlayers> tabViewAllPlayers;
-    
 
     // all players
-    List<AllPlayers> listOfAllPlayers = new ArrayList<AllPlayers>();  
+    List<AllPlayers> listOfAllPlayers = new ArrayList<AllPlayers>();
     ObservableList<AllPlayers> listOfAllPlayersForTable;
     // online
     Vector<Players> onlinePlayersVector;
-    List<AllPlayers> onlinePlayersList = new ArrayList<AllPlayers>();  
+    List<AllPlayers> onlinePlayersList = new ArrayList<AllPlayers>();
     ObservableList<AllPlayers> listOfOnlinePlayersForTable;
-    
-   
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         SERVER_SOCKET_PORT = 5005;
         lastNumberOfOnlinePlayers = 0;
         startStatusFlag = false;
         stopStatusFlag = true;
-        
+
         /* for list of players */
-        onlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
-        onlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
-        onlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
-        offlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("rank"));
-        offlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers,String>("username"));
-        offlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers,Integer>("score"));
-        
-    } 
-    
-    
+        onlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers, Integer>("rank"));
+        onlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers, String>("username"));
+        onlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers, Integer>("score"));
+        offlinePlayerRank.setCellValueFactory(new PropertyValueFactory<AllPlayers, Integer>("rank"));
+        offlinePlayerName.setCellValueFactory(new PropertyValueFactory<AllPlayers, String>("username"));
+        offlinePlayerScore.setCellValueFactory(new PropertyValueFactory<AllPlayers, Integer>("score"));
+
+    }
+
     @FXML
     private void handleActivateAndDeactivateAction(ActionEvent event) {
-        if(event.getSource() == activateBtn && startStatusFlag == false && stopStatusFlag == true)
-        {
+        if (event.getSource() == activateBtn && startStatusFlag == false && stopStatusFlag == true) {
             startStatusFlag = true;
             stopStatusFlag = false;
-            
+
             StartThreadToAcceptClients();
             startThreedToUpdateServerGui();
-            
-            /* change the button image to deactive next time (execute in UpdateThread)*/ 
+
+            /* change the button image to deactive next time (execute in UpdateThread)*/
             ImageView imageView = new ImageView(getClass().getResource("images/power-off.jpg").toExternalForm());
             imageView.setFitWidth(56);
             imageView.setFitHeight(56);
@@ -128,29 +124,27 @@ public class MainController implements Initializable {
             /* server status */
             serverStatus.setText("ON");
             activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
-            activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");   
-            
-        }else {
-            
+            activateBtn.setStyle("-fx-background-color: #FA5353; -fx-background-radius: 2em;");
+
+        } else {
+
             startStatusFlag = false;
             stopStatusFlag = true;
-            
+
             /* for delete the list from the screen when teh server deactivated */
-            if(onlinePlayersList.size() != 0)
-            {
+            if (onlinePlayersList.size() != 0) {
                 tabViewOnlinePlayers.getItems().clear();
                 onlinePlayersList.clear();
             }
-            if(listOfAllPlayers.size() != 0)
-            {
+            if (listOfAllPlayers.size() != 0) {
                 tabViewAllPlayers.getItems().clear();
                 listOfAllPlayers.clear();
             }
-            
+
             /* reset this variable to relist online players */
             lastNumberOfOnlinePlayers = 0;
-  
-            /* change the button image to active next time */ 
+
+            /* change the button image to active next time */
             ImageView imageView = new ImageView(getClass().getResource("images/power-on-button.png").toExternalForm());
             imageView.setFitWidth(56);
             imageView.setFitHeight(56);
@@ -161,84 +155,86 @@ public class MainController implements Initializable {
             serverStatus.setText("OFF");
             activateDeactivateImage.setStyle("-fx-background-radius: 2em;");
             activateBtn.setStyle("-fx-background-color: #71c213; -fx-background-radius: 2em; ");
-           
+
             actionAtServerAppClose();
-        }    
+        }
     }
-   
- 
-    /**************************************************************************/
-    /***************** thread for the server to accept clients ****************/
-    
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * *************** thread for the server to accept clients ***************
+     */
     private static Thread acceptClientsThread;
-    private void StartThreadToAcceptClients()
-    {
-        Runnable runnable = new Runnable(){
+
+    private void StartThreadToAcceptClients() {
+        Runnable runnable = new Runnable() {
             @Override
-            public void run(){
-                
-                try{
+            public void run() {
+
+                try {
                     myServerSocket = new ServerSocket(SERVER_SOCKET_PORT);
-                    while(true){
+                    while (true) {
                         Socket internalSocket = myServerSocket.accept();
-                        
+
                         new ClientHandler(internalSocket);
-                    }    
-                }catch(Exception e){
-                }   
+                    }
+                } catch (Exception e) {
+                }
             }
         };
-        
+
         acceptClientsThread = new Thread(runnable);
         acceptClientsThread.start();
     }
-    
-    static void endThreadThatAcceptClients()
-    {
+
+    static void endThreadThatAcceptClients() {
         acceptClientsThread.stop();
     }
-    
-    
-    /**************************************************************************/
-    /**************** thread to renew the data of server screen ***************/
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * ************** thread to renew the data of server screen **************
+     */
     private static Thread updateServerGuiThread;
-    private void startThreedToUpdateServerGui(){
+
+    private void startThreedToUpdateServerGui() {
         Runnable task = new Runnable() {
-            public void run(){
+            public void run() {
                 runTask();
             }
         };
         updateServerGuiThread = new Thread(task);
         updateServerGuiThread.start();
     }
-    
-    private void runTask(){     
-        while(true)
-        { 
-            try
-            {
+
+    private void runTask() {
+        while (true) {
+            try {
                 /* get all players */
                 listOfAllPlayers = Database.getAllPlayers();
                 listOfAllPlayersForTable = FXCollections.observableArrayList(listOfAllPlayers);
                 /* get the online players */
                 onlinePlayersVector = Players.playersVector;
-                if(lastNumberOfOnlinePlayers != onlinePlayersVector.size())
-                {
-                    if(lastNumberOfOnlinePlayers != 0)
+                if (lastNumberOfOnlinePlayers != onlinePlayersVector.size()) {
+                    if (lastNumberOfOnlinePlayers != 0) {
                         tabViewOnlinePlayers.getItems().clear();
+                    }
 
                     lastNumberOfOnlinePlayers = onlinePlayersVector.size();
                     onlinePlayersList.clear();
-                    for(Players player: onlinePlayersVector)
-                    {
-                        onlinePlayersList.add(new AllPlayers(0 , player.getUsername(), player.getScore()));
+                    for (Players player : onlinePlayersVector) {
+                        onlinePlayersList.add(new AllPlayers(0, player.getUsername(), player.getScore()));
                     }
                     onlinePlayersList = setPlayersRank(onlinePlayersList);
                     listOfOnlinePlayersForTable = FXCollections.observableArrayList(onlinePlayersList);
                 }
 
-                Platform.runLater( new Runnable(){
-                    public void run(){    
+                Platform.runLater(new Runnable() {
+                    public void run() {
                         /* for online players */
                         tabViewOnlinePlayers.setItems(listOfOnlinePlayersForTable);
 
@@ -246,22 +242,24 @@ public class MainController implements Initializable {
                         tabViewAllPlayers.setItems(listOfAllPlayersForTable);
                     }
                 });
-                
+
                 updateServerGuiThread.sleep(500);
-            }catch(InterruptedException e){
+            } catch (InterruptedException e) {
             }
         }
     }
-    
-    static void endThreadThatUpdateServerGui()
-    {
+
+    static void endThreadThatUpdateServerGui() {
         updateServerGuiThread.stop();
     }
-    
-    /**************************************************************************/
-    /******************* action should take at close the server ***************/
-    static void actionAtServerAppClose()
-    {
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * ***************** action should take at close the server **************
+     */
+    static void actionAtServerAppClose() {
         /* close the thread resposible for accept clients */
         endThreadThatAcceptClients();
         /* close the thread resposible for make changes on the GUI */
@@ -269,8 +267,7 @@ public class MainController implements Initializable {
 
         /* wait all internal sockets (threads that stands against) */
         clietnsVector = ClientHandler.getClientsVector();
-        for(ClientHandler ch: clietnsVector)
-        {
+        for (ClientHandler ch : clietnsVector) {
             try {
                 ch.status = false;
                 ch.inObj.close();
@@ -279,37 +276,31 @@ public class MainController implements Initializable {
                 Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         /* close the socket of the server */
         try {
             myServerSocket.close();
         } catch (IOException ex) {
         }
     }
-    
-    
-    private List<AllPlayers> setPlayersRank(List<AllPlayers> list)
-    {
+
+    private List<AllPlayers> setPlayersRank(List<AllPlayers> list) {
         int sorted = 0;
-        for(int counter = 0; counter < list.size() - 1 && sorted == 0; counter++)
-        {
+        for (int counter = 0; counter < list.size() - 1 && sorted == 0; counter++) {
             sorted = 1;
-            for(int index = 0; index < list.size() - 1 - counter; index++)
-            {
-                if(list.get(index).getScore() < list.get(index+1).getScore())
-                {
+            for (int index = 0; index < list.size() - 1 - counter; index++) {
+                if (list.get(index).getScore() < list.get(index + 1).getScore()) {
                     AllPlayers temp = list.get(index);
-                    list.set(index, list.get(index+1));
-                    list.set(index+1, temp);
+                    list.set(index, list.get(index + 1));
+                    list.set(index + 1, temp);
                     sorted = 0;
                 }
             }
         }
-        for(int counter=0 ; counter<list.size() ; counter++)
-        {
-            list.get(counter).setRank(counter+1);
+        for (int counter = 0; counter < list.size(); counter++) {
+            list.get(counter).setRank(counter + 1);
         }
-  
+
         return list;
-    }  
+    }
 }

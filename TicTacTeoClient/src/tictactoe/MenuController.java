@@ -10,36 +10,29 @@ import game.Game;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.Provider.Service;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Timer;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -50,8 +43,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javax.swing.ImageIcon;
 import player.Players;
@@ -72,12 +63,11 @@ public class MenuController extends Thread implements Initializable {
 
     static StackPane pane;
     Stage window;
-//    public static Stage homeStage;
+
 
     static boolean turnThread = true;
     static boolean waitTh = false;
-//    Timer time;
-//    InterruptTimerTask interruptTimerTask;
+
 
     @FXML
     private Button LogoutBtn;
@@ -103,17 +93,15 @@ public class MenuController extends Thread implements Initializable {
             newGame.getStyleClass().add("btn");
             resume.setPrefSize(50, 50);
             newGame.setTranslateX(-30);
-//            File file = new File();
+
             newGame.getStyleClass().add("BtnLive");
             resume.getStyleClass().add("BtnLive");
             newGame.setStyle("-fx-background-color: #4adeed ");
             resume.setStyle("-fx-background-color: #4adeed ");
 
-//Image image = new Image(new FileInputStream("file:images/newgame.png"));
-//        Image image = new Image("file:images/newgame.png");
+
             ImageView newGameImg = new ImageView("newgame.png");
-//        newGameImg.setImage();
-//             ImageView newGameImg = new ImageView("tictactoe.images/newgame.png");
+
             newGameImg.setFitHeight(20);
             newGameImg.setFitWidth(20);
             newGameImg.setPreserveRatio(true);
@@ -138,11 +126,9 @@ public class MenuController extends Thread implements Initializable {
                     String[] invitePlay = label.getText().split("\t");
 
                     turnThread = false;
-                    System.out.println(label.getText());
 
-//                       Parent root = null;
-//                    try {
-//                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+
+
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.initModality(Modality.APPLICATION_MODAL);
                     ButtonType buttonSave = new ButtonType("Invite");
@@ -162,11 +148,11 @@ public class MenuController extends Thread implements Initializable {
                             Parent root = null;
                             if (p.getUsername().equals(invitePlay[0]) && !p.isInGame()) {
                                 try {
-//                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+
                                     PlayerSocket.outObj.writeObject("invite::" + invitePlay[0]);
 
                                     String respond = (String) PlayerSocket.inObj.readObject();
-                                    System.out.println(respond);
+
                                     if (respond.equals("inviteAccepted")) {
                                         try {
                                             waitTh = false;
@@ -202,38 +188,11 @@ public class MenuController extends Thread implements Initializable {
                                 }
 
                             }else{
-//                                Alert alert2 = new Alert(AlertType.INFORMATION);
-//                                alert2.initModality(Modality.APPLICATION_MODAL);
-//                                alert2.setTitle("Invitation");
-//                                alert2.setHeaderText(invitePlay[0] + "is in a game!");
-//                                DialogPane dialogPane2 = alert2.getDialogPane();
-//                                dialogPane2.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-//                                dialogPane2.getStyleClass().add("myDialog");
-//                                alert2.show();
+
                             }
 
                         });
-//                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
-//                        PlayerSocket.outObj.writeObject("invite::"+invitePlay[0]);
-//
-//                        String respond = (String)PlayerSocket.inObj.readObject();
-//                        System.out.println(respond);
-//                        if(respond.equals("inviteAccepted")){
-//                            waitTh = false;
-//                            turnThread = false;
-//                            Players.vsPlayer=new Players();
-//                            Players.vsPlayer.setScore(Integer.parseInt(invitePlay[1]));
-//                            Players.vsPlayer.setUsername(invitePlay[0]);
-//                            Players.vsPlayer.setInGame(true);
-//                            Players.myPlayer.setInGame(true);
-//                            root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-//                            Stage window = (Stage) newGame.getScene().getWindow();
-//                            window.setScene(new Scene(root));
-//                            
-//                        }else{
-//                            turnThread = true;
-//                            
-//                        }
+
                     }else{
                         Alert alert1 = new Alert(AlertType.INFORMATION);
                         alert1.initModality(Modality.APPLICATION_MODAL);
@@ -244,12 +203,6 @@ public class MenuController extends Thread implements Initializable {
                         dialogPane1.getStyleClass().add("myDialog");
                         alert1.show();
                     }
-
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (ClassNotFoundException ex) {
-//                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
                 }
             });
             //----------Resume Button Event Handler ----------------------------//
@@ -260,11 +213,8 @@ public class MenuController extends Thread implements Initializable {
                          String[] invitePlay = label.getText().split("\t");
 
                          turnThread = false;
-                         System.out.println(label.getText());
 
-//                       Parent root = null;
-//                    try {
-//                        PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+
                          Alert alert = new Alert(AlertType.CONFIRMATION);
                          alert.initModality(Modality.APPLICATION_MODAL);
                          ButtonType buttonSave = new ButtonType("resume");
@@ -284,7 +234,7 @@ public class MenuController extends Thread implements Initializable {
                                  Parent root = null;
                                  if (p.getUsername().equals(invitePlay[0]) && !p.isInGame()) {
                                      try {
-//                                    PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
+
                                          PlayerSocket.outObj.writeObject("getGame::"+Players.myPlayer.getUsername()+"::"+ invitePlay[0]);
                                          Object res = (Object)PlayerSocket.inObj.readObject();
 
@@ -293,11 +243,10 @@ public class MenuController extends Thread implements Initializable {
                                          if(res != null){
                                              Game.myGame = (Game)res;
                                              PlayerSocket.outObj.writeObject("invite::"+label.getText().split("\t")[0]);
-                                             System.out.println(Game.myGame);
-//                                         }
-//!(res.getClass() == myGame.getClass())
+
+
                                          String respond = (String) PlayerSocket.inObj.readObject();
-                                         System.out.println(respond);
+
                                          if (respond.equals("inviteAccepted")) {
                                              try {
                                                  waitTh = false;
@@ -335,12 +284,7 @@ public class MenuController extends Thread implements Initializable {
              }
         
 
-//        public void setStage(){
-//            Parent root = null;
-//            root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-//            Stage window = (Stage) newGame.getScene().getWindow();
-//            window.setScene(new Scene(root));
-//        }
+
         @Override
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
@@ -356,8 +300,7 @@ public class MenuController extends Thread implements Initializable {
             }
         }
     }
-//Vector<Players> ConnectedPlayers;
-//Thread onlineUsrs;
+
 
     /**
      * Initializes the controller class.
@@ -365,7 +308,7 @@ public class MenuController extends Thread implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-//        onlineUsrs.start();
+
           waitTh=false;
           turnThread=true;
      
@@ -395,7 +338,7 @@ public class MenuController extends Thread implements Initializable {
 
         returnBtn.getStyleClass().add("BtnLive");
         hboxheader.setStyle("-fx-background-color: #dcf5f5; ");
-        //lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
+
         pane = new StackPane();
         BorderPane borderpane = new BorderPane();
         hboxheader.setPrefHeight(70);
@@ -423,16 +366,14 @@ public class MenuController extends Thread implements Initializable {
         });
 
         start();
-//>>>>>>> ed9b659c5d76bfab01ae03af81a6cba7db975c83
+
         Stage window = (Stage) StartGameBtn.getScene().getWindow();
         Scene scene = new Scene(borderpane, 500, 500);
         scene.getStylesheets().add(getClass().getResource("BackGround.css").toString());
         window.setScene(scene);
 
     }
-//        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayerMode.fxml"));
-//        Stage window = (Stage) StartGameBtn.getScene().getWindow();
-//        window.setScene(new Scene(root));
+
 
     @FXML
     void Logout(ActionEvent event) throws IOException {
@@ -445,7 +386,7 @@ public class MenuController extends Thread implements Initializable {
     static Game anyGame=new Game();
     
     private void checkInvite(String user) {
-//          boolean ok = false;
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -466,7 +407,7 @@ public class MenuController extends Thread implements Initializable {
                 if (result.get() == buttonSave) {
                     try {
                         PlayerSocket.outObj.writeObject("accept::" + user);
-                        //PlayerSocket.inObj.readObject();
+
                         Players.vsPlayer = new Players();
                         Players.vsPlayer.setUsername(user);
                         ConnectedPlayers.forEach(p
@@ -477,27 +418,9 @@ public class MenuController extends Thread implements Initializable {
                         });
                         
                         Players.vsPlayer.setInGame(true);
-//<<<<<<< HEAD
-//                        Players.myPlayer.setInGame(true);waitTh = false;
-//                        if(Game.myGame.getUsername1_x() != null){
-//                            if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
-//                                PlayerSocket.inObj.readObject();}
-//                        waitTh = false;
-//                        Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-//                        Stage window = (Stage) pane.getScene().getWindow();
-//                        window.setScene(new Scene(root));
-////                        stop();
-//=======
+
                         Players.myPlayer.setInGame(true);
 
-
-//                        PlayerSocket.inObj.readObject();
-
-
-//                        if(Game.myGame.getUsername1_x() != null){
-//                            if(Game.myGame.getUsername1_x().equals(user) || Game.myGame.getUsername2_o().equals(user))
-//                                PlayerSocket.inObj.readObject(); 
-//                        }
 
                         Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
                         Stage window = (Stage) pane.getScene().getWindow();
@@ -507,12 +430,10 @@ public class MenuController extends Thread implements Initializable {
 
                     } catch (IOException ex) {
                         Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//                    } catch (ClassNotFoundException ex) {G
-//                        Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else if (result.get() == buttonDontSave) {
-                    //System.out.println("reject********************************************");
-                    Game.myGame = null;
+
+                    Game.myGame.setUsername1_x(null);
                     try {
                         PlayerSocket.outObj.writeObject("reject::" + user);
                         PlayerSocket.inObj.readObject();
@@ -525,7 +446,6 @@ public class MenuController extends Thread implements Initializable {
 
             }
         });
-//          return ok;
     }
 
     public static Vector<Players> ConnectedPlayers=new Vector<>();
@@ -543,36 +463,18 @@ public class MenuController extends Thread implements Initializable {
                 try {
                     PlayerSocket.outObj.writeObject("onlinePlayers");
                     Object checkType = PlayerSocket.inObj.readObject();
-                    System.out.println(checkType.getClass());
+
                     String msg = new String();
-//                    Game.myGame = new Game();
+
                     if (checkType.getClass() == msg.getClass()) {
-                        System.out.println((String) checkType);
+
                         String[] arrString = ((String) checkType).split("::");
 
                         checkInvite(arrString[1]);
 
-//                    PlayerSocket.outObj.writeObject("accept::"+arrString[1]);
-//                    PlayerSocket.inObj.readObject();
-//                    Platform.runLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                Parent root = FXMLLoader.load(getClass().getResource("MultiPlayersMode.fxml"));
-//                                Stage window = (Stage) pane.getScene().getWindow();
-//                                window.setScene(new Scene(root));
-//                            } catch (IOException ex) {
-//                                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//                            }
-//                        }
-//                    });
-//                    stop();
-//                    waitTh = false;
-//                    turnThread = true;
-                    } else //                ConnectedPlayers = (Vector<Players>)PlayerSocket.inObj.readObject();    
+                    } else //                
                     if(checkType.getClass() == anyGame.getClass()){
                         Game.myGame = (Game)checkType;
-//                        turnThread = true;
                     }
                     else if(checkType.getClass() == ConnectedPlayers.getClass()){
                         ConnectedPlayers = (Vector<Players>) checkType;
@@ -582,14 +484,18 @@ public class MenuController extends Thread implements Initializable {
                         public void run() {
                             pane.getChildren().removeAll();
                             String[] info = new String[ConnectedPlayers.size() - 1];
-                            System.out.println(ConnectedPlayers);
                             int i = 0;
                             for (Players p : ConnectedPlayers) {
                                 if (p.getUsername().equals(Players.myPlayer.getUsername())) {
                                     Players.myPlayer.setScore(p.getScore());
                                     continue;
                                 }
-                                info[i] = p.getUsername() + "\t" + p.getScore();
+
+                                if(p.isInGame()){
+                                    info[i] = p.getUsername() + "\t" + p.getScore()+"\tin a game!";
+                                }else{
+                                    info[i] = p.getUsername() + "\t" + p.getScore();
+                                }
                                 i++;
                             }
                             ObservableList<String> list = FXCollections.observableArrayList(info);

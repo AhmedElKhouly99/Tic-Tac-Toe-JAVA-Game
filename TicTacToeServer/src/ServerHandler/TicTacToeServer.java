@@ -30,52 +30,55 @@ import javafx.stage.Stage;
  * @author ahmed
  */
 public class TicTacToeServer extends Application {
-    
+
     Label clientNum;
     Label numField; // using Lable here as i could set the text of it and give it initial value(0) to show
     Label clients;
     FlowPane clientsField; // using FlowPane here not Label as i can't appent text on label
-     
+
     Button refreshBtn;
     Button closeBtn;
-    
+
     FlowPane lapelPane;
     FlowPane textFieldPane;
     FlowPane buttonsPane;
     BorderPane rootPane;
-     
+
     Scene myScene;
-    
+
     ServerSocket myServerSocket;
 
     Vector<ClientHandler> clietnsVector;
-    
+
     @Override
-    public void init()
-    {
-        
+    public void init() {
+
         new Database();
-        /**********************************************************************/
-        /*************************** the server GUI ***************************/
+        /**
+         * *******************************************************************
+         */
+        /**
+         * ************************* the server GUI **************************
+         */
         clientNum = new Label("Client Num: ");
         clientNum.setPrefWidth(100);
         numField = new Label("0");
-        
+
         clients = new Label("Online Clients: ");
-        clients.setPadding(new Insets(0, 0, 0,10));
+        clients.setPadding(new Insets(0, 0, 0, 10));
         clientsField = new FlowPane(Orientation.VERTICAL);
-        clientsField.setPadding(new Insets(0,0,0,10)); // to make it aligne the word "Online Clients"
-       
+        clientsField.setPadding(new Insets(0, 0, 0, 10)); // to make it aligne the word "Online Clients"
+
         refreshBtn = new Button("Refresh");
         closeBtn = new Button("Close");
-        
-        lapelPane = new FlowPane( clientNum, numField);
+
+        lapelPane = new FlowPane(clientNum, numField);
         lapelPane.setVgap(20);
         lapelPane.setPadding(new Insets(10, 0, 10, 10));
-        
+
         buttonsPane = new FlowPane(refreshBtn, closeBtn);
         buttonsPane.setHgap(223);
-        
+
         rootPane = new BorderPane();
         rootPane.setTop(lapelPane);
         rootPane.setLeft(clients);
@@ -83,12 +86,12 @@ public class TicTacToeServer extends Application {
         rootPane.setBottom(buttonsPane);
 
         myScene = new Scene(rootPane, 350, 350);
-        
+
     }
-    
+
     @Override
     public void start(Stage primaryStage) {
-        
+
         /* close button action */
         closeBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -100,135 +103,130 @@ public class TicTacToeServer extends Application {
                 }
             }
         });
-        
-//        refreshBtn.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                        
-//            }
-//        });
 
         /* show the app */
         primaryStage.setTitle("TicTacToeServer!");
         primaryStage.setScene(myScene);
         primaryStage.show();
-             
+
         /* add the recovery code here */
-        
-        
         StartThreadToAcceptClients();
-        
+
         startThreedToUpdateServerGui();
     }
-    
+
     /* Actions taken when the server app closed */
     @Override
-    public void stop() throws IOException
-    {
+    public void stop() throws IOException {
         actionAtServerAppClose();
     }
-    
-    
-    /**************************************************************************/
-    /******************************* The main *********************************/
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * ***************************** The main ********************************
+     */
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Application.launch(args);
     }
-    
-    
-    
-    
-    /**************************************************************************/
-    /***************** thread for the server to accept clients ****************/
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * *************** thread for the server to accept clients ***************
+     */
     Thread acceptClientsThread;
-    private void StartThreadToAcceptClients()
-    {
-        Runnable runnable = new Runnable(){
+
+    private void StartThreadToAcceptClients() {
+        Runnable runnable = new Runnable() {
             @Override
-            public void run(){
-                
-                try{
+            public void run() {
+
+                try {
                     myServerSocket = new ServerSocket(5005);
-                    while(true){
+                    while (true) {
                         Socket internalSocket = myServerSocket.accept();
-                        
+
                         new ClientHandler(internalSocket);
-                    }    
-                }catch(Exception e){
-                    System.out.println("TicTacToeServer.start<in the thread>()");
-                }   
+                    }
+                } catch (IOException e) {
+
+                }
             }
         };
-        
+
         acceptClientsThread = new Thread(runnable);
         acceptClientsThread.start();
     }
-    
-    private void endThreadThatAcceptClients()
-    {
+
+    private void endThreadThatAcceptClients() {
         acceptClientsThread.stop();
     }
-    
-    
-    /**************************************************************************/
-    /**************** thread to renew the data of server screen ***************/
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * ************** thread to renew the data of server screen **************
+     */
     int lastSize = 1;
     Thread updateServerGuiThread;
-    private void startThreedToUpdateServerGui(){
+
+    private void startThreedToUpdateServerGui() {
         Runnable task = new Runnable() {
-            public void run(){
+            public void run() {
                 runTask();
             }
         };
         updateServerGuiThread = new Thread(task);
         updateServerGuiThread.start();
     }
-    
-    private void runTask(){     
-        while(true)
-        { 
-            try
-            {
+
+    private void runTask() {
+        while (true) {
+            try {
                 /* get the online clients */
                 clietnsVector = ClientHandler.getClientsVector();
-                Platform.runLater( new Runnable(){
-                    public void run(){
+                Platform.runLater(new Runnable() {
+                    public void run() {
                         numField.setText(new Integer(clietnsVector.size()).toString());
-                        if(lastSize != clietnsVector.size())
-                        {
+                        if (lastSize != clietnsVector.size()) {
                             lastSize = clietnsVector.size();
                             clientsField.getChildren().removeAll(clientsField.getChildren());
-                            for(ClientHandler ch: clietnsVector){                          
-                                clientsField.getChildren().add(new Label(ch.getId()+"\n"));
-                          }
+                            for (ClientHandler ch : clietnsVector) {
+                                clientsField.getChildren().add(new Label(ch.getId() + "\n"));
+                            }
                         }
                     }
                 });
-                
+
                 updateServerGuiThread.sleep(50);
-            }catch(InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-    
-    private void endThreadThatUpdateServerGui()
-    {
+
+    private void endThreadThatUpdateServerGui() {
         updateServerGuiThread.stop();
     }
-    
-    /**************************************************************************/
-    /******************* action should take at close the server ***************/
-    private void actionAtServerAppClose() throws IOException
-    {
-    clietnsVector = ClientHandler.getClientsVector();
-        
+
+    /**
+     * ***********************************************************************
+     */
+    /**
+     * ***************** action should take at close the server **************
+     */
+    private void actionAtServerAppClose() throws IOException {
+        clietnsVector = ClientHandler.getClientsVector();
+
         /* end all internal sockets (threads that stands against) */
-        for(ClientHandler ch: clietnsVector)
-        {
+        for (ClientHandler ch : clietnsVector) {
             try {
                 ch.currentThread().wait();
             } catch (InterruptedException ex) {
@@ -244,5 +242,5 @@ public class TicTacToeServer extends Application {
         /* terminate the  JavaFX application explicitly */
         Platform.exit();
     }
-    
+
 }
