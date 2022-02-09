@@ -1,6 +1,5 @@
 <h1 align="center">Tic-tac-Toe Game using JAVAFX</h1>   
-<h3 align="center">ITI students IoT and Telecom departments intake 42 (2022)</h3>  
-<h3 align="center">Project for JAVA course</h3> 
+<h3 align="center">ITI students, IoT and Telecom departments intake 42 (2022)</h3>  
 
 <p align="center">
   <img width="550" src="TicTacToeServer/src/ServerHandler/images/2.PNG">
