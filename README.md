@@ -9,15 +9,14 @@
 ## OBJECTIVE
 This project aims to develop a Tic Tac Toe game using Java. It mainly consists of developing and implementing two playing modes: Single Player and Multi-Player.
 
-<<<<<<< HEAD
+
 ## Database
 
 ![img](https://fv9-4.failiem.lv/thumb_show.php?i=nrfeucg2t&view)
 <p align="center">
   <img width="550" height="350" src="https://github.com/Tic-Tac-Toe-JAVA-Game/TicTacToeServer/src/ServerHandler/images/db.PNG">
 </p>
-=======
->>>>>>> ab4f496432925b84b41650c6cc6a2c9a8989f1b0
+
 
 ## Video Link 
 - https://youtu.be/EUCLO864xrQ 
