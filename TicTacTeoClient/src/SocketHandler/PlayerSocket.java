@@ -47,4 +47,24 @@ public class PlayerSocket {
             Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void sendMsg(Object mgs){
+        try {
+            outObj.writeObject(mgs);
+        } catch (IOException ex) {
+            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static Object receiveMsg(){
+        Object res = null;
+        try {
+            res  = (Object)inObj.readObject();
+        } catch (IOException ex) {
+            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return res;
+    }
 }

@@ -6,12 +6,14 @@
 package tictactoe;
 
 
+import SocketHandler.PlayerSocket;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -32,6 +34,11 @@ public class TicTacToe extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        primaryStage.setOnCloseRequest((event) -> {
+//            PlayerSocket.closeSoket();
+        });
+        
     }
 
     /**
