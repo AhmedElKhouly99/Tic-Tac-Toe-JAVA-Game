@@ -33,6 +33,7 @@ import javafx.stage.Stage;
  */
 public class LoginController implements Initializable {
 
+//    public static LoginController lg = new LoginController();
     @FXML
     private Button GoToRegisterBtn;
     @FXML
@@ -45,7 +46,7 @@ public class LoginController implements Initializable {
     private PasswordField passwordField;
 
     @FXML
-    private Button BackToMainBtn;
+    public static Button BackToMainBtn;
 
     static Vector<Players> playersVector = new Vector<Players>();
 
@@ -87,9 +88,10 @@ public class LoginController implements Initializable {
 
         } else {
             PlayerSocket.socketInit();
-            PlayerSocket.outObj.writeObject("login::" + unameField.getText() + "::" + passwordField.getText());
-            String respond = (String) PlayerSocket.inObj.readObject();
-
+//            PlayerSocket.outObj.writeObject("login::" + unameField.getText() + "::" + passwordField.getText());
+//            String respond = (String) PlayerSocket.inObj.readObject();
+            PlayerSocket.sendMsg((String)"login::" + unameField.getText() + "::" + passwordField.getText());
+            String respond = (String)PlayerSocket.receiveMsg();
             if ("login::done".equals(respond)) {
                 Players.myPlayer = new Players(uname, 0);
                 Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -103,15 +105,15 @@ public class LoginController implements Initializable {
                 dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                 dialogPane.getStyleClass().add("myDialog");
                 PlayerSocket.closeSoket();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Incorrect username or password");
-                alert.show();
-                DialogPane dialogPane = alert.getDialogPane();
-                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-                dialogPane.getStyleClass().add("myDialog");
-
-                PlayerSocket.closeSoket();
+//            } else {
+//                Alert alert = new Alert(Alert.AlertType.WARNING);
+//                alert.setContentText("Incorrect username or password");
+//                alert.show();
+//                DialogPane dialogPane = alert.getDialogPane();
+//                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+//                dialogPane.getStyleClass().add("myDialog");
+//
+//                PlayerSocket.closeSoket();
             }
 
         }

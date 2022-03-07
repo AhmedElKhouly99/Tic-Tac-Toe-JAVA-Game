@@ -105,6 +105,10 @@ public class MessageParser {
                             e.player2Handler = ch;
                             ch.p.setInGame(true);
                             e.p.setInGame(true);
+//                            playersVector.removeElement(ch.p);
+//                            playersVector.removeElement(e.p);
+//                            playersVector.add(ch.p);
+//                            playersVector.add(e.p);
                             e.outObj.writeObject("inviteAccepted");
                             e.outObj.writeObject("X");
                             ch.outObj.writeObject("O");

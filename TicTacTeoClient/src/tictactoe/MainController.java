@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 public class MainController implements Initializable {
 
     @FXML
-    private Button MultiPlayerBtn;
+    public Button MultiPlayerBtn;
     @FXML
     private Button singlePlayerBtn;
     @FXML

@@ -188,7 +188,13 @@ public class MenuController extends Thread implements Initializable {
                                 }
 
                             }else{
-
+                                Alert alert1 = new Alert(AlertType.INFORMATION);
+                                alert1.initModality(Modality.APPLICATION_MODAL);
+                                alert1.setTitle("Invitation");
+                                alert1.setHeaderText(invitePlay[0]+"in another game!");
+                                DialogPane dialogPane1 = alert.getDialogPane();
+                                dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                                dialogPane1.getStyleClass().add("myDialog");
                             }
 
                         });
@@ -326,18 +332,17 @@ public class MenuController extends Thread implements Initializable {
     void StartGame(ActionEvent event) throws IOException {
         Button returnBtn = new Button();
         ImageView returnImg = new ImageView("returnn.png");
-        returnImg.setFitHeight(25);
-        returnImg.setFitWidth(25);
+        returnImg.setFitHeight(30);
+        returnImg.setFitWidth(50);
         returnImg.setPreserveRatio(true);
         returnBtn.setGraphic(returnImg);
         Label onlinePlayers = new Label("List of Online Players , send a game request to start a game !");
         onlinePlayers.setStyle("-fx-text-fill: purple; -fx-font-size: 16px;");
         HBox hboxheader = new HBox();
-
+        hboxheader.setStyle("-fx-background-image: url('images/bg2.jpg');");
         waitTh = true;
 
         returnBtn.getStyleClass().add("BtnLive");
-        hboxheader.setStyle("-fx-background-color: #dcf5f5; ");
 
         pane = new StackPane();
         BorderPane borderpane = new BorderPane();
@@ -447,9 +452,9 @@ public class MenuController extends Thread implements Initializable {
             }
         });
     }
-
+//    public static ObservableList<String> list;
     public static Vector<Players> ConnectedPlayers=new Vector<>();
-
+//    public static ListView<String> lv = null;
     @Override
     public void run() {
         while (waitTh) {
@@ -460,10 +465,24 @@ public class MenuController extends Thread implements Initializable {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                try {
-                    PlayerSocket.outObj.writeObject("onlinePlayers");
-                    Object checkType = PlayerSocket.inObj.readObject();
-
+                    
+                    PlayerSocket.sendMsg("onlinePlayers");
+                    Object checkType = PlayerSocket.receiveMsg();
+                    if(checkType == null){
+                         Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                                    Stage window = (Stage) pane.getScene().getWindow();
+                                    window.setScene(new Scene(root));
+                                } catch (IOException ex) {
+                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                         });
+                         break;
+                    }
                     String msg = new String();
 
                     if (checkType.getClass() == msg.getClass()) {
@@ -476,7 +495,7 @@ public class MenuController extends Thread implements Initializable {
                     if(checkType.getClass() == anyGame.getClass()){
                         Game.myGame = (Game)checkType;
                     }
-                    else if(checkType.getClass() == ConnectedPlayers.getClass()){
+                    else if(checkType.getClass() == ConnectedPlayers.getClass()){ConnectedPlayers.clear();
                         ConnectedPlayers = (Vector<Players>) checkType;
                     }
                     Platform.runLater(new Runnable() {
@@ -498,25 +517,25 @@ public class MenuController extends Thread implements Initializable {
                                 }
                                 i++;
                             }
+
                             ObservableList<String> list = FXCollections.observableArrayList(info);
                             ListView<String> lv = new ListView<>(list);
                             lv.setPrefWidth(Screen.getPrimary().getVisualBounds().getWidth() - 200);
                             lv.setStyle("-fx-control-inner-background: #edcef1; -fx-background-radius: 5; -fx-border-color: #b023c1; -fx-border-style: solid; -fx-border-width: 2; -fx-border-radius: 5;");
-
+                            
                             lv.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
                                 @Override
                                 public ListCell<String> call(ListView<String> param) {
-                                    return new XCell();
+                                    XCell c = new XCell();
+                                     return c;
                                 }
                             });
+                            pane.getChildren().removeAll();
                             pane.getChildren().addAll(lv);
                         }
-                    });
+                    }); 
+                try {
                     sleep(2000);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
                 }

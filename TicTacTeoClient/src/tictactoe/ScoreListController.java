@@ -62,23 +62,27 @@ public class ScoreListController extends Thread implements Initializable {
     @Override
     public void run() {
         while (true) {
-            try {
-                PlayerSocket.outObj.writeObject("rankings");
-                Object res = (Object) PlayerSocket.inObj.readObject();
+//            try {
+//                PlayerSocket.outObj.writeObject("rankings");
+//                Object res = (Object) PlayerSocket.inObj.readObject();
+                PlayerSocket.sendMsg("rankings");
+                Object res = PlayerSocket.receiveMsg();
                 String garbage = "hhh";
+                if(res != null){
                 if (res.getClass() == garbage.getClass()) {
                     continue;
                 }
+                
                 List<AllPlayers> list = (List<AllPlayers>) res;
 
                 listM = FXCollections.observableArrayList(list);
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-
-                Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IOException ex) {
+//
+//                Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -87,12 +91,31 @@ public class ScoreListController extends Thread implements Initializable {
                     col_score.setCellValueFactory(new PropertyValueFactory<AllPlayers, Integer>("score"));
                     table_users.setItems(listM);
                 }
-            });
+            });}else{ 
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            Parent root = null;
+                            try {
+                                root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                            } catch (IOException ex) {
+                                Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Stage window = (Stage) BackBtn.getScene().getWindow();;
+                            window.setScene(new Scene(root));
+                        }
+                    });
+                    
+                    break;
+                }
             try {
                 sleep(200);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
             }
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(ScoreListController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
     }
 }

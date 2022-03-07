@@ -59,8 +59,8 @@ public class ClientHandler extends Thread {
 
                 if (clientStatus == null) // done at the client fallen
                 {
-                    clientsVector.removeElement(this);
                     playersVector.removeElement(this.p);
+                    clientsVector.removeElement(this);
                     this.currentThread().stop();
                 } else {
 
@@ -70,8 +70,8 @@ public class ClientHandler extends Thread {
             }
         } catch (Exception ex) {
             try {
-                clientsVector.removeElement(this);
                 playersVector.removeElement(this.p);
+                clientsVector.removeElement(this);               
                 this.currentThread().stop();
             } catch (Exception e) {
             }

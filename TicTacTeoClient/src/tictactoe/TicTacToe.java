@@ -7,13 +7,19 @@ package tictactoe;
 
 
 import SocketHandler.PlayerSocket;
+import game.Game;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import static tictactoe.MultiPlayerModeController.gameTh;
 
 /**
  *
@@ -36,9 +42,16 @@ public class TicTacToe extends Application {
         primaryStage.show();
         
         primaryStage.setOnCloseRequest((event) -> {
-//            PlayerSocket.closeSoket();
+            if(MultiPlayerModeController.gameTh){
+                PlayerSocket.sendMsg("exited");
+                Game.myGame.setUsername1_x(null);
+            }
+            Platform.exit();
+            System.exit(0);
+            if(PlayerSocket.inObj != null)
+                PlayerSocket.closeSoket();
         });
-        
+
     }
 
     /**

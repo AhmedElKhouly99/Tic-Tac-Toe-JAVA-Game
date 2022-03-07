@@ -89,8 +89,25 @@ public class MultiPlayerModeController implements Initializable {
             public void run() {
                 while (gameTh) {
                     try {
-                        msg = (String[]) (((String) PlayerSocket.inObj.readObject()).split("::"));
-
+                        Object res = PlayerSocket.receiveMsg();
+//                        msg = (String[]) (((String) res).split("::"));
+                        if(res == null){
+                            gameTh = false;
+                         Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                                    Stage window = (Stage) btn1.getScene().getWindow();
+                                    window.setScene(new Scene(root));
+                                } catch (IOException ex) {
+                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                         });myGameTh.stop();
+                         break;
+                    }
+                        msg = (String[]) (((String) res).split("::"));
                         if (msg[0].equals("record")) {
 
                             Platform.runLater(new Runnable() {
@@ -116,7 +133,8 @@ public class MultiPlayerModeController implements Initializable {
                                         try {
                                             gameTh = false;
                                             myGameTh.stop();
-                                            PlayerSocket.outObj.writeObject("recordaccept");
+                                            PlayerSocket.sendMsg("recordaccept");
+                                            Game.myGame.setUsername1_x(null);
                                             Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
                                             Stage window = (Stage) returnBtn.getScene().getWindow();
                                             PlayerSocket.closeSoket();
@@ -127,18 +145,18 @@ public class MultiPlayerModeController implements Initializable {
 
                                     } else {
 
-                                        try {
-                                            PlayerSocket.outObj.writeObject("recordreject");
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+//                                        try {
+                                            PlayerSocket.sendMsg("recordreject");
+//                                        } catch (IOException ex) {
+//                                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                                        }
                                     }
                                 }
                             });
 
                         } else if (msg[0].equals("recordaccepted")) {
 
-                            try {
+//                            try {
                                 String xplayer = null;
                                 String oplayer = null;
 
@@ -154,13 +172,13 @@ public class MultiPlayerModeController implements Initializable {
 
                                 Game cuurentGame = new Game(xplayer, oplayer, arrPlays[0], arrPlays[1], arrPlays[2], arrPlays[3], arrPlays[4], arrPlays[5], arrPlays[6], arrPlays[7], arrPlays[8], gameCOunter);
 
-                                try {
-                                    PlayerSocket.outObj.writeObject(cuurentGame);
-                                } catch (IOException ex) {
-                                    Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                PlayerSocket.outObj.writeObject("finishgame");
-
+//                                try {
+                                    PlayerSocket.sendMsg(cuurentGame);
+//                                } catch (IOException ex) {
+//                                    Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                                }
+                                PlayerSocket.sendMsg("finishgame");
+                                Game.myGame.setUsername1_x(null);
                                 Platform.runLater(new Runnable() {
                                     @Override
                                     public void run() {
@@ -178,9 +196,9 @@ public class MultiPlayerModeController implements Initializable {
                                     }
                                 });
 
-                            } catch (IOException ex) {
-                                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+//                            } catch (IOException ex) {
+//                                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
                         } else if (msg[0].equals("inviteAccepted")) {
                             for (int i = 0; i < 9; i++) {
                                 buttonsArr[i].setText("");
@@ -189,7 +207,7 @@ public class MultiPlayerModeController implements Initializable {
                             for (int i = 0; i < arrPlays.length; i++) {
                                 arrPlays[i] = (char) i;
                             }
-
+//                            Game.myGame.setUsername1_x(null);
                             playerWins = 2;
                             gameCOunter = 0;
                             if (symbol.equals("X")) {
@@ -231,11 +249,11 @@ public class MultiPlayerModeController implements Initializable {
                                         dialogPane1.getStyleClass().add("myDialog");
                                         alert1.show();
 
-                                        PlayerSocket.outObj.writeObject("winner");
-
+                                        PlayerSocket.sendMsg("winner");
+                                        Game.myGame.setUsername1_x(null);
                                         gameTh = false;
                                         myGameTh.stop();
-                                        PlayerSocket.outObj.writeObject("finishgame");
+                                        PlayerSocket.sendMsg("finishgame");
                                         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
                                         PlayerSocket.closeSoket();
                                         Stage window = (Stage) returnBtn.getScene().getWindow();
@@ -266,12 +284,12 @@ public class MultiPlayerModeController implements Initializable {
 
                                     if (result.get() == buttonSave) {
 
-                                        try {
-                                            PlayerSocket.outObj.writeObject("accept::" + Players.vsPlayer.getUsername());
+//                                        try {
+                                            PlayerSocket.sendMsg("accept::" + Players.vsPlayer.getUsername());
 
-                                        } catch (IOException ex) {
-                                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
+//                                        } catch (IOException ex) {
+//                                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                                        }
 
                                         Players.vsPlayer.setInGame(true);
                                         Players.myPlayer.setInGame(true);
@@ -348,7 +366,22 @@ public class MultiPlayerModeController implements Initializable {
             Object response;
             do {
 
-                response = PlayerSocket.inObj.readObject();
+                response = PlayerSocket.receiveMsg();
+                if(response == null){
+                         Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                                    Stage window = (Stage) btn1.getScene().getWindow();
+                                    window.setScene(new Scene(root));
+                                } catch (IOException ex) {
+                                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                         });
+                         break;
+                    }
 
             } while (response.getClass() != symbol.getClass());
             symbol = (String) response;
@@ -462,18 +495,20 @@ public class MultiPlayerModeController implements Initializable {
 
                     if (result.get() == buttonSave) {
 
-                        try {
+//                        try {
 
-                            PlayerSocket.outObj.writeObject("recordrequest");
+                            PlayerSocket.sendMsg("recordrequest");
                             String recordResponse = null;
+                            Game.myGame.setUsername1_x(null);
 
-                        } catch (IOException ex) {
-                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+//                        } catch (IOException ex) {
+//                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
 
                     } else if (result.get() == buttonDontSave) {
-                        try {
-                            PlayerSocket.outObj.writeObject("exited");
+//                        try {
+                            PlayerSocket.sendMsg("exited");
+                            Game.myGame.setUsername1_x(null);
                             PlayerSocket.closeSoket();
                             Platform.runLater(new Runnable() {
                                 @Override
@@ -492,16 +527,17 @@ public class MultiPlayerModeController implements Initializable {
                                 }
                             });
 
-                        } catch (IOException ex) {
-                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+//                        } catch (IOException ex) {
+//                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
                     }
                 }
 
             });
         } else {
-            try {
-                PlayerSocket.outObj.writeObject("finishgame");
+//            try {
+                PlayerSocket.sendMsg("finishgame");
+                
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -519,10 +555,10 @@ public class MultiPlayerModeController implements Initializable {
                     }
                 });
 
-            } //To change body of generated methods, choose Tools | Templates.
-            catch (IOException ex) {
-                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            } //To change body of generated methods, choose Tools | Templates.
+//            catch (IOException ex) {
+//                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
 
     }
@@ -548,7 +584,7 @@ public class MultiPlayerModeController implements Initializable {
 
                         gameCOunter++;
 
-                        PlayerSocket.outObj.writeObject("play::" + i);
+                        PlayerSocket.sendMsg("play::" + i);
 
                         check();
 
@@ -580,12 +616,12 @@ public class MultiPlayerModeController implements Initializable {
                     Optional<ButtonType> result = alert.showAndWait();
 
                     if (result.get() == buttonSave) {
-                        try {
-                            PlayerSocket.outObj.writeObject("invite::" + Players.vsPlayer.getUsername());
+//                        try {
+                            PlayerSocket.sendMsg("invite::" + Players.vsPlayer.getUsername());
 
-                        } catch (IOException ex) {
-                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+//                        } catch (IOException ex) {
+//                            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
                     } else {
 
                     }
@@ -599,15 +635,15 @@ public class MultiPlayerModeController implements Initializable {
         //check X win conditions
         int j;
 
-        if (gameCOunter == 9) {
-            playerOneName.setText("Tie");
-            try {
-                PlayerSocket.outObj.writeObject("tie");
-            } catch (IOException ex) {
-                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return;
-        }
+//        if (gameCOunter == 9) {
+//            playerOneName.setText("Tie");
+////            try {
+//                PlayerSocket.sendMsg("tie");
+////            } catch (IOException ex) {
+////                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+////            }
+//            return;
+//        }
 
         for (int i = 0; i < 3; i++) {
             j = i * 3;
@@ -671,6 +707,15 @@ public class MultiPlayerModeController implements Initializable {
             }
 
         }
+        if (gameCOunter == 9) {
+            playerOneName.setText("Tie");
+//            try {
+                PlayerSocket.sendMsg("tie");
+//            } catch (IOException ex) {
+//                Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+            return;
+        }
 
     }
 
@@ -679,11 +724,11 @@ public class MultiPlayerModeController implements Initializable {
         buttonsArr[a].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
         buttonsArr[b].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
         buttonsArr[c].setStyle("-fx-background-color: #00b100;-fx-text-fill: #ff0303;");
-        try {
-            PlayerSocket.outObj.writeObject("winner");
-        } catch (IOException ex) {
-            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+            PlayerSocket.sendMsg("winner");
+//        } catch (IOException ex) {
+//            Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public void youLose(int a, int b, int c) {
