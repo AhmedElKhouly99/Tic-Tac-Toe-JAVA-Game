@@ -70,7 +70,7 @@ public class RegisterController implements Initializable {
             dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
             dialogPane.getStyleClass().add("myDialog");
 
-        } else if (!(uname.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[_@#$%^&+=])(?=\\S+$).{8,}$"))) {
+        } else if (!(uname.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[_@#$%^&+=])(?=\\S+$).{8,}"))) {
             Alert alertUsername = new Alert(Alert.AlertType.ERROR);
             alertUsername.setContentText("Username must be: \n - At least 8 chars \n - Contains at least one digit \n - Contains at least one lower alpha char and one upper alpha char \n - Contains at least one char within a set of special chars (@#%$^ etc.)\n - Does not contain space, tab, etc.");
             alertUsername.show();
@@ -78,7 +78,7 @@ public class RegisterController implements Initializable {
             dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
             dialogPane.getStyleClass().add("myDialog");
 
-        } else if (!(pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$_%^&+=])(?=\\S+$).{8,}$"))) {
+        } else if (!(pass.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$_%^&+=])(?=\\S+$).{8,}"))) {
             Alert alertPass = new Alert(Alert.AlertType.ERROR);
             alertPass.setContentText("Password must be:\n - At least 8 chars \n - Contains at least one digit\n - Contains at least one lower alpha char and one upper alpha char\n - Contains at least one char within a set of special chars (@#%$^ etc.)\n - Does not contain space, tab, etc.");
             alertPass.show();

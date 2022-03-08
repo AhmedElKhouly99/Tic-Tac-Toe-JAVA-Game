@@ -105,15 +105,15 @@ public class LoginController implements Initializable {
                 dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
                 dialogPane.getStyleClass().add("myDialog");
                 PlayerSocket.closeSoket();
-//            } else {
-//                Alert alert = new Alert(Alert.AlertType.WARNING);
-//                alert.setContentText("Incorrect username or password");
-//                alert.show();
-//                DialogPane dialogPane = alert.getDialogPane();
-//                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-//                dialogPane.getStyleClass().add("myDialog");
-//
-//                PlayerSocket.closeSoket();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Incorrect username or password");
+                alert.show();
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+                dialogPane.getStyleClass().add("myDialog");
+
+                PlayerSocket.closeSoket();
             }
 
         }

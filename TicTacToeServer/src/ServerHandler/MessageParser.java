@@ -160,6 +160,7 @@ public class MessageParser {
                 break;
 
             case "finishgame":
+                ch.player2Handler.player2Handler.outObj.writeObject("out");
                 ch.player2Handler.player2Handler = null;
                 ch.player2Handler = null;
 
