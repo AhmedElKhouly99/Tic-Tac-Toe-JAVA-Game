@@ -61,7 +61,7 @@ public class LoginController implements Initializable {
     @FXML
     void BackToMain(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Stage window = (Stage) BackToMainBtn.getScene().getWindow();
+        Stage window = (Stage) GoToRegisterBtn.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
