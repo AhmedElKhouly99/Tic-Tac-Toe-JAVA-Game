@@ -553,13 +553,13 @@ public class MultiPlayerModeController implements Initializable {
                     try {
                         gameTh = false;
                         myGameTh.stop();
-                        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-                        Stage window = (Stage) btn1.getScene().getWindow();
-                        window.setScene(new Scene(root));
 //                        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-//                        PlayerSocket.closeSoket();
-//                        Stage window = (Stage) returnBtn.getScene().getWindow();
+//                        Stage window = (Stage) btn1.getScene().getWindow();
 //                        window.setScene(new Scene(root));
+                        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+                        PlayerSocket.closeSoket();
+                        Stage window = (Stage) returnBtn.getScene().getWindow();
+                        window.setScene(new Scene(root));
 
                     } catch (IOException ex) {
                         Logger.getLogger(MultiPlayerModeController.class.getName()).log(Level.SEVERE, null, ex);
