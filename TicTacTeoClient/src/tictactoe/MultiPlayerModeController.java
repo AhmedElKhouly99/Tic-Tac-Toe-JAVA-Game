@@ -233,7 +233,7 @@ public class MultiPlayerModeController implements Initializable {
                                 @Override
                                 public void run() {
                                     try {
-                                        if(playerWins == 2){
+                                        if(playerWins == 2 && gameCOunter != 9){
                                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                                         alert1.setTitle("Your Opponent has quit the game");
 
@@ -464,7 +464,7 @@ public class MultiPlayerModeController implements Initializable {
 
     @FXML
     private void backToMainPage(ActionEvent event) throws IOException {
-        if (playerWins == 2) {
+        if (playerWins == 2 && gameCOunter != 9) {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -611,8 +611,11 @@ public class MultiPlayerModeController implements Initializable {
                         youWin(i, 4, 8 - i);
 
                         playerWins = 1;
+                        
                         playerOneName.setText("You Win");
                         playerOneScore.setText("");
+                        Players.myPlayer.setScore(Players.myPlayer.getScore()+10);
+                        playerOneScore.setText(String.valueOf(Players.myPlayer.getScore()));
                     } else {
 
                         youLose(i, 4, 8 - i);
@@ -620,6 +623,8 @@ public class MultiPlayerModeController implements Initializable {
                         player1_turn = false;
                         playerOneName.setText("You lose");
                         playerOneScore.setText("");
+                        Players.vsPlayer.setScore(Players.vsPlayer.getScore()+10);
+                        playerTwoScore.setText(String.valueOf(Players.vsPlayer.getScore()));
                     }
                     return;
                 }
@@ -633,6 +638,8 @@ public class MultiPlayerModeController implements Initializable {
 
                     playerOneName.setText("You Win");
                     playerOneScore.setText("");
+                    Players.myPlayer.setScore(Players.myPlayer.getScore()+10);
+                    playerOneScore.setText(String.valueOf(Players.myPlayer.getScore()));
                 } else {
 
                     youLose(i, i + 3, i + 6);
@@ -640,6 +647,8 @@ public class MultiPlayerModeController implements Initializable {
                     player1_turn = false;
                     playerOneName.setText("You lose");
                     playerOneScore.setText("");
+                    Players.vsPlayer.setScore(Players.vsPlayer.getScore()+10);
+                    playerTwoScore.setText(String.valueOf(Players.vsPlayer.getScore()));
                 }
                 return;
             } else if ((arrPlays[j] == arrPlays[j + 1]) && (arrPlays[j + 1] == arrPlays[j + 2])) ///Check Rows
@@ -651,6 +660,8 @@ public class MultiPlayerModeController implements Initializable {
                     playerWins = 1;
                     playerOneName.setText("You Win");
                     playerOneScore.setText("");
+                    Players.myPlayer.setScore(Players.myPlayer.getScore()+10);
+                    playerOneScore.setText(String.valueOf(Players.myPlayer.getScore()));
                 } else {
 
                     youLose(j, j + 1, j + 2);
@@ -658,6 +669,8 @@ public class MultiPlayerModeController implements Initializable {
                     player1_turn = false;
                     playerOneName.setText("You lose");
                     playerOneScore.setText("");
+                    Players.vsPlayer.setScore(Players.vsPlayer.getScore()+10);
+                    playerTwoScore.setText(String.valueOf(Players.vsPlayer.getScore()));
                 }
                 return;
             }
@@ -665,6 +678,13 @@ public class MultiPlayerModeController implements Initializable {
         }
         if (gameCOunter == 9) {
             playerOneName.setText("Tie");
+            playerOneScore.setText("");
+            Players.myPlayer.setScore(Players.vsPlayer.getScore()+5);
+            playerOneScore.setText(String.valueOf(Players.myPlayer.getScore()));
+
+            playerOneScore.setText("");
+            Players.vsPlayer.setScore(Players.vsPlayer.getScore()+5);
+            playerTwoScore.setText(String.valueOf(Players.vsPlayer.getScore()));
             PlayerSocket.sendMsg("tie");
             return;
         }
