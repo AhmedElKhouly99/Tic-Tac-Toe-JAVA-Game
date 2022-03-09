@@ -194,16 +194,17 @@ public class MenuController extends Thread implements Initializable {
 
                         });
 
-                    } else {
-                        Alert alert1 = new Alert(AlertType.INFORMATION);
-                        alert1.initModality(Modality.APPLICATION_MODAL);
-                        alert1.setTitle("Invitation");
-                        alert1.setHeaderText("Invite rejected!!");
-                        DialogPane dialogPane1 = alert1.getDialogPane();
-                        dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
-                        dialogPane1.getStyleClass().add("myDialog");
-                        alert1.show();
-                    }
+                    } 
+//                    else {
+//                        Alert alert1 = new Alert(AlertType.INFORMATION);
+//                        alert1.initModality(Modality.APPLICATION_MODAL);
+//                        alert1.setTitle("Invitation");
+//                        alert1.setHeaderText("Invite rejected!!");
+//                        DialogPane dialogPane1 = alert1.getDialogPane();
+//                        dialogPane1.getStylesheets().add(getClass().getResource("myDialogs.css").toExternalForm());
+//                        dialogPane1.getStyleClass().add("myDialog");
+//                        alert1.show();
+//                    }
                     turnThread = true;
                 }
             });
