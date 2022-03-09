@@ -239,7 +239,7 @@ public class MenuController extends Thread implements Initializable {
                                     PlayerSocket.outObj.writeObject("getGame::" + Players.myPlayer.getUsername() + "::" + invitePlay[0]);
                                     Object res = (Object) PlayerSocket.inObj.readObject();
 
-                                    Game.myGame = null;
+                                    Game.myGame.setUsername1_x(null);
 
                                     if (res != null) {
                                         Game.myGame = (Game) res;
