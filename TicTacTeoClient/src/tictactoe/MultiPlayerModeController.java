@@ -490,7 +490,8 @@ public class MultiPlayerModeController implements Initializable {
                     } else if (result.get() == buttonDontSave) {
                         PlayerSocket.sendMsg("exited");
                         Game.myGame.setUsername1_x(null);
-                        PlayerSocket.closeSoket();
+                        PlayerSocket.sendMsg("finishgame");
+                        
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
@@ -498,7 +499,7 @@ public class MultiPlayerModeController implements Initializable {
                                     gameTh = false;
                                     myGameTh.stop();
                                     Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-
+                                    PlayerSocket.closeSoket();
                                     Stage window = (Stage) returnBtn.getScene().getWindow();
                                     window.setScene(new Scene(root));
 
