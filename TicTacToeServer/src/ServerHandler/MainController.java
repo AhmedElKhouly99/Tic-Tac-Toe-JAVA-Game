@@ -161,9 +161,6 @@ public class MainController implements Initializable {
     }
 
     /**
-     * ***********************************************************************
-     */
-    /**
      * *************** thread for the server to accept clients ***************
      */
     private static Thread acceptClientsThread;

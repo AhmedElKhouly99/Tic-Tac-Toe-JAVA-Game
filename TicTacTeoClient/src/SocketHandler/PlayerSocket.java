@@ -61,7 +61,7 @@ public class PlayerSocket implements Initializable{
             clientSocket.close();
         } catch (IOException ex) {
 //            disconnectionAlert(s);
-            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
 //            disconnectionAlert(s);
         }
@@ -72,7 +72,7 @@ public class PlayerSocket implements Initializable{
             outObj.writeObject(mgs);
         } catch (IOException ex) {
             disconnectionAlert();
-            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
             closeSoket();
             disconnectionAlert();
@@ -87,10 +87,10 @@ public class PlayerSocket implements Initializable{
             res = (Object) inObj.readObject();
         } catch (IOException ex) {
             disconnectionAlert();
-            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             disconnectionAlert();
-            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(PlayerSocket.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
             closeSoket();
             disconnectionAlert();
